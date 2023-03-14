@@ -57,9 +57,7 @@ public class MySQLConnect {
     
     public ResultSet executeQuery(String sql){
                     ResultSet rs = null;
-        try {
-
-            
+        try {           
             Connect();
             statement = connection.createStatement();
             rs = statement.executeQuery(sql);
@@ -68,7 +66,6 @@ public class MySQLConnect {
         }
         return rs;
     }
-    
     public Connection getConnection(){
         Connect();
         return connection;
