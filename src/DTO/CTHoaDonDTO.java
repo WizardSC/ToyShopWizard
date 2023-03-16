@@ -17,6 +17,11 @@ public class CTHoaDonDTO {
     private int DonGia;
     private int ThanhTien;
 
+    public CTHoaDonDTO(String MaSP, String TenSP, int SoLuong) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.SoLuong = SoLuong;
+    }
     public CTHoaDonDTO(String MaHD, String MaSP, String TenSP, int SoLuong, int DonGia, int ThanhTien) {
         this.MaHD = MaHD;
         this.MaSP = MaSP;
