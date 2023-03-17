@@ -78,8 +78,10 @@ public class ChangeScreenNhanVien {
                     break;
                 case "DSHoaDon":
                     node = new DSHoaDonGUI();
+                    break;
                 case "KhachHang":
                     node = new KhachHangGUI();
+                    break;
                 default:
                     break;
             }

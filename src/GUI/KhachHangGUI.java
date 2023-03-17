@@ -5,19 +5,73 @@
  */
 package GUI;
 
+import BUS.KhachHangBUS;
+import DTO.KhachHangDTO;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author wizardsc
  */
 public class KhachHangGUI extends javax.swing.JPanel {
-
-    /**
-     * Creates new form KhachHanGUI
-     */
+    KhachHangBUS khBUS = new KhachHangBUS();
+    DefaultTableModel dtmKhachHang;
+    private BufferedImage i = null;
+    String imgName = "null";
     public KhachHangGUI() {
         initComponents();
+        dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
+        init();
+        loadDataDSKH();
     }
+    public void init(){
+        tblDSKH.setFocusable(false);
+        tblDSKH.setIntercellSpacing(new Dimension(0, 0));
 
+        tblDSKH.setRowHeight(25);
+        tblDSKH.setFillsViewportHeight(true);
+
+        tblDSKH.getTableHeader().setOpaque(false);
+        tblDSKH.getTableHeader().setBackground(new Color(152, 168, 248));
+        tblDSKH.getTableHeader().setForeground(Color.WHITE);
+        tblDSKH.setSelectionBackground(new Color(188, 206, 248));
+        tblDSKH.setSelectionForeground(Color.BLACK);
+        tblDSKH.setFont(new Font("Arial", Font.PLAIN, 13));
+        tblDSKH.getTableHeader().setReorderingAllowed(false);
+        tblDSKH.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
+        
+    }
+    
+    //Hàm load dữ liệu lên bảng DSKH
+    public void showAllDSKH(ArrayList<KhachHangDTO> dskh){
+        dtmKhachHang.setRowCount(0);
+        for(int i=0;i<dskh.size();i++){
+            dtmKhachHang.addRow(new String[]{
+                dskh.get(i).getMaKH(),
+                dskh.get(i).getHo(),
+                dskh.get(i).getTen(),
+                dskh.get(i).getNgaySinh(),
+                dskh.get(i).getGioiTinh(),
+                dskh.get(i).getDiaChi(),
+                dskh.get(i).getSoDT(),
+                dskh.get(i).getIMG()
+            });
+        }
+    }
+    //Hàm lấy dữ liệu để đổ vào table
+    public void loadDataDSKH(){
+        khBUS.docDanhSach();
+        ArrayList<KhachHangDTO> dskh = khBUS.getListKhachHang();
+        showAllDSKH(dskh);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,13 +83,13 @@ public class KhachHangGUI extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDSNV = new javax.swing.JTable();
+        tblDSKH = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lblMaNV = new javax.swing.JLabel();
         lblHo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtMaNV = new javax.swing.JTextField();
+        txtMaKH = new javax.swing.JTextField();
         txtHo = new javax.swing.JTextField();
         txtTen = new javax.swing.JTextField();
         txtNgaySinh = new javax.swing.JTextField();
@@ -60,7 +114,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(250, 247, 240));
         jPanel2.setPreferredSize(new java.awt.Dimension(1089, 700));
 
-        tblDSNV.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSKH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -79,12 +133,12 @@ public class KhachHangGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblDSNV.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblDSKH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDSNVMouseClicked(evt);
+                tblDSKHMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblDSNV);
+        jScrollPane1.setViewportView(tblDSKH);
 
         jPanel1.setBackground(new java.awt.Color(250, 247, 240));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "QUẢN LÝ KHÁCH HÀNG", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Baloo 2 ExtraBold", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
@@ -145,7 +199,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
                             .addComponent(jLabel3))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(txtMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                             .addComponent(txtHo)
                             .addComponent(txtTen))))
                 .addGap(50, 50, 50)
@@ -195,7 +249,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
                             .addComponent(lblMaNV)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblHo)
@@ -371,24 +425,25 @@ public class KhachHangGUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblDSNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSNVMouseClicked
-//        int k = tblDSNV.getSelectedRow();
-//        txtMaNV.setText(tblDSNV.getModel().getValueAt(k, 0).toString());
-//        txtHo.setText(tblDSNV.getModel().getValueAt(k, 1).toString());
-//        txtTen.setText(tblDSNV.getModel().getValueAt(k, 2).toString());
-//        txtNgaySinh.setText(tblDSNV.getModel().getValueAt(k, 3).toString());
-//        cbxGioiTinh.setSelectedItem(tblDSNV.getModel().getValueAt(k, 4).toString());
-//        txtDiaChi.setText(tblDSNV.getModel().getValueAt(k, 5).toString());
-//        txtSoDT.setText(tblDSNV.getModel().getValueAt(k, 6).toString());
-//        txtMaCV.setText(tblDSNV.getModel().getValueAt(k, 7).toString());
-//        imgName = tblDSNV.getModel().getValueAt(k, 8).toString();
-//        txtMaNV.setEnabled(false);
-//        Image newImage;
-//
-//        newImage = new ImageIcon("./src/image/NhanVien/" + imgName).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
-//
-//        txtIMG.setIcon(new ImageIcon(newImage));
-    }//GEN-LAST:event_tblDSNVMouseClicked
+    private void tblDSKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSKHMouseClicked
+        int k = tblDSKH.getSelectedRow();
+        txtMaKH.setText(tblDSKH.getModel().getValueAt(k, 0).toString());
+        txtHo.setText(tblDSKH.getModel().getValueAt(k, 1).toString());
+        txtTen.setText(tblDSKH.getModel().getValueAt(k, 2).toString());
+        txtNgaySinh.setText(tblDSKH.getModel().getValueAt(k, 3).toString());
+        cbxGioiTinh.setSelectedItem(tblDSKH.getModel().getValueAt(k, 4).toString());
+        txtDiaChi.setText(tblDSKH.getModel().getValueAt(k, 5).toString());
+        txtSoDT.setText(tblDSKH.getModel().getValueAt(k, 6).toString());
+        
+        imgName = tblDSKH.getModel().getValueAt(k, 8).toString();
+        txtMaKH.setEnabled(false);
+        Image newImage;
+
+        newImage = new ImageIcon("./src/image/KhachHang/" + imgName).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
+
+        txtIMG.setIcon(new ImageIcon(newImage));
+        txtMaKH.setEnabled(false);
+    }//GEN-LAST:event_tblDSKHMouseClicked
 
     private void btnChonAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonAnhMouseClicked
 //        JFileChooser fc = new JFileChooser("./src/image/NhanVien");
@@ -440,7 +495,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
 //        //saveIMG();
 //        //loadData();
 //
-//        if (tblDSNV.getSelectedRowCount() == 1) {
+//        if (tblDSKH.getSelectedRowCount() == 1) {
 //            int result = JOptionPane.showConfirmDialog(null, "Bạn muốn xóa sản phẩm này?");
 //            if (result == 0) {
 //                nvBUS.delete(txtMaNV.getText());
@@ -526,11 +581,11 @@ public class KhachHangGUI extends javax.swing.JPanel {
     private javax.swing.JLabel lblHo;
     private javax.swing.JLabel lblMaNV;
     private javax.swing.JLabel lblSoDT;
-    private javax.swing.JTable tblDSNV;
+    private javax.swing.JTable tblDSKH;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtHo;
     private javax.swing.JLabel txtIMG;
-    private javax.swing.JTextField txtMaNV;
+    private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtSoDT;
     private javax.swing.JTextField txtTen;

@@ -17,7 +17,7 @@ public class Main {
         //new MainForQuanLyGUI().setVisible(true);
 
 //         new DangNhapGUI().setVisible(true);
-//      new MainForNhanVienGUI().setVisible(true);
+      new MainForNhanVienGUI().setVisible(true);
 
 
 
