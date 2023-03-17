@@ -103,7 +103,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         tblTTPX.getTableHeader().setReorderingAllowed(false);
         tblTTPX.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
         //set SoLuong Spinner
-        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, 100, 1);
+        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, 0, 100, 1);
         txtSoLuong.setModel(modeSpinner);
         JFormattedTextField txtSpinner = ((JSpinner.NumberEditor) txtSoLuong.getEditor()).getTextField();
         ((NumberFormatter) txtSpinner.getFormatter()).setAllowsInvalid(false);
@@ -731,7 +731,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
             }
         }
         //set txtSoLuong sao cho chỉ có thể chọn tối đa số lượng sản phẩm hiện có trong table
-        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, SoLuongConLai, 1);
+        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, 0, SoLuongConLai, 1);
         txtSoLuong.setModel(modeSpinner);
         JFormattedTextField txtSpinner = ((JSpinner.NumberEditor) txtSoLuong.getEditor()).getTextField();
         ((NumberFormatter) txtSpinner.getFormatter()).setAllowsInvalid(false);

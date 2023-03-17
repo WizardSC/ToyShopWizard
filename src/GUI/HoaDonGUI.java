@@ -108,7 +108,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         tblTTHD.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
 
         //set SoLuong Spinner
-        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, 100, 1);
+        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, 0, 100, 1);
         txtSoLuong.setModel(modeSpinner);
         JFormattedTextField txtSpinner = ((JSpinner.NumberEditor) txtSoLuong.getEditor()).getTextField();
         ((NumberFormatter) txtSpinner.getFormatter()).setAllowsInvalid(false);
@@ -117,12 +117,17 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtSpinner.setBackground(Color.white);
 
         //set Enabled(false)
+        txtMaSP.setEnabled(false);
+        txtTenSP.setEnabled(false);
+        txtDonGia.setEnabled(false);
+//        txtSoLuong.setEnabled(false);
+        txtMaSP.setEnabled(false);
         txtMaHD.setEnabled(false);
-//        txtMaKH.setEnabled(false);
-//        txtMaNV.setEnabled(false);
-//        txtTongTien.setEnabled(false);
-//        txtMaKM.setEnabled(false);
-//        txtThanhToan.setEnabled(false);
+        txtMaKH.setEnabled(false);
+        txtMaNV.setEnabled(false);
+        txtTongTien.setEnabled(false);
+        txtMaKM.setEnabled(false);
+        txtThanhToan.setEnabled(false);
     }
 
     public void showAllDSSP(ArrayList<SanPhamDTO> dssp) {
@@ -802,6 +807,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtMaSP.setText("");
         txtTenSP.setText("");
         txtDonGia.setText("");
+        txtSoLuong.setEnabled(true);
         //set hết hàng cho SP có số lượng < 1
         int SoLuongConLai = Integer.parseInt(tblDSSP.getModel().getValueAt(k, 2).toString());
         if (SoLuongConLai < 1) {
@@ -814,7 +820,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtDonGia.setText(tblDSSP.getModel().getValueAt(k, 3).toString());
         
         //set txtSoLuong sao cho chỉ có thể chọn tối đa số lượng sản phẩm hiện có trong table
-        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, SoLuongConLai, 1);
+        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, 0, SoLuongConLai, 1);
         txtSoLuong.setModel(modeSpinner);
         JFormattedTextField txtSpinner = ((JSpinner.NumberEditor) txtSoLuong.getEditor()).getTextField();
         ((NumberFormatter) txtSpinner.getFormatter()).setAllowsInvalid(false);

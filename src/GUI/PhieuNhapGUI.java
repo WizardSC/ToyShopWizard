@@ -113,7 +113,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         tblTTPN.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
         
         //set SoLuong Spinner
-        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, 100, 1);
+        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, 0, 100, 1);
         txtSoLuong.setModel(modeSpinner);
         JFormattedTextField txtSpinner = ((JSpinner.NumberEditor) txtSoLuong.getEditor()).getTextField();
         ((NumberFormatter) txtSpinner.getFormatter()).setAllowsInvalid(false);
