@@ -50,6 +50,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     CTPhieuNhapBUS ctpnBUS = new CTPhieuNhapBUS();
     KhoBUS khoBUS = new KhoBUS();
     ArrayList<PhieuNhapDTO> dspn = new ArrayList<>();
+    static boolean chooseNCC = false;
     
     private ArrayList<CTPhieuNhapDTO> dsctpn = new ArrayList<>();
     String imgName = "null";
@@ -219,7 +220,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     }
 //--
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         InPhieuNhapGUI = new javax.swing.JDialog();
@@ -737,9 +738,9 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void tblDSSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSPMouseClicked
+    private void tblDSSPMouseClicked(java.awt.event.MouseEvent evt) {                                     
         int k = tblDSSP.getSelectedRow();      
         txtMaSP.setText(tblDSSP.getModel().getValueAt(k,0).toString());
         txtTenSP.setText(tblDSSP.getModel().getValueAt(k,1).toString());
@@ -759,57 +760,65 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         
         txtMaSP.setEnabled(false);
         txtTenSP.setEnabled(false);
-    }//GEN-LAST:event_tblDSSPMouseClicked
+    }                                    
 
-    private void btnThemSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSPMouseClicked
+    private void btnThemSPMouseClicked(java.awt.event.MouseEvent evt) {                                       
         String MaPN = txtMaPN.getText();
         String MaSP = txtMaSP.getText();
         String TenSP = txtTenSP.getText();
         int SoLuong = Integer.parseInt(txtSoLuong.getValue().toString());
-        int DonGia = Integer.parseInt(txtDonGia.getText());
-        int ThanhTien = SoLuong * DonGia;
+        if(SoLuong >=1){
+            if(isNumeric(txtDonGia.getText())){
+                int DonGia = Integer.parseInt(txtDonGia.getText());
+                int ThanhTien = SoLuong * DonGia;
 
-        int k = tblDSSP.getSelectedRow();
-        int SoLuongConLai = Integer.parseInt(tblDSSP.getModel().getValueAt(k, 2).toString());
+                int k = tblDSSP.getSelectedRow();
+                int SoLuongConLai = Integer.parseInt(tblDSSP.getModel().getValueAt(k, 2).toString());
 
-        khoBUS.capNhatSoLuongSP(MaSP, SoLuong, SoLuongConLai);
-        khoBUS.docDanhSach();
-        boolean flag = true;
-        for (CTPhieuNhapDTO ctpn : dsctpn) {
-            if (ctpn.getMaSP().equals(MaSP)) {
-                int old = ctpn.getSoLuong();
-                ctpn.setSoLuong(old + SoLuong);
-                int new1 = ctpn.getSoLuong();
-                ctpn.setThanhTien(new1 * DonGia);
-                flag = false;
-                break;
+                khoBUS.capNhatSoLuongSP(MaSP, SoLuong, SoLuongConLai);
+                khoBUS.docDanhSach();
+                boolean flag = true;
+                for (CTPhieuNhapDTO ctpn : dsctpn) {
+                    if (ctpn.getMaSP().equals(MaSP)) {
+                        int old = ctpn.getSoLuong();
+                        ctpn.setSoLuong(old + SoLuong);
+                        int new1 = ctpn.getSoLuong();
+                        ctpn.setThanhTien(new1 * DonGia);
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    dsctpn.add(new CTPhieuNhapDTO(MaPN, MaSP, TenSP, SoLuong, DonGia, ThanhTien));
+
+                }
+
+                outModelHangChoNhap(dtmHangChoNhap, dsctpn);
+                txtTongTien.setText(String.valueOf(sumPN()));
+
+                txtMaSP.setText("");
+                txtTenSP.setText("");
+                txtSoLuong.setValue(0);
+                txtDonGia.setText("");
+                txtIMG.setIcon(null);
+                txtIMG.setText("IMAGE");
+                imgName = null;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Đơn giá không hợp lệ");
             }
         }
-        if (flag) {
-            dsctpn.add(new CTPhieuNhapDTO(MaPN, MaSP, TenSP, SoLuong, DonGia, ThanhTien));
-
+        else{
+            JOptionPane.showMessageDialog(null, "Số lượng nhập phải lớn hơn 0");
         }
-        
 
-        outModelHangChoNhap(dtmHangChoNhap, dsctpn);
-        txtTongTien.setText(String.valueOf(sumPN()));
+    }                                      
 
-        
-        txtMaSP.setText("");
-        txtTenSP.setText("");
-        txtSoLuong.setValue(0);
-        txtDonGia.setText("");
-        txtIMG.setIcon(null);
-        txtIMG.setText("IMAGE");
-        imgName = null;
+    private void tblHangChoNhapMouseClicked(java.awt.event.MouseEvent evt) {                                            
 
-    }//GEN-LAST:event_btnThemSPMouseClicked
+    }                                           
 
-    private void tblHangChoNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHangChoNhapMouseClicked
-
-    }//GEN-LAST:event_tblHangChoNhapMouseClicked
-
-    private void btnTaoPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoPhieuNhapMouseClicked
+    private void btnTaoPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {                                             
         String MaPN = txtMaPN.getText();
         String MaNCC = txtMaNCC.getText();
         String MaNV = txtMaNV.getText();
@@ -830,9 +839,9 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         dtmHangChoNhap.setRowCount(0);
 
         JOptionPane.showMessageDialog(pnRoot, "Tạo phiếu nhập thành công");
-    }//GEN-LAST:event_btnTaoPhieuNhapMouseClicked
+    }                                            
 
-    private void btnInHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDonMouseClicked
+    private void btnInHoaDonMouseClicked(java.awt.event.MouseEvent evt) {                                         
         InPhieuNhapGUI.setUndecorated(true);
         InPhieuNhapGUI.pack();
         InPhieuNhapGUI.setVisible(true);
@@ -840,17 +849,20 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         loadDataTTPN(); //load thông tin hóa đơn
         ctpnBUS.docDanhSach();
         ArrayList<PhieuNhapDTO> dsctpn = pnBUS.getListPhieuNhap();
-    }//GEN-LAST:event_btnInHoaDonMouseClicked
+    }                                        
 
-    private void chooseMaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaKHActionPerformed
+    private void chooseMaKHActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        if(!chooseNCC){
+            ChooseNCC ncc = new ChooseNCC();
+            ncc.setVisible(true);
+        } 
+    }                                          
 
-    }//GEN-LAST:event_chooseMaKHActionPerformed
+    private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {                                           
 
-    private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaNVActionPerformed
+    }                                          
 
-    }//GEN-LAST:event_chooseMaNVActionPerformed
-
-    private void btnXoaSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaSanPhamMouseClicked
+    private void btnXoaSanPhamMouseClicked(java.awt.event.MouseEvent evt) {                                           
         int k = tblHangChoNhap.getSelectedRow();
         String MaSP = tblHangChoNhap.getModel().getValueAt(k,0).toString();
         int SoLuong = Integer.parseInt(tblHangChoNhap.getModel().getValueAt(k,2).toString());
@@ -871,9 +883,9 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtTongTien.setText(String.valueOf(sumPN()));
         loadDataDSSP();
         
-    }//GEN-LAST:event_btnXoaSanPhamMouseClicked
+    }                                          
 
-    private void tblTTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTPNMouseClicked
+    private void tblTTPNMouseClicked(java.awt.event.MouseEvent evt) {                                     
         int k = tblTTPN.getSelectedRow();
         txtMaPNinTTPN.setText(tblTTPN.getValueAt(k, 0).toString());
         txtMaNCCinTTPN.setText(tblTTPN.getValueAt(k, 1).toString());
@@ -893,18 +905,18 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtMaNVinTTPN.setEnabled(false);
         txtNgapLapinTTPN.setEnabled(false);
         txtTongTieninTTPN.setEnabled(false);
-    }//GEN-LAST:event_tblTTPNMouseClicked
+    }                                    
 
-    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
+    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {                                      
         InPhieuNhapGUI.dispose();
         txtMaPNinTTPN.setText("");
         txtMaNCCinTTPN.setText("");
         txtMaNVinTTPN.setText("");
         txtNgapLapinTTPN.setCalendar(null);
         txtTongTieninTTPN.setText("");
-    }//GEN-LAST:event_btnCloseMouseClicked
+    }                                     
 
-    private void btnInPhieuNhapinTTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInPhieuNhapinTTPNMouseClicked
+    private void btnInPhieuNhapinTTPNMouseClicked(java.awt.event.MouseEvent evt) {                                                  
         
         for (CTPhieuNhapDTO ctpn : dsctpn) {
             ctpnBUS.add(ctpn);
@@ -917,10 +929,16 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In hóa đơn thành công");
         loadDataDSSP();
-    }//GEN-LAST:event_btnInPhieuNhapinTTPNMouseClicked
+    }                                                 
+    public static void setMaNCC(String ma){
+        txtMaNCC.setText(ma);
+        chooseNCC = false;
+    }
+    public boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JDialog InPhieuNhapGUI;
     private javax.swing.JLabel btnClose;
     private javax.swing.JLabel btnInHoaDon;
@@ -964,7 +982,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     private javax.swing.JTable tblTTPN;
     private javax.swing.JTextField txtDonGia;
     private javax.swing.JLabel txtIMG;
-    private javax.swing.JTextField txtMaNCC;
+    private static javax.swing.JTextField txtMaNCC;
     private javax.swing.JTextField txtMaNCCinTTPN;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtMaNVinTTPN;
@@ -977,5 +995,5 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenSP;
     private javax.swing.JTextField txtTongTien;
     private javax.swing.JTextField txtTongTieninTTPN;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
