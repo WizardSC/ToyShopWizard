@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import java.sql.Connection;
@@ -24,7 +18,7 @@ public class MySQLConnect {
 
     private String user = "root";
     private String password = "";
-    private String url = "jdbc:mysql://localhost:3306/toyshopwizard?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private String url = "jdbc:mysql://localhost:3306/toyshopwizard?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull&autoReconnect=true";
     private Connection connection = null;
     private Statement statement = null;
     private PreparedStatement pstatement = null;
