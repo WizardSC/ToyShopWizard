@@ -218,7 +218,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         pnMenu.setPreferredSize(new java.awt.Dimension(211, 650));
 
         lblIconHotel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIconHotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/shop.png"))); // NOI18N
+        lblIconHotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/toy-shop.png"))); // NOI18N
 
         pnTaiKhoan.setBackground(new java.awt.Color(188, 206, 248));
         pnTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));

@@ -142,7 +142,7 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
         pnMenu.setPreferredSize(new java.awt.Dimension(211, 650));
 
         lblIconHotel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIconHotel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/shop.png"))); // NOI18N
+        lblIconHotel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/toy-shop.png"))); // NOI18N
 
         pnThongKe.setBackground(new java.awt.Color(188, 206, 248));
         pnThongKe.setForeground(new java.awt.Color(255, 255, 255));

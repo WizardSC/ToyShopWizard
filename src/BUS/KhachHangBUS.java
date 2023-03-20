@@ -22,4 +22,10 @@ public class KhachHangBUS {
     public ArrayList<KhachHangDTO> getListKhachHang(){
         return listKhachHang;
     }
+    
+    public void add(KhachHangDTO kh){
+        listKhachHang.add(kh);
+        KhachHangDAO khDAO = new KhachHangDAO();
+        khDAO.insertKhachHang(kh);
+    }
 }

@@ -434,15 +434,17 @@ public class KhachHangGUI extends javax.swing.JPanel {
         cbxGioiTinh.setSelectedItem(tblDSKH.getModel().getValueAt(k, 4).toString());
         txtDiaChi.setText(tblDSKH.getModel().getValueAt(k, 5).toString());
         txtSoDT.setText(tblDSKH.getModel().getValueAt(k, 6).toString());
+        txtMaKH.setEnabled(false);
         
         imgName = tblDSKH.getModel().getValueAt(k, 8).toString();
-        txtMaKH.setEnabled(false);
+        
         Image newImage;
 
         newImage = new ImageIcon("./src/image/KhachHang/" + imgName).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
-
+        
+        
         txtIMG.setIcon(new ImageIcon(newImage));
-        txtMaKH.setEnabled(false);
+        
     }//GEN-LAST:event_tblDSKHMouseClicked
 
     private void btnChonAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonAnhMouseClicked
@@ -475,15 +477,17 @@ public class KhachHangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxTimKiemActionPerformed
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-//        String MaNV = txtMaNV.getText().toUpperCase();
-//        String Ho = txtHo.getText();
-//        String Ten = txtTen.getText();
-//        String NgaySinh = txtNgaySinh.getText();
-//        String GioiTinh = cbxGioiTinh.getSelectedItem().toString();
-//        String DiaChi = txtDiaChi.getText();
-//        String SoDT = txtSoDT.getText();
-//        String MaCV = txtMaCV.getText();
-//        String IMG = imgName;
+        String MaKH = txtMaKH.getText();
+        String Ho = txtHo.getText();
+        String Ten = txtTen.getText();
+        String NgaySinh = txtNgaySinh.getText();
+        String GioiTinh = cbxGioiTinh.getSelectedItem().toString();
+        String DiaChi = txtDiaChi.getText();
+        String SoDT = txtSoDT.getText();
+        String IMG = imgName;
+        KhachHangDTO kh = new KhachHangDTO(MaKH, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, IMG);
+        khBUS.add(kh);
+        loadDataDSKH();
 //        NhanVienDTO nv = new NhanVienDTO(MaNV, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, MaCV, IMG);
 //        nvBUS.add(nv);
 //        saveIMG();
