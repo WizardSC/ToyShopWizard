@@ -175,9 +175,8 @@ public class HoaDonGUI extends javax.swing.JPanel {
     }
 //--
 
-    
-    private void loadDataCTHD(){
-        
+    private void loadDataCTHD() {
+
     }
 //--    Hiển thị mã HD tiếp theo
 //--    Lấy mã HD mới nhất + 1 để ra mã HD cần được tạo
@@ -187,7 +186,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
             txtMaHD.setText(String.valueOf("HD01"));
         }
         for (int i = 0; i < dshd.size(); i++) {
-            
+
             int sum = Integer.parseInt(dshd.get(i).getMaHD().substring(2)) + 1;
             if (sum < 10) {
                 txtMaHD.setText(String.valueOf("HD0" + sum));
@@ -207,6 +206,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         showMaHD(dshd);
     }
 //-- 
+
     private void loadDataGioHang() {
         dtmGioHang.setRowCount(0);
         ArrayList<SanPhamDTO> dssp = null;
@@ -240,7 +240,8 @@ public class HoaDonGUI extends javax.swing.JPanel {
         return sum;
     }
 //--Lấy tổng tiền ban đầu của hóa đơn
-    public String getTongTien(){
+
+    public String getTongTien() {
         return txtTongTien.getText();
     }
 
@@ -818,7 +819,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtMaSP.setText(tblDSSP.getModel().getValueAt(k, 0).toString());
         txtTenSP.setText(tblDSSP.getModel().getValueAt(k, 1).toString());
         txtDonGia.setText(tblDSSP.getModel().getValueAt(k, 3).toString());
-        
+
         //set txtSoLuong sao cho chỉ có thể chọn tối đa số lượng sản phẩm hiện có trong table
         SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, 0, SoLuongConLai, 1);
         txtSoLuong.setModel(modeSpinner);
@@ -827,47 +828,51 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtSpinner.setEditable(false);
         txtSpinner.setHorizontalAlignment(JTextField.LEFT);
         //--
-        
+
         imgName = tblDSSP.getModel().getValueAt(k, 4).toString();
         Image newImage;
         newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(155, 185, Image.SCALE_DEFAULT);
         txtIMG.setIcon(new ImageIcon(newImage));
-        
+
         txtMaSP.setEnabled(false);
         txtTenSP.setEnabled(false);
         txtDonGia.setEnabled(false);
     }//GEN-LAST:event_tblDSSPMouseClicked
 
     private void btnThemSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSPMouseClicked
+        
+        if (txtMaSP.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng lựa chọn sản phầm", "LỖI", JOptionPane.ERROR_MESSAGE);
 
-        String MaHD = txtMaHD.getText();
-        String MaSP = txtMaSP.getText();
-        String TenSP = txtTenSP.getText();
-        int SoLuong = Integer.parseInt(txtSoLuong.getValue().toString());
-        int DonGia = Integer.parseInt(txtDonGia.getText());
-        int ThanhTien = SoLuong * DonGia;
+        } else {
+            String MaHD = txtMaHD.getText();
+            String MaSP = txtMaSP.getText();
+            String TenSP = txtTenSP.getText();
+            int SoLuong = Integer.parseInt(txtSoLuong.getValue().toString());
+            int DonGia = Integer.parseInt(txtDonGia.getText());
+            int ThanhTien = SoLuong * DonGia;
 
-        int k = tblDSSP.getSelectedRow();
-        int SoLuongConLai = Integer.parseInt(tblDSSP.getModel().getValueAt(k, 2).toString());
+            int k = tblDSSP.getSelectedRow();
+            int SoLuongConLai = Integer.parseInt(tblDSSP.getModel().getValueAt(k, 2).toString());
 
-        spBUS.capNhatSoLuongHD(MaSP, -SoLuong, SoLuongConLai);
-        spBUS.docDanhSach();
-        boolean flag = true;
-        for (CTHoaDonDTO cthd : dscthd) {
-            if (cthd.getMaSP().equals(MaSP)) {
-                int old = cthd.getSoLuong();
-                cthd.setSoLuong(old + SoLuong);
-                int new1 = cthd.getSoLuong();
-                cthd.setThanhTien(new1 * DonGia);
-                flag = false;
-                break;
+            spBUS.capNhatSoLuongHD(MaSP, -SoLuong, SoLuongConLai);
+            spBUS.docDanhSach();
+            boolean flag = true;
+            for (CTHoaDonDTO cthd : dscthd) {
+                if (cthd.getMaSP().equals(MaSP)) {
+                    int old = cthd.getSoLuong();
+                    cthd.setSoLuong(old + SoLuong);
+                    int new1 = cthd.getSoLuong();
+                    cthd.setThanhTien(new1 * DonGia);
+                    flag = false;
+                    break;
+                }
             }
-        }
-        if (flag) {
-            dscthd.add(new CTHoaDonDTO(MaHD, MaSP, TenSP, SoLuong, DonGia, ThanhTien));
+            if (flag) {
+                dscthd.add(new CTHoaDonDTO(MaHD, MaSP, TenSP, SoLuong, DonGia, ThanhTien));
 
-        }
-        System.out.println(dscthd.size());
+            }
+        
 
         outModelGioHang(dtmGioHang, dscthd);
         txtTongTien.setText(String.valueOf(sumHD()));
@@ -879,7 +884,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtIMG.setIcon(null);
         txtIMG.setText("IMAGE");
         imgName = null;
-
+        }
 //
 //        dtmGioHang.addRow(new String[]{
 //            MaSP,
@@ -935,16 +940,16 @@ public class HoaDonGUI extends javax.swing.JPanel {
 
     private void btnXoaSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaSPMouseClicked
         int k = tblGioHang.getSelectedRow();
-        String MaSP = tblGioHang.getModel().getValueAt(k,0).toString();
-        int SoLuong = Integer.parseInt(tblGioHang.getModel().getValueAt(k,2).toString());
-        
+        String MaSP = tblGioHang.getModel().getValueAt(k, 0).toString();
+        int SoLuong = Integer.parseInt(tblGioHang.getModel().getValueAt(k, 2).toString());
+
         //lấy số lượng sản phẩm hiện có trong cửa hàng
         spBUS.docDanhSach();
         ArrayList<SanPhamDTO> dssp = spBUS.getListSanPham();
-        for(SanPhamDTO sp : dssp){
-            if(MaSP.equals(sp.getMaSP())){
-                SoLuongSPTrongCuaHang = sp.getSoLuong(); 
-        }
+        for (SanPhamDTO sp : dssp) {
+            if (MaSP.equals(sp.getMaSP())) {
+                SoLuongSPTrongCuaHang = sp.getSoLuong();
+            }
         }
         //--
         spBUS.capNhatSoLuongHD(MaSP, SoLuong, SoLuongSPTrongCuaHang);
@@ -978,7 +983,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblTTHDMouseClicked
 
     private void btnInHoaDoninTTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDoninTTHDMouseClicked
-        for (CTHoaDonDTO cthd : dscthd) {            
+        for (CTHoaDonDTO cthd : dscthd) {
             cthdBUS.add(cthd);
         }
         txtMaHDinTTHD.setText("");
@@ -986,13 +991,13 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtMaNVinTTHD.setText("");
         txtNgayLapinTTHD.setCalendar(null);
         txtTongTieninTTHD.setText("");
-        
+
         JOptionPane.showMessageDialog(pnRoot, "In hóa đơn thành công");
     }//GEN-LAST:event_btnInHoaDoninTTHDMouseClicked
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
         InHoaDonGUI.dispose();
-        
+
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void chooseMaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaKHActionPerformed
@@ -1009,12 +1014,12 @@ public class HoaDonGUI extends javax.swing.JPanel {
 
     private void chooseMaKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaKMActionPerformed
         double TongTien = Double.parseDouble(txtTongTien.getText());
-        
+
         RCKhuyenMaiGUI rkm = new RCKhuyenMaiGUI(TongTien); //hàm tạo truyền vào tham số TongTien
         rkm.setVisible(true);
         String MaKM = rkm.getMaKM();
         txtMaKM.setText(MaKM);
-        
+
         double KM = Double.parseDouble(rkm.getPhanTramKM());
         double TongTienSauKM = TongTien - TongTien * (KM / 100);
         txtThanhToan.setText(String.valueOf(TongTienSauKM));
