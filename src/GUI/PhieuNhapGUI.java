@@ -823,7 +823,8 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         String MaNCC = txtMaNCC.getText();
         String MaNV = txtMaNV.getText();
 
-        String NgayLap = ((JTextField) txtNgayLap.getDateEditor().getUiComponent()).getText();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String NgayLap = dateFormat.format(txtNgayLap.getDate());
         int TongTien = Integer.parseInt(txtTongTien.getText());
 
         PhieuNhapDTO pn= new PhieuNhapDTO(MaPN, MaNCC, MaNV, NgayLap, TongTien);
