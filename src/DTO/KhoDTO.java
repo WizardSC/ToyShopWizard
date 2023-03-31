@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DTO;
 
 /**
@@ -18,6 +13,12 @@ public class KhoDTO {
     private String MaLoai;
     private String IMG;
 
+    public KhoDTO(String MaSP, String TenSP, int SoLuong) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.SoLuong = SoLuong;
+    }
+    
     public KhoDTO(String MaSP, String TenSP, int SoLuong, int GiaNhap, String DonViTinh, String MaLoai, String IMG) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
