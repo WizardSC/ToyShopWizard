@@ -115,6 +115,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtSpinner.setEditable(true);
         txtSpinner.setHorizontalAlignment(JTextField.LEFT);
         txtSpinner.setBackground(Color.white);
+        txtSpinner.setEditable(false);
 
         //set Enabled(false)
         txtMaSP.setEnabled(false);

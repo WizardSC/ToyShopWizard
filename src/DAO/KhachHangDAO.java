@@ -50,26 +50,47 @@ public class KhachHangDAO {
         }
         return null;
     }
-    
-    public void insertKhachHang(KhachHangDTO kh){
+
+    public void insertKhachHang(KhachHangDTO kh) {
         try {
             String sql = "INSERT INTO khachhang VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,kh.getMaKH());
-            ps.setString(2,kh.getHo());
-            ps.setString(3,kh.getTen());
-            ps.setString(4,kh.getNgaySinh());
-            ps.setString(5,kh.getGioiTinh());
-            ps.setString(6,kh.getDiaChi());
-            ps.setString(7,kh.getSoDT());
-            ps.setString(8,kh.getIMG());
+            ps.setString(1, kh.getMaKH());
+            ps.setString(2, kh.getHo());
+            ps.setString(3, kh.getTen());
+            ps.setString(4, kh.getNgaySinh());
+            ps.setString(5, kh.getGioiTinh());
+            ps.setString(6, kh.getDiaChi());
+            ps.setString(7, kh.getSoDT());
+            ps.setString(8, kh.getIMG());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             mySQL.Disconnect();
         }
-        
+
+    }
+
+    public void updateKhachHang(KhachHangDTO kh) {
+        try {
+            String sql = "UPDATE khachhang SET Ho = ?, Ten = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoDT = ?, IMG = ?"
+                    + "WHERE MaKH = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, kh.getHo());
+            ps.setString(2, kh.getTen());
+            ps.setString(3, kh.getNgaySinh());
+            ps.setString(4, kh.getGioiTinh());
+            ps.setString(5, kh.getDiaChi());
+            ps.setString(6, kh.getSoDT());
+            ps.setString(7, kh.getIMG());
+            ps.setString(8, kh.getMaKH());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
     }
 
 }

@@ -28,4 +28,14 @@ public class KhachHangBUS {
         KhachHangDAO khDAO = new KhachHangDAO();
         khDAO.insertKhachHang(kh);
     }
+    
+    public void update(KhachHangDTO kh){
+        for(int i=0;i<listKhachHang.size();i++){
+            if(listKhachHang.get(i).getMaKH().equals(kh.getMaKH())){
+                listKhachHang.set(i,kh);
+                khDAO.updateKhachHang(kh);
+                return;
+            }
+        }
+    }
 }
