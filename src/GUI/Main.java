@@ -18,10 +18,10 @@ public class Main {
 
 //         new DangNhapGUI().setVisible(true);
 //      new MainForNhanVienGUI().setVisible(true);
-      new MainForNVKhoGUI().setVisible(true);
+//      new MainForNVKhoGUI().setVisible(true);
 
 
-//        new MainForKeToanGUI().setVisible(true);
+        new MainForKeToanGUI().setVisible(true);
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
