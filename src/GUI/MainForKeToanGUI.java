@@ -48,10 +48,6 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
         lblThongKe = new javax.swing.JLabel();
         pnTinhLuong = new javax.swing.JPanel();
         lblTinhLuong = new javax.swing.JLabel();
-        pnNhanVien = new javax.swing.JPanel();
-        lblNhanVien = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         pnView = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -186,45 +182,6 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
             .addComponent(lblTinhLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
 
-        pnNhanVien.setBackground(new java.awt.Color(188, 206, 248));
-        pnNhanVien.setForeground(new java.awt.Color(255, 255, 255));
-        pnNhanVien.setPreferredSize(new java.awt.Dimension(300, 43));
-
-        lblNhanVien.setFont(new java.awt.Font("Baloo 2 ExtraBold", 1, 20)); // NOI18N
-        lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblNhanVien.png"))); // NOI18N
-        lblNhanVien.setText("  Nhân viên");
-
-        jLabel1.setFont(new java.awt.Font("Baloo 2 SemiBold", 0, 14)); // NOI18N
-        jLabel1.setText("Hello");
-
-        jLabel2.setFont(new java.awt.Font("Baloo 2 SemiBold", 0, 14)); // NOI18N
-        jLabel2.setText("Username");
-
-        javax.swing.GroupLayout pnNhanVienLayout = new javax.swing.GroupLayout(pnNhanVien);
-        pnNhanVien.setLayout(pnNhanVienLayout);
-        pnNhanVienLayout.setHorizontalGroup(
-            pnNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnNhanVienLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addGroup(pnNhanVienLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        pnNhanVienLayout.setVerticalGroup(
-            pnNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnNhanVienLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout pnMenuLayout = new javax.swing.GroupLayout(pnMenu);
         pnMenu.setLayout(pnMenuLayout);
         pnMenuLayout.setHorizontalGroup(
@@ -232,7 +189,6 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMenuLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnTinhLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(lblIconHotel1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
@@ -244,9 +200,7 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
             .addGroup(pnMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblIconHotel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(79, 79, 79)
                 .addComponent(pnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnTinhLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,21 +292,17 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
     private javax.swing.JLabel btnClose;
     private javax.swing.JLabel btnMinimize;
     private javax.swing.JComboBox<String> cbxPhanQuyen;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblHome;
     private javax.swing.JLabel lblIconHotel1;
-    private javax.swing.JLabel lblNhanVien;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblThongTin;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblTinhLuong;
     private javax.swing.JPanel pnHeader;
     private javax.swing.JPanel pnMenu;
-    private javax.swing.JPanel pnNhanVien;
     private javax.swing.JPanel pnRoot;
     private javax.swing.JPanel pnThongKe;
     private javax.swing.JPanel pnTinhLuong;

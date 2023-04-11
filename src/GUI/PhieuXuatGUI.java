@@ -14,11 +14,14 @@ import DTO.CTPhieuXuatDTO;
 import DTO.KhoDTO;
 import DTO.PhieuXuatDTO;
 import DTO.SanPhamDTO;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.BorderFactory;
@@ -110,6 +113,15 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         txtSpinner.setEditable(true);
         txtSpinner.setHorizontalAlignment(JTextField.LEFT);
         txtSpinner.setBackground(Color.white);
+        
+        //setEnabled
+        txtMaNV.setEnabled(false);
+        txtMaPX.setEnabled(false);
+        txtTongTien.setEnabled(false);
+        JDateChooser chooser = new JDateChooser();
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) this.txtNgayLap.getDateEditor();
+        editor.setEnabled(false);
+        
     }
 
     public void showAllDSSP(ArrayList<KhoDTO> dskho) {
@@ -586,42 +598,42 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
             pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnHangChoXuatLayout.createSequentialGroup()
                 .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                     .addGroup(pnHangChoXuatLayout.createSequentialGroup()
-                        .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnHangChoXuatLayout.createSequentialGroup()
-                                .addGap(113, 113, 113)
-                                .addComponent(btnTaoPhieuXuat)
-                                .addGap(79, 79, 79)
-                                .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnHangChoXuatLayout.createSequentialGroup()
-                                .addGap(230, 230, 230)
-                                .addComponent(btnXoaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(113, 113, 113)
+                        .addComponent(btnTaoPhieuXuat)
+                        .addGap(79, 79, 79)
+                        .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(pnHangChoXuatLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnHangChoXuatLayout.createSequentialGroup()
                         .addComponent(lblMaSP3)
                         .addGap(29, 29, 29)
-                        .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chooseMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMaSP4)
-                            .addComponent(lblMaSP5)))
+                        .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnHangChoXuatLayout.createSequentialGroup()
                         .addComponent(lblMaSP1)
-                        .addGap(32, 32, 32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtMaPX, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(chooseMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMaSP4)
+                    .addComponent(lblMaSP5))
                 .addGap(18, 18, 18)
                 .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtNgayLap, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHangChoXuatLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnXoaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(169, 169, 169))
+            .addGroup(pnHangChoXuatLayout.createSequentialGroup()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
         );
         pnHangChoXuatLayout.setVerticalGroup(
             pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -629,33 +641,29 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
                 .addComponent(lblGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addGap(18, 18, 18)
                 .addComponent(btnXoaSP)
-                .addGap(41, 41, 41)
+                .addGap(27, 27, 27)
                 .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnHangChoXuatLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnHangChoXuatLayout.createSequentialGroup()
                         .addComponent(txtNgayLap, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnHangChoXuatLayout.createSequentialGroup()
-                            .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(104, 104, 104)
+                        .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTaoPhieuXuat)
+                            .addComponent(btnInHoaDon)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnHangChoXuatLayout.createSequentialGroup()
+                        .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblMaSP1)
                                 .addComponent(txtMaPX, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(20, 20, 20)
-                            .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(chooseMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblMaSP3)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHangChoXuatLayout.createSequentialGroup()
-                            .addComponent(lblMaSP4)
-                            .addGap(20, 20, 20)
-                            .addComponent(lblMaSP5))))
-                .addGap(60, 60, 60)
-                .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTaoPhieuXuat)
-                    .addComponent(btnInHoaDon))
-                .addContainerGap())
+                            .addComponent(lblMaSP4))
+                        .addGap(30, 30, 30)
+                        .addGroup(pnHangChoXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMaSP3)
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chooseMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMaSP5)
+                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
         javax.swing.GroupLayout pnRootLayout = new javax.swing.GroupLayout(pnRoot);
@@ -670,7 +678,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         pnRootLayout.setVerticalGroup(
             pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnHangChoXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnDSSP, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
+            .addComponent(pnDSSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -691,9 +699,9 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
             .addGap(0, 1096, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 4, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 4, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -716,6 +724,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         int SoLuongConLai = Integer.parseInt(tblDSSP.getModel().getValueAt(k, 2).toString());
         if (SoLuongConLai < 1) {
             JOptionPane.showMessageDialog(pnRoot, "Sản phẩm đã hết hàng", "THÔNG BÁO", JOptionPane.ERROR_MESSAGE);
+            txtIMG.setIcon(null);
             return;
         }
         //--
@@ -797,7 +806,9 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     private void btnTaoPhieuXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoPhieuXuatMouseClicked
         String MaPX = txtMaPX.getText();
         String MaNV = txtMaNV.getText();
-        String NgayLap = ((JTextField) txtNgayLap.getDateEditor().getUiComponent()).getText();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String NgayLap = dateFormat.format(txtNgayLap.getDate());
+        
         int TongTien = Integer.parseInt(txtTongTien.getText());
         PhieuXuatDTO px = new PhieuXuatDTO(MaPX, MaNV, NgayLap, TongTien);
         pxBUS.add(px);
@@ -822,7 +833,10 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnInHoaDonMouseClicked
 
     private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaNVActionPerformed
-
+        RCNhanVienGUI rcnv = new RCNhanVienGUI();
+        rcnv.setVisible(true);
+        String MaNV = rcnv.getMaNV();
+        txtMaNV.setText(MaNV);
     }//GEN-LAST:event_chooseMaNVActionPerformed
 
     private void btnXoaSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaSPMouseClicked

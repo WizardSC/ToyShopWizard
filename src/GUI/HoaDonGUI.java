@@ -464,7 +464,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         pnDSSP.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 4, new java.awt.Color(0, 0, 0)));
         pnDSSP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblDSSP.setFont(new java.awt.Font("Baloo 2 ExtraBold", 0, 20)); // NOI18N
+        lblDSSP.setFont(new java.awt.Font("Baloo 2 ExtraBold", 1, 20)); // NOI18N
         lblDSSP.setForeground(new java.awt.Color(255, 51, 51));
         lblDSSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDSSP.setText("Danh sách sản phẩm");

@@ -12,7 +12,12 @@ import DTO.PhieuXuatDTO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
 
@@ -121,18 +126,23 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         txtTongTien = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtNgayLap = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
         pnGioHang = new javax.swing.JPanel();
         lblGioHang = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblDSCTPX = new javax.swing.JTable();
-        lblMaSP1 = new javax.swing.JLabel();
-        txtMaCTPN = new javax.swing.JTextField();
-        lblMaSP5 = new javax.swing.JLabel();
-        lblMaSP6 = new javax.swing.JLabel();
-        txtMaKM = new javax.swing.JTextField();
-        lblMaSP7 = new javax.swing.JLabel();
-        txtThanhToan = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        txtMaSPinDSPN = new javax.swing.JTextField();
+        lblSanPhaminDSPN = new javax.swing.JLabel();
+        txtMaPNinDSPN = new javax.swing.JTextField();
+        lblMaPNinDSPN = new javax.swing.JLabel();
+        lblTenSPinDSPN = new javax.swing.JLabel();
+        txtTenSPinDSPN = new javax.swing.JTextField();
+        lblSoLuonginDSPN = new javax.swing.JLabel();
+        txtSoLuonginDSPN = new javax.swing.JTextField();
+        lblThanhTieninDSPN = new javax.swing.JLabel();
+        txtThanhTieninDSPN = new javax.swing.JTextField();
+        lblDonGiainDSPN = new javax.swing.JLabel();
+        txtDonGiainDSPN = new javax.swing.JTextField();
 
         pnRoot.setBackground(new java.awt.Color(250, 247, 240));
 
@@ -178,35 +188,38 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
             tblDSPX.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        pnDSSP.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 480, 530));
+        pnDSSP.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 490, 500));
 
         lblMaPN.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
-        lblMaPN.setText("Mã PN");
-        pnDSSP.add(lblMaPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, -1, -1));
+        lblMaPN.setText("Mã PX");
+        pnDSSP.add(lblMaPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, -1));
 
         txtMaPX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaPXActionPerformed(evt);
             }
         });
-        pnDSSP.add(txtMaPX, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 580, 160, 24));
-        pnDSSP.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 620, 160, 24));
+        pnDSSP.add(txtMaPX, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 550, 160, 24));
+        pnDSSP.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 590, 160, 24));
 
         lblHo.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblHo.setText("Mã NV");
-        pnDSSP.add(lblHo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, -1, -1));
+        pnDSSP.add(lblHo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel4.setText("Ngày lập");
-        pnDSSP.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 580, -1, -1));
-        pnDSSP.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 620, 160, 24));
+        pnDSSP.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, -1, -1));
+        pnDSSP.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 590, 160, 24));
 
         jLabel5.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel5.setText("Tổng tiền");
-        pnDSSP.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 620, -1, -1));
+        pnDSSP.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 590, -1, -1));
 
         txtNgayLap.setDateFormatString("dd/MM/yyyy");
-        pnDSSP.add(txtNgayLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 580, 160, 24));
+        pnDSSP.add(txtNgayLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 160, 24));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        pnDSSP.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, -1, -1));
 
         pnGioHang.setBackground(new java.awt.Color(250, 247, 240));
 
@@ -252,48 +265,62 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
             tblDSCTPX.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
-        lblMaSP1.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
-        lblMaSP1.setText("Mã PX");
+        lblSanPhaminDSPN.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        lblSanPhaminDSPN.setText("Mã SP");
 
-        lblMaSP5.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
-        lblMaSP5.setText("Tổng tiền");
+        lblMaPNinDSPN.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        lblMaPNinDSPN.setText("Mã PN");
 
-        lblMaSP6.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
-        lblMaSP6.setText("Khuyến mãi");
+        lblTenSPinDSPN.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        lblTenSPinDSPN.setText("Tên SP");
 
-        lblMaSP7.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
-        lblMaSP7.setText("Thanh toán");
+        lblSoLuonginDSPN.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        lblSoLuonginDSPN.setText("Số lượng");
 
-        jButton3.setText("...");
+        lblThanhTieninDSPN.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        lblThanhTieninDSPN.setText("Thành tiền");
+
+        lblDonGiainDSPN.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        lblDonGiainDSPN.setText("Đơn giá");
 
         javax.swing.GroupLayout pnGioHangLayout = new javax.swing.GroupLayout(pnGioHang);
         pnGioHang.setLayout(pnGioHangLayout);
         pnGioHangLayout.setHorizontalGroup(
             pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnGioHangLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblMaSP1)
-                .addGap(32, 32, 32)
-                .addComponent(txtMaCTPN, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
                 .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMaSP5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMaSP6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMaSP7, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblGioHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnGioHangLayout.createSequentialGroup()
-                        .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))
-                    .addGroup(pnGioHangLayout.createSequentialGroup()
-                        .addComponent(txtMaKM, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                        .addGap(4, 4, 4))))
-            .addGroup(pnGioHangLayout.createSequentialGroup()
-                .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5)
-                    .addComponent(lblGioHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnGioHangLayout.createSequentialGroup()
+                                .addComponent(lblThanhTieninDSPN)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtThanhTieninDSPN))
+                            .addGroup(pnGioHangLayout.createSequentialGroup()
+                                .addComponent(lblSoLuonginDSPN)
+                                .addGap(18, 18, 18)
+                                .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTenSPinDSPN)
+                                    .addGroup(pnGioHangLayout.createSequentialGroup()
+                                        .addComponent(txtMaPNinDSPN, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(pnGioHangLayout.createSequentialGroup()
+                                        .addComponent(txtSoLuonginDSPN, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(46, 46, 46)
+                                        .addComponent(lblDonGiainDSPN)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtDonGiainDSPN, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))))
+                            .addGroup(pnGioHangLayout.createSequentialGroup()
+                                .addComponent(lblTenSPinDSPN)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnGioHangLayout.createSequentialGroup()
+                                .addComponent(lblMaPNinDSPN)
+                                .addGap(257, 257, 257)
+                                .addComponent(lblSanPhaminDSPN)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtMaSPinDSPN))))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         pnGioHangLayout.setVerticalGroup(
@@ -302,24 +329,30 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(lblGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMaPNinDSPN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMaPNinDSPN)
+                    .addComponent(lblSanPhaminDSPN)
+                    .addComponent(txtMaSPinDSPN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTenSPinDSPN)
+                    .addComponent(txtTenSPinDSPN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnGioHangLayout.createSequentialGroup()
-                        .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMaCTPN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMaSP1))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMaSP6)
-                            .addComponent(txtMaKM, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMaSP7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblMaSP5))
-                .addContainerGap(123, Short.MAX_VALUE))
+                    .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSoLuonginDSPN)
+                        .addComponent(txtSoLuonginDSPN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDonGiainDSPN)
+                        .addComponent(txtDonGiainDSPN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(pnGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblThanhTieninDSPN)
+                    .addComponent(txtThanhTieninDSPN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnRootLayout = new javax.swing.GroupLayout(pnRoot);
@@ -335,7 +368,7 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         pnRootLayout.setVerticalGroup(
             pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnDSSP, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
+            .addComponent(pnDSSP, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -356,9 +389,9 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
             .addGap(0, 1090, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 1, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 2, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,8 +407,25 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
     private void tblDSPXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSPXMouseClicked
         int k = tblDSPX.getSelectedRow();
         txtMaPX.setText(tblDSPX.getModel().getValueAt(k,0).toString());
+        txtMaNV.setText(tblDSPX.getModel().getValueAt(k,1).toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date NgayLap = new Date();
+        try {
+            NgayLap = sdf.parse(tblDSPX.getModel().getValueAt(k, 2).toString());
+        } catch (ParseException ex) {
+            System.out.println("Sai thgian");
+            Logger.getLogger(DSPhieuXuatGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtNgayLap.setDate(NgayLap);
+        txtTongTien.setText(tblDSPX.getModel().getValueAt(k,3).toString());
+        
         String MaPX = txtMaPX.getText();
         loadDataDSCTPXtheoMaPX(MaPX);
+        
+        txtMaPX.setEnabled(false);
+        txtMaNV.setEnabled(false);
+        txtTongTien.setEnabled(false);
+        txtNgayLap.setEnabled(false);
     }//GEN-LAST:event_tblDSPXMouseClicked
 
     private void txtMaPXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPXActionPerformed
@@ -388,31 +438,36 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblDSSP;
+    private javax.swing.JLabel lblDonGiainDSPN;
     private javax.swing.JLabel lblGioHang;
     private javax.swing.JLabel lblHo;
     private javax.swing.JLabel lblMaPN;
-    private javax.swing.JLabel lblMaSP1;
-    private javax.swing.JLabel lblMaSP5;
-    private javax.swing.JLabel lblMaSP6;
-    private javax.swing.JLabel lblMaSP7;
+    private javax.swing.JLabel lblMaPNinDSPN;
+    private javax.swing.JLabel lblSanPhaminDSPN;
+    private javax.swing.JLabel lblSoLuonginDSPN;
+    private javax.swing.JLabel lblTenSPinDSPN;
+    private javax.swing.JLabel lblThanhTieninDSPN;
     private javax.swing.JPanel pnDSSP;
     private javax.swing.JPanel pnGioHang;
     private javax.swing.JPanel pnRoot;
     private javax.swing.JTable tblDSCTPX;
     private javax.swing.JTable tblDSPX;
-    private javax.swing.JTextField txtMaCTPN;
-    private javax.swing.JTextField txtMaKM;
+    private javax.swing.JTextField txtDonGiainDSPN;
     private javax.swing.JTextField txtMaNV;
+    private javax.swing.JTextField txtMaPNinDSPN;
     private javax.swing.JTextField txtMaPX;
+    private javax.swing.JTextField txtMaSPinDSPN;
     private com.toedter.calendar.JDateChooser txtNgayLap;
-    private javax.swing.JTextField txtThanhToan;
+    private javax.swing.JTextField txtSoLuonginDSPN;
+    private javax.swing.JTextField txtTenSPinDSPN;
+    private javax.swing.JTextField txtThanhTieninDSPN;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

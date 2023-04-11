@@ -21,14 +21,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="692" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="715" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -76,7 +76,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnGioHang" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnDSSP" alignment="0" pref="692" max="32767" attributes="0"/>
+                  <Component id="pnDSSP" alignment="0" pref="715" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -294,40 +294,57 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane5" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblMaSP1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="txtMaCTPN" min="-2" pref="143" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblMaSP5" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="lblMaSP6" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblMaSP7" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtThanhToan" min="-2" pref="143" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtMaKM" min="-2" pref="143" max="-2" attributes="0"/>
+                              <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblGioHang" alignment="1" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton3" pref="0" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblTenSPinDSPN" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblMaPNinDSPN" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
+                                          <Component id="lblSanPhaminDSPN" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="txtMaSPinDSPN" min="-2" pref="171" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="lblGioHang" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblThanhTieninDSPN" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtThanhTieninDSPN" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblSoLuonginDSPN" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" pref="19" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="txtSoLuonginDSPN" min="-2" pref="159" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                          <Component id="lblDonGiainDSPN" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="txtDonGiainDSPN" pref="173" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtTenSPinDSPN" min="-2" pref="449" max="-2" attributes="0"/>
+                                              <Component id="txtMaPNinDSPN" min="-2" pref="158" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -337,29 +354,36 @@
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           <Component id="lblGioHang" min="-2" pref="21" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane5" min="-2" pref="380" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtMaCTPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="lblMaSP1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblMaSP6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtMaKM" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="jButton3" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblMaSP7" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="txtThanhToan" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="lblMaSP5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane5" min="-2" pref="411" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtMaPNinDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="lblMaPNinDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblSanPhaminDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMaSPinDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="123" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblTenSPinDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTenSPinDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblSoLuonginDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSoLuonginDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblDonGiainDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDonGiainDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblThanhTieninDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtThanhTieninDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -398,17 +422,17 @@
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="10" resizable="false">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
                               <Title/>
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="10" resizable="false">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
                               <Title/>
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="230" resizable="false">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="200" resizable="false">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -440,48 +464,65 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="lblMaSP1">
+                <Component class="javax.swing.JLabel" name="lblMaPNinDSPN">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Baloo 2 SemiBold" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="M&#xe3; HD"/>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; PN"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtMaCTPN">
+                <Component class="javax.swing.JTextField" name="txtMaPNinDSPN">
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblMaSP5">
+                <Component class="javax.swing.JLabel" name="lblSanPhaminDSPN">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Baloo 2 SemiBold" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n"/>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; SP"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblMaSP6">
+                <Component class="javax.swing.JTextField" name="txtTenSPinDSPN">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblTenSPinDSPN">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Baloo 2 SemiBold" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Khuy&#x1ebf;n m&#xe3;i"/>
+                    <Property name="text" type="java.lang.String" value="T&#xea;n SP"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtMaKM">
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblMaSP7">
+                <Component class="javax.swing.JLabel" name="lblSoLuonginDSPN">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Baloo 2 SemiBold" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
+                    <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtThanhToan">
-                </Component>
-                <Component class="javax.swing.JButton" name="jButton3">
+                <Component class="javax.swing.JLabel" name="lblDonGiainDSPN">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="..."/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Baloo 2 SemiBold" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1;"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblThanhTieninDSPN">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Baloo 2 SemiBold" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Th&#xe0;nh ti&#x1ec1;n"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtSoLuonginDSPN">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtThanhTieninDSPN">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtMaSPinDSPN">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtDonGiainDSPN">
                 </Component>
               </SubComponents>
             </Container>
