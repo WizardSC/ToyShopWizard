@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1090" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="1095" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="692" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="694" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -120,7 +120,7 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="10" y="30" width="490" height="500"/>
+                      <AbsoluteConstraints x="10" y="30" width="490" height="480"/>
                     </Constraint>
                   </Constraints>
 
@@ -175,11 +175,12 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Baloo 2 SemiBold" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="M&#xe3; PX"/>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="&#x110;&#x1ebf;n"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="10" y="550" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="330" y="650" width="40" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -189,14 +190,14 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="80" y="550" width="160" height="24"/>
+                      <AbsoluteConstraints x="180" y="610" width="310" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMaNV">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="80" y="590" width="160" height="24"/>
+                      <AbsoluteConstraints x="80" y="570" width="160" height="24"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -209,7 +210,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="10" y="590" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="10" y="570" width="-1" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -222,14 +223,14 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="250" y="550" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="250" y="530" width="-1" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTongTien">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="330" y="590" width="160" height="24"/>
+                      <AbsoluteConstraints x="370" y="650" width="120" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -242,7 +243,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="250" y="590" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="250" y="570" width="-1" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -252,7 +253,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="330" y="550" width="160" height="24"/>
+                      <AbsoluteConstraints x="330" y="530" width="160" height="24"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -264,7 +265,106 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="10" y="640" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="20" y="650" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBox2">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="2">
+                        <StringItem index="0" value="Ng&#xe0;y l&#x1ead;p"/>
+                        <StringItem index="1" value="T&#x1ed5;ng ti&#x1ec1;n"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="80" y="650" width="100" height="30"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel2">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/image/search.png"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="20" y="610" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtMaPX1">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaPX1ActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="80" y="530" width="160" height="24"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBox3">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="2">
+                        <StringItem index="0" value="M&#xe3; PX"/>
+                        <StringItem index="1" value="M&#xe3; NV"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="80" y="610" width="100" height="30"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTongTien1">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="330" y="570" width="160" height="24"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTongTien2">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="210" y="650" width="120" height="30"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblMaPN1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Baloo 2 SemiBold" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; PX"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="10" y="530" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblMaPN2">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Baloo 2 SemiBold" size="14" style="1"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="T&#x1eeb;"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="180" y="650" width="30" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -289,23 +389,23 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lblThanhTieninDSPN" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtThanhTieninDSPN" max="32767" attributes="0"/>
+                                          <Component id="txtThanhTieninDSPX" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lblSoLuonginDSPN" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtTenSPinDSPN" max="32767" attributes="0"/>
+                                              <Component id="txtTenSPinDSPX" max="32767" attributes="0"/>
                                               <Group type="102" attributes="0">
-                                                  <Component id="txtMaPNinDSPN" min="-2" pref="158" max="-2" attributes="0"/>
+                                                  <Component id="txtMaPNinDSPX" min="-2" pref="158" max="-2" attributes="0"/>
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="txtSoLuonginDSPN" min="-2" pref="159" max="-2" attributes="0"/>
+                                                  <Component id="txtSoLuonginDSPX" min="-2" pref="159" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                                                   <Component id="lblDonGiainDSPN" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="txtDonGiainDSPN" pref="192" max="32767" attributes="0"/>
+                                                  <Component id="txtDonGiainDSPX" pref="192" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -318,7 +418,7 @@
                                           <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
                                           <Component id="lblSanPhaminDSPN" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="txtMaSPinDSPN" max="32767" attributes="0"/>
+                                          <Component id="txtMaSPinDSPX" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -337,33 +437,33 @@
                           <Component id="jScrollPane5" min="-2" pref="408" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtMaPNinDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtMaPNinDSPX" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="lblMaPNinDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblSanPhaminDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtMaSPinDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtMaSPinDSPX" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblTenSPinDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTenSPinDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtTenSPinDSPX" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="lblSoLuonginDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtSoLuonginDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="txtSoLuonginDSPX" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="lblDonGiainDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtDonGiainDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="txtDonGiainDSPX" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblThanhTieninDSPN" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtThanhTieninDSPN" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtThanhTieninDSPX" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="86" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -444,7 +544,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JTextField" name="txtMaSPinDSPN">
+                <Component class="javax.swing.JTextField" name="txtMaSPinDSPX">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblSanPhaminDSPN">
                   <Properties>
@@ -454,7 +554,7 @@
                     <Property name="text" type="java.lang.String" value="M&#xe3; SP"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtMaPNinDSPN">
+                <Component class="javax.swing.JTextField" name="txtMaPNinDSPX">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblMaPNinDSPN">
                   <Properties>
@@ -472,7 +572,7 @@
                     <Property name="text" type="java.lang.String" value="T&#xea;n SP"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtTenSPinDSPN">
+                <Component class="javax.swing.JTextField" name="txtTenSPinDSPX">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblSoLuonginDSPN">
                   <Properties>
@@ -482,7 +582,7 @@
                     <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtSoLuonginDSPN">
+                <Component class="javax.swing.JTextField" name="txtSoLuonginDSPX">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblThanhTieninDSPN">
                   <Properties>
@@ -492,7 +592,7 @@
                     <Property name="text" type="java.lang.String" value="Th&#xe0;nh ti&#x1ec1;n"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtThanhTieninDSPN">
+                <Component class="javax.swing.JTextField" name="txtThanhTieninDSPX">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblDonGiainDSPN">
                   <Properties>
@@ -502,7 +602,7 @@
                     <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1;"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtDonGiainDSPN">
+                <Component class="javax.swing.JTextField" name="txtDonGiainDSPX">
                 </Component>
               </SubComponents>
             </Container>

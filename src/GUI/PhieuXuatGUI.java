@@ -506,10 +506,10 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Baloo 2 SemiBold", 2, 13)); // NOI18N
         jLabel1.setText("Giá bán đề xuất");
-        pnDSSP.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, -1, 30));
+        pnDSSP.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 600, -1, 20));
 
         lblGiaNhap.setText(" ");
-        pnDSSP.add(lblGiaNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 600, 100, -1));
+        pnDSSP.add(lblGiaNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 600, 100, 20));
 
         pnHangChoXuat.setBackground(new java.awt.Color(250, 247, 240));
 
@@ -540,6 +540,17 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
             }
         });
         jScrollPane5.setViewportView(tblHangChoXuat);
+        if (tblHangChoXuat.getColumnModel().getColumnCount() > 0) {
+            tblHangChoXuat.getColumnModel().getColumn(0).setResizable(false);
+            tblHangChoXuat.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblHangChoXuat.getColumnModel().getColumn(1).setResizable(false);
+            tblHangChoXuat.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblHangChoXuat.getColumnModel().getColumn(2).setResizable(false);
+            tblHangChoXuat.getColumnModel().getColumn(2).setPreferredWidth(25);
+            tblHangChoXuat.getColumnModel().getColumn(3).setResizable(false);
+            tblHangChoXuat.getColumnModel().getColumn(3).setPreferredWidth(25);
+            tblHangChoXuat.getColumnModel().getColumn(4).setPreferredWidth(50);
+        }
 
         btnTaoPhieuXuat.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
         btnTaoPhieuXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnAdd.png"))); // NOI18N
