@@ -13,6 +13,8 @@ import DTO.CTPhieuNhapDTO;
 import DTO.HoaDonDTO;
 import DTO.KhoDTO;
 import DTO.PhieuNhapDTO;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -65,6 +67,14 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         init();
         loadDataDSSP();
         loadDataMaPN();
+        
+        txtMaNCC.setEnabled(false);
+        txtMaNV.setEnabled(false);
+        txtMaPN.setEnabled(false);
+        txtTongTien.setEnabled(false);
+        
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) this.txtNgayLap.getDateEditor();
+        editor.setEnabled(false);
     }
 
     public void init() {
@@ -113,7 +123,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         tblTTPN.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
         
         //set SoLuong Spinner
-        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, 0, 100, 1);
+        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, 100, 1);
         txtSoLuong.setModel(modeSpinner);
         JFormattedTextField txtSpinner = ((JSpinner.NumberEditor) txtSoLuong.getEditor()).getTextField();
         ((NumberFormatter) txtSpinner.getFormatter()).setAllowsInvalid(false);
@@ -220,7 +230,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     }
 //--
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         InPhieuNhapGUI = new javax.swing.JDialog();
@@ -276,7 +286,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         lblMaSP4 = new javax.swing.JLabel();
         lblMaSP5 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JTextField();
-        chooseMaKH = new javax.swing.JButton();
+        chooseMaNCC = new javax.swing.JButton();
         chooseMaNV = new javax.swing.JButton();
         btnXoaSanPham = new javax.swing.JLabel();
 
@@ -605,10 +615,10 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         lblMaSP5.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblMaSP5.setText("Tổng tiền");
 
-        chooseMaKH.setText("...");
-        chooseMaKH.addActionListener(new java.awt.event.ActionListener() {
+        chooseMaNCC.setText("...");
+        chooseMaNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chooseMaKHActionPerformed(evt);
+                chooseMaNCCActionPerformed(evt);
             }
         });
 
@@ -641,37 +651,38 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
                         .addGap(232, 232, 232)
                         .addComponent(btnXoaSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnHangChoNhapLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblMaSP1)
-                        .addGap(32, 32, 32)
-                        .addComponent(txtMaPN, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addComponent(lblMaSP4)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNgayLap, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnHangChoNhapLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblMaSP2)
-                        .addGap(24, 24, 24)
-                        .addComponent(txtMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(chooseMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(lblMaSP5)
-                        .addGap(11, 11, 11)
-                        .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnHangChoNhapLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addContainerGap()
                         .addComponent(lblMaSP3)
-                        .addGap(32, 32, 32)
+                        .addGap(30, 30, 30)
                         .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(chooseMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnHangChoNhapLayout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addComponent(btnTaoPhieuNhap)
                         .addGap(79, 79, 79)
-                        .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnHangChoNhapLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(pnHangChoNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMaSP1)
+                            .addComponent(lblMaSP2))
+                        .addGap(22, 22, 22)
+                        .addGroup(pnHangChoNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnHangChoNhapLayout.createSequentialGroup()
+                                .addComponent(txtMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chooseMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(lblMaSP5)
+                                .addGap(11, 11, 11)
+                                .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnHangChoNhapLayout.createSequentialGroup()
+                                .addComponent(txtMaPN, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71)
+                                .addComponent(lblMaSP4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNgayLap, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnHangChoNhapLayout.setVerticalGroup(
@@ -700,12 +711,12 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
                         .addGroup(pnHangChoNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMaSP2)
                             .addComponent(txtMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chooseMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(chooseMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20)
-                .addGroup(pnHangChoNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMaSP3)
+                .addGroup(pnHangChoNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chooseMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chooseMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMaSP3))
                 .addGap(43, 43, 43)
                 .addGroup(pnHangChoNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnTaoPhieuNhap)
@@ -738,9 +749,9 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void tblDSSPMouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void tblDSSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSPMouseClicked
         int k = tblDSSP.getSelectedRow();      
         txtMaSP.setText(tblDSSP.getModel().getValueAt(k,0).toString());
         txtTenSP.setText(tblDSSP.getModel().getValueAt(k,1).toString());
@@ -760,9 +771,9 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         
         txtMaSP.setEnabled(false);
         txtTenSP.setEnabled(false);
-    }                                    
+    }//GEN-LAST:event_tblDSSPMouseClicked
 
-    private void btnThemSPMouseClicked(java.awt.event.MouseEvent evt) {                                       
+    private void btnThemSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSPMouseClicked
         String MaPN = txtMaPN.getText();
         String MaSP = txtMaSP.getText();
         String TenSP = txtTenSP.getText();
@@ -812,13 +823,13 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Số lượng nhập phải lớn hơn 0");
         }
 
-    }                                      
+    }//GEN-LAST:event_btnThemSPMouseClicked
 
-    private void tblHangChoNhapMouseClicked(java.awt.event.MouseEvent evt) {                                            
+    private void tblHangChoNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHangChoNhapMouseClicked
 
-    }                                           
+    }//GEN-LAST:event_tblHangChoNhapMouseClicked
 
-    private void btnTaoPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {                                             
+    private void btnTaoPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaoPhieuNhapMouseClicked
         String MaPN = txtMaPN.getText();
         String MaNCC = txtMaNCC.getText();
         String MaNV = txtMaNV.getText();
@@ -840,9 +851,9 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         dtmHangChoNhap.setRowCount(0);
 
         JOptionPane.showMessageDialog(pnRoot, "Tạo phiếu nhập thành công");
-    }                                            
+    }//GEN-LAST:event_btnTaoPhieuNhapMouseClicked
 
-    private void btnInHoaDonMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    private void btnInHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDonMouseClicked
         InPhieuNhapGUI.setUndecorated(true);
         InPhieuNhapGUI.pack();
         InPhieuNhapGUI.setVisible(true);
@@ -850,20 +861,24 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         loadDataTTPN(); //load thông tin hóa đơn
         ctpnBUS.docDanhSach();
         ArrayList<PhieuNhapDTO> dsctpn = pnBUS.getListPhieuNhap();
-    }                                        
+    }//GEN-LAST:event_btnInHoaDonMouseClicked
 
-    private void chooseMaKHActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        if(!chooseNCC){
-            ChooseNCC ncc = new ChooseNCC();
-            ncc.setVisible(true);
-        } 
-    }                                          
+    private void chooseMaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaNCCActionPerformed
+        RCNhaCungCapGUI rcncc = new RCNhaCungCapGUI();
+        rcncc.setVisible(true);
+        String MaNCC = rcncc.getMaNCC();
+        txtMaNCC.setText(MaNCC);
+    }//GEN-LAST:event_chooseMaNCCActionPerformed
 
-    private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaNVActionPerformed
+        RCNhanVienGUI rcnv = new RCNhanVienGUI();
+        rcnv.setVisible(true);
+        
+        String MaNV = rcnv.getMaNV();
+        txtMaNV.setText(MaNV);
+    }//GEN-LAST:event_chooseMaNVActionPerformed
 
-    }                                          
-
-    private void btnXoaSanPhamMouseClicked(java.awt.event.MouseEvent evt) {                                           
+    private void btnXoaSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaSanPhamMouseClicked
         int k = tblHangChoNhap.getSelectedRow();
         String MaSP = tblHangChoNhap.getModel().getValueAt(k,0).toString();
         int SoLuong = Integer.parseInt(tblHangChoNhap.getModel().getValueAt(k,2).toString());
@@ -884,9 +899,9 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtTongTien.setText(String.valueOf(sumPN()));
         loadDataDSSP();
         
-    }                                          
+    }//GEN-LAST:event_btnXoaSanPhamMouseClicked
 
-    private void tblTTPNMouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void tblTTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTPNMouseClicked
         int k = tblTTPN.getSelectedRow();
         txtMaPNinTTPN.setText(tblTTPN.getValueAt(k, 0).toString());
         txtMaNCCinTTPN.setText(tblTTPN.getValueAt(k, 1).toString());
@@ -906,18 +921,18 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtMaNVinTTPN.setEnabled(false);
         txtNgapLapinTTPN.setEnabled(false);
         txtTongTieninTTPN.setEnabled(false);
-    }                                    
+    }//GEN-LAST:event_tblTTPNMouseClicked
 
-    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {                                      
+    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
         InPhieuNhapGUI.dispose();
         txtMaPNinTTPN.setText("");
         txtMaNCCinTTPN.setText("");
         txtMaNVinTTPN.setText("");
         txtNgapLapinTTPN.setCalendar(null);
         txtTongTieninTTPN.setText("");
-    }                                     
+    }//GEN-LAST:event_btnCloseMouseClicked
 
-    private void btnInPhieuNhapinTTPNMouseClicked(java.awt.event.MouseEvent evt) {                                                  
+    private void btnInPhieuNhapinTTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInPhieuNhapinTTPNMouseClicked
         
         for (CTPhieuNhapDTO ctpn : dsctpn) {
             ctpnBUS.add(ctpn);
@@ -930,7 +945,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In hóa đơn thành công");
         loadDataDSSP();
-    }                                                 
+    }//GEN-LAST:event_btnInPhieuNhapinTTPNMouseClicked
     public static void setMaNCC(String ma){
         txtMaNCC.setText(ma);
         chooseNCC = false;
@@ -939,7 +954,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog InPhieuNhapGUI;
     private javax.swing.JLabel btnClose;
     private javax.swing.JLabel btnInHoaDon;
@@ -947,7 +962,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     private javax.swing.JLabel btnTaoPhieuNhap;
     private javax.swing.JLabel btnThemSP;
     private javax.swing.JLabel btnXoaSanPham;
-    private javax.swing.JButton chooseMaKH;
+    private javax.swing.JButton chooseMaNCC;
     private javax.swing.JButton chooseMaNV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -996,5 +1011,5 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenSP;
     private javax.swing.JTextField txtTongTien;
     private javax.swing.JTextField txtTongTieninTTPN;
-    // End of variables declaration                   
+    // End of variables declaration//GEN-END:variables
 }

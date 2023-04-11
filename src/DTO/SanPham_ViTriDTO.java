@@ -7,20 +7,21 @@ package DTO;
 
 /**
  *
- * @author wizardsc
+ * @author Phuc Toan
  */
-public class SanPhamDTO {
+public class SanPham_ViTriDTO {
     private String MaSP;
+    
     private String TenSP;
     private int SoLuong;
     private int DonGia;
     private String DonViTinh;
     private String MaLoai;
-    
     private String IMG;
 
-    public SanPhamDTO(String MaSP, String TenSP, int SoLuong, int DonGia, String DonViTinh, String MaLoai, String IMG) {
+    public SanPham_ViTriDTO(String MaSP, String TenSP, int SoLuong, int DonGia, String DonViTinh, String MaLoai, String IMG) {
         this.MaSP = MaSP;
+        
         this.TenSP = TenSP;
         this.SoLuong = SoLuong;
         this.DonGia = DonGia;
@@ -29,11 +30,6 @@ public class SanPhamDTO {
         this.IMG = IMG;
     }
 
-
-    
-
-    
-
     public String getMaSP() {
         return MaSP;
     }
@@ -41,6 +37,8 @@ public class SanPhamDTO {
     public void setMaSP(String MaSP) {
         this.MaSP = MaSP;
     }
+
+    
 
     public String getTenSP() {
         return TenSP;
@@ -82,8 +80,6 @@ public class SanPhamDTO {
         this.MaLoai = MaLoai;
     }
 
-    
-
     public String getIMG() {
         return IMG;
     }
@@ -91,5 +87,5 @@ public class SanPhamDTO {
     public void setIMG(String IMG) {
         this.IMG = IMG;
     }
-           
+    
 }

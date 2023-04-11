@@ -7,6 +7,7 @@ package BUS;
 
 import DAO.SanPhamDAO;
 import DTO.SanPhamDTO;
+import DTO.SanPham_ViTriDTO;
 import java.util.ArrayList;
 
 /**
@@ -15,15 +16,31 @@ import java.util.ArrayList;
  */
 public class SanPhamBUS {
     private ArrayList<SanPhamDTO> listSanPham = null;
+    private ArrayList<SanPham_ViTriDTO> listSPCuaHang = null;
     private SanPhamDAO spDAO = new SanPhamDAO();
     
     public void docDanhSach(){
         this.listSanPham = spDAO.getListSanPham();
+        
+        
     }
+    public void docDanhSach1(){
+        this.listSPCuaHang = spDAO.getListSanPhamCuaHang();
+    }
+    
     public ArrayList<SanPhamDTO> getListSanPham(){
         return listSanPham;
     }
     
+    public ArrayList<SanPham_ViTriDTO> getListSPCuahang(){
+        return listSPCuaHang;
+    }
+    
+    
+    public void add(SanPhamDTO sp){
+        listSanPham.add(sp);
+        spDAO.insertSanPham(sp);     
+    }
     public void update(SanPhamDTO sp){
         for(int i=0;i<listSanPham.size();i++){
             if (listSanPham.get(i).getMaSP().equals(sp.getMaSP())){
