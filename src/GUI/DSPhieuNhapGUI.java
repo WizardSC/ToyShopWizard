@@ -68,6 +68,25 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
         tblDSCTPN.setFont(new Font("Arial", Font.PLAIN, 13));
         tblDSCTPN.getTableHeader().setReorderingAllowed(false);
         tblDSCTPN.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
+        
+        tblDSPN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tblDSPN.clearSelection(); // xóa lựa chọn khi chuột rời khỏi JTable
+            }
+        });
+
+        tblDSPN.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                int row = tblDSPN.rowAtPoint(evt.getPoint());
+                int col = tblDSPN.columnAtPoint(evt.getPoint());
+                if (row >= 0 && col >= 0) {
+                    tblDSPN.clearSelection();
+                    tblDSPN.setRowSelectionInterval(row, row);
+                    tblDSPN.setColumnSelectionInterval(0, tblDSPN.getColumnCount() - 1);
+                    tblDSPN.setSelectionBackground(Color.LIGHT_GRAY); // đổi màu nền của ô khi hover
+                }
+            }
+        });
     }
     
     public void showAllDSPN(ArrayList<PhieuNhapDTO> dspn){

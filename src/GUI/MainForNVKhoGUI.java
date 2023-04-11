@@ -8,6 +8,7 @@ package GUI;
 import GUI.model.ChangeScreenNVKho;
 
 import GUI.model.DanhMuc;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

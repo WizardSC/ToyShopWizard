@@ -33,7 +33,7 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
     DefaultTableModel dtmCTPhieuXuat;
     private PhieuXuatBUS pxBUS = new PhieuXuatBUS();
     private CTPhieuXuatBUS ctpxBUS = new CTPhieuXuatBUS();
-    
+    boolean clickedOnce = false; //gán giá trị cho lần click đầu tiên
     String tuKhoaTimKiem;
     public DSPhieuXuatGUI() {
         initComponents();
@@ -89,11 +89,36 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
                 search(tuKhoaTimKiem);
             }
         });
+        
+        DocumentListener listener  = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+        };
+        
+        txtFrom.getDocument().addDocumentListener(listener);
+        txtTo.getDocument().addDocumentListener(listener);
     }
     //Hàm tìm kiếm
     public void search(String tk){
         if(tk.equals("Mã PX")){
             ArrayList<PhieuXuatDTO> dspx = pxBUS.searchMaPX(txtTimKiem.getText().toString());
+            showAllDSPX(dspx);
+        }
+        if(tk.equals("Tổng tiền")){
+            
+            ArrayList<PhieuXuatDTO> dspx = pxBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
             showAllDSPX(dspx);
         }
     }
@@ -155,8 +180,8 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         txtTo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtNgayLap = new com.toedter.calendar.JDateChooser();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        btnTimKiemNC = new javax.swing.JLabel();
+        cbxTimKiemNC = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         txtMaPX = new javax.swing.JTextField();
         cbxTimKiem = new javax.swing.JComboBox<>();
@@ -256,11 +281,21 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         txtNgayLap.setDateFormatString("dd/MM/yyyy");
         pnDSSP.add(txtNgayLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 530, 160, 24));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
-        pnDSSP.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, -1, -1));
+        btnTimKiemNC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        btnTimKiemNC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTimKiemNCMouseClicked(evt);
+            }
+        });
+        pnDSSP.add(btnTimKiemNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày lập", "Tổng tiền" }));
-        pnDSSP.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 650, 100, 30));
+        cbxTimKiemNC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tổng tiền" }));
+        cbxTimKiemNC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTimKiemNCActionPerformed(evt);
+            }
+        });
+        pnDSSP.add(cbxTimKiemNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 650, 100, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         pnDSSP.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
@@ -528,11 +563,31 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         txtTimKiem.setText("");
     }//GEN-LAST:event_cbxTimKiemActionPerformed
 
+    private void cbxTimKiemNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemNCActionPerformed
+        tuKhoaTimKiem = cbxTimKiemNC.getSelectedItem().toString();
+        System.out.println(tuKhoaTimKiem);
+    }//GEN-LAST:event_cbxTimKiemNCActionPerformed
+    
+    private void btnTimKiemNCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemNCMouseClicked
+        if(!clickedOnce){
+            ArrayList<PhieuXuatDTO> dspx = pxBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
+            showAllDSPX(dspx);
+            clickedOnce = true;
+        } else {
+            txtFrom.setText("");
+            txtTo.setText("");
+            loadDataDSPX();
+            clickedOnce = false;
+        }
+        
+        
+    }//GEN-LAST:event_btnTimKiemNCMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnTimKiemNC;
     private javax.swing.JComboBox<String> cbxTimKiem;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> cbxTimKiemNC;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

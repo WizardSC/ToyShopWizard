@@ -108,16 +108,16 @@ public class ChangeScreenNVKho {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-//            pnItem.setBackground(new Color(232, 255, 194));
-//            lblItem.setBackground(new Color(232, 255, 194));
+            pnItem.setBackground(new Color(233, 246, 255));
+            lblItem.setBackground(new Color(233, 246, 255));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-//            if (!kindSelected.equalsIgnoreCase(kind)) {
-//                pnItem.setBackground(new Color(76,175,80));
-//                lblItem.setBackground(new Color(76,175,80));
-//            }
+            if (!kindSelected.equalsIgnoreCase(kind)) {
+                pnItem.setBackground(new Color(188, 206, 248));
+                lblItem.setBackground(new Color(188, 206, 248));
+            }
         }
 
     }

@@ -130,6 +130,26 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtSpinner.setEditable(true);
         txtSpinner.setHorizontalAlignment(JTextField.LEFT);
         txtSpinner.setBackground(Color.white);
+        
+        //Set hover cho tblDSSP
+        tblDSSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tblDSSP.clearSelection(); // xóa lựa chọn khi chuột rời khỏi JTable
+            }
+        });
+
+        tblDSSP.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                int row = tblDSSP.rowAtPoint(evt.getPoint());
+                int col = tblDSSP.columnAtPoint(evt.getPoint());
+                if (row >= 0 && col >= 0) {
+                    tblDSSP.clearSelection();
+                    tblDSSP.setRowSelectionInterval(row, row);
+                    tblDSSP.setColumnSelectionInterval(0, tblDSSP.getColumnCount() - 1);
+                    tblDSSP.setSelectionBackground(new Color(152, 168, 248)); // đổi màu nền của ô khi hover
+                }
+            }
+        });
     }
 
     public void showAllDSSP(ArrayList<KhoDTO> dskho) {

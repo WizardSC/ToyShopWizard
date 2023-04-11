@@ -42,5 +42,16 @@ public class PhieuXuatBUS {
         }
         return dspx;
     }
+    
+    public ArrayList<PhieuXuatDTO> searchTongTien(int minTongTien, int maxTongTien){
+        ArrayList<PhieuXuatDTO> dspx = new ArrayList<>();
+        for(PhieuXuatDTO px : listPhieuXuat){
+            int TongTien = px.getTongTien();
+            if ( minTongTien <= TongTien && TongTien <= maxTongTien){
+                dspx.add(px);
+            }
+        }
+        return dspx;
+    }
     //Tìm kiếm theo Mã NV
 }
