@@ -19,6 +19,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +33,8 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
     DefaultTableModel dtmCTPhieuXuat;
     private PhieuXuatBUS pxBUS = new PhieuXuatBUS();
     private CTPhieuXuatBUS ctpxBUS = new CTPhieuXuatBUS();
+    
+    String tuKhoaTimKiem;
     public DSPhieuXuatGUI() {
         initComponents();
         
@@ -67,6 +71,31 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         tblDSCTPX.setFont(new Font("Arial", Font.PLAIN, 13));
         tblDSCTPX.getTableHeader().setReorderingAllowed(false);
         tblDSCTPX.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
+        cbxTimKiem.setSelectedIndex(0);
+        //Tìm kiếm động
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+        });
+    }
+    //Hàm tìm kiếm
+    public void search(String tk){
+        if(tk.equals("Mã PX")){
+            ArrayList<PhieuXuatDTO> dspx = pxBUS.searchMaPX(txtTimKiem.getText().toString());
+            showAllDSPX(dspx);
+        }
     }
 
     public void showAllDSPX(ArrayList<PhieuXuatDTO> dspx){
@@ -119,20 +148,20 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSPX = new javax.swing.JTable();
         lblMaPN = new javax.swing.JLabel();
-        txtMaPX = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         txtMaNV = new javax.swing.JTextField();
         lblHo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtTongTien = new javax.swing.JTextField();
+        txtTo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtNgayLap = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        txtMaPX1 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        txtTongTien1 = new javax.swing.JTextField();
-        txtTongTien2 = new javax.swing.JTextField();
+        txtMaPX = new javax.swing.JTextField();
+        cbxTimKiem = new javax.swing.JComboBox<>();
+        txtTongTien = new javax.swing.JTextField();
+        txtFrom = new javax.swing.JTextField();
         lblMaPN1 = new javax.swing.JLabel();
         lblMaPN2 = new javax.swing.JLabel();
         pnGioHang = new javax.swing.JPanel();
@@ -203,12 +232,12 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         lblMaPN.setText("Đến");
         pnDSSP.add(lblMaPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 650, 40, 30));
 
-        txtMaPX.addActionListener(new java.awt.event.ActionListener() {
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPXActionPerformed(evt);
+                txtTimKiemActionPerformed(evt);
             }
         });
-        pnDSSP.add(txtMaPX, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 610, 310, 30));
+        pnDSSP.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 610, 310, 30));
         pnDSSP.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 570, 160, 24));
 
         lblHo.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
@@ -218,7 +247,7 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel4.setText("Ngày lập");
         pnDSSP.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 530, -1, -1));
-        pnDSSP.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 650, 120, 30));
+        pnDSSP.add(txtTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 650, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel5.setText("Tổng tiền");
@@ -236,17 +265,22 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         pnDSSP.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
 
-        txtMaPX1.addActionListener(new java.awt.event.ActionListener() {
+        txtMaPX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPX1ActionPerformed(evt);
+                txtMaPXActionPerformed(evt);
             }
         });
-        pnDSSP.add(txtMaPX1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 530, 160, 24));
+        pnDSSP.add(txtMaPX, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 530, 160, 24));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã PX", "Mã NV" }));
-        pnDSSP.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 100, 30));
-        pnDSSP.add(txtTongTien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 570, 160, 24));
-        pnDSSP.add(txtTongTien2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 650, 120, 30));
+        cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã PX", "Mã NV" }));
+        cbxTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTimKiemActionPerformed(evt);
+            }
+        });
+        pnDSSP.add(cbxTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 100, 30));
+        pnDSSP.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 570, 160, 24));
+        pnDSSP.add(txtFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 650, 120, 30));
 
         lblMaPN1.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblMaPN1.setText("Mã PX");
@@ -455,7 +489,7 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         txtNgayLap.setDate(NgayLap);
         txtTongTien.setText(tblDSPX.getModel().getValueAt(k,3).toString());
         
-        String MaPX = txtMaPX.getText();
+        String MaPX = txtTimKiem.getText();
         loadDataDSCTPXtheoMaPX(MaPX);
         
         txtMaPX.setEnabled(false);
@@ -464,9 +498,9 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         txtNgayLap.setEnabled(false);
     }//GEN-LAST:event_tblDSPXMouseClicked
 
-    private void txtMaPXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPXActionPerformed
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
 
-    }//GEN-LAST:event_txtMaPXActionPerformed
+    }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void tblDSCTPXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSCTPXMouseClicked
         int k = tblDSCTPX.getSelectedRow();
@@ -485,14 +519,19 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         txtThanhTieninDSPX.setEnabled(false);    
     }//GEN-LAST:event_tblDSCTPXMouseClicked
 
-    private void txtMaPX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPX1ActionPerformed
+    private void txtMaPXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPXActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPX1ActionPerformed
+    }//GEN-LAST:event_txtMaPXActionPerformed
+
+    private void cbxTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemActionPerformed
+        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
+        txtTimKiem.setText("");
+    }//GEN-LAST:event_cbxTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxTimKiem;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -518,17 +557,17 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
     private javax.swing.JTable tblDSCTPX;
     private javax.swing.JTable tblDSPX;
     private javax.swing.JTextField txtDonGiainDSPX;
+    private javax.swing.JTextField txtFrom;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtMaPNinDSPX;
     private javax.swing.JTextField txtMaPX;
-    private javax.swing.JTextField txtMaPX1;
     private javax.swing.JTextField txtMaSPinDSPX;
     private com.toedter.calendar.JDateChooser txtNgayLap;
     private javax.swing.JTextField txtSoLuonginDSPX;
     private javax.swing.JTextField txtTenSPinDSPX;
     private javax.swing.JTextField txtThanhTieninDSPX;
+    private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JTextField txtTo;
     private javax.swing.JTextField txtTongTien;
-    private javax.swing.JTextField txtTongTien1;
-    private javax.swing.JTextField txtTongTien2;
     // End of variables declaration//GEN-END:variables
 }

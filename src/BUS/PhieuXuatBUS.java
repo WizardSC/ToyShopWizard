@@ -29,4 +29,18 @@ public class PhieuXuatBUS {
         listPhieuXuat.add(px);
         pxDAO.insertPhieuXuat(px);
     }
+    
+    //Tìm kiếm theo Mã PX
+    public ArrayList<PhieuXuatDTO> searchMaPX(String tk){
+        tk=tk.toLowerCase();
+        ArrayList<PhieuXuatDTO> dspx = new ArrayList<>();
+        for(PhieuXuatDTO px : listPhieuXuat){
+            String MaPX = px.getMaPX().toLowerCase();
+            if(MaPX.contains(tk)){
+                dspx.add(px);
+            }
+        }
+        return dspx;
+    }
+    //Tìm kiếm theo Mã NV
 }

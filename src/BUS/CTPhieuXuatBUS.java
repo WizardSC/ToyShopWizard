@@ -48,4 +48,6 @@ public class CTPhieuXuatBUS {
         }
         return dsctpx;
     }
+    
+    
 }
