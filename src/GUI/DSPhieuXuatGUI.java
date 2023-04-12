@@ -116,6 +116,10 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
             ArrayList<PhieuXuatDTO> dspx = pxBUS.searchMaPX(txtTimKiem.getText().toString());
             showAllDSPX(dspx);
         }
+        if(tk.equals("Mã NV")){
+            ArrayList<PhieuXuatDTO> dspx = pxBUS.searchMaNV(txtTimKiem.getText().toString());
+            showAllDSPX(dspx);
+        }
         if(tk.equals("Tổng tiền")){
             
             ArrayList<PhieuXuatDTO> dspx = pxBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
@@ -524,7 +528,7 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         txtNgayLap.setDate(NgayLap);
         txtTongTien.setText(tblDSPX.getModel().getValueAt(k,3).toString());
         
-        String MaPX = txtTimKiem.getText();
+        String MaPX = txtMaPX.getText();
         loadDataDSCTPXtheoMaPX(MaPX);
         
         txtMaPX.setEnabled(false);

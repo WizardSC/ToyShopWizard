@@ -21,9 +21,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
@@ -283,7 +287,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
                 {"2", null, null, null}
             },
             new String [] {
-                "Mã HD", "Mã NV", "Ngày lập", "Tổng tiền"
+                "Mã PX", "Mã NV", "Ngày lập", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -386,7 +390,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
                 .addGap(287, 287, 287)
                 .addComponent(btnInHoaDoninTTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(pnHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+            .addComponent(pnHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -877,25 +881,25 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaSPMouseClicked
 
     private void tblTTPXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTPXMouseClicked
-//        int k = tblTTPX.getSelectedRow();
-//        txtMaPXinTTPX.setText(tblTTPX.getValueAt(k, 0).toString());
-//        txtMaNVinTTPX.setText(tblTTPX.getValueAt(k, 1).toString());
-//        txtMaNVinTTPX.setText(tblTTPX.getValueAt(k, 2).toString());
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//        Date NgayLap = new Date();
-//        try {
-//            NgayLap = sdf.parse(tblTTPX.getModel().getValueAt(k, 3).toString());
-//        } catch (ParseException ex) {
-//            Logger.getLogger(HoaDonGUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        txtNgayLapinTTPX.setDate(NgayLap);
-//        txtTongTieninTTPX.setText(tblTTPX.getValueAt(k, 4).toString());
-//
-//        txtMaPXinTTPX.setEnabled(false);
-//        txtMaNVinTTPX.setEnabled(false);
-//        txtMaNVinTTPX.setEnabled(false);
-//        txtNgayLapinTTPX.setEnabled(false);
-//        txtTongTieninTTPX.setEnabled(false);
+        int k = tblTTPX.getSelectedRow();
+        txtMaPXinTTPX.setText(tblTTPX.getValueAt(k, 0).toString());
+        txtMaNVinTTPX.setText(tblTTPX.getValueAt(k, 1).toString());
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date NgayLap = new Date();
+        try {
+            NgayLap = sdf.parse(tblTTPX.getModel().getValueAt(k, 2).toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(HoaDonGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtNgayLapinTTPX.setDate(NgayLap);
+        txtTongTieninTTPX.setText(tblTTPX.getValueAt(k, 3).toString());
+
+        txtMaPXinTTPX.setEnabled(false);
+        txtMaNVinTTPX.setEnabled(false);
+        txtMaNVinTTPX.setEnabled(false);
+        txtNgayLapinTTPX.setEnabled(false);
+        txtTongTieninTTPX.setEnabled(false);
     }//GEN-LAST:event_tblTTPXMouseClicked
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
@@ -904,6 +908,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void btnInHoaDoninTTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDoninTTHDMouseClicked
+        
         for (CTPhieuXuatDTO ctpx : dsctpx) {
             ctpxBUS.add(ctpx);
         }

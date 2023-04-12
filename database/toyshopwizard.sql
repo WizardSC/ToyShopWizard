@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 31, 2023 lúc 09:51 AM
--- Phiên bản máy phục vụ: 10.4.24-MariaDB
--- Phiên bản PHP: 7.4.29
+-- Thời gian đã tạo: Th4 12, 2023 lúc 05:51 AM
+-- Phiên bản máy phục vụ: 10.4.27-MariaDB
+-- Phiên bản PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `chucvu` (
-  `MaCV` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenCV` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaCV` varchar(20) NOT NULL,
+  `TenCV` varchar(30) NOT NULL,
   `Luong` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -50,9 +50,9 @@ INSERT INTO `chucvu` (`MaCV`, `TenCV`, `Luong`) VALUES
 --
 
 CREATE TABLE `cthoadon` (
-  `MaHD` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaSP` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenSP` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaHD` varchar(10) NOT NULL,
+  `MaSP` varchar(10) NOT NULL,
+  `TenSP` varchar(50) NOT NULL,
   `SoLuong` int(20) NOT NULL,
   `DonGia` int(20) NOT NULL,
   `ThanhTien` int(20) NOT NULL
@@ -101,9 +101,9 @@ INSERT INTO `cthoadon` (`MaHD`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhTien
 --
 
 CREATE TABLE `ctphieunhap` (
-  `MaPN` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaSP` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenSP` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaPN` varchar(15) NOT NULL,
+  `MaSP` varchar(15) NOT NULL,
+  `TenSP` varchar(50) NOT NULL,
   `SoLuong` int(20) NOT NULL,
   `DonGia` int(20) NOT NULL,
   `ThanhTien` int(20) NOT NULL
@@ -114,6 +114,8 @@ CREATE TABLE `ctphieunhap` (
 --
 
 INSERT INTO `ctphieunhap` (`MaPN`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhTien`) VALUES
+('PN01', 'SP03', 'Bàn làm việc Osaka', 5, 230000, 1150000),
+('PN01', 'SP04', 'Bàn làm việc Osaka KA', 3, 250000, 750000),
 ('PN05', 'SP01', 'Bàn làm việc Finn 260011', 2, 100000, 200000),
 ('PN07', 'SP03', 'Bàn làm việc Osaka', 3, 230000, 690000),
 ('PN08', 'SP02', 'Bàn làm việc Maxine', 1, 150000, 150000),
@@ -132,7 +134,8 @@ INSERT INTO `ctphieunhap` (`MaPN`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhT
 ('PN18', 'SP04', 'Bàn làm việc Osaka KA', 6, 250000, 1500000),
 ('PN18', 'SP05', 'Bàn làm việc Pio', 3, 186000, 558000),
 ('PN19', 'SP04', 'Bàn làm việc Osaka KA', 5, 250000, 1250000),
-('PN20', 'SP03', 'Bàn làm việc Osaka', 4, 230000, 920000);
+('PN20', 'SP03', 'Bàn làm việc Osaka', 4, 230000, 920000),
+('PN21', 'SP04', 'Bàn làm việc Osaka KA', 4, 250000, 1000000);
 
 -- --------------------------------------------------------
 
@@ -141,9 +144,9 @@ INSERT INTO `ctphieunhap` (`MaPN`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhT
 --
 
 CREATE TABLE `ctphieuxuat` (
-  `MaPX` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaSP` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenSP` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaPX` varchar(15) NOT NULL,
+  `MaSP` varchar(20) NOT NULL,
+  `TenSP` varchar(50) NOT NULL,
   `SoLuong` int(20) NOT NULL,
   `DonGia` int(20) NOT NULL,
   `ThanhTien` int(20) NOT NULL
@@ -154,11 +157,7 @@ CREATE TABLE `ctphieuxuat` (
 --
 
 INSERT INTO `ctphieuxuat` (`MaPX`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhTien`) VALUES
-('PX02', 'SP04', 'Bàn làm việc Osaka KA', 3, 365000, 1095000),
-('PX03', 'SP05', 'Bàn làm việc Pio', 3, 300000, 900000),
-('PX04', 'SP01', 'Bàn làm việc Finn 260011', 2, 250000, 500000),
-('PX05', 'SP04', 'Bàn làm việc Osaka KA', 5, 365000, 1825000),
-('PX06', 'SP02', 'Bàn làm việc Maxine', 3, 300000, 900000);
+('PX05', 'SP01', 'Bàn làm việc Finn 260011', 4, 250000, 1000000);
 
 -- --------------------------------------------------------
 
@@ -167,9 +166,9 @@ INSERT INTO `ctphieuxuat` (`MaPX`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhT
 --
 
 CREATE TABLE `hoadon` (
-  `MaHD` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaKH` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `MaNV` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `MaHD` varchar(15) NOT NULL,
+  `MaKH` varchar(15) DEFAULT NULL,
+  `MaNV` varchar(15) DEFAULT NULL,
   `NgayLap` date DEFAULT current_timestamp(),
   `TongTien` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -218,15 +217,22 @@ INSERT INTO `hoadon` (`MaHD`, `MaKH`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 --
 
 CREATE TABLE `khachhang` (
-  `MaKH` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ho` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ten` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `NgaySinh` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `GioiTinh` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `DiaChi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `SoDT` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `IMG` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `MaKH` varchar(20) NOT NULL,
+  `Ho` varchar(50) NOT NULL,
+  `Ten` varchar(50) NOT NULL,
+  `NgaySinh` varchar(20) NOT NULL,
+  `GioiTinh` varchar(15) NOT NULL,
+  `DiaChi` varchar(255) NOT NULL,
+  `SoDT` varchar(20) NOT NULL,
+  `IMG` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `khachhang`
+--
+
+INSERT INTO `khachhang` (`MaKH`, `Ho`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `SoDT`, `IMG`) VALUES
+('dà', 'r3', '423', '34', 'Nam', '24', '2423', 'null');
 
 -- --------------------------------------------------------
 
@@ -235,13 +241,13 @@ CREATE TABLE `khachhang` (
 --
 
 CREATE TABLE `kho` (
-  `MaSP` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenSP` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaSP` varchar(20) NOT NULL,
+  `TenSP` varchar(50) NOT NULL,
   `SoLuong` int(11) NOT NULL,
   `GiaNhap` int(11) NOT NULL,
-  `DonViTinh` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaLoai` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `IMG` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `DonViTinh` varchar(20) NOT NULL,
+  `MaLoai` varchar(20) NOT NULL,
+  `IMG` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -249,11 +255,11 @@ CREATE TABLE `kho` (
 --
 
 INSERT INTO `kho` (`MaSP`, `TenSP`, `SoLuong`, `GiaNhap`, `DonViTinh`, `MaLoai`, `IMG`) VALUES
-('SP01', 'Bàn làm việc Finn 260011', 9, 100000, 'Cái', 'L01', ''),
-('SP02', 'Bàn làm việc Maxine', 7, 150000, 'Cái', '', 'SP02.jpg'),
-('SP03', 'Bàn làm việc Osaka', 4, 230000, 'Cái', '', ''),
-('SP04', 'Bàn làm việc Osaka KA', 5, 250000, 'Cái', '', ''),
-('SP05', 'Bàn làm việc Pio', 4, 186000, 'Cái', '', 'null');
+('SP01', 'Bàn làm việc Finn 260011', 0, 100000, 'Cái', 'L01', ''),
+('SP02', 'Bàn làm việc Maxine', 0, 150000, 'Cái', '', 'SP02.jpg'),
+('SP03', 'Bàn làm việc Osaka', 0, 230000, 'Cái', '', ''),
+('SP04', 'Bàn làm việc Osaka KA', 0, 250000, 'Cái', '', ''),
+('SP05', 'Bàn làm việc Pio', 0, 186000, 'Cái', '', 'null');
 
 -- --------------------------------------------------------
 
@@ -262,8 +268,8 @@ INSERT INTO `kho` (`MaSP`, `TenSP`, `SoLuong`, `GiaNhap`, `DonViTinh`, `MaLoai`,
 --
 
 CREATE TABLE `khuyenmai` (
-  `MaKM` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenKM` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaKM` varchar(10) NOT NULL,
+  `TenKM` varchar(40) NOT NULL,
   `PhanTramKM` int(10) NOT NULL,
   `DieuKien` int(20) NOT NULL,
   `NgayBatDau` date NOT NULL,
@@ -286,10 +292,10 @@ INSERT INTO `khuyenmai` (`MaKM`, `TenKM`, `PhanTramKM`, `DieuKien`, `NgayBatDau`
 --
 
 CREATE TABLE `nhacungcap` (
-  `MaNCC` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenNCC` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `DiaChi` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `SoDT` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `MaNCC` varchar(20) NOT NULL,
+  `TenNCC` varchar(30) NOT NULL,
+  `DiaChi` varchar(20) NOT NULL,
+  `SoDT` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -306,15 +312,15 @@ INSERT INTO `nhacungcap` (`MaNCC`, `TenNCC`, `DiaChi`, `SoDT`) VALUES
 --
 
 CREATE TABLE `nhanvien` (
-  `MaNV` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ho` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ten` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `NgaySinh` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `GioiTinh` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `DiaChi` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `SoDT` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaCV` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `IMG` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
+  `MaNV` varchar(10) NOT NULL,
+  `Ho` varchar(20) NOT NULL,
+  `Ten` varchar(20) NOT NULL,
+  `NgaySinh` varchar(15) NOT NULL,
+  `GioiTinh` varchar(10) NOT NULL,
+  `DiaChi` varchar(20) NOT NULL,
+  `SoDT` varchar(20) NOT NULL,
+  `MaCV` varchar(10) NOT NULL,
+  `IMG` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -340,7 +346,6 @@ INSERT INTO `nhanvien` (`MaNV`, `Ho`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `
 ('NV16', 'Yontararak', 'Minnie', '23/10/1997', 'Nữ', 'Thailand', '23101997', 'CV01', 'Minnie.jpg'),
 ('NV17', 'Song', 'Yuqi', '23/09/1999', 'Nữ', 'China', '23091999', 'CV01', 'Yuqi.jpg'),
 ('NV18', 'Yeh', 'Shuhua', '06/01/2000', 'Nữ', 'Taiwan', '06012000', 'CV01', 'Shuhua.jpg'),
-('NV19', 'Đ', 'Đ', '02/05/1991', 'Nam', 'D', '072', 'CV04', 'null'),
 ('NV20', 'Yook', 'Sungjae', '12/10/1995', 'Nam', 'North Korea', '12101995', 'CV04', 'null');
 
 -- --------------------------------------------------------
@@ -350,9 +355,9 @@ INSERT INTO `nhanvien` (`MaNV`, `Ho`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `
 --
 
 CREATE TABLE `phieunhap` (
-  `MaPN` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaNCC` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaNV` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaPN` varchar(15) NOT NULL,
+  `MaNCC` varchar(15) NOT NULL,
+  `MaNV` varchar(15) NOT NULL,
   `NgayLap` date NOT NULL,
   `TongTien` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -362,26 +367,7 @@ CREATE TABLE `phieunhap` (
 --
 
 INSERT INTO `phieunhap` (`MaPN`, `MaNCC`, `MaNV`, `NgayLap`, `TongTien`) VALUES
-('PN01', 'NCC01', 'NV01', '2022-11-20', 100000),
-('PN02', 'NCC02', 'NV02', '2022-11-20', 1000000),
-('PN03', 'NCC03', 'NV03', '2022-11-20', 460000),
-('PN04', 'NCC04', 'NV04', '2022-11-20', 372000),
-('PN05', 'NCC05', 'NV05', '2022-11-20', 200000),
-('PN06', 'NCC06', 'NV06', '2022-11-20', 600000),
-('PN07', 'NC007', 'NV07', '2022-11-20', 690000),
-('PN08', 'NCC08', 'NV08', '2022-11-30', 350000),
-('PN09', 'NCC09', 'NV09', '2022-11-30', 760000),
-('PN10', 'NCC10', 'NV10', '2022-12-10', 872000),
-('PN11', 'NCC11', 'NV11', '2022-12-10', 1670000),
-('PN12', 'NCC12', 'NV12', '2022-12-10', 1150000),
-('PN13', 'NCC13', 'NV13', '2022-12-15', 1520000),
-('PN14', 'NCC14', 'NV14', '2022-12-15', 930000),
-('PN15', 'NCC15', 'NV15', '2022-12-20', 250000),
-('PN16', 'NCC', '16', '2022-12-20', 1250000),
-('PN17', 'NCC01', 'NV15', '2022-12-30', 300000),
-('PN18', 'NCC12', 'NV01', '2023-01-10', 2058000),
-('PN19', 'NCC11', 'NV01', '2023-01-10', 1250000),
-('PN20', 'NCC01', 'NV01', '2023-03-16', 372000);
+('PN01', 'NCC01', 'NV05', '2023-04-10', 1900000);
 
 -- --------------------------------------------------------
 
@@ -390,9 +376,9 @@ INSERT INTO `phieunhap` (`MaPN`, `MaNCC`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 --
 
 CREATE TABLE `phieuxuat` (
-  `MaPX` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaNV` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `NgayLap` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaPX` varchar(15) NOT NULL,
+  `MaNV` varchar(15) NOT NULL,
+  `NgayLap` date NOT NULL,
   `TongTien` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -401,12 +387,11 @@ CREATE TABLE `phieuxuat` (
 --
 
 INSERT INTO `phieuxuat` (`MaPX`, `MaNV`, `NgayLap`, `TongTien`) VALUES
-('PX01', 'NV01', '22/11/2022', 365000),
-('PX02', 'NV02', '23/11/2022', 1095000),
-('PX03', 'NV03', '27/11/2022', 900000),
-('PX04', 'NV04', '27/11/2022', 500000),
-('PX05', 'NV05', '10/12/2022', 1825000),
-('PX06', 'NV07', '11/12/2022', 900000);
+('PX01', 'NV01', '2023-04-11', 1460000),
+('PX02', 'NV07', '2023-04-11', 1095000),
+('PX03', 'NV07', '2023-04-10', 1200000),
+('PX04', 'NV09', '2023-04-12', 1500000),
+('PX05', 'NV08', '2023-04-12', 1000000);
 
 -- --------------------------------------------------------
 
@@ -415,13 +400,13 @@ INSERT INTO `phieuxuat` (`MaPX`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 --
 
 CREATE TABLE `sanpham` (
-  `MaSP` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenSP` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaSP` varchar(20) NOT NULL,
+  `TenSP` varchar(100) NOT NULL,
   `SoLuong` int(20) NOT NULL,
   `DonGia` int(20) NOT NULL,
-  `DonViTinh` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaLoai` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `IMG` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `DonViTinh` varchar(20) NOT NULL,
+  `MaLoai` varchar(20) NOT NULL,
+  `IMG` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -429,11 +414,32 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`MaSP`, `TenSP`, `SoLuong`, `DonGia`, `DonViTinh`, `MaLoai`, `IMG`) VALUES
-('SP01', 'Bàn làm việc Finn 260011', 0, 250000, 'Cái', '', ''),
-('SP02', 'Bàn làm việc Maxine', 0, 300000, 'Cái', '', 'SP02.jpg'),
-('SP03', 'Bàn làm việc Osaka', 0, 350000, 'Cái', '', ''),
+('SP01', 'Bàn làm việc Finn 260011', 8, 250000, 'Cái', '', ''),
+('SP02', 'Bàn làm việc Maxine', 10, 300000, 'Cái', '', 'SP02.jpg'),
+('SP03', 'Bàn làm việc Osaka', 10, 350000, 'Cái', '', ''),
 ('SP04', 'Bàn làm việc Osaka KA', 6, 365000, 'Cái', '', ''),
-('SP05', 'Bàn làm việc Pio', 6, 300000, 'Cái', '', 'null');
+('SP05', 'Bàn làm việc Pio', 8, 300000, 'Cái', '', 'null');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `sanpham_vitri`
+--
+
+CREATE TABLE `sanpham_vitri` (
+  `MaSP` varchar(20) NOT NULL,
+  `MaVT` varchar(20) NOT NULL,
+  `SoLuong` int(11) NOT NULL,
+  `DonGia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sanpham_vitri`
+--
+
+INSERT INTO `sanpham_vitri` (`MaSP`, `MaVT`, `SoLuong`, `DonGia`) VALUES
+('SP01', 'VT01', 10, 20000),
+('SP01', 'VT02', 20, 25000);
 
 -- --------------------------------------------------------
 
@@ -442,10 +448,10 @@ INSERT INTO `sanpham` (`MaSP`, `TenSP`, `SoLuong`, `DonGia`, `DonViTinh`, `MaLoa
 --
 
 CREATE TABLE `taikhoan` (
-  `MaNV` char(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TenDangNhap` char(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MatKhau` char(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `PhanQuyen` char(25) COLLATE utf8mb4_unicode_ci NOT NULL
+  `MaNV` char(20) NOT NULL,
+  `TenDangNhap` char(30) NOT NULL,
+  `MatKhau` char(20) NOT NULL,
+  `PhanQuyen` char(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -457,6 +463,25 @@ INSERT INTO `taikhoan` (`MaNV`, `TenDangNhap`, `MatKhau`, `PhanQuyen`) VALUES
 ('NV02', 'admin1', '123456', 'CV02'),
 ('NV03', 'admin12345', '123456', 'CV03'),
 ('NV04', 'nv04', '123', 'CV04');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `vitri`
+--
+
+CREATE TABLE `vitri` (
+  `MaVT` varchar(20) NOT NULL,
+  `TenVT` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `vitri`
+--
+
+INSERT INTO `vitri` (`MaVT`, `TenVT`) VALUES
+('VT01', 'Cửa hàng'),
+('VT02', 'Kho');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -520,19 +545,23 @@ ALTER TABLE `nhacungcap`
 -- Chỉ mục cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  ADD PRIMARY KEY (`MaNV`);
+  ADD PRIMARY KEY (`MaNV`),
+  ADD KEY `FK_NHANVIEN_CHUCVU` (`MaCV`);
 
 --
 -- Chỉ mục cho bảng `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  ADD PRIMARY KEY (`MaPN`);
+  ADD PRIMARY KEY (`MaPN`),
+  ADD KEY `FK_PHIEUNHAP_NHACUNGCAP` (`MaNCC`),
+  ADD KEY `FK_PHIEUNHAP_NHANVIEN` (`MaNV`);
 
 --
 -- Chỉ mục cho bảng `phieuxuat`
 --
 ALTER TABLE `phieuxuat`
-  ADD PRIMARY KEY (`MaPX`);
+  ADD PRIMARY KEY (`MaPX`),
+  ADD KEY `FK_PHIEUXUAT_NHANVIEN` (`MaNV`);
 
 --
 -- Chỉ mục cho bảng `sanpham`
@@ -541,10 +570,52 @@ ALTER TABLE `sanpham`
   ADD PRIMARY KEY (`MaSP`);
 
 --
+-- Chỉ mục cho bảng `sanpham_vitri`
+--
+ALTER TABLE `sanpham_vitri`
+  ADD PRIMARY KEY (`MaSP`,`MaVT`);
+
+--
 -- Chỉ mục cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  ADD PRIMARY KEY (`TenDangNhap`);
+  ADD PRIMARY KEY (`TenDangNhap`),
+  ADD KEY `FK_TAIKHOAN_NHANVIEN` (`MaNV`);
+
+--
+-- Chỉ mục cho bảng `vitri`
+--
+ALTER TABLE `vitri`
+  ADD PRIMARY KEY (`MaVT`);
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `nhanvien`
+--
+ALTER TABLE `nhanvien`
+  ADD CONSTRAINT `FK_NHANVIEN_CHUCVU` FOREIGN KEY (`MaCV`) REFERENCES `chucvu` (`MaCV`);
+
+--
+-- Các ràng buộc cho bảng `phieunhap`
+--
+ALTER TABLE `phieunhap`
+  ADD CONSTRAINT `FK_PHIEUNHAP_NHACUNGCAP` FOREIGN KEY (`MaNCC`) REFERENCES `nhacungcap` (`MaNCC`),
+  ADD CONSTRAINT `FK_PHIEUNHAP_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
+
+--
+-- Các ràng buộc cho bảng `phieuxuat`
+--
+ALTER TABLE `phieuxuat`
+  ADD CONSTRAINT `FK_PHIEUXUAT_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
+
+--
+-- Các ràng buộc cho bảng `taikhoan`
+--
+ALTER TABLE `taikhoan`
+  ADD CONSTRAINT `FK_TAIKHOAN_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

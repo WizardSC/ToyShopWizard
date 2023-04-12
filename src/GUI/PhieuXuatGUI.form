@@ -37,7 +37,7 @@
                       <Component id="btnInHoaDoninTTHD" min="-2" pref="141" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
-                  <Component id="pnHeader1" alignment="0" pref="623" max="32767" attributes="0"/>
+                  <Component id="pnHeader1" alignment="0" pref="627" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -75,7 +75,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="1">
-                        <Column editable="false" title="M&#xe3; HD" type="java.lang.Object">
+                        <Column editable="false" title="M&#xe3; PX" type="java.lang.Object">
                           <Data value="2"/>
                         </Column>
                         <Column editable="false" title="M&#xe3; NV" type="java.lang.Object"/>

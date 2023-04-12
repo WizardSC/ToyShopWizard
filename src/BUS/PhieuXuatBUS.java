@@ -43,6 +43,18 @@ public class PhieuXuatBUS {
         return dspx;
     }
     
+    public ArrayList<PhieuXuatDTO> searchMaNV(String tk){
+        tk =tk.toLowerCase();
+        ArrayList<PhieuXuatDTO> dspx = new ArrayList<>();
+        for(PhieuXuatDTO px : listPhieuXuat){
+            String MaNV = px.getMaNV().toLowerCase();
+            if(MaNV.contains(tk)){
+                dspx.add(px);
+            }
+        }
+        return dspx;
+    }
+    
     public ArrayList<PhieuXuatDTO> searchTongTien(int minTongTien, int maxTongTien){
         ArrayList<PhieuXuatDTO> dspx = new ArrayList<>();
         for(PhieuXuatDTO px : listPhieuXuat){

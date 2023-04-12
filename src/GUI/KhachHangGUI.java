@@ -436,7 +436,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
         txtSoDT.setText(tblDSKH.getModel().getValueAt(k, 6).toString());
         txtMaKH.setEnabled(false);
         
-        imgName = tblDSKH.getModel().getValueAt(k, 8).toString();
+        imgName = tblDSKH.getModel().getValueAt(k,7).toString();
         
         Image newImage;
 

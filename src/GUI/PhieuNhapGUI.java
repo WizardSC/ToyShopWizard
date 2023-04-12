@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +36,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.NumberFormatter;
 
@@ -53,11 +59,13 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     KhoBUS khoBUS = new KhoBUS();
     ArrayList<PhieuNhapDTO> dspn = new ArrayList<>();
     static boolean chooseNCC = false;
-    
+
     private ArrayList<CTPhieuNhapDTO> dsctpn = new ArrayList<>();
     String imgName = "null";
     private BufferedImage i = null;
     int SoLuongTrongKho;
+    int selectedRow = -1;
+
     public PhieuNhapGUI() {
         initComponents();
 
@@ -67,12 +75,12 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         init();
         loadDataDSSP();
         loadDataMaPN();
-        
+
         txtMaNCC.setEnabled(false);
         txtMaNV.setEnabled(false);
         txtMaPN.setEnabled(false);
         txtTongTien.setEnabled(false);
-        
+
         JTextFieldDateEditor editor = (JTextFieldDateEditor) this.txtNgayLap.getDateEditor();
         editor.setEnabled(false);
     }
@@ -107,7 +115,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         tblHangChoNhap.setFont(new Font("Arial", Font.PLAIN, 13));
         tblHangChoNhap.getTableHeader().setReorderingAllowed(false);
         tblHangChoNhap.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
-        
+
         //ThongTinPN
         tblTTPN.setFocusable(false);
         tblTTPN.setIntercellSpacing(new Dimension(0, 0));
@@ -121,7 +129,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         tblTTPN.setFont(new Font("Arial", Font.PLAIN, 13));
         tblTTPN.getTableHeader().setReorderingAllowed(false);
         tblTTPN.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
-        
+
         //set SoLuong Spinner
         SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, 100, 1);
         txtSoLuong.setModel(modeSpinner);
@@ -130,12 +138,15 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtSpinner.setEditable(true);
         txtSpinner.setHorizontalAlignment(JTextField.LEFT);
         txtSpinner.setBackground(Color.white);
-        
+
         //Set hover cho tblDSSP
+        
+
         tblDSSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 tblDSSP.clearSelection(); // xóa lựa chọn khi chuột rời khỏi JTable
             }
+
         });
 
         tblDSSP.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -150,8 +161,10 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
                 }
             }
         });
-    }
+        
 
+    
+    }
     public void showAllDSSP(ArrayList<KhoDTO> dskho) {
         dtmSanPham.setRowCount(0);
         for (int i = 0; i < dskho.size(); i++) {
@@ -164,24 +177,25 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         }
 
     }
-    
-    public void loadDataDSSP(){
+
+    public void loadDataDSSP() {
         khoBUS.docDanhSach();
         ArrayList<KhoDTO> dskho = khoBUS.getListKho();
         showAllDSSP(dskho);
     }
-    
-    public void loadDataGiaNhap(){
-        
+
+    public void loadDataGiaNhap() {
+
     }
 //--    Hiển thị mã PN tiếp theo
 //--    Lấy mã PN mới nhất + 1 để ra mã PN cần được tạo
+
     public void showMaPN(ArrayList<PhieuNhapDTO> dspn) {
         if (dspn.isEmpty()) {
             txtMaPN.setText(String.valueOf("PN01"));
         }
         for (int i = 0; i < dspn.size(); i++) {
-            
+
             int sum = Integer.parseInt(dspn.get(i).getMaPN().substring(2)) + 1;
             if (sum < 10) {
                 txtMaPN.setText(String.valueOf("PN0" + sum));
@@ -192,6 +206,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
 
         }
     }
+
     private void loadDataMaPN() {
         pnBUS.docDanhSach();
         ArrayList<PhieuNhapDTO> dspn = pnBUS.getListPhieuNhap();
@@ -213,7 +228,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         }
     }
 //--
-    
+
 //-- Tính tổng tiền hóa đơn
     public int sumPN() {
         int sum = 0;
@@ -249,6 +264,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         showAllTTPN(dspn);
     }
 //--
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -772,23 +788,24 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDSSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSPMouseClicked
-        int k = tblDSSP.getSelectedRow();      
-        txtMaSP.setText(tblDSSP.getModel().getValueAt(k,0).toString());
-        txtTenSP.setText(tblDSSP.getModel().getValueAt(k,1).toString());
-        imgName = tblDSSP.getModel().getValueAt(k, 3).toString();    
+        int k = tblDSSP.getSelectedRow();
+        txtMaSP.setText(tblDSSP.getModel().getValueAt(k, 0).toString());
+        txtTenSP.setText(tblDSSP.getModel().getValueAt(k, 1).toString());
+        imgName = tblDSSP.getModel().getValueAt(k, 3).toString();
         //--Lấy giá nhập đề xuất
         khoBUS.docDanhSach();
         ArrayList<KhoDTO> dskho = khoBUS.getListKho();
-        for(KhoDTO kho : dskho){
-            if(txtMaSP.getText().equals(kho.getMaSP()))
+        for (KhoDTO kho : dskho) {
+            if (txtMaSP.getText().equals(kho.getMaSP())) {
                 lblGiaNhap.setText(String.valueOf(kho.getGiaNhap()));
+            }
         }
         //--
-        
+
         Image newImage;
         newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(155, 185, Image.SCALE_DEFAULT);
         txtIMG.setIcon(new ImageIcon(newImage));
-        
+
         txtMaSP.setEnabled(false);
         txtTenSP.setEnabled(false);
     }//GEN-LAST:event_tblDSSPMouseClicked
@@ -798,8 +815,8 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         String MaSP = txtMaSP.getText();
         String TenSP = txtTenSP.getText();
         int SoLuong = Integer.parseInt(txtSoLuong.getValue().toString());
-        if(SoLuong >=1){
-            if(isNumeric(txtDonGia.getText())){
+        if (SoLuong >= 1) {
+            if (isNumeric(txtDonGia.getText())) {
                 int DonGia = Integer.parseInt(txtDonGia.getText());
                 int ThanhTien = SoLuong * DonGia;
 
@@ -834,12 +851,10 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
                 txtIMG.setIcon(null);
                 txtIMG.setText("IMAGE");
                 imgName = null;
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Đơn giá không hợp lệ");
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Số lượng nhập phải lớn hơn 0");
         }
 
@@ -858,7 +873,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         String NgayLap = dateFormat.format(txtNgayLap.getDate());
         int TongTien = Integer.parseInt(txtTongTien.getText());
 
-        PhieuNhapDTO pn= new PhieuNhapDTO(MaPN, MaNCC, MaNV, NgayLap, TongTien);
+        PhieuNhapDTO pn = new PhieuNhapDTO(MaPN, MaNCC, MaNV, NgayLap, TongTien);
         pnBUS.add(pn);
 //        loadDataTTHD(); //load thông tin hóa đơn
 
@@ -866,7 +881,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtMaNCC.setText("");
         txtMaNV.setText("");
         txtTongTien.setText("");
-        
+
         txtNgayLap.setCalendar(null);
         dtmHangChoNhap.setRowCount(0);
 
@@ -893,23 +908,23 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaNVActionPerformed
         RCNhanVienGUI rcnv = new RCNhanVienGUI();
         rcnv.setVisible(true);
-        
+
         String MaNV = rcnv.getMaNV();
         txtMaNV.setText(MaNV);
     }//GEN-LAST:event_chooseMaNVActionPerformed
 
     private void btnXoaSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaSanPhamMouseClicked
         int k = tblHangChoNhap.getSelectedRow();
-        String MaSP = tblHangChoNhap.getModel().getValueAt(k,0).toString();
-        int SoLuong = Integer.parseInt(tblHangChoNhap.getModel().getValueAt(k,2).toString());
-        
+        String MaSP = tblHangChoNhap.getModel().getValueAt(k, 0).toString();
+        int SoLuong = Integer.parseInt(tblHangChoNhap.getModel().getValueAt(k, 2).toString());
+
         //lấy số lượng sản phẩm hiện có trong kho
         khoBUS.docDanhSach();
         ArrayList<KhoDTO> dskho = khoBUS.getListKho();
-        for(KhoDTO kho : dskho){
-            if(MaSP.equals(kho.getMaSP())){
-                SoLuongTrongKho = kho.getSoLuong(); 
-        }
+        for (KhoDTO kho : dskho) {
+            if (MaSP.equals(kho.getMaSP())) {
+                SoLuongTrongKho = kho.getSoLuong();
+            }
         }
         //--
         khoBUS.capNhatSoLuongSP(MaSP, -SoLuong, SoLuongTrongKho);
@@ -918,7 +933,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         dtmHangChoNhap.removeRow(k);
         txtTongTien.setText(String.valueOf(sumPN()));
         loadDataDSSP();
-        
+
     }//GEN-LAST:event_btnXoaSanPhamMouseClicked
 
     private void tblTTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTPNMouseClicked
@@ -926,7 +941,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtMaPNinTTPN.setText(tblTTPN.getValueAt(k, 0).toString());
         txtMaNCCinTTPN.setText(tblTTPN.getValueAt(k, 1).toString());
         txtMaNVinTTPN.setText(tblTTPN.getValueAt(k, 2).toString());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date NgayLap = new Date();
         try {
             NgayLap = sdf.parse(tblTTPN.getModel().getValueAt(k, 3).toString());
@@ -953,7 +968,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void btnInPhieuNhapinTTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInPhieuNhapinTTPNMouseClicked
-        
+
         for (CTPhieuNhapDTO ctpn : dsctpn) {
             ctpnBUS.add(ctpn);
         }
@@ -966,10 +981,11 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In hóa đơn thành công");
         loadDataDSSP();
     }//GEN-LAST:event_btnInPhieuNhapinTTPNMouseClicked
-    public static void setMaNCC(String ma){
+    public static void setMaNCC(String ma) {
         txtMaNCC.setText(ma);
         chooseNCC = false;
     }
+
     public boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
