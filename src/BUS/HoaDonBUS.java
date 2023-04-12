@@ -30,4 +30,16 @@ public class HoaDonBUS {
         hdDAO.insertHoaDon(hd);
     }
     
+   public ArrayList<HoaDonDTO> searchMaHD(String tk){
+        tk=tk.toLowerCase();
+        ArrayList<HoaDonDTO> dshd= new ArrayList<>();
+        for(HoaDonDTO hd : listHoaDon){
+            String MaHD = hd.getMaHD().toLowerCase();
+            if(MaHD.contains(tk)){
+                dshd.add(hd);
+            }
+        }
+        return dshd;
+    }
+    
 }

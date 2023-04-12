@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,16 +29,18 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
     private CTHoaDonBUS cthdBUS = new CTHoaDonBUS();
     DefaultTableModel dtmDSHoaDon;
     DefaultTableModel dtmDSCTHoaDon;
+    String tuKhoaTimKiem;
+
     public DSHoaDonGUI() {
         initComponents();
         dtmDSHoaDon = (DefaultTableModel) tblDSHD.getModel();
         dtmDSCTHoaDon = (DefaultTableModel) tblDSCTHD.getModel();
         init();
         loadDataDSHD();
-        
+
     }
-    
-    public void init(){
+
+    public void init() {
         //set giao diện cho Table
         //DSHD
         tblDSHD.setFocusable(false);
@@ -64,13 +68,36 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
         tblDSCTHD.setFont(new Font("Arial", Font.PLAIN, 13));
         tblDSCTHD.getTableHeader().setReorderingAllowed(false);
         tblDSCTHD.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
+        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+        });
         
-        
+
     }
     
-    public void showAllDSHD(ArrayList<HoaDonDTO> dshd){
+    public void search(String tk){
+        if(tk.equals("Mã HD")){
+            ArrayList<HoaDonDTO> dshd = hdBUS.searchMaHD(txtTimKiem.getText().toString());
+            showAllDSHD(dshd);
+        }
+    }
+    public void showAllDSHD(ArrayList<HoaDonDTO> dshd) {
         dtmDSHoaDon.setRowCount(0);
-        for(int i=0;i<dshd.size();i++){
+        for (int i = 0; i < dshd.size(); i++) {
             dtmDSHoaDon.addRow(new String[]{
                 dshd.get(i).getMaHD(),
                 dshd.get(i).getMaKH(),
@@ -79,17 +106,18 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
                 String.valueOf(dshd.get(i).getTongTien())
             });
         }
-        
+
     }
-    public void loadDataDSHD(){
+
+    public void loadDataDSHD() {
         hdBUS.docDanhSach();
         ArrayList<HoaDonDTO> dshd = hdBUS.getListHoaDon();
         showAllDSHD(dshd);
     }
-    
-    public void showAllDSCTHD(ArrayList<CTHoaDonDTO> dscthd){
+
+    public void showAllDSCTHD(ArrayList<CTHoaDonDTO> dscthd) {
         dtmDSCTHoaDon.setRowCount(0);
-        for(int i=0;i<dscthd.size();i++){
+        for (int i = 0; i < dscthd.size(); i++) {
             dtmDSCTHoaDon.addRow(new String[]{
                 dscthd.get(i).getMaHD(),
                 dscthd.get(i).getMaSP(),
@@ -100,13 +128,14 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
             });
         }
     }
-    public void loadDataDSCTHD(){
+
+    public void loadDataDSCTHD() {
         cthdBUS.docListCTHoaDon();
         ArrayList<CTHoaDonDTO> dscthd = cthdBUS.getListCTHoaDon();
         showAllDSCTHD(dscthd);
     }
-    
-    public void loadDataDSCTHDTheoMaHD(String MaHD){
+
+    public void loadDataDSCTHDTheoMaHD(String MaHD) {
         if (cthdBUS.getListCTHoaDon() == null) {
             cthdBUS.listCTHD();
         }
@@ -140,6 +169,15 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
         txtTongTien = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtNgayLap = new com.toedter.calendar.JDateChooser();
+        txtTimKiem = new javax.swing.JTextField();
+        txtFrom = new javax.swing.JTextField();
+        txtTo = new javax.swing.JTextField();
+        lblMaPN = new javax.swing.JLabel();
+        lblMaPN2 = new javax.swing.JLabel();
+        cbxTimKiemNC = new javax.swing.JComboBox<>();
+        cbxTimKiem = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        btnTimKiemNC = new javax.swing.JLabel();
         pnGioHang = new javax.swing.JPanel();
         lblGioHang = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -209,40 +247,86 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
             tblDSHD.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
 
-        pnDSSP.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 480, 430));
+        pnDSSP.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 480, 460));
 
         lblMaSP.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblMaSP.setText("Mã HD");
-        pnDSSP.add(lblMaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        pnDSSP.add(lblMaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
 
         txtMaHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaHDActionPerformed(evt);
             }
         });
-        pnDSSP.add(txtMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 160, 24));
-        pnDSSP.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 160, 24));
+        pnDSSP.add(txtMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, 160, 24));
+        pnDSSP.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 550, 160, 24));
 
         lblHo.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblHo.setText("Mã NV");
-        pnDSSP.add(lblHo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, -1));
+        pnDSSP.add(lblHo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel3.setText("Mã KH");
-        pnDSSP.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
+        pnDSSP.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel4.setText("Ngày lập");
-        pnDSSP.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 480, -1, -1));
-        pnDSSP.add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 560, 160, 24));
-        pnDSSP.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 160, 24));
+        pnDSSP.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 510, -1, -1));
+        pnDSSP.add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 590, 160, 24));
+        pnDSSP.add(txtTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 160, 24));
 
         jLabel5.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel5.setText("Tổng tiền");
-        pnDSSP.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 520, -1, -1));
+        pnDSSP.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, -1, -1));
 
         txtNgayLap.setDateFormatString("dd/MM/yyyy");
-        pnDSSP.add(txtNgayLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, 160, 24));
+        pnDSSP.add(txtNgayLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 510, 160, 24));
+
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemActionPerformed(evt);
+            }
+        });
+        pnDSSP.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 630, 310, 30));
+        pnDSSP.add(txtFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 670, 120, 30));
+        pnDSSP.add(txtTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 670, 120, 30));
+
+        lblMaPN.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        lblMaPN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMaPN.setText("Đến");
+        pnDSSP.add(lblMaPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 670, 40, 30));
+
+        lblMaPN2.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        lblMaPN2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMaPN2.setText("Từ");
+        pnDSSP.add(lblMaPN2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 670, 30, 30));
+
+        cbxTimKiemNC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày lập", "Tổng tiền" }));
+        cbxTimKiemNC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTimKiemNCActionPerformed(evt);
+            }
+        });
+        pnDSSP.add(cbxTimKiemNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 670, 100, 30));
+
+        cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã HD", "Mã NV", "Mã KH" }));
+        cbxTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTimKiemActionPerformed(evt);
+            }
+        });
+        pnDSSP.add(cbxTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 630, 100, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        pnDSSP.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, -1, -1));
+
+        btnTimKiemNC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        btnTimKiemNC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTimKiemNCMouseClicked(evt);
+            }
+        });
+        pnDSSP.add(btnTimKiemNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, -1, -1));
 
         pnGioHang.setBackground(new java.awt.Color(250, 247, 240));
 
@@ -418,9 +502,9 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
         int k = tblDSHD.getSelectedRow();
         //        int SoLuong = Integer.parseInt(tblDSHD.getModel().getValueAt(k, 2).toString());
         //        if (SoLuong < -100) {
-            //            JOptionPane.showMessageDialog(pnRoot, "Sản phẩm đã hết hàng", "THÔNG BÁO", JOptionPane.ERROR_MESSAGE);
-            //            return;
-            //        }
+        //            JOptionPane.showMessageDialog(pnRoot, "Sản phẩm đã hết hàng", "THÔNG BÁO", JOptionPane.ERROR_MESSAGE);
+        //            return;
+        //        }
         //        //-- setModel cho txtSoLuong, căn trái số,....
         //        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, SoLuong, 1);
         //        txtSoLuong.setModel(modeSpinner);
@@ -441,7 +525,7 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
             Logger.getLogger(HoaDonGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         txtNgayLap.setDate(NgayLap);
-        txtTongTien.setText(tblDSHD.getModel().getValueAt(k,4).toString());
+        txtTongTien.setText(tblDSHD.getModel().getValueAt(k, 4).toString());
 
         txtMaHD.setEnabled(false);
         txtMaNV.setEnabled(false);
@@ -458,23 +542,56 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
 
     private void tblDSCTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSCTHDMouseClicked
         int k = tblDSCTHD.getSelectedRow();
-        txtMaPNinDSHD.setText(tblDSCTHD.getModel().getValueAt(k,0).toString());
-        txtMaSPinDSHD.setText(tblDSCTHD.getModel().getValueAt(k,1).toString());
-        txtTenSPinDSHD.setText(tblDSCTHD.getModel().getValueAt(k,2).toString());
-        txtSoLuonginDSHD.setText(tblDSCTHD.getModel().getValueAt(k,3).toString());
-        txtDonGiainDSHD.setText(tblDSCTHD.getModel().getValueAt(k,4).toString());
-        txtThanhTieninDSHD.setText(tblDSCTHD.getModel().getValueAt(k,5).toString());
-        
+        txtMaPNinDSHD.setText(tblDSCTHD.getModel().getValueAt(k, 0).toString());
+        txtMaSPinDSHD.setText(tblDSCTHD.getModel().getValueAt(k, 1).toString());
+        txtTenSPinDSHD.setText(tblDSCTHD.getModel().getValueAt(k, 2).toString());
+        txtSoLuonginDSHD.setText(tblDSCTHD.getModel().getValueAt(k, 3).toString());
+        txtDonGiainDSHD.setText(tblDSCTHD.getModel().getValueAt(k, 4).toString());
+        txtThanhTieninDSHD.setText(tblDSCTHD.getModel().getValueAt(k, 5).toString());
+
         txtMaPNinDSHD.setEnabled(false);
         txtMaSPinDSHD.setEnabled(false);
         txtTenSPinDSHD.setEnabled(false);
         txtSoLuonginDSHD.setEnabled(false);
         txtDonGiainDSHD.setEnabled(false);
-        txtThanhTieninDSHD.setEnabled(false);   
+        txtThanhTieninDSHD.setEnabled(false);
     }//GEN-LAST:event_tblDSCTHDMouseClicked
+
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
+
+    }//GEN-LAST:event_txtTimKiemActionPerformed
+
+    private void cbxTimKiemNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemNCActionPerformed
+//        tuKhoaTimKiem = cbxTimKiemNC.getSelectedItem().toString();
+//        System.out.println(tuKhoaTimKiem);
+    }//GEN-LAST:event_cbxTimKiemNCActionPerformed
+
+    private void cbxTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemActionPerformed
+        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
+        System.out.println(tuKhoaTimKiem);
+        txtTimKiem.setText("");
+    }//GEN-LAST:event_cbxTimKiemActionPerformed
+
+    private void btnTimKiemNCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemNCMouseClicked
+//        if(!clickedOnce){
+//            ArrayList<PhieuXuatDTO> dspx = pxBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
+//            showAllDSPX(dspx);
+//            clickedOnce = true;
+//        } else {
+//            txtFrom.setText("");
+//            txtTo.setText("");
+//            loadDataDSPX();
+//            clickedOnce = false;
+//        }
+
+    }//GEN-LAST:event_btnTimKiemNCMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnTimKiemNC;
+    private javax.swing.JComboBox<String> cbxTimKiem;
+    private javax.swing.JComboBox<String> cbxTimKiemNC;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -485,6 +602,8 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
     private javax.swing.JLabel lblDonGiainDSPN;
     private javax.swing.JLabel lblGioHang;
     private javax.swing.JLabel lblHo;
+    private javax.swing.JLabel lblMaPN;
+    private javax.swing.JLabel lblMaPN2;
     private javax.swing.JLabel lblMaPNinDSPN;
     private javax.swing.JLabel lblMaSP;
     private javax.swing.JLabel lblSanPhaminDSPN;
@@ -497,6 +616,7 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
     private javax.swing.JTable tblDSCTHD;
     private javax.swing.JTable tblDSHD;
     private javax.swing.JTextField txtDonGiainDSHD;
+    private javax.swing.JTextField txtFrom;
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaNV;
@@ -506,6 +626,8 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
     private javax.swing.JTextField txtSoLuonginDSHD;
     private javax.swing.JTextField txtTenSPinDSHD;
     private javax.swing.JTextField txtThanhTieninDSHD;
+    private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JTextField txtTo;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

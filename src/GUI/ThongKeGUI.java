@@ -69,8 +69,8 @@ public class ThongKeGUI extends javax.swing.JPanel {
         Date date = new Date();
         ngayTKThang.setDate(date);
         txtThang.setDate(date);
-        
-        // Doanh Thu
+//        
+//        // Doanh Thu
         tkBUS.ThongkeDT(dateFormat.format(ngayTKThang.getDate()));
         setPanelDT(dateFormat.format(ngayTKThang.getDate())
                 , tkBUS.listTKDT.get(0)
@@ -80,23 +80,23 @@ public class ThongKeGUI extends javax.swing.JPanel {
         // So luong Hoa don
         setPanelHD(dateFormat.format(ngayTKThang.getDate())
                 , tkBUS.ThongkeHD(dateFormat.format(ngayTKThang.getDate())));
-        
+//        
         // Thong ke san pham Mua
         tkBUS.ThongkeSP(dateFormat.format(date), "", "Giảm");
         txtSoLuong.setValue(tkBUS.listTKSP.size()); // Lấy số lượng tối đa
         showAll(tkBUS.listTKSP);
-        
+//        
         // Tong Tien Nhap
         tkBUS.ThongkeTN(dateFormat.format(txtThang.getDate()));
         setPanelTN(dateFormat.format(txtThang.getDate())
                 , tkBUS.listTKTN.get(0)
                 , (Double)tkBUS.listTKTN.get(1)
                 , (Double)tkBUS.listTKTN.get(2));
-            
+//            
         // So Luong Nhap
         setPanelSLNhap(dateFormat.format(txtThang.getDate())
                 , tkBUS.ThongkeSLN(dateFormat.format(txtThang.getDate())));
-        
+//        
         // Thong ke san pham Ton Kho
         tkBUS.ThongkeSPKho("", "Giảm");
         txtSLKho.setValue(tkBUS.listTKTon.size()); // Lấy số lượng tối đa

@@ -7,6 +7,7 @@ package BUS;
 
 import DAO.KhachHangDAO;
 import DTO.KhachHangDTO;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +24,13 @@ public class KhachHangBUS {
         return listKhachHang;
     }
     
+    public void listKH() {
+        KhachHangDAO khDAO = new KhachHangDAO();
+        
+        listKhachHang = new ArrayList<>();
+        listKhachHang = khDAO.getListKhachHang();
+    }
+    
     public void add(KhachHangDTO kh){
         listKhachHang.add(kh);
         KhachHangDAO khDAO = new KhachHangDAO();
@@ -37,5 +45,9 @@ public class KhachHangBUS {
                 return;
             }
         }
+    }
+    
+    public void ImportExcel(File file) {
+        khDAO.ImportExcel(file);
     }
 }

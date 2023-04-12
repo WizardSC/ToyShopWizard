@@ -12,9 +12,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -546,21 +550,21 @@ public class KhachHangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNhapLaiMouseClicked
 
     private void btnImportExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImportExcelMouseClicked
-//        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
-//        JFileChooser fc = new JFileChooser("./report");
-//        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-//            "Excel", "xlsx");
-//        fc.setFileFilter(filter);
-//        int result = fc.showOpenDialog(null);
-//        if (result == JFileChooser.APPROVE_OPTION) {
-//            File file = fc.getSelectedFile(); //Lấy URL
-//            nvBUS.ImportExcel(file);
-//            nvBUS.listNV();
-//            JOptionPane.showMessageDialog(null, "Đã nhập file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
-//
-//        }
-//        saveIMG();
-//        loadData();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JFileChooser fc = new JFileChooser("./reports");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Excel", "xlsx");
+        fc.setFileFilter(filter);
+        int result = fc.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile(); //Lấy URL
+            khBUS.ImportExcel(file);
+            khBUS.listKH();
+            JOptionPane.showMessageDialog(null, "Đã nhập file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+
+        }
+        
+        loadDataDSKH();
     }//GEN-LAST:event_btnImportExcelMouseClicked
 
 

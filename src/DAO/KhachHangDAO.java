@@ -6,6 +6,10 @@
 package DAO;
 
 import DTO.KhachHangDTO;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +17,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -92,5 +98,66 @@ public class KhachHangDAO {
             mySQL.Disconnect();
         }
     }
+    
+    public void ImportExcel(File file) {
 
+        try {
+
+            FileInputStream in = new FileInputStream(file);
+            XSSFWorkbook workbook = new XSSFWorkbook(in);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            org.apache.poi.ss.usermodel.Row row;
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                row = sheet.getRow(i);
+                String MaKH = row.getCell(0).getStringCellValue();
+                String Ho = row.getCell(1).getStringCellValue();
+                String Ten = row.getCell(2).getStringCellValue();
+                String NgaySinh = row.getCell(3).getStringCellValue();
+                String GioiTinh = row.getCell(4).getStringCellValue();
+                String DiaChi = row.getCell(5).getStringCellValue();
+                String SoDT = row.getCell(6).getStringCellValue();
+                String IMG = row.getCell(7).getStringCellValue();
+                String sql_check = "SELECT * FROM khachhang WHERE MaKH='" + MaKH + "'";
+                ResultSet rs = mySQL.executeQuery(sql_check);
+                if (!rs.next()) {
+                    String sql = "INSERT INTO khachhang VALUES(?,?,?,?,?,?,?,?)";
+                    PreparedStatement pstatement = connection.prepareStatement(sql);
+                    pstatement.setString(1, MaKH);
+                    pstatement.setString(2, Ho);
+                    pstatement.setString(3, Ten);
+                    pstatement.setString(4, NgaySinh);
+                    pstatement.setString(5, GioiTinh);
+                    pstatement.setString(6, DiaChi);
+                    pstatement.setString(7, SoDT);
+                    pstatement.setString(8, IMG);
+                    pstatement.executeUpdate();
+
+                    System.out.println(sql);
+
+                } else {
+                    String sql = "UPDATE khachhang SET Ho = ?, Ten = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SoDT = ?, IMG = ? WHERE MaKH = ?";
+                    PreparedStatement pstatement = connection.prepareStatement(sql);
+
+                    pstatement.setString(1, Ho);
+                    pstatement.setString(2, Ten);
+                    pstatement.setString(3, NgaySinh);
+                    pstatement.setString(4, GioiTinh);
+                    pstatement.setString(5, DiaChi);
+                    pstatement.setString(6, SoDT);
+                    pstatement.setString(7, IMG);
+                    pstatement.setString(8, MaKH);
+                    pstatement.executeUpdate();
+
+                    System.out.println(sql);
+
+                }
+            }
+            in.close();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

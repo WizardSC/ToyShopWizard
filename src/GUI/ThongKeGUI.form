@@ -667,9 +667,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="T&#x1ed5;ng Ti&#x1ec1;n Nh&#x1ead;p"/>
-              </AccessibilityProperties>
 
               <Layout>
                 <DimensionLayout dim="0">
