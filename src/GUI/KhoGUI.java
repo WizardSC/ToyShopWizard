@@ -10,8 +10,11 @@ import DTO.KhoDTO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 public class KhoGUI extends javax.swing.JPanel {
     KhoBUS khoBUS = new KhoBUS();
     DefaultTableModel dtmKho;
+    private BufferedImage i = null;
+    String imgName = "null";
     public KhoGUI() {
         initComponents();
         dtmKho = (DefaultTableModel) tblDSSP.getModel();
@@ -375,19 +380,19 @@ public class KhoGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDSSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSPMouseClicked
-//        int k = tblDSSP.getSelectedRow();
-//        txtMaSP.setText(tblDSSP.getModel().getValueAt(k, 0).toString());
-//        txtTenSP.setText(tblDSSP.getModel().getValueAt(k, 1).toString());
-//        txtSoLuong.setText(tblDSSP.getModel().getValueAt(k, 2).toString());
-//        txtDonGia.setText(tblDSSP.getModel().getValueAt(k, 3).toString());
-//        cbxDonViTinh.setSelectedItem(tblDSSP.getModel().getValueAt(k, 4).toString());
-//        txtMaLoai.setText(tblDSSP.getModel().getValueAt(k, 5).toString());
-//        imgName = tblDSSP.getModel().getValueAt(k, 6).toString();
-//        Image newImage;
-//        newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(170,203, Image.SCALE_DEFAULT);
-//        txtIMG.setIcon(new ImageIcon(newImage));
-//
-//        txtMaSP.setEnabled(false);
+        int k = tblDSSP.getSelectedRow();
+        txtMaSP.setText(tblDSSP.getModel().getValueAt(k, 0).toString());
+        txtTenSP.setText(tblDSSP.getModel().getValueAt(k, 1).toString());
+        txtSoLuong.setText(tblDSSP.getModel().getValueAt(k, 2).toString());
+        txtDonGia.setText(tblDSSP.getModel().getValueAt(k, 3).toString());
+        cbxDonViTinh.setSelectedItem(tblDSSP.getModel().getValueAt(k, 4).toString());
+        txtMaLoai.setText(tblDSSP.getModel().getValueAt(k, 5).toString());
+        imgName = tblDSSP.getModel().getValueAt(k, 6).toString();
+        Image newImage;
+        newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(170,203, Image.SCALE_DEFAULT);
+        txtIMG.setIcon(new ImageIcon(newImage));
+
+        txtMaSP.setEnabled(false);
     }//GEN-LAST:event_tblDSSPMouseClicked
 
     private void btnLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoaiActionPerformed

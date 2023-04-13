@@ -32,7 +32,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        ImageIcon logo = new ImageIcon("./src/image/lblIconShop32x32.png");
+        ImageIcon logo = new ImageIcon("./src/image/iconshop.png");
         setIconImage(logo.getImage());
         
 //        setTime();
@@ -215,7 +215,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         pnMenu.setPreferredSize(new java.awt.Dimension(211, 650));
 
         lblIconHotel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIconHotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/toy-shop.png"))); // NOI18N
+        lblIconHotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/storage-box.png"))); // NOI18N
 
         pnTaiKhoan.setBackground(new java.awt.Color(188, 206, 248));
         pnTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));

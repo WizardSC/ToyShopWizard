@@ -1004,6 +1004,8 @@ public class HoaDonGUI extends javax.swing.JPanel {
     private void chooseMaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaKHActionPerformed
         RCKhachHangGUI rkh = new RCKhachHangGUI();
         rkh.setVisible(true);
+        String MaKH = rkh.getMaKH();
+        txtMaKH.setText(MaKH);
     }//GEN-LAST:event_chooseMaKHActionPerformed
 
     private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaNVActionPerformed

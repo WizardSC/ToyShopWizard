@@ -5,7 +5,13 @@
  */
 package GUI;
 
+import BUS.KhachHangBUS;
+import DTO.KhachHangDTO;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,21 +20,77 @@ import javax.swing.table.DefaultTableModel;
  * @author wizardsc
  */
 public class RCKhachHangGUI extends javax.swing.JDialog {
+
     DefaultTableModel dtmKhachHang;
-    
-//    private ArrayList<KhachHangDTO> dskh = new ArrayList<>();
-    public RCKhachHangGUI(){
+    private KhachHangBUS khBUS = new KhachHangBUS();
+    private ArrayList<KhachHangDTO> dskh = new ArrayList<>();
+
+    public RCKhachHangGUI() {
         setUndecorated(true);
         initComponents();
         this.setModal(true);
         this.setResizable(false);
         setLocationRelativeTo(null);
+        dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
+        
+        init();
+        loadData();
+        
+        
     }
 
+    public void init() {
+        tblDSKH.setFocusable(false);
+        tblDSKH.setIntercellSpacing(new Dimension(0, 0));
+        tblDSKH.setRowHeight(25);
+        tblDSKH.setFillsViewportHeight(true);
+        tblDSKH.getTableHeader().setOpaque(false);
+        tblDSKH.getTableHeader().setBackground(new Color(152, 168, 248));
+        tblDSKH.getTableHeader().setForeground(Color.WHITE);
+        tblDSKH.setSelectionBackground(new Color(188, 206, 248));
+        tblDSKH.setSelectionForeground(Color.BLACK);
+        tblDSKH.setFont(new Font("Arial", Font.PLAIN, 13));
+        tblDSKH.getTableHeader().setReorderingAllowed(false);
+        tblDSKH.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
+
+        tblDSKH.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                int row = tblDSKH.rowAtPoint(evt.getPoint());
+                int col = tblDSKH.columnAtPoint(evt.getPoint());
+                if (row >= 0 && col >= 0) {
+
+                    tblDSKH.setRowSelectionInterval(row, row);
+                    tblDSKH.setColumnSelectionInterval(0, tblDSKH.getColumnCount() - 1);
+                    tblDSKH.setSelectionBackground(new Color(188, 206, 248)); // đổi màu nền của ô khi hover
+                }
+            }
+        });
+    }
     
-   
+    public void showAllDSKH(ArrayList<KhachHangDTO> dskh){
+        dtmKhachHang.setRowCount(0);
+        for(int i=0;i<dskh.size();i++){
+            dtmKhachHang.addRow(new Object[]{
+                dskh.get(i).getMaKH(),
+                dskh.get(i).getHo(),
+                dskh.get(i).getTen(),
+                dskh.get(i).getNgaySinh(),
+                dskh.get(i).getGioiTinh(),
+            });
+        }
+    }
     
+    public void loadData(){
+        khBUS.docDanhSach();
+        ArrayList<KhachHangDTO> dskh = khBUS.getListKhachHang();
+        showAllDSKH(dskh);
+    }
     
+    //Hàm lấy mã KH để dùng cho việc khác
+    public String getMaKH(){
+        return txtMaKH.getText();
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -40,7 +102,7 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
         jPanel7 = new javax.swing.JPanel();
         btnChonLoai = new javax.swing.JLabel();
         btnBoChon = new javax.swing.JLabel();
-        txtMaKH1 = new javax.swing.JTextField();
+        txtMaKH = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtHo = new javax.swing.JTextField();
@@ -87,7 +149,7 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
         btnChonLoai.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
         btnChonLoai.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnChonLoai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/check-mark.png"))); // NOI18N
-        btnChonLoai.setText("Chọn NV");
+        btnChonLoai.setText("Chọn");
         btnChonLoai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnChonLoaiMouseClicked(evt);
@@ -105,7 +167,7 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
             }
         });
         jPanel7.add(btnBoChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, 122, -1));
-        jPanel7.add(txtMaKH1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 148, 27));
+        jPanel7.add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 148, 27));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Mã KH");
@@ -133,7 +195,7 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
 
         tblDSKH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"2", null, null, null, null}
+
             },
             new String [] {
                 "Mã KH", "Họ", "Tên", "Ngày sinh", "Giới tính"
@@ -192,7 +254,12 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblDSKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSKHMouseClicked
-        
+        int k = tblDSKH.getSelectedRow();
+        txtMaKH.setText(tblDSKH.getModel().getValueAt(k, 0).toString());
+        txtHo.setText(tblDSKH.getModel().getValueAt(k, 1).toString());
+        txtTen.setText(tblDSKH.getModel().getValueAt(k, 2).toString());
+        txtNgaySinh.setText(tblDSKH.getModel().getValueAt(k, 3).toString());
+        txtGioiTinh.setText(tblDSKH.getModel().getValueAt(k, 4).toString());
     }//GEN-LAST:event_tblDSKHMouseClicked
 
     private void btnClose1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClose1MouseClicked
@@ -200,14 +267,13 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btnClose1MouseClicked
 
     private void btnChonLoaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonLoaiMouseClicked
-
+        dispose();
     }//GEN-LAST:event_btnChonLoaiMouseClicked
 
     private void btnBoChonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBoChonMouseClicked
-
+        dispose();
     }//GEN-LAST:event_btnBoChonMouseClicked
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBoChon;
@@ -227,7 +293,7 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
     private javax.swing.JTable tblDSKH;
     private javax.swing.JTextField txtGioiTinh;
     private javax.swing.JTextField txtHo;
-    private javax.swing.JTextField txtMaKH1;
+    private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables

@@ -24,7 +24,7 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        ImageIcon logo = new ImageIcon("./src/image/lblIconShop32x32.png");
+        ImageIcon logo = new ImageIcon("./src/image/iconshop.png");
         setIconImage(logo.getImage());
         
         ChangeScreenNVKho controller = new ChangeScreenNVKho(pnView);
@@ -188,7 +188,7 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
         pnMenu.setPreferredSize(new java.awt.Dimension(211, 650));
 
         lblIconHotel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIconHotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/toy-shop.png"))); // NOI18N
+        lblIconHotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/storage-box.png"))); // NOI18N
 
         pnNhapHang.setBackground(new java.awt.Color(188, 206, 248));
         pnNhapHang.setForeground(new java.awt.Color(255, 255, 255));
