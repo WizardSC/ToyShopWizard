@@ -65,21 +65,7 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
 
     }
 
-    public void showAll(ArrayList<SanPham_ViTriDTO> dssp) {
-        dtmSanPham.setRowCount(0);
-        for (int i = 0; i < dssp.size(); i++) {
-            dtmSanPham.addRow(new String[]{
-                dssp.get(i).getMaSP(),
-                dssp.get(i).getTenSP(),
-                String.valueOf(dssp.get(i).getSoLuong()),
-                String.valueOf(dssp.get(i).getDonGia()),
-                dssp.get(i).getDonViTinh(),
-                dssp.get(i).getMaLoai(),
-                dssp.get(i).getIMG()
-            });
-        }
-    }
-//    public void showAll(ArrayList<SanPhamDTO> dssp) {
+//    public void showAll(ArrayList<SanPham_ViTriDTO> dssp) {
 //        dtmSanPham.setRowCount(0);
 //        for (int i = 0; i < dssp.size(); i++) {
 //            dtmSanPham.addRow(new String[]{
@@ -93,16 +79,30 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
 //            });
 //        }
 //    }
-    public void loadData() {
-        spBUS.docDanhSach1();
-        ArrayList<SanPham_ViTriDTO> dssp = spBUS.getListSPCuahang();
-        showAll(dssp);
+    public void showAll(ArrayList<SanPhamDTO> dssp) {
+        dtmSanPham.setRowCount(0);
+        for (int i = 0; i < dssp.size(); i++) {
+            dtmSanPham.addRow(new String[]{
+                dssp.get(i).getMaSP(),
+                dssp.get(i).getTenSP(),
+                String.valueOf(dssp.get(i).getSoLuong()),
+                String.valueOf(dssp.get(i).getDonGia()),
+                dssp.get(i).getDonViTinh(),
+                dssp.get(i).getMaLoai(),
+                dssp.get(i).getIMG()
+            });
+        }
     }
 //    public void loadData() {
-//        spBUS.docDanhSach();
-//        ArrayList<SanPhamDTO> dssp = spBUS.getListSanPham();
+//        spBUS.docDanhSach1();
+//        ArrayList<SanPham_ViTriDTO> dssp = spBUS.getListSPCuahang();
 //        showAll(dssp);
 //    }
+    public void loadData() {
+        spBUS.docDanhSach();
+        ArrayList<SanPhamDTO> dssp = spBUS.getListSanPham();
+        showAll(dssp);
+    }
 
     public void saveIMG() {
         try {
