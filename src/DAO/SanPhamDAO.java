@@ -116,6 +116,7 @@ public class SanPhamDAO {
             ps.setString(5, sp.getDonViTinh());
             ps.setString(6, sp.getMaLoai());
             ps.setString(7, sp.getIMG());
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

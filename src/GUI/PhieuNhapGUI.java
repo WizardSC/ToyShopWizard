@@ -142,19 +142,12 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         //Set hover cho tblDSSP
         
 
-        tblDSSP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                tblDSSP.clearSelection(); // xóa lựa chọn khi chuột rời khỏi JTable
-            }
-
-        });
-
         tblDSSP.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 int row = tblDSSP.rowAtPoint(evt.getPoint());
                 int col = tblDSSP.columnAtPoint(evt.getPoint());
                 if (row >= 0 && col >= 0) {
-                    tblDSSP.clearSelection();
+
                     tblDSSP.setRowSelectionInterval(row, row);
                     tblDSSP.setColumnSelectionInterval(0, tblDSSP.getColumnCount() - 1);
                     tblDSSP.setSelectionBackground(new Color(152, 168, 248)); // đổi màu nền của ô khi hover
@@ -162,8 +155,8 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
             }
         });
         
-
-    
+//
+//    
     }
     public void showAllDSSP(ArrayList<KhoDTO> dskho) {
         dtmSanPham.setRowCount(0);
@@ -520,12 +513,13 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblDSSP);
         if (tblDSSP.getColumnModel().getColumnCount() > 0) {
             tblDSSP.getColumnModel().getColumn(0).setResizable(false);
-            tblDSSP.getColumnModel().getColumn(0).setPreferredWidth(15);
+            tblDSSP.getColumnModel().getColumn(0).setPreferredWidth(50);
             tblDSSP.getColumnModel().getColumn(1).setResizable(false);
-            tblDSSP.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblDSSP.getColumnModel().getColumn(1).setPreferredWidth(300);
             tblDSSP.getColumnModel().getColumn(2).setResizable(false);
-            tblDSSP.getColumnModel().getColumn(2).setPreferredWidth(20);
+            tblDSSP.getColumnModel().getColumn(2).setPreferredWidth(100);
             tblDSSP.getColumnModel().getColumn(3).setResizable(false);
+            tblDSSP.getColumnModel().getColumn(3).setPreferredWidth(1);
         }
 
         pnDSSP.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 490, 380));
@@ -798,10 +792,11 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         for (KhoDTO kho : dskho) {
             if (txtMaSP.getText().equals(kho.getMaSP())) {
                 lblGiaNhap.setText(String.valueOf(kho.getGiaNhap()));
+                txtDonGia.setText(String.valueOf(kho.getGiaNhap()));
             }
         }
         //--
-
+        
         Image newImage;
         newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(155, 185, Image.SCALE_DEFAULT);
         txtIMG.setIcon(new ImageIcon(newImage));
@@ -811,6 +806,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblDSSPMouseClicked
 
     private void btnThemSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSPMouseClicked
+        
         String MaPN = txtMaPN.getText();
         String MaSP = txtMaSP.getText();
         String TenSP = txtTenSP.getText();
@@ -836,6 +832,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
                         break;
                     }
                 }
+                
                 if (flag) {
                     dsctpn.add(new CTPhieuNhapDTO(MaPN, MaSP, TenSP, SoLuong, DonGia, ThanhTien));
 
