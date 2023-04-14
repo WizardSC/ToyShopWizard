@@ -9,6 +9,7 @@ import BUS.CTPhieuNhapBUS;
 import BUS.KhoBUS;
 import BUS.PhieuNhapBUS;
 import BUS.SanPhamBUS;
+import BUS.XuatPhieuNhapBUS;
 import DTO.CTPhieuNhapDTO;
 import DTO.HoaDonDTO;
 import DTO.KhoDTO;
@@ -280,7 +281,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         lblMaSP11 = new javax.swing.JLabel();
         lblMaSP12 = new javax.swing.JLabel();
         txtTongTieninTTPN = new javax.swing.JTextField();
-        txtNgapLapinTTPN = new com.toedter.calendar.JDateChooser();
+        txtNgayLapinTTPN = new com.toedter.calendar.JDateChooser();
         btnInPhieuNhapinTTPN = new javax.swing.JLabel();
         pnRoot = new javax.swing.JPanel();
         pnDSSP = new javax.swing.JPanel();
@@ -421,8 +422,8 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         jPanel6.add(lblMaSP12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
         jPanel6.add(txtTongTieninTTPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 140, 24));
 
-        txtNgapLapinTTPN.setDateFormatString("dd/MM/yyyy");
-        jPanel6.add(txtNgapLapinTTPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 143, 24));
+        txtNgayLapinTTPN.setDateFormatString("dd/MM/yyyy");
+        jPanel6.add(txtNgayLapinTTPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 143, 24));
 
         btnInPhieuNhapinTTPN.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
         btnInPhieuNhapinTTPN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblInHoaDon.png"))); // NOI18N
@@ -892,10 +893,10 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
             loadDataTTPN(); //load thông tin hóa đơn
             ctpnBUS.docDanhSach();
             ArrayList<PhieuNhapDTO> dsctpn = pnBUS.getListPhieuNhap();
-        } else{
+        } else {
             JOptionPane.showMessageDialog(pnRoot, "Nếu có nhu cầu, bạn hãy nhấn vào In phiếu nhập");
         }
-        
+
     }//GEN-LAST:event_btnTaoPhieuNhapMouseClicked
 
     private void btnInHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDonMouseClicked
@@ -958,13 +959,13 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         } catch (ParseException ex) {
             Logger.getLogger(PhieuNhapGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        txtNgapLapinTTPN.setDate(NgayLap);
+        txtNgayLapinTTPN.setDate(NgayLap);
         txtTongTieninTTPN.setText(tblTTPN.getValueAt(k, 4).toString());
 
         txtMaPNinTTPN.setEnabled(false);
         txtMaNCCinTTPN.setEnabled(false);
         txtMaNVinTTPN.setEnabled(false);
-        txtNgapLapinTTPN.setEnabled(false);
+        txtNgayLapinTTPN.setEnabled(false);
         txtTongTieninTTPN.setEnabled(false);
     }//GEN-LAST:event_tblTTPNMouseClicked
 
@@ -973,7 +974,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtMaPNinTTPN.setText("");
         txtMaNCCinTTPN.setText("");
         txtMaNVinTTPN.setText("");
-        txtNgapLapinTTPN.setCalendar(null);
+        txtNgayLapinTTPN.setCalendar(null);
         txtTongTieninTTPN.setText("");
     }//GEN-LAST:event_btnCloseMouseClicked
 
@@ -982,13 +983,27 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         for (CTPhieuNhapDTO ctpn : dsctpn) {
             ctpnBUS.add(ctpn);
         }
+        //Xuất pdf
+        String MaPN = txtMaPNinTTPN.getText();
+        String MaNCC = txtMaNCCinTTPN.getText();
+        String MaNV = txtMaNVinTTPN.getText();
+
+       
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // định dạng ngày
+        String NgayLap = sdf.format(txtNgayLapinTTPN.getDate());
+        System.out.println(NgayLap);
+        int TongTien = Integer.parseInt(txtTongTieninTTPN.getText());
+
+        PhieuNhapDTO pn = new PhieuNhapDTO(MaPN, MaNCC, MaNV, NgayLap, TongTien);
+        XuatPhieuNhapBUS xuatpn = new XuatPhieuNhapBUS(pn, dsctpn);
+        xuatpn.print();
         txtMaPNinTTPN.setText("");
         txtMaNCCinTTPN.setText("");
         txtMaNVinTTPN.setText("");
-        txtNgapLapinTTPN.setCalendar(null);
+        txtNgayLapinTTPN.setCalendar(null);
         txtTongTieninTTPN.setText("");
 
-        JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In phiếu nhập thành công");
+//        JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In phiếu nhập thành công");
         loadDataDSSP();
     }//GEN-LAST:event_btnInPhieuNhapinTTPNMouseClicked
     public static void setMaNCC(String ma) {
@@ -1051,8 +1066,8 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     private javax.swing.JTextField txtMaPN;
     private javax.swing.JTextField txtMaPNinTTPN;
     private javax.swing.JTextField txtMaSP;
-    private com.toedter.calendar.JDateChooser txtNgapLapinTTPN;
     private com.toedter.calendar.JDateChooser txtNgayLap;
+    private com.toedter.calendar.JDateChooser txtNgayLapinTTPN;
     private javax.swing.JSpinner txtSoLuong;
     private javax.swing.JTextField txtTenSP;
     private javax.swing.JTextField txtTongTien;

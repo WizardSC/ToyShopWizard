@@ -309,7 +309,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="txtNgapLapinTTPN">
+                <Component class="com.toedter.calendar.JDateChooser" name="txtNgayLapinTTPN">
                   <Properties>
                     <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                   </Properties>

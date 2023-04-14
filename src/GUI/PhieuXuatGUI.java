@@ -9,7 +9,7 @@ import BUS.CTPhieuXuatBUS;
 import BUS.KhoBUS;
 import BUS.PhieuXuatBUS;
 import BUS.SanPhamBUS;
-import DTO.CTPhieuNhapDTO;
+import BUS.XuatPhieuXuatBUS;
 import DTO.CTPhieuXuatDTO;
 import DTO.KhoDTO;
 import DTO.PhieuXuatDTO;
@@ -387,10 +387,6 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(287, 287, 287)
-                .addComponent(btnInHoaDoninTTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(pnHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
@@ -398,6 +394,10 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(234, 234, 234)
+                .addComponent(btnInHoaDoninTTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -927,13 +927,26 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         for (CTPhieuXuatDTO ctpx : dsctpx) {
             ctpxBUS.add(ctpx);
         }
+        String MaPX = txtMaPXinTTPX.getText();
+       
+        String MaNV = txtMaNVinTTPX.getText();
+
+       
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // định dạng ngày
+        String NgayLap = sdf.format(txtNgayLapinTTPX.getDate());
+        System.out.println(NgayLap);
+        int TongTien = Integer.parseInt(txtTongTieninTTPX.getText());
+        PhieuXuatDTO px = new PhieuXuatDTO(MaPX, MaNV, NgayLap, TongTien);
+        
+        XuatPhieuXuatBUS xuatpx = new XuatPhieuXuatBUS(px, dsctpx);
+        xuatpx.print();
         txtMaPXinTTPX.setText("");
         txtMaNVinTTPX.setText("");
         txtMaNVinTTPX.setText("");
         txtNgayLapinTTPX.setCalendar(null);
         txtTongTieninTTPX.setText("");
 
-        JOptionPane.showMessageDialog(pnRoot, "In phiếu xuất thành công");
+        JOptionPane.showMessageDialog(jPanel5, "In phiếu xuất thành công");
     }//GEN-LAST:event_btnInHoaDoninTTHDMouseClicked
 
 

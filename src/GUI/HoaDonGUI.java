@@ -8,6 +8,7 @@ package GUI;
 import BUS.CTHoaDonBUS;
 import BUS.HoaDonBUS;
 import BUS.SanPhamBUS;
+import BUS.XuatHoaDonBUS;
 import DTO.CTHoaDonDTO;
 import DTO.HoaDonDTO;
 import DTO.SanPhamDTO;
@@ -977,7 +978,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtMaHDinTTHD.setText(tblTTHD.getValueAt(k, 0).toString());
         txtMaKHinTTHD.setText(tblTTHD.getValueAt(k, 1).toString());
         txtMaNVinTTHD.setText(tblTTHD.getValueAt(k, 2).toString());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date NgayLap = new Date();
         try {
             NgayLap = sdf.parse(tblTTHD.getModel().getValueAt(k, 3).toString());
@@ -995,6 +996,16 @@ public class HoaDonGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblTTHDMouseClicked
 
     private void btnInHoaDoninTTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDoninTTHDMouseClicked
+        String MaHD= txtMaHDinTTHD.getText();
+        String MaKH = txtMaKHinTTHD.getText();
+        String MaNV = txtMaNVinTTHD.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // định dạng ngày
+        String NgayLap = sdf.format(txtNgayLapinTTHD.getDate());
+        System.out.println(NgayLap);
+        int TongTien = Integer.parseInt(txtTongTieninTTHD.getText());
+        HoaDonDTO hd = new HoaDonDTO(MaHD, MaKH, MaNV, NgayLap, NgayLap);
+        XuatHoaDonBUS xuathd = new XuatHoaDonBUS(hd, dscthd);
+        xuathd.print();
         for (CTHoaDonDTO cthd : dscthd) {
             cthdBUS.add(cthd);
         }

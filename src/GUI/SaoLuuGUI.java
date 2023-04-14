@@ -5,8 +5,18 @@
  */
 package GUI;
 
+import BUS.KhachHangBUS;
+import BUS.KhoBUS;
+import BUS.SanPhamBUS;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Handler;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -14,18 +24,26 @@ import java.util.Date;
  */
 public class SaoLuuGUI extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SaoLuuGUI
-     */
+    private SanPhamBUS spBUS = new SanPhamBUS();
+    private KhoBUS khoBUS = new KhoBUS();
+    private KhachHangBUS khBUS = new KhachHangBUS();
     public SaoLuuGUI() {
         initComponents();
-        
-        Date currentDate = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedDate = formatter.format(currentDate);
-        txtNgayThang.setText(formattedDate);
-    }
+        // Khởi tạo giá trị ngày tháng A ban đầu
+        Date dateA = new Date();
+        String formattedDateA = formatter.format(dateA);
+        txtNgayThangA.setText(formattedDateA);
+        // Khởi tạo giá trị ngày tháng B ban đầu
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateA);
+        calendar.add(Calendar.WEEK_OF_YEAR, 1); // Thêm 1 tuần vào giá trị của ngày tháng A
+        Date dateB = calendar.getTime();
+        String formattedDateB = formatter.format(dateB);
+        txtNgayThangB.setText(formattedDateB);
 
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,54 +57,182 @@ public class SaoLuuGUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNgayThang = new javax.swing.JLabel();
+        txtNgayThangB = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        txtNgayThangA = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnXuatExcelSP = new javax.swing.JLabel();
+        btnNhapExcelSP = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        btnXuatExcelKH = new javax.swing.JLabel();
+        btnNhapExcelKH = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        btnNhapExcelKho = new javax.swing.JLabel();
+        btnXuatExcelKho = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(250, 247, 240));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1062, 0, -1, -1));
 
         jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1062, 674, -1, -1));
 
         jLabel3.setText("jLabel2");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 674, -1, -1));
 
-        txtNgayThang.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        txtNgayThang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtNgayThangB.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtNgayThangB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(txtNgayThangB, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, 39));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setText("Hôm nay là ngày:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 25, 164, 39));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1021, Short.MAX_VALUE)
-                .addComponent(jLabel2))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNgayThang, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        txtNgayThangA.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtNgayThangA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(txtNgayThangA, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 130, 39));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setText("Ngày sao lưu kế tiếp: ");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 200, 39));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SẢN PHẨM (Cửa hàng)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
+
+        btnXuatExcelSP.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnXuatExcelSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/xls.png"))); // NOI18N
+        btnXuatExcelSP.setText("Xuất Excel");
+        btnXuatExcelSP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXuatExcelSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXuatExcelSPMouseClicked(evt);
+            }
+        });
+
+        btnNhapExcelSP.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnNhapExcelSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/import.png"))); // NOI18N
+        btnNhapExcelSP.setText("Nhập Excel");
+        btnNhapExcelSP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNhapExcelSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNhapExcelSPMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(btnNhapExcelSP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(btnXuatExcelSP)
+                .addGap(27, 27, 27))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(txtNgayThang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 610, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnXuatExcelSP)
+                    .addComponent(btnNhapExcelSP))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 410, 110));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KHÁCH HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
+
+        btnXuatExcelKH.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnXuatExcelKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/xls.png"))); // NOI18N
+        btnXuatExcelKH.setText("Xuất Excel");
+        btnXuatExcelKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXuatExcelKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXuatExcelKHMouseClicked(evt);
+            }
+        });
+
+        btnNhapExcelKH.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnNhapExcelKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/import.png"))); // NOI18N
+        btnNhapExcelKH.setText("Nhập Excel");
+        btnNhapExcelKH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNhapExcelKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNhapExcelKHMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(btnNhapExcelKH)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(btnXuatExcelKH)
+                .addGap(48, 48, 48))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnXuatExcelKH)
+                    .addComponent(btnNhapExcelKH))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 410, 110));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SẢN PHẨM (Kho)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
+
+        btnNhapExcelKho.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnNhapExcelKho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/import.png"))); // NOI18N
+        btnNhapExcelKho.setText("Nhập Excel");
+        btnNhapExcelKho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNhapExcelKho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNhapExcelKhoMouseClicked(evt);
+            }
+        });
+
+        btnXuatExcelKho.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnXuatExcelKho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/xls.png"))); // NOI18N
+        btnXuatExcelKho.setText("Xuất Excel");
+        btnXuatExcelKho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXuatExcelKho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXuatExcelKhoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(btnNhapExcelKho)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(btnXuatExcelKho)
+                .addGap(29, 29, 29))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNhapExcelKho)
+                    .addComponent(btnXuatExcelKho))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 410, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -100,13 +246,96 @@ public class SaoLuuGUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnXuatExcelSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatExcelSPMouseClicked
+        spBUS.ExportExcel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JOptionPane.showMessageDialog(null, "Đã xuất file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+    }//GEN-LAST:event_btnXuatExcelSPMouseClicked
+
+    private void btnNhapExcelKhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapExcelKhoMouseClicked
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JFileChooser fc = new JFileChooser("./reports");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Excel", "xlsx");
+        fc.setFileFilter(filter);
+        int result = fc.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile(); //Lấy URL
+            khoBUS.importExcel(file);
+            khoBUS.listKho();
+            JOptionPane.showMessageDialog(null, "Đã nhập file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+
+        }
+
+        
+    }//GEN-LAST:event_btnNhapExcelKhoMouseClicked
+
+    private void btnXuatExcelKhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatExcelKhoMouseClicked
+        khoBUS.ExportExcel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JOptionPane.showMessageDialog(null, "Đã xuất file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+    }//GEN-LAST:event_btnXuatExcelKhoMouseClicked
+
+    private void btnNhapExcelKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapExcelKHMouseClicked
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JFileChooser fc = new JFileChooser("./reports");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Excel", "xlsx");
+        fc.setFileFilter(filter);
+        int result = fc.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile(); //Lấy URL
+            khBUS.ImportExcel(file);
+            khBUS.listKH();
+            JOptionPane.showMessageDialog(null, "Đã nhập file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+
+        }
+
+       
+    }//GEN-LAST:event_btnNhapExcelKHMouseClicked
+
+    private void btnXuatExcelKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatExcelKHMouseClicked
+        khBUS.ExportExcel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JOptionPane.showMessageDialog(null, "Đã xuất file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+    }//GEN-LAST:event_btnXuatExcelKHMouseClicked
+
+    private void btnNhapExcelSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapExcelSPMouseClicked
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JFileChooser fc = new JFileChooser("./reports");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Excel", "xlsx");
+        fc.setFileFilter(filter);
+        int result = fc.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile(); //Lấy URL
+            spBUS.importExcel(file);
+            spBUS.listSP();
+            JOptionPane.showMessageDialog(null, "Đã nhập file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+
+        }
+
+        
+    }//GEN-LAST:event_btnNhapExcelSPMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnNhapExcelKH;
+    private javax.swing.JLabel btnNhapExcelKho;
+    private javax.swing.JLabel btnNhapExcelSP;
+    private javax.swing.JLabel btnXuatExcelKH;
+    private javax.swing.JLabel btnXuatExcelKho;
+    private javax.swing.JLabel btnXuatExcelSP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel txtNgayThang;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel txtNgayThangA;
+    private javax.swing.JLabel txtNgayThangB;
     // End of variables declaration//GEN-END:variables
 }
