@@ -144,7 +144,7 @@
                           <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                           <Component id="jTextField1" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" min="-2" pref="310" max="-2" attributes="0"/>
+                          <Component id="cbxChonThang" min="-2" pref="310" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
@@ -197,7 +197,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextField1" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="cbxChonThang" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -421,13 +421,16 @@
                       <Image iconType="3" name="/image/search.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel6MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Th&#xe1;ng"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="cbxChonThang">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="12">
@@ -446,6 +449,10 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxChonThangItemStateChanged"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxChonThangActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>

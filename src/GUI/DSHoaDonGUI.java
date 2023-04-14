@@ -37,6 +37,8 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
         dtmDSCTHoaDon = (DefaultTableModel) tblDSCTHD.getModel();
         init();
         loadDataDSHD();
+        ArrayList<HoaDonDTO> dshd = hdBUS.getListHoaDon();
+        
 
     }
 
@@ -85,16 +87,16 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
                 search(tuKhoaTimKiem);
             }
         });
-        
 
     }
-    
-    public void search(String tk){
-        if(tk.equals("Mã HD")){
+
+    public void search(String tk) {
+        if (tk.equals("Mã HD")) {
             ArrayList<HoaDonDTO> dshd = hdBUS.searchMaHD(txtTimKiem.getText().toString());
             showAllDSHD(dshd);
         }
     }
+
     public void showAllDSHD(ArrayList<HoaDonDTO> dshd) {
         dtmDSHoaDon.setRowCount(0);
         for (int i = 0; i < dshd.size(); i++) {

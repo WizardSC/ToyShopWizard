@@ -83,6 +83,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
 
         JTextFieldDateEditor editor = (JTextFieldDateEditor) this.txtNgayLap.getDateEditor();
         editor.setEnabled(false);
+        
     }
 
     public void init() {

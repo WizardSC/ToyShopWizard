@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -31,16 +32,34 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
     DefaultTableModel dtmCTPhieuNhap;
     PhieuNhapBUS pnBUS = new PhieuNhapBUS();
     CTPhieuNhapBUS ctpnBUS = new CTPhieuNhapBUS();
+
+    String tuKhoaTimKiem;
+
     public DSPhieuNhapGUI() {
         initComponents();
         init();
-        
+
         dtmPhieuNhap = (DefaultTableModel) tblDSPN.getModel();
         dtmCTPhieuNhap = (DefaultTableModel) tblDSCTPN.getModel();
         loadDataDSPN();
-    }
+        pnBUS.docDanhSach();
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        Date NgayLap = new Date();
 
-    public void init(){
+//        ArrayList<PhieuNhapDTO> dspn = pnBUS.getListPhieuNhap();
+//        for (PhieuNhapDTO pn : dspn) {
+//            String NgayLap = pn.getNgayLap().toString();
+//            LocalDate date = LocalDate.parse(NgayLap);
+//            int month = date.getMonthValue();
+//            System.out.println(month);
+//        }
+        
+    }
+    public void search(){
+        
+        
+    }
+    public void init() {
         //set giao diện cho Table
         //DSHD
         tblDSPN.setFocusable(false);
@@ -68,15 +87,14 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
         tblDSCTPN.setFont(new Font("Arial", Font.PLAIN, 13));
         tblDSCTPN.getTableHeader().setReorderingAllowed(false);
         tblDSCTPN.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
-        
-//        
 
+//        
         tblDSPN.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 int row = tblDSPN.rowAtPoint(evt.getPoint());
                 int col = tblDSPN.columnAtPoint(evt.getPoint());
                 if (row >= 0 && col >= 0) {
-                    
+
                     tblDSPN.setRowSelectionInterval(row, row);
                     tblDSPN.setColumnSelectionInterval(0, tblDSPN.getColumnCount() - 1);
                     tblDSPN.setSelectionBackground(new Color(188, 206, 248)); // đổi màu nền của ô khi hover
@@ -84,10 +102,10 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
             }
         });
     }
-    
-    public void showAllDSPN(ArrayList<PhieuNhapDTO> dspn){
+
+    public void showAllDSPN(ArrayList<PhieuNhapDTO> dspn) {
         dtmPhieuNhap.setRowCount(0);
-        for(int i=0;i<dspn.size();i++){
+        for (int i = 0; i < dspn.size(); i++) {
             dtmPhieuNhap.addRow(new String[]{
                 dspn.get(i).getMaPN(),
                 dspn.get(i).getMaNCC(),
@@ -97,35 +115,35 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
             });
         }
     }
-    
-    public void showAllDSCTPN(ArrayList<CTPhieuNhapDTO> dsctpn){
+
+    public void showAllDSCTPN(ArrayList<CTPhieuNhapDTO> dsctpn) {
         dtmCTPhieuNhap.setRowCount(0);
-        for(int i=0;i<dsctpn.size();i++){
+        for (int i = 0; i < dsctpn.size(); i++) {
             dtmCTPhieuNhap.addRow(new String[]{
                 dsctpn.get(i).getMaPN(),
                 dsctpn.get(i).getMaSP(),
                 dsctpn.get(i).getTenSP(),
                 String.valueOf(dsctpn.get(i).getDonGia()),
                 String.valueOf(dsctpn.get(i).getSoLuong()),
-                String.valueOf(dsctpn.get(i).getThanhTien()),
-            });
+                String.valueOf(dsctpn.get(i).getThanhTien()),});
         }
     }
-    
-    public void loadDataDSPN(){
+
+    public void loadDataDSPN() {
         pnBUS.docDanhSach();
         ArrayList<PhieuNhapDTO> dspn = pnBUS.getListPhieuNhap();
         showAllDSPN(dspn);
     }
-    
-    public void loadDataDSCTPNtheoMaPN(String MaPN){
-        if (ctpnBUS.getListCTPN() == null){
+
+    public void loadDataDSCTPNtheoMaPN(String MaPN) {
+        if (ctpnBUS.getListCTPN() == null) {
             ctpnBUS.listCTPN();
         }
         ArrayList<CTPhieuNhapDTO> dsctpn = ctpnBUS.getListCTPNtheoMaPN(MaPN);
         dtmCTPhieuNhap.setRowCount(0);
         showAllDSCTPN(dsctpn);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,7 +175,7 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
         txtTo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxChonThang = new javax.swing.JComboBox<>();
         pnGioHang = new javax.swing.JPanel();
         lblGioHang = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -279,10 +297,25 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
         lblMaPN1.setText("Đến");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jTextField1.setText("Tháng");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
+        cbxChonThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
+        cbxChonThang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxChonThangItemStateChanged(evt);
+            }
+        });
+        cbxChonThang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxChonThangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnDSSPLayout = new javax.swing.GroupLayout(pnDSSP);
         pnDSSP.setLayout(pnDSSPLayout);
@@ -328,7 +361,7 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cbxChonThang, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnDSSPLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(btnTimKiemNC)
@@ -374,7 +407,7 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
                 .addGroup(pnDSSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxChonThang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(pnDSSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnTimKiemNC)
@@ -517,9 +550,9 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
 
     private void tblDSPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSPNMouseClicked
         int k = tblDSPN.getSelectedRow();
-        txtMaPN.setText(tblDSPN.getModel().getValueAt(k,0).toString());
-        txtMaNCC.setText(tblDSPN.getModel().getValueAt(k,1).toString());
-        txtMaNV.setText(tblDSPN.getModel().getValueAt(k,2).toString());
+        txtMaPN.setText(tblDSPN.getModel().getValueAt(k, 0).toString());
+        txtMaNCC.setText(tblDSPN.getModel().getValueAt(k, 1).toString());
+        txtMaNV.setText(tblDSPN.getModel().getValueAt(k, 2).toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date NgayLap = new Date();
         try {
@@ -529,7 +562,7 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
             Logger.getLogger(DSPhieuNhapGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         txtNgayLap.setDate(NgayLap);
-        txtTongTien.setText(tblDSPN.getModel().getValueAt(k,4).toString());
+        txtTongTien.setText(tblDSPN.getModel().getValueAt(k, 4).toString());
         txtMaPN.setEnabled(false);
         txtMaNV.setEnabled(false);
         txtMaNCC.setEnabled(false);
@@ -545,19 +578,19 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
 
     private void tblDSCTPNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSCTPNMouseClicked
         int k = tblDSCTPN.getSelectedRow();
-        txtMaPNinDSPN.setText(tblDSCTPN.getModel().getValueAt(k,0).toString());
-        txtMaSPinDSPN.setText(tblDSCTPN.getModel().getValueAt(k,1).toString());
-        txtTenSPinDSPN.setText(tblDSCTPN.getModel().getValueAt(k,2).toString());
-        txtSoLuonginDSPN.setText(tblDSCTPN.getModel().getValueAt(k,3).toString());
-        txtDonGiainDSPN.setText(tblDSCTPN.getModel().getValueAt(k,4).toString());
-        txtThanhTieninDSPN.setText(tblDSCTPN.getModel().getValueAt(k,5).toString());
-        
+        txtMaPNinDSPN.setText(tblDSCTPN.getModel().getValueAt(k, 0).toString());
+        txtMaSPinDSPN.setText(tblDSCTPN.getModel().getValueAt(k, 1).toString());
+        txtTenSPinDSPN.setText(tblDSCTPN.getModel().getValueAt(k, 2).toString());
+        txtSoLuonginDSPN.setText(tblDSCTPN.getModel().getValueAt(k, 3).toString());
+        txtDonGiainDSPN.setText(tblDSCTPN.getModel().getValueAt(k, 4).toString());
+        txtThanhTieninDSPN.setText(tblDSCTPN.getModel().getValueAt(k, 5).toString());
+
         txtMaPNinDSPN.setEnabled(false);
         txtMaSPinDSPN.setEnabled(false);
         txtTenSPinDSPN.setEnabled(false);
         txtSoLuonginDSPN.setEnabled(false);
         txtDonGiainDSPN.setEnabled(false);
-        txtThanhTieninDSPN.setEnabled(false);    
+        txtThanhTieninDSPN.setEnabled(false);
     }//GEN-LAST:event_tblDSCTPNMouseClicked
 
     private void btnTimKiemNCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemNCMouseClicked
@@ -588,12 +621,32 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
+    private void cbxChonThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxChonThangActionPerformed
+        
+        //indexOf(" ") trả về vị trí của khoảng trắng đầu tiên trong chuỗi, ở đây là vị trí thứ 5 (đếm từ 0)
+        //substring(chuoi.indexOf(" ") + 1) cắt chuỗi bắt đầu từ vị trí sau khoảng trắng đầu tiên, ở đây là ký tự số 5 và trả về chuỗi kết quả
+    }//GEN-LAST:event_cbxChonThangActionPerformed
+
+    private void cbxChonThangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxChonThangItemStateChanged
+        tuKhoaTimKiem = cbxChonThang.getSelectedItem().toString();
+        String temp = tuKhoaTimKiem.substring(tuKhoaTimKiem.indexOf(" ")+1);
+        int thang = Integer.parseInt(temp);
+        pnBUS.docDanhSach();
+        ArrayList<PhieuNhapDTO> dspn = pnBUS.searchThang(thang);
+        showAllDSPN(dspn);
+        
+    }//GEN-LAST:event_cbxChonThangItemStateChanged
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        search();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnTimKiemNC;
+    private javax.swing.JComboBox<String> cbxChonThang;
     private javax.swing.JComboBox<String> cbxTimKiem;
     private javax.swing.JComboBox<String> cbxTimKiemNC;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

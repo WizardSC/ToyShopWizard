@@ -41,5 +41,7 @@ public class HoaDonBUS {
         }
         return dshd;
     }
+   
+//   public ArrayList<HoaDonDTO> searchNgayLap(String)
     
 }

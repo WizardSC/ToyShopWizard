@@ -9,6 +9,7 @@ import GUI.model.ChangeScreenKeToan;
 
 import GUI.model.DanhMuc;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -21,7 +22,8 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        
+        ImageIcon logo = new ImageIcon("./src/image/iconshop.png");
+        setIconImage(logo.getImage());
         ChangeScreenKeToan controller = new ChangeScreenKeToan(pnView);
         ArrayList<DanhMuc> list = new ArrayList<>();
         list.add(new DanhMuc("ThongKe", pnThongKe, lblThongKe));
@@ -138,7 +140,7 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
         pnMenu.setPreferredSize(new java.awt.Dimension(211, 650));
 
         lblIconHotel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIconHotel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/toy-shop.png"))); // NOI18N
+        lblIconHotel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/storage-box.png"))); // NOI18N
 
         pnThongKe.setBackground(new java.awt.Color(188, 206, 248));
         pnThongKe.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,7 +206,7 @@ public class MainForKeToanGUI extends javax.swing.JFrame {
                 .addComponent(pnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnTinhLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addContainerGap(340, Short.MAX_VALUE))
         );
 
         pnView.setBackground(new java.awt.Color(250, 247, 240));

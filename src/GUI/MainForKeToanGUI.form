@@ -253,7 +253,7 @@
                       <Component id="pnThongKe" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnTinhLuong" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="342" max="32767" attributes="0"/>
+                      <EmptySpace pref="340" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -263,7 +263,7 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/image/toy-shop.png"/>
+                  <Image iconType="3" name="/image/storage-box.png"/>
                 </Property>
               </Properties>
             </Component>
