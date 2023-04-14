@@ -12,14 +12,18 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -167,6 +171,8 @@ public class KhoGUI extends javax.swing.JPanel {
         txtTo = new javax.swing.JTextField();
         cbxDuLieu = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        btnImportExcel = new javax.swing.JLabel();
+        btnExportExcel = new javax.swing.JLabel();
 
         pnRoot.setBackground(new java.awt.Color(250, 247, 240));
         pnRoot.setPreferredSize(new java.awt.Dimension(1089, 750));
@@ -266,14 +272,14 @@ public class KhoGUI extends javax.swing.JPanel {
                 btnChinhSuaMouseClicked(evt);
             }
         });
-        jPanel1.add(btnChinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+        jPanel1.add(btnChinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(250, 247, 240));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TÌM KIẾM", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 94, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã SP", "Tên SP", "Đơn vị tính" }));
         cbxTimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -281,14 +287,14 @@ public class KhoGUI extends javax.swing.JPanel {
                 cbxTimKiemActionPerformed(evt);
             }
         });
-        jPanel2.add(cbxTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 94, 100, 30));
+        jPanel2.add(cbxTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 100, 30));
 
         txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtTimKiemMouseClicked(evt);
             }
         });
-        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 94, 190, 30));
+        jPanel2.add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 190, 30));
 
         btnTimKiemNC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         btnTimKiemNC.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -296,7 +302,7 @@ public class KhoGUI extends javax.swing.JPanel {
                 btnTimKiemNCMouseClicked(evt);
             }
         });
-        jPanel2.add(btnTimKiemNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 173, -1, -1));
+        jPanel2.add(btnTimKiemNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         cbxTimKiemNC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đơn giá" }));
         cbxTimKiemNC.addActionListener(new java.awt.event.ActionListener() {
@@ -304,19 +310,19 @@ public class KhoGUI extends javax.swing.JPanel {
                 cbxTimKiemNCActionPerformed(evt);
             }
         });
-        jPanel2.add(cbxTimKiemNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 173, 100, 30));
+        jPanel2.add(cbxTimKiemNC, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 100, 30));
 
         lblMaPN2.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblMaPN2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMaPN2.setText("Từ");
-        jPanel2.add(lblMaPN2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 30, 30));
-        jPanel2.add(txtFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 140, 30));
+        jPanel2.add(lblMaPN2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 30, 30));
+        jPanel2.add(txtFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 140, 30));
 
         lblMaPN1.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblMaPN1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMaPN1.setText("Đến");
-        jPanel2.add(lblMaPN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 40, 30));
-        jPanel2.add(txtTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 140, 30));
+        jPanel2.add(lblMaPN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 40, 30));
+        jPanel2.add(txtTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 140, 30));
 
         cbxDuLieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn mã loại" }));
         cbxDuLieu.addItemListener(new java.awt.event.ItemListener() {
@@ -324,10 +330,30 @@ public class KhoGUI extends javax.swing.JPanel {
                 cbxDuLieuItemStateChanged(evt);
             }
         });
-        jPanel2.add(cbxDuLieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 300, 30));
+        jPanel2.add(cbxDuLieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 300, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        btnImportExcel.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnImportExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/import.png"))); // NOI18N
+        btnImportExcel.setText("Nhập Excel");
+        btnImportExcel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnImportExcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnImportExcelMouseClicked(evt);
+            }
+        });
+
+        btnExportExcel.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnExportExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/xls.png"))); // NOI18N
+        btnExportExcel.setText("Xuất Excel");
+        btnExportExcel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExportExcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExportExcelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnRootLayout = new javax.swing.GroupLayout(pnRoot);
         pnRoot.setLayout(pnRootLayout);
@@ -339,17 +365,29 @@ public class KhoGUI extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1069, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnRootLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnRootLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnRootLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(btnImportExcel)
+                                .addGap(38, 38, 38)
+                                .addComponent(btnExportExcel)))
                         .addGap(5, 5, 5)))
                 .addGap(18, 18, 18))
         );
         pnRootLayout.setVerticalGroup(
             pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRootLayout.createSequentialGroup()
-                .addGroup(pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnRootLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addGroup(pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnExportExcel)
+                            .addComponent(btnImportExcel))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
@@ -474,10 +512,36 @@ public class KhoGUI extends javax.swing.JPanel {
        
     }//GEN-LAST:event_cbxDuLieuItemStateChanged
 
+    private void btnImportExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImportExcelMouseClicked
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JFileChooser fc = new JFileChooser("./reports");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Excel", "xlsx");
+        fc.setFileFilter(filter);
+        int result = fc.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile(); //Lấy URL
+            khoBUS.importExcel(file);
+            khoBUS.listKho();
+            JOptionPane.showMessageDialog(null, "Đã nhập file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+
+        }
+
+        loadDataKho();
+    }//GEN-LAST:event_btnImportExcelMouseClicked
+
+    private void btnExportExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportExcelMouseClicked
+        khoBUS.ExportExcel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JOptionPane.showMessageDialog(null, "Đã xuất file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+    }//GEN-LAST:event_btnExportExcelMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnChinhSua;
     private javax.swing.JLabel btnChonAnh;
+    private javax.swing.JLabel btnExportExcel;
+    private javax.swing.JLabel btnImportExcel;
     private javax.swing.JButton btnLoai;
     private javax.swing.JLabel btnTimKiemNC;
     private javax.swing.JComboBox<String> cbxDonViTinh;

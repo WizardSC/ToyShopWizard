@@ -8,6 +8,7 @@ package BUS;
 import DAO.SanPhamDAO;
 import DTO.SanPhamDTO;
 import DTO.SanPham_ViTriDTO;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +24,12 @@ public class SanPhamBUS {
         this.listSanPham = spDAO.getListSanPham();
         
         
+    }
+    public void listSP() {
+        SanPhamDAO spDAO = new SanPhamDAO();
+        
+        listSanPham = new ArrayList<>();
+        listSanPham = spDAO.getListSanPham();
     }
     public void docDanhSach1(){
         this.listSPCuaHang = spDAO.getListSanPhamCuaHang();
@@ -64,5 +71,12 @@ public class SanPhamBUS {
 
         spDAO.capNhatSoLuongHD(MaSP, SoLuongMua, SoLuongTrongKho);
 
+    }
+    
+    public void importExcel(File file){
+        spDAO.ImportExcel(file);
+    }
+    public void ExportExcel(){
+        spDAO.ExportExcel();
     }
 }

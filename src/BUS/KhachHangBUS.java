@@ -50,4 +50,8 @@ public class KhachHangBUS {
     public void ImportExcel(File file) {
         khDAO.ImportExcel(file);
     }
+    
+    public void ExportExcel(){
+        khDAO.ExportExcel();
+    }
 }

@@ -8,6 +8,7 @@ package BUS;
 import DAO.KhoDAO;
 import DAO.SanPhamDAO;
 import DTO.KhoDTO;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,12 @@ public class KhoBUS {
     public ArrayList<KhoDTO> getListKho(){
         return listKho;
     }
-    
+    public void listKho() {
+        KhoDAO khoDAO = new KhoDAO();
+        
+        listKho = new ArrayList<>();
+        listKho = khoDAO.getListKho();
+    }
     public void capNhatSoLuongSP(String MaPN, int SoLuongNhap, int SoLuongTrongKho){
         khoDAO.capNhatSoLuongSP(MaPN, SoLuongNhap, SoLuongTrongKho);
     }
@@ -85,5 +91,11 @@ public class KhoBUS {
             }
         }
         return dskho;
+    }
+    public void importExcel(File file){
+        khoDAO.ImportExcel(file);
+    }
+    public void ExportExcel(){
+        khoDAO.ExportExcel();
     }
 }

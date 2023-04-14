@@ -173,6 +173,8 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         cbxTimKiem = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
+        btnImportExcel = new javax.swing.JLabel();
+        btnExportExcel = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1089, 750));
 
@@ -388,20 +390,33 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
 
         jTextField1.setText("jTextField1");
 
+        btnImportExcel.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnImportExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/import.png"))); // NOI18N
+        btnImportExcel.setText("Nhập Excel");
+        btnImportExcel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnImportExcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnImportExcelMouseClicked(evt);
+            }
+        });
+
+        btnExportExcel.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnExportExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/xls.png"))); // NOI18N
+        btnExportExcel.setText("Xuất Excel");
+        btnExportExcel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExportExcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExportExcelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(67, 67, 67)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(cbxTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
-                        .addGap(11, 11, 11))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnChinhSua)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -412,6 +427,20 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(btnXoa)
                         .addGap(95, 95, 95))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbxTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1)
+                .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(btnImportExcel)
+                .addGap(38, 38, 38)
+                .addComponent(btnExportExcel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,13 +453,17 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChinhSua)
                     .addComponent(btnNhapLai))
-                .addGap(43, 43, 43)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExportExcel)
+                    .addComponent(btnImportExcel))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbxTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(57, 57, 57))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -591,10 +624,36 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
 //        txtTimKiem.setText("");
     }//GEN-LAST:event_cbxTimKiemActionPerformed
 
+    private void btnImportExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImportExcelMouseClicked
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JFileChooser fc = new JFileChooser("./reports");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "Excel", "xlsx");
+        fc.setFileFilter(filter);
+        int result = fc.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile(); //Lấy URL
+            spBUS.importExcel(file);
+            spBUS.listSP();
+            JOptionPane.showMessageDialog(null, "Đã nhập file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+
+        }
+
+        loadData();
+    }//GEN-LAST:event_btnImportExcelMouseClicked
+
+    private void btnExportExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportExcelMouseClicked
+        spBUS.ExportExcel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
+        JOptionPane.showMessageDialog(null, "Đã xuất file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
+    }//GEN-LAST:event_btnExportExcelMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnChinhSua;
     private javax.swing.JLabel btnChonAnh;
+    private javax.swing.JLabel btnExportExcel;
+    private javax.swing.JLabel btnImportExcel;
     private javax.swing.JButton btnLoai;
     private javax.swing.JLabel btnNhapLai;
     private javax.swing.JLabel btnThem;
