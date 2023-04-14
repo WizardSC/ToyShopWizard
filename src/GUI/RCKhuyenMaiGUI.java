@@ -279,6 +279,7 @@ public class RCKhuyenMaiGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_tblDSKMMouseClicked
 
     private void btnBoChonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBoChonMouseClicked
+        txtMaKM.setText("");
         dispose();
     }//GEN-LAST:event_btnBoChonMouseClicked
 
@@ -291,10 +292,12 @@ public class RCKhuyenMaiGUI extends javax.swing.JDialog {
 
             if (tblDSKM.getModel().getValueAt(k, 6).equals("Không hiệu lực")) {
                 JOptionPane.showMessageDialog(null, "Khuyến mãi không có hiệu lực!", "THÔNG BÁO", JOptionPane.ERROR_MESSAGE);
+                txtMaKM.setText("");
                 return;
             }
             else if (TongTien < DieuKien) {
                 JOptionPane.showMessageDialog(null, "Không đủ điều kiện tham gia khuyến mãi này!", "THÔNG BÁO", JOptionPane.ERROR_MESSAGE);
+                txtMaKM.setText("");
                 return;
             } else {
                 dispose();

@@ -42,6 +42,8 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         dtmCTPhieuXuat = (DefaultTableModel) tblDSCTPX.getModel();
         init();
         loadDataDSPX();
+        
+        
     }
     public void init(){
         //set giao diện cho Table
@@ -261,6 +263,11 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         lblMaPN.setText("Đến");
         pnDSSP.add(lblMaPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 650, 40, 30));
 
+        txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTimKiemMouseClicked(evt);
+            }
+        });
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
@@ -586,6 +593,10 @@ public class DSPhieuXuatGUI extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_btnTimKiemNCMouseClicked
+
+    private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
+        
+    }//GEN-LAST:event_txtTimKiemMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

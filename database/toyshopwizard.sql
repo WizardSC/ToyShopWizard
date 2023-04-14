@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 13, 2023 lúc 06:12 PM
+-- Thời gian đã tạo: Th4 14, 2023 lúc 10:34 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.0.25
 
@@ -73,16 +73,6 @@ CREATE TABLE `ctphieunhap` (
   `ThanhTien` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `ctphieunhap`
---
-
-INSERT INTO `ctphieunhap` (`MaPN`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhTien`) VALUES
-('PN01', 'SP01', 'Siêu Xe Porsche 963', 2, 838950, 1677900),
-('PN01', 'SP03', 'Xe Mô Tô Cổ Điển', 5, 492450, 2462250),
-('PN01', 'SP08', 'Bộ làm bếp 3 món mini Hồng', 4, 586950, 2347800),
-('PN01', 'SP12', 'Xe chở xăng MAN TGS', 3, 2310000, 6930000);
-
 -- --------------------------------------------------------
 
 --
@@ -112,18 +102,6 @@ CREATE TABLE `hoadon` (
   `TongTien` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `hoadon`
---
-
-INSERT INTO `hoadon` (`MaHD`, `MaKH`, `MaNV`, `NgayLap`, `TongTien`) VALUES
-('HD26', 'KH26', 'NV26', '2023-05-15', 800000),
-('HD27', 'KH03', 'NV03', '2023-05-15', 876000),
-('HD28', 'KH13', 'NV13', '2023-05-15', 1050000),
-('HD29', 'KH10', 'NV10', '2023-06-10', 2135000),
-('HD30', 'KH10', 'NV05', '2023-06-10', 2260000),
-('HD31', '111', '111', '2023-06-10', 420000);
-
 -- --------------------------------------------------------
 
 --
@@ -146,7 +124,6 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`MaKH`, `Ho`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `SoDT`, `IMG`) VALUES
-('dà', 'r3', '423', '34', 'Nam', '24', '2423', 'null'),
 ('KH01', 'So', 'Junghwan', '18/02/2005', 'Nam', 'South Korea', '18022005', 'Junghwan.jpg'),
 ('KH03', 'Watanabe', 'Haruto', '05/04/2004', 'Nam', 'South Korea', '05042004', 'Haruto.jpg'),
 ('KH04', 'Son', 'Dongwoon', '06/06/1991', 'Nam', 'South Korea', '06061991', 'Dongwoon.jpg'),
@@ -185,18 +162,18 @@ CREATE TABLE `kho` (
 --
 
 INSERT INTO `kho` (`MaSP`, `TenSP`, `SoLuong`, `GiaNhap`, `DonViTinh`, `MaLoai`, `IMG`) VALUES
-('SP01', 'Siêu Xe Porsche 963', 1, 838950, 'Cái', 'L01', 'null'),
-('SP02', 'Siêu Xe Pagani Utopia', 0, 838950, 'Cái', 'L01', 'null'),
-('SP03', 'Xe Mô Tô Cổ Điển', 5, 492450, 'Cái', 'L01', 'null'),
-('SP04', 'Bộ Gạch Sáng Tạo Neon Vui Nhộn', 0, 454650, 'Cái', 'L01', 'null'),
-('SP05', 'Bộ Gạch Sáng Tạo Pastel Dễ Thương', 0, 649950, 'Bộ', 'L01', 'null'),
-('SP06', 'Siêu Xe Của Người Nhện', 0, 324450, 'Chiếc', 'L01', 'null'),
-('SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 0, 502950, 'Chiếc', 'L01', 'null'),
-('SP08', 'Bộ làm bếp 3 món mini Hồng', 4, 586950, 'Cái', 'L05', 'null'),
-('SP09', 'Bộ nồi lẩu điện mini Xanh dương', 0, 418950, 'Cái', 'L05', 'null'),
-('SP10', 'Set bánh vui vẻ 28 chi tiết ', 0, 329700, 'Bộ', 'L05', 'null'),
+('SP01', 'Siêu Xe Porsche 963', 0, 838950, 'Cái', 'L01', 'SP01.jpg'),
+('SP02', 'Siêu Xe Pagani Utopia', 0, 838950, 'Cái', 'L01', 'SP02.jpg'),
+('SP03', 'Xe Mô Tô Cổ Điển', 0, 492450, 'Cái', 'L01', 'SP03.jpg'),
+('SP04', 'Bộ Gạch Sáng Tạo Neon Vui Nhộn', 0, 454650, 'Cái', 'L01', 'SP04.jpg'),
+('SP05', 'Bộ Gạch Sáng Tạo Pastel Dễ Thương', 0, 649950, 'Bộ', 'L01', 'SP05.jpg'),
+('SP06', 'Siêu Xe Của Người Nhện', 4, 324450, 'Chiếc', 'L01', 'SP06.jpg'),
+('SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 0, 502950, 'Chiếc', 'L01', 'SP07.jpg'),
+('SP08', 'Bộ làm bếp 3 món mini Hồng', 0, 586950, 'Cái', 'L05', 'SP08.jpg'),
+('SP09', 'Bộ nồi lẩu điện mini Xanh dương', 0, 418950, 'Cái', 'L05', 'SP09.jpg'),
+('SP10', 'Set bánh vui vẻ 28 chi tiết ', 0, 329700, 'Bộ', 'L05', 'SP10.jpg'),
 ('SP11', 'Trung tâm thương mại hiện đại', 0, 2100000, 'Bộ', 'L05', 'null'),
-('SP12', 'Xe chở xăng MAN TGS', 3, 2310000, 'Cái', 'L02', 'null'),
+('SP12', 'Xe chở xăng MAN TGS', 0, 2310000, 'Cái', 'L02', 'null'),
 ('SP13', 'Đồ chơi mô hình tỷ lệ 1:16 xe chở hàng DHL ', 0, 1890000, 'Cái', 'L02', 'null'),
 ('SP14', 'Đồ chơi búp bê thời trang tóc đỏ ', 0, 270900, 'Cái', 'L04', 'null'),
 ('SP15', 'Đồ chơi búp bê thời trang jumpsuit xanh dạo phố ', 0, 270900, 'Cái', 'L04', 'null'),
@@ -347,13 +324,6 @@ CREATE TABLE `phieunhap` (
   `TongTien` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `phieunhap`
---
-
-INSERT INTO `phieunhap` (`MaPN`, `MaNCC`, `MaNV`, `NgayLap`, `TongTien`) VALUES
-('PN01', 'NCC02', 'NV04', '2023-04-12', 13417950);
-
 -- --------------------------------------------------------
 
 --
@@ -388,25 +358,25 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`MaSP`, `TenSP`, `SoLuong`, `DonGia`, `DonViTinh`, `MaLoai`, `IMG`) VALUES
-('SP01', 'Siêu Xe Porsche 963', 0, 799000, 'Cái', 'L01', 'null'),
-('SP02', 'Siêu Xe Pagani Utopia', 0, 799000, 'Cái', 'L01', 'null'),
-('SP03', 'Xe Mô Tô Cổ Điển', 0, 469000, 'Cái', 'L01', 'null'),
-('SP04', 'Bộ Gạch Sáng Tạo Neon Vui Nhộn', 0, 433000, 'Cái', 'L01', 'null'),
-('SP05', 'Bộ Gạch Sáng Tạo Pastel Dễ Thương', 0, 619000, 'Bộ', 'L01', 'null'),
-('SP06', 'Siêu Xe Của Người Nhện', 0, 309000, 'Chiếc', 'L01', 'null'),
-('SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 0, 479000, 'Chiếc', 'L01', 'null'),
-('SP08', 'Bộ làm bếp 3 món mini Hồng', 0, 559000, 'Cái', 'L05', 'null'),
-('SP09', 'Bộ nồi lẩu điện mini Xanh dương', 0, 399000, 'Cái', 'L05', 'null'),
-('SP10', 'Set bánh vui vẻ 28 chi tiết ', 0, 314000, 'Bộ', 'L05', 'null'),
-('SP11', 'Trung tâm thương mại hiện đại', 0, 2000000, 'Bộ', 'L05', 'null'),
+('SP01', 'Siêu Xe Porsche 963', 0, 799000, 'Cái', 'L01', 'SP01.jpg'),
+('SP02', 'Siêu Xe Pagani Utopia', 0, 799000, 'Cái', 'L01', 'SP02.jpg'),
+('SP03', 'Xe Mô Tô Cổ Điển', 10, 469000, 'Cái', 'L01', 'SP03.jpg'),
+('SP04', 'Bộ Gạch Sáng Tạo Neon Vui Nhộn', 0, 433000, 'Cái', 'L01', 'SP04.jpg'),
+('SP05', 'Bộ Gạch Sáng Tạo Pastel Dễ Thương', 0, 619000, 'Bộ', 'L01', 'SP05.jpg'),
+('SP06', 'Siêu Xe Của Người Nhện', 0, 309000, 'Chiếc', 'L01', 'SP06.jpg'),
+('SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 0, 479000, 'Chiếc', 'L01', 'SP07.jpg'),
+('SP08', 'Bộ làm bếp 3 món mini Hồng', 0, 559000, 'Cái', 'L05', 'SP08.jpg'),
+('SP09', 'Bộ nồi lẩu điện mini Xanh dương', 0, 399000, 'Cái', 'L05', 'SP09.jpg'),
+('SP10', 'Set bánh vui vẻ 28 chi tiết ', 0, 314000, 'Bộ', 'L05', 'SP10.jpg'),
+('SP11', 'Trung tâm thương mại hiện đại', 8, 2000000, 'Bộ', 'L05', 'null'),
 ('SP12', 'Xe chở xăng MAN TGS', 0, 2200000, 'Cái', 'L02', 'null'),
 ('SP13', 'Đồ chơi mô hình tỷ lệ 1:16 xe chở hàng DHL ', 0, 1800000, 'Cái', 'L02', 'null'),
 ('SP14', 'Đồ chơi búp bê thời trang tóc đỏ ', 0, 258000, 'Cái', 'L04', 'null'),
-('SP15', 'Đồ chơi búp bê thời trang jumpsuit xanh dạo phố ', 0, 258000, 'Cái', 'L04', 'null'),
+('SP15', 'Đồ chơi búp bê thời trang jumpsuit xanh dạo phố ', 6, 258000, 'Cái', 'L04', 'null'),
 ('SP16', 'Bộ đồ chơi búp bê đi picnic cùng thú cưng ', 0, 700000, 'Cái', 'L04', 'null'),
-('SP17', 'Đồ chơi búp bê nam thời trang áo xám ', 0, 369000, 'Cái', 'L04', 'null'),
-('SP18', 'Sư tử Leo lười ', 0, 567000, 'Cái', 'L06', 'null'),
-('SP19', 'Gấu Lizzie tinh nghịch ', 0, 495000, 'Con', 'L06', 'null'),
+('SP17', 'Đồ chơi búp bê nam thời trang áo xám ', 4, 369000, 'Cái', 'L04', 'null'),
+('SP18', 'Sư tử Leo lười ', 0, 567000, 'Cái', 'L04', 'null'),
+('SP19', 'Gấu Lizzie tinh nghịch ', 2, 495000, 'Con', 'L06', 'null'),
 ('SP20', 'Gấu Bobbie tinh nghịch ', 0, 495000, 'Con', 'L06', 'null');
 
 --
@@ -457,25 +427,30 @@ ALTER TABLE `chucvu`
 -- Chỉ mục cho bảng `cthoadon`
 --
 ALTER TABLE `cthoadon`
-  ADD PRIMARY KEY (`MaHD`,`MaSP`);
+  ADD PRIMARY KEY (`MaHD`,`MaSP`),
+  ADD KEY `FK_CTHOADON_SANPHAM` (`MaSP`);
 
 --
 -- Chỉ mục cho bảng `ctphieunhap`
 --
 ALTER TABLE `ctphieunhap`
-  ADD PRIMARY KEY (`MaPN`,`MaSP`);
+  ADD PRIMARY KEY (`MaPN`,`MaSP`),
+  ADD KEY `FK_CTPHIEUNHAP_SANPHAM` (`MaSP`);
 
 --
 -- Chỉ mục cho bảng `ctphieuxuat`
 --
 ALTER TABLE `ctphieuxuat`
-  ADD PRIMARY KEY (`MaPX`,`MaSP`);
+  ADD PRIMARY KEY (`MaPX`,`MaSP`),
+  ADD KEY `FK_CTPHIEUXUAT_SANPHAM` (`MaSP`);
 
 --
 -- Chỉ mục cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  ADD PRIMARY KEY (`MaHD`);
+  ADD PRIMARY KEY (`MaHD`),
+  ADD KEY `FK_HOADON_NHANVIEN` (`MaNV`),
+  ADD KEY `FK_HOADON_KHACHHANG` (`MaKH`);
 
 --
 -- Chỉ mục cho bảng `khachhang`
@@ -547,6 +522,34 @@ ALTER TABLE `taikhoan`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `cthoadon`
+--
+ALTER TABLE `cthoadon`
+  ADD CONSTRAINT `FK_CTHOADON_HOADON` FOREIGN KEY (`MaHD`) REFERENCES `hoadon` (`MaHD`),
+  ADD CONSTRAINT `FK_CTHOADON_SANPHAM` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
+
+--
+-- Các ràng buộc cho bảng `ctphieunhap`
+--
+ALTER TABLE `ctphieunhap`
+  ADD CONSTRAINT `FK_CTPHIEUNHAP_PHIEUNHAP` FOREIGN KEY (`MaPN`) REFERENCES `phieunhap` (`MaPN`),
+  ADD CONSTRAINT `FK_CTPHIEUNHAP_SANPHAM` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
+
+--
+-- Các ràng buộc cho bảng `ctphieuxuat`
+--
+ALTER TABLE `ctphieuxuat`
+  ADD CONSTRAINT `FK_CTPHIEUXUAT_PHIEUXUAT` FOREIGN KEY (`MaPX`) REFERENCES `phieuxuat` (`MaPX`),
+  ADD CONSTRAINT `FK_CTPHIEUXUAT_SANPHAM` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
+
+--
+-- Các ràng buộc cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `FK_HOADON_KHACHHANG` FOREIGN KEY (`MaKH`) REFERENCES `khachhang` (`MaKH`),
+  ADD CONSTRAINT `FK_HOADON_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
 
 --
 -- Các ràng buộc cho bảng `kho`

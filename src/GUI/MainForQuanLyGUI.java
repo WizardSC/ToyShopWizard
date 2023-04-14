@@ -49,7 +49,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         list.add(new DanhMuc("SanPham",pnSanPham,lblSanPham));
         list.add(new DanhMuc("KhuyenMai",pnKhuyenMai,lblKhuyenMai));
         list.add(new DanhMuc("NhanVien",pnNhanVien,lblNhanVien));
-        
+        list.add(new DanhMuc("ThongKe",pnThongKe,lblThongKe));
         controller.setEvent(list);
         
         
@@ -112,6 +112,8 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         lblKhuyenMai = new javax.swing.JLabel();
         pnNhanVien = new javax.swing.JPanel();
         lblNhanVien = new javax.swing.JLabel();
+        pnThongKe = new javax.swing.JPanel();
+        lblThongKe = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -348,6 +350,27 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
             .addComponent(lblNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
 
+        pnThongKe.setBackground(new java.awt.Color(188, 206, 248));
+        pnThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        pnThongKe.setPreferredSize(new java.awt.Dimension(300, 43));
+
+        lblThongKe.setFont(new java.awt.Font("Baloo 2 ExtraBold", 1, 20)); // NOI18N
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblThongKe.png"))); // NOI18N
+        lblThongKe.setText("  Thống kê");
+
+        javax.swing.GroupLayout pnThongKeLayout = new javax.swing.GroupLayout(pnThongKe);
+        pnThongKe.setLayout(pnThongKeLayout);
+        pnThongKeLayout.setHorizontalGroup(
+            pnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThongKeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnThongKeLayout.setVerticalGroup(
+            pnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnMenuLayout = new javax.swing.GroupLayout(pnMenu);
         pnMenu.setLayout(pnMenuLayout);
         pnMenuLayout.setHorizontalGroup(
@@ -364,7 +387,8 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
                     .addGroup(pnMenuLayout.createSequentialGroup()
                         .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(pnNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(pnThongKe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -385,7 +409,9 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
                 .addComponent(pnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnRootLayout = new javax.swing.GroupLayout(pnRoot);
@@ -453,6 +479,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblNhanVien;
     private javax.swing.JLabel lblSanPham;
     private javax.swing.JLabel lblTaiKhoan;
+    private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblThongTin;
     private javax.swing.JLabel lblTime;
     private javax.swing.JPanel pnChucVu;
@@ -464,6 +491,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
     private javax.swing.JPanel pnRoot;
     private javax.swing.JPanel pnSanPham;
     private javax.swing.JPanel pnTaiKhoan;
+    private javax.swing.JPanel pnThongKe;
     private javax.swing.JPanel pnView;
     // End of variables declaration//GEN-END:variables
 }

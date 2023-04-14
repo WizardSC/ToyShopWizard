@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +36,7 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
     CTPhieuNhapBUS ctpnBUS = new CTPhieuNhapBUS();
 
     String tuKhoaTimKiem;
+    boolean clickedOnce = false;
 
     public DSPhieuNhapGUI() {
         initComponents();
@@ -43,22 +46,15 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
         dtmCTPhieuNhap = (DefaultTableModel) tblDSCTPN.getModel();
         loadDataDSPN();
         pnBUS.docDanhSach();
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//        Date NgayLap = new Date();
+        
+        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
+//        
+    }
 
-//        ArrayList<PhieuNhapDTO> dspn = pnBUS.getListPhieuNhap();
-//        for (PhieuNhapDTO pn : dspn) {
-//            String NgayLap = pn.getNgayLap().toString();
-//            LocalDate date = LocalDate.parse(NgayLap);
-//            int month = date.getMonthValue();
-//            System.out.println(month);
-//        }
-        
+    public void search() {
+
     }
-    public void search(){
-        
-        
-    }
+
     public void init() {
         //set giao diện cho Table
         //DSHD
@@ -101,6 +97,43 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
                 }
             }
         });
+
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+        });
+
+    }
+
+    public void search(String tk) {
+        if (tk.equals("Mã PN")) {
+            pnBUS.docDanhSach();
+            ArrayList<PhieuNhapDTO> dspn = pnBUS.searchMaPN(txtTimKiem.getText());
+            showAllDSPN(dspn);
+        }
+        if (tk.equals("Mã NCC")) {
+            pnBUS.docDanhSach();
+            ArrayList<PhieuNhapDTO> dspn = pnBUS.searchMaPN(txtTimKiem.getText());
+            showAllDSPN(dspn);
+        }
+        if (tk.equals("Mã NV")) {
+            pnBUS.docDanhSach();
+            ArrayList<PhieuNhapDTO> dspn = pnBUS.searchMaNV(txtTimKiem.getText());
+            showAllDSPN(dspn);
+        }
     }
 
     public void showAllDSPN(ArrayList<PhieuNhapDTO> dspn) {
@@ -275,16 +308,16 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
             }
         });
 
-        cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã PN", "<Mã NCC", "Mã NV" }));
+        cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã PN", "Mã NCC", "Mã NV" }));
         cbxTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxTimKiemActionPerformed(evt);
             }
         });
 
-        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimKiemActionPerformed(evt);
+        txtTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTimKiemMouseClicked(evt);
             }
         });
 
@@ -594,6 +627,17 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblDSCTPNMouseClicked
 
     private void btnTimKiemNCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemNCMouseClicked
+        if(!clickedOnce){
+            ArrayList<PhieuNhapDTO> dspn = pnBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
+            showAllDSPN(dspn);
+            clickedOnce = true;
+        } else {
+            txtFrom.setText("");
+            txtTo.setText("");
+            loadDataDSPN();
+            clickedOnce = false;
+        }
+
 //        if(!clickedOnce){
 //            ArrayList<PhieuXuatDTO> dspx = pxBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
 //            showAllDSPX(dspx);
@@ -613,33 +657,36 @@ public class DSPhieuNhapGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxTimKiemNCActionPerformed
 
     private void cbxTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemActionPerformed
-//        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
-//        txtTimKiem.setText("");
+        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
     }//GEN-LAST:event_cbxTimKiemActionPerformed
 
-    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
-
-    }//GEN-LAST:event_txtTimKiemActionPerformed
-
     private void cbxChonThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxChonThangActionPerformed
-        
+
         //indexOf(" ") trả về vị trí của khoảng trắng đầu tiên trong chuỗi, ở đây là vị trí thứ 5 (đếm từ 0)
         //substring(chuoi.indexOf(" ") + 1) cắt chuỗi bắt đầu từ vị trí sau khoảng trắng đầu tiên, ở đây là ký tự số 5 và trả về chuỗi kết quả
     }//GEN-LAST:event_cbxChonThangActionPerformed
 
     private void cbxChonThangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxChonThangItemStateChanged
         tuKhoaTimKiem = cbxChonThang.getSelectedItem().toString();
-        String temp = tuKhoaTimKiem.substring(tuKhoaTimKiem.indexOf(" ")+1);
+        String temp = tuKhoaTimKiem.substring(tuKhoaTimKiem.indexOf(" ") + 1);
         int thang = Integer.parseInt(temp);
         pnBUS.docDanhSach();
         ArrayList<PhieuNhapDTO> dspn = pnBUS.searchThang(thang);
         showAllDSPN(dspn);
-        
+
     }//GEN-LAST:event_cbxChonThangItemStateChanged
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         search();
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
+        txtMaNCC.setText("");
+        txtMaNV.setText("");
+        txtMaPN.setText("");
+        txtNgayLap.setDate(null);
+        txtTongTien.setText("");
+    }//GEN-LAST:event_txtTimKiemMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

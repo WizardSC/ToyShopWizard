@@ -717,7 +717,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
                                 .addGap(4, 4, 4))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnGioHangLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnTaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(79, 79, 79)
                         .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90))))
@@ -841,7 +841,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblDSSPMouseClicked
 
     private void btnThemSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSPMouseClicked
-        
+
         if (txtMaSP.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng lựa chọn sản phầm", "LỖI", JOptionPane.ERROR_MESSAGE);
 
@@ -873,18 +873,17 @@ public class HoaDonGUI extends javax.swing.JPanel {
                 dscthd.add(new CTHoaDonDTO(MaHD, MaSP, TenSP, SoLuong, DonGia, ThanhTien));
 
             }
-        
 
-        outModelGioHang(dtmGioHang, dscthd);
-        txtTongTien.setText(String.valueOf(sumHD()));
-        loadDataDSSP();
-        txtMaSP.setText("");
-        txtTenSP.setText("");
-        txtSoLuong.setValue(0);
-        txtDonGia.setText("");
-        txtIMG.setIcon(null);
-        txtIMG.setText("IMAGE");
-        imgName = null;
+            outModelGioHang(dtmGioHang, dscthd);
+            txtTongTien.setText(String.valueOf(sumHD()));
+            loadDataDSSP();
+            txtMaSP.setText("");
+            txtTenSP.setText("");
+            txtSoLuong.setValue(0);
+            txtDonGia.setText("");
+            txtIMG.setIcon(null);
+            txtIMG.setText("IMAGE");
+            imgName = null;
         }
 //
 //        dtmGioHang.addRow(new String[]{
@@ -913,8 +912,9 @@ public class HoaDonGUI extends javax.swing.JPanel {
         String MaHD = txtMaHD.getText();
         String MaKH = txtMaKH.getText();
         String MaNV = txtMaNV.getText();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        String NgayLap = ((JTextField) txtNgayLap.getDateEditor().getUiComponent()).getText();
+        String NgayLap = dateFormat.format(txtNgayLap.getDate());
         String ThanhToan = txtThanhToan.getText();
 
         HoaDonDTO hd = new HoaDonDTO(MaHD, MaKH, MaNV, NgayLap, ThanhToan);
@@ -931,7 +931,18 @@ public class HoaDonGUI extends javax.swing.JPanel {
         dtmGioHang.setRowCount(0);
 //        dscthd.clear();
 
-        JOptionPane.showMessageDialog(pnRoot, "Tạo hóa đơn thành công");
+        int result = JOptionPane.showConfirmDialog(pnRoot, "Tạo hóa đơn thành công. Nhấn OK để In hóa đơn");
+        if (result == JOptionPane.YES_OPTION) {
+            InHoaDonGUI.setUndecorated(true);
+            InHoaDonGUI.pack();
+            InHoaDonGUI.setVisible(true);
+            InHoaDonGUI.setLocationRelativeTo(null);
+            loadDataTTHD(); //load thông tin hóa đơn
+            cthdBUS.docListCTHoaDon();
+            ArrayList<HoaDonDTO> dscthd = hdBUS.getListHoaDon();
+        } else {
+            JOptionPane.showMessageDialog(pnRoot, "Nếu có nhu cầu, bạn hãy nhấn vào In hóa đơn");
+        }
 
     }//GEN-LAST:event_btnTaoHoaDonMouseClicked
 
@@ -1022,10 +1033,15 @@ public class HoaDonGUI extends javax.swing.JPanel {
         rkm.setVisible(true);
         String MaKM = rkm.getMaKM();
         txtMaKM.setText(MaKM);
+        if (txtMaKM.getText().equals("")) {
+            double TongTienSauKM = TongTien;
+            txtThanhToan.setText(String.valueOf(TongTienSauKM));
+        } else {
+            double KM = Double.parseDouble(rkm.getPhanTramKM());
+            double TongTienSauKM = TongTien - TongTien * (KM / 100);
+            txtThanhToan.setText(String.valueOf(TongTienSauKM));
+        }
 
-        double KM = Double.parseDouble(rkm.getPhanTramKM());
-        double TongTienSauKM = TongTien - TongTien * (KM / 100);
-        txtThanhToan.setText(String.valueOf(TongTienSauKM));
     }//GEN-LAST:event_chooseMaKMActionPerformed
 
 

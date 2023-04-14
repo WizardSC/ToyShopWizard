@@ -55,6 +55,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     String imgName = "null";
     private BufferedImage i = null;
     int SoLuongTrongKho;
+
     public PhieuXuatGUI() {
         initComponents();
         init();
@@ -117,7 +118,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         txtSpinner.setEditable(true);
         txtSpinner.setHorizontalAlignment(JTextField.LEFT);
         txtSpinner.setBackground(Color.white);
-        
+
         //setEnabled
         txtMaNV.setEnabled(false);
         txtMaPX.setEnabled(false);
@@ -125,7 +126,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         JDateChooser chooser = new JDateChooser();
         JTextFieldDateEditor editor = (JTextFieldDateEditor) this.txtNgayLap.getDateEditor();
         editor.setEnabled(false);
-        
+
     }
 
     public void showAllDSSP(ArrayList<KhoDTO> dskho) {
@@ -568,7 +569,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
 
         btnInHoaDon.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
         btnInHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblInHoaDon.png"))); // NOI18N
-        btnInHoaDon.setText("In hóa đơn");
+        btnInHoaDon.setText("In phiếu xuất");
         btnInHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -618,7 +619,8 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
                         .addGap(113, 113, 113)
                         .addComponent(btnTaoPhieuXuat)
                         .addGap(79, 79, 79)
-                        .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(pnHangChoXuatLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
@@ -756,6 +758,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         for (SanPhamDTO sp : dssp) {
             if (txtMaSP.getText().equals(sp.getMaSP())) {
                 lblGiaNhap.setText(String.valueOf(sp.getDonGia()));
+                txtDonGia.setText(String.valueOf(sp.getDonGia()));
             }
         }
         //set txtSoLuong sao cho chỉ có thể chọn tối đa số lượng sản phẩm hiện có trong table
@@ -827,7 +830,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         String MaNV = txtMaNV.getText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String NgayLap = dateFormat.format(txtNgayLap.getDate());
-        
+
         int TongTien = Integer.parseInt(txtTongTien.getText());
         PhieuXuatDTO px = new PhieuXuatDTO(MaPX, MaNV, NgayLap, TongTien);
         pxBUS.add(px);
@@ -837,8 +840,20 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         txtNgayLap.setCalendar(null);
         txtTongTien.setText("");
         dtmHangChoXuat.setRowCount(0);
-        JOptionPane.showMessageDialog(pnHangChoXuat, "Tạo phiếu xuất thành công");
-
+        int result = JOptionPane.showConfirmDialog(pnRoot, "Tạo phiếu xuất thành công. Nhấn OK để In phiếu xuất");
+        if (result == JOptionPane.YES_OPTION) {
+            XuatHoaDonGUI.setUndecorated(true);
+            XuatHoaDonGUI.pack();
+            XuatHoaDonGUI.setVisible(true);
+            XuatHoaDonGUI.setLocationRelativeTo(null);
+            loadDataDSPX();
+            ctpxBUS.docDanhSach();
+            ArrayList<PhieuXuatDTO> dsctpx = pxBUS.getListPhieuXuat();
+        } else {
+            JOptionPane.showMessageDialog(pnRoot, "Nếu có nhu cầu, bạn hãy nhấn vào In phiếu xuất");
+        
+        }
+        
     }//GEN-LAST:event_btnTaoPhieuXuatMouseClicked
 
     private void btnInHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDonMouseClicked
@@ -859,17 +874,17 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_chooseMaNVActionPerformed
 
     private void btnXoaSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaSPMouseClicked
-       int k = tblHangChoXuat.getSelectedRow();
-        String MaSP = tblHangChoXuat.getModel().getValueAt(k,0).toString();
-        int SoLuong = Integer.parseInt(tblHangChoXuat.getModel().getValueAt(k,2).toString());
-        
+        int k = tblHangChoXuat.getSelectedRow();
+        String MaSP = tblHangChoXuat.getModel().getValueAt(k, 0).toString();
+        int SoLuong = Integer.parseInt(tblHangChoXuat.getModel().getValueAt(k, 2).toString());
+
         //lấy số lượng sản phẩm hiện có trong kho
         khoBUS.docDanhSach();
         ArrayList<KhoDTO> dskho = khoBUS.getListKho();
-        for(KhoDTO kho : dskho){
-            if(MaSP.equals(kho.getMaSP())){
-                SoLuongTrongKho = kho.getSoLuong(); 
-        }
+        for (KhoDTO kho : dskho) {
+            if (MaSP.equals(kho.getMaSP())) {
+                SoLuongTrongKho = kho.getSoLuong();
+            }
         }
         //--
         khoBUS.capNhatSoLuongSP(MaSP, SoLuong, SoLuongTrongKho);
@@ -884,7 +899,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         int k = tblTTPX.getSelectedRow();
         txtMaPXinTTPX.setText(tblTTPX.getValueAt(k, 0).toString());
         txtMaNVinTTPX.setText(tblTTPX.getValueAt(k, 1).toString());
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date NgayLap = new Date();
         try {
@@ -908,7 +923,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void btnInHoaDoninTTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDoninTTHDMouseClicked
-        
+
         for (CTPhieuXuatDTO ctpx : dsctpx) {
             ctpxBUS.add(ctpx);
         }
@@ -918,7 +933,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         txtNgayLapinTTPX.setCalendar(null);
         txtTongTieninTTPX.setText("");
 
-        JOptionPane.showMessageDialog(pnRoot, "In hóa đơn thành công");
+        JOptionPane.showMessageDialog(pnRoot, "In phiếu xuất thành công");
     }//GEN-LAST:event_btnInHoaDoninTTHDMouseClicked
 
 

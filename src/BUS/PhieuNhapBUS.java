@@ -47,4 +47,39 @@ public class PhieuNhapBUS {
         return dspn;
 
     }
+    
+    public ArrayList<PhieuNhapDTO> searchMaPN(String tukhoa){
+        tukhoa = tukhoa.toLowerCase();
+        ArrayList<PhieuNhapDTO> dspn = new ArrayList<>();
+        for(PhieuNhapDTO pn : listPhieuNhap){
+            String MaPN = pn.getMaPN().toLowerCase();
+            if (MaPN.contains(tukhoa)){
+                dspn.add(pn);
+            }
+        }
+        return dspn;
+    }
+    
+    public ArrayList<PhieuNhapDTO> searchMaNV(String tuKhoa){
+        tuKhoa = tuKhoa.toLowerCase();
+        ArrayList<PhieuNhapDTO> dspn = new ArrayList<>();
+        for(PhieuNhapDTO pn : listPhieuNhap){
+            String MaNV = pn.getMaNV().toLowerCase();
+            if(MaNV.contains(tuKhoa)){
+                dspn.add(pn);
+            }
+        }
+        return dspn;
+    }
+    
+    public ArrayList<PhieuNhapDTO> searchTongTien(int tienmin, int tienmax){
+        ArrayList<PhieuNhapDTO> dspn = new ArrayList<>();
+        for(PhieuNhapDTO pn : listPhieuNhap){
+            int TongTien = pn.getTongTien();
+            if ( tienmin <= TongTien && TongTien <= tienmax){
+                dspn.add(pn);
+            }
+        }
+        return dspn;
+    }
 }

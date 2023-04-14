@@ -83,7 +83,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
 
         JTextFieldDateEditor editor = (JTextFieldDateEditor) this.txtNgayLap.getDateEditor();
         editor.setEnabled(false);
-        
+
     }
 
     public void init() {
@@ -132,7 +132,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         tblTTPN.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
 
         //set SoLuong Spinner
-        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, -10, 100, 1);
+        SpinnerNumberModel modeSpinner = new SpinnerNumberModel(1, 0, 100, 1);
         txtSoLuong.setModel(modeSpinner);
         JFormattedTextField txtSpinner = ((JSpinner.NumberEditor) txtSoLuong.getEditor()).getTextField();
         ((NumberFormatter) txtSpinner.getFormatter()).setAllowsInvalid(false);
@@ -557,7 +557,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
                 btnThemSPMouseClicked(evt);
             }
         });
-        pnDSSP.add(btnThemSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 640, 170, -1));
+        pnDSSP.add(btnThemSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 640, 190, -1));
         pnDSSP.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, 230, 24));
 
         jLabel1.setFont(new java.awt.Font("Baloo 2 SemiBold", 2, 13)); // NOI18N
@@ -838,10 +838,9 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
                     dsctpn.add(new CTPhieuNhapDTO(MaPN, MaSP, TenSP, SoLuong, DonGia, ThanhTien));
 
                 }
-                
+
                 outModelHangChoNhap(dtmHangChoNhap, dsctpn);
-                
-                
+
                 txtTongTien.setText(String.valueOf(sumPN()));
 
                 txtMaSP.setText("");
@@ -876,7 +875,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         PhieuNhapDTO pn = new PhieuNhapDTO(MaPN, MaNCC, MaNV, NgayLap, TongTien);
         pnBUS.add(pn);
 //        loadDataTTHD(); //load thông tin hóa đơn
-        
+
         txtMaPN.setText("");
         txtMaNCC.setText("");
         txtMaNV.setText("");
@@ -884,8 +883,19 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
 
         txtNgayLap.setCalendar(null);
         dtmHangChoNhap.setRowCount(0);
+        int result = JOptionPane.showConfirmDialog(pnRoot, "Tạo phiếu nhập thành công. Nhấn OK để In phiếu nhập");
+        if (result == JOptionPane.YES_OPTION) {
+            InPhieuNhapGUI.setUndecorated(true);
+            InPhieuNhapGUI.pack();
+            InPhieuNhapGUI.setVisible(true);
+            InPhieuNhapGUI.setLocationRelativeTo(null);
+            loadDataTTPN(); //load thông tin hóa đơn
+            ctpnBUS.docDanhSach();
+            ArrayList<PhieuNhapDTO> dsctpn = pnBUS.getListPhieuNhap();
+        } else{
+            JOptionPane.showMessageDialog(pnRoot, "Nếu có nhu cầu, bạn hãy nhấn vào In phiếu nhập");
+        }
         
-        JOptionPane.showMessageDialog(pnRoot, "Tạo phiếu nhập thành công. Vui lòng chọn In phiếu nhập");
     }//GEN-LAST:event_btnTaoPhieuNhapMouseClicked
 
     private void btnInHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDonMouseClicked
@@ -978,7 +988,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtNgapLapinTTPN.setCalendar(null);
         txtTongTieninTTPN.setText("");
 
-        JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In hóa đơn thành công");
+        JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In phiếu nhập thành công");
         loadDataDSSP();
     }//GEN-LAST:event_btnInPhieuNhapinTTPNMouseClicked
     public static void setMaNCC(String ma) {

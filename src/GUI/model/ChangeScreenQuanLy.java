@@ -5,7 +5,6 @@
  */
 package GUI.model;
 
-
 import GUI.ChucVuGUI;
 import GUI.KhuyenMaiGUI;
 import GUI.NhanVienGUI;
@@ -13,6 +12,7 @@ import GUI.MainForQuanLyGUI;
 import GUI.NhaCungCapGUI;
 import GUI.SanPhamForQLGUI;
 import GUI.TaiKhoanGUI;
+import GUI.ThongKeGUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -90,6 +90,9 @@ public class ChangeScreenQuanLy {
                 case "KhuyenMai":
                     node = new KhuyenMaiGUI();
                     break;
+                case "ThongKe":
+                    node = new ThongKeGUI();
+                    break;
                 default:
                     break;
             }
@@ -134,8 +137,8 @@ public class ChangeScreenQuanLy {
                 item.getPn().setBackground(new Color(233, 246, 255));
                 item.getLbl().setBackground(new Color(233, 246, 255));
             } else {
-                item.getPn().setBackground(new Color(188,206,248));
-                item.getLbl().setBackground(new Color(188,206,248));
+                item.getPn().setBackground(new Color(188, 206, 248));
+                item.getLbl().setBackground(new Color(188, 206, 248));
             }
         }
     }
