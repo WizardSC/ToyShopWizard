@@ -50,6 +50,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         list.add(new DanhMuc("KhuyenMai",pnKhuyenMai,lblKhuyenMai));
         list.add(new DanhMuc("NhanVien",pnNhanVien,lblNhanVien));
         list.add(new DanhMuc("ThongKe",pnThongKe,lblThongKe));
+        list.add(new DanhMuc("SaoLuu",pnSaoLuu,lblSaoLuu));
         controller.setEvent(list);
         
         
@@ -114,6 +115,8 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         lblNhanVien = new javax.swing.JLabel();
         pnThongKe = new javax.swing.JPanel();
         lblThongKe = new javax.swing.JLabel();
+        pnSaoLuu = new javax.swing.JPanel();
+        lblSaoLuu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -362,13 +365,34 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         pnThongKe.setLayout(pnThongKeLayout);
         pnThongKeLayout.setHorizontalGroup(
             pnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThongKeLayout.createSequentialGroup()
+            .addGroup(pnThongKeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnThongKeLayout.setVerticalGroup(
             pnThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+            .addComponent(lblThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+        );
+
+        pnSaoLuu.setBackground(new java.awt.Color(188, 206, 248));
+        pnSaoLuu.setForeground(new java.awt.Color(255, 255, 255));
+        pnSaoLuu.setPreferredSize(new java.awt.Dimension(300, 43));
+
+        lblSaoLuu.setFont(new java.awt.Font("Baloo 2 ExtraBold", 1, 20)); // NOI18N
+        lblSaoLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/backup.png"))); // NOI18N
+        lblSaoLuu.setText("  Sao lưu");
+
+        javax.swing.GroupLayout pnSaoLuuLayout = new javax.swing.GroupLayout(pnSaoLuu);
+        pnSaoLuu.setLayout(pnSaoLuuLayout);
+        pnSaoLuuLayout.setHorizontalGroup(
+            pnSaoLuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSaoLuuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSaoLuu, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+        );
+        pnSaoLuuLayout.setVerticalGroup(
+            pnSaoLuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblSaoLuu, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnMenuLayout = new javax.swing.GroupLayout(pnMenu);
@@ -385,10 +409,12 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
                         .addComponent(lblIconHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnMenuLayout.createSequentialGroup()
-                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(pnThongKe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(pnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(pnThongKe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                            .addComponent(pnSaoLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -410,7 +436,9 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnSaoLuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -478,6 +506,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblNhaCungCap;
     private javax.swing.JLabel lblNhanVien;
     private javax.swing.JLabel lblSanPham;
+    private javax.swing.JLabel lblSaoLuu;
     private javax.swing.JLabel lblTaiKhoan;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblThongTin;
@@ -490,6 +519,7 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
     private javax.swing.JPanel pnNhanVien;
     private javax.swing.JPanel pnRoot;
     private javax.swing.JPanel pnSanPham;
+    private javax.swing.JPanel pnSaoLuu;
     private javax.swing.JPanel pnTaiKhoan;
     private javax.swing.JPanel pnThongKe;
     private javax.swing.JPanel pnView;

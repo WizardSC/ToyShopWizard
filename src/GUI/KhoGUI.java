@@ -13,7 +13,10 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -26,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 public class KhoGUI extends javax.swing.JPanel {
     KhoBUS khoBUS = new KhoBUS();
     DefaultTableModel dtmKho;
+    DefaultComboBoxModel dcbmDuLieu;
     private BufferedImage i = null;
     String imgName = "null";
     String tuKhoaTimKiem;
@@ -33,8 +37,12 @@ public class KhoGUI extends javax.swing.JPanel {
     public KhoGUI() {
         initComponents();
         dtmKho = (DefaultTableModel) tblDSSP.getModel();
+        dcbmDuLieu = (DefaultComboBoxModel) cbxDuLieu.getModel();
+        
         init();
         loadDataKho();
+        loaddataCBX();
+        
     }
     
     public void init(){
@@ -86,11 +94,7 @@ public class KhoGUI extends javax.swing.JPanel {
             ArrayList<KhoDTO> dskho = khoBUS.searchDonViTinh(txtTimKiem.getText());
             showAllDSKho(dskho);
         }
-        if (tk.equals("Mã loại")){
-            khoBUS.docDanhSach();
-            ArrayList<KhoDTO> dskho = khoBUS.searchMaLoai(txtTimKiem.getText());
-            showAllDSKho(dskho);
-        }
+       
     }
     public void showAllDSKho(ArrayList<KhoDTO> dskho){
         dtmKho.setRowCount(0);
@@ -106,6 +110,20 @@ public class KhoGUI extends javax.swing.JPanel {
             });
             
             
+        }
+    }
+    
+//    Đổ dữ liệu vào combobox
+    public void loaddataCBX(){
+        
+        khoBUS.docDanhSach();
+        ArrayList<KhoDTO> dskho = khoBUS.getListKho();
+        HashSet<String> unique = new HashSet<>();
+        for (KhoDTO kho : dskho) {
+            unique.add(kho.getMaLoai());
+        }
+        for(String MaLoai : unique ){
+            cbxDuLieu.addItem(MaLoai);        
         }
     }
     public void loadDataKho(){
@@ -147,6 +165,8 @@ public class KhoGUI extends javax.swing.JPanel {
         txtFrom = new javax.swing.JTextField();
         lblMaPN1 = new javax.swing.JLabel();
         txtTo = new javax.swing.JTextField();
+        cbxDuLieu = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         pnRoot.setBackground(new java.awt.Color(250, 247, 240));
         pnRoot.setPreferredSize(new java.awt.Dimension(1089, 750));
@@ -255,7 +275,7 @@ public class KhoGUI extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 94, -1, -1));
 
-        cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã SP", "Tên SP", "Đơn vị tính", "Mã loại" }));
+        cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã SP", "Tên SP", "Đơn vị tính" }));
         cbxTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxTimKiemActionPerformed(evt);
@@ -298,18 +318,30 @@ public class KhoGUI extends javax.swing.JPanel {
         jPanel2.add(lblMaPN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 40, 30));
         jPanel2.add(txtTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 140, 30));
 
+        cbxDuLieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn mã loại" }));
+        cbxDuLieu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxDuLieuItemStateChanged(evt);
+            }
+        });
+        jPanel2.add(cbxDuLieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 300, 30));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
         javax.swing.GroupLayout pnRootLayout = new javax.swing.GroupLayout(pnRoot);
         pnRoot.setLayout(pnRootLayout);
         pnRootLayout.setHorizontalGroup(
             pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnRootLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(pnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1069, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnRootLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)))
                 .addGap(18, 18, 18))
         );
         pnRootLayout.setVerticalGroup(
@@ -319,19 +351,19 @@ public class KhoGUI extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnRoot, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
+            .addComponent(pnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, 1087, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, 678, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -345,7 +377,7 @@ public class KhoGUI extends javax.swing.JPanel {
         txtMaLoai.setText(tblDSSP.getModel().getValueAt(k, 5).toString());
         imgName = tblDSSP.getModel().getValueAt(k, 6).toString();
         Image newImage;
-        newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(170,203, Image.SCALE_DEFAULT);
+        newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(200,250, Image.SCALE_DEFAULT);
         txtIMG.setIcon(new ImageIcon(newImage));
 
         txtMaSP.setEnabled(false);
@@ -397,6 +429,7 @@ public class KhoGUI extends javax.swing.JPanel {
 
     private void cbxTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemActionPerformed
         tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
+        
         System.out.println(tuKhoaTimKiem);
     }//GEN-LAST:event_cbxTimKiemActionPerformed
 
@@ -409,33 +442,37 @@ public class KhoGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemMouseClicked
 
     private void btnTimKiemNCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemNCMouseClicked
-//        if(!clickedOnce){
-//            ArrayList<PhieuNhapDTO> dspn = pnBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
-//            showAllDSPN(dspn);
-//            clickedOnce = true;
-//        } else {
-//            txtFrom.setText("");
-//            txtTo.setText("");
-//            loadDataDSPN();
-//            clickedOnce = false;
-//        }
-
-        //        if(!clickedOnce){
-            //            ArrayList<PhieuXuatDTO> dspx = pxBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
-            //            showAllDSPX(dspx);
-            //            clickedOnce = true;
-            //        } else {
-            //            txtFrom.setText("");
-            //            txtTo.setText("");
-            //            loadDataDSPX();
-            //            clickedOnce = false;
-            //        }
+        if(!clickedOnce){
+            ArrayList<KhoDTO> dskho = khoBUS.searchDonGia(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
+            showAllDSKho(dskho);
+            clickedOnce = true;
+        } else {
+            txtFrom.setText("");
+            txtTo.setText("");
+            loadDataKho();
+            clickedOnce = false;
+        }
     }//GEN-LAST:event_btnTimKiemNCMouseClicked
 
     private void cbxTimKiemNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemNCActionPerformed
         //        tuKhoaTimKiem = cbxTimKiemNC.getSelectedItem().toString();
         //        System.out.println(tuKhoaTimKiem);
     }//GEN-LAST:event_cbxTimKiemNCActionPerformed
+
+    private void cbxDuLieuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxDuLieuItemStateChanged
+        tuKhoaTimKiem = cbxDuLieu.getSelectedItem().toString();
+        if(tuKhoaTimKiem.equals("Danh sach")){
+            khoBUS.docDanhSach();
+            ArrayList<KhoDTO> dskho = khoBUS.getListKho();
+            showAllDSKho(dskho);
+            loadDataKho();
+        } else {
+             khoBUS.docDanhSach();
+        ArrayList<KhoDTO> dskho = khoBUS.searchMaLoai(tuKhoaTimKiem);
+        showAllDSKho(dskho);
+        }
+       
+    }//GEN-LAST:event_cbxDuLieuItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -444,12 +481,14 @@ public class KhoGUI extends javax.swing.JPanel {
     private javax.swing.JButton btnLoai;
     private javax.swing.JLabel btnTimKiemNC;
     private javax.swing.JComboBox<String> cbxDonViTinh;
+    private javax.swing.JComboBox<String> cbxDuLieu;
     private javax.swing.JComboBox<String> cbxTimKiem;
     private javax.swing.JComboBox<String> cbxTimKiemNC;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

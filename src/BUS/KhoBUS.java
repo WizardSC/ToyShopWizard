@@ -75,4 +75,15 @@ public class KhoBUS {
         }
         return dskho;
     }
+    
+    public ArrayList<KhoDTO> searchDonGia(int tienmin, int tienmax){
+        ArrayList<KhoDTO> dskho = new ArrayList<>();
+        for(KhoDTO kho : listKho){
+            int DonGia = kho.getGiaNhap();
+            if(tienmin <= DonGia && DonGia <= tienmax){
+                dskho.add(kho);
+            }
+        }
+        return dskho;
+    }
 }

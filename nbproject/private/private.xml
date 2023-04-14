@@ -5,10 +5,8 @@
         <group>
             <file>file:/C:/Users/Phuc%20Toan/Documents/NetBeansProjects/ToyShopWizard/src/GUI/Main.java</file>
             <file>file:/C:/Users/Phuc%20Toan/Documents/NetBeansProjects/ToyShopWizard/src/GUI/KhoGUI.java</file>
+            <file>file:/C:/Users/Phuc%20Toan/Documents/NetBeansProjects/ToyShopWizard/src/BUS/KhoBUS.java</file>
             <file>file:/C:/Users/Phuc%20Toan/Documents/NetBeansProjects/ToyShopWizard/src/GUI/DSPhieuNhapGUI.java</file>
-            <file>file:/C:/Users/Phuc%20Toan/Documents/NetBeansProjects/ToyShopWizard/src/BUS/PhieuNhapBUS.java</file>
-            <file>file:/C:/Users/Phuc%20Toan/Documents/NetBeansProjects/ToyShopWizard/src/GUI/SanPhamForQLGUI.java</file>
-            <file>file:/C:/Users/Phuc%20Toan/Documents/NetBeansProjects/ToyShopWizard/src/GUI/DSPhieuXuatGUI.java</file>
         </group>
     </open-files>
 </project-private>

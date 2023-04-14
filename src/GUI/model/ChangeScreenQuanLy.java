@@ -11,6 +11,7 @@ import GUI.NhanVienGUI;
 import GUI.MainForQuanLyGUI;
 import GUI.NhaCungCapGUI;
 import GUI.SanPhamForQLGUI;
+import GUI.SaoLuuGUI;
 import GUI.TaiKhoanGUI;
 import GUI.ThongKeGUI;
 import java.awt.BorderLayout;
@@ -92,6 +93,9 @@ public class ChangeScreenQuanLy {
                     break;
                 case "ThongKe":
                     node = new ThongKeGUI();
+                    break;
+                case "SaoLuu":
+                    node = new SaoLuuGUI();
                     break;
                 default:
                     break;
