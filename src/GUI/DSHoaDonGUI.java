@@ -306,7 +306,7 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
         lblMaPN2.setText("Từ");
         pnDSSP.add(lblMaPN2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 650, 30, 30));
 
-        cbxTimKiemNC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày lập", "Tổng tiền" }));
+        cbxTimKiemNC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tổng tiền" }));
         cbxTimKiemNC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxTimKiemNCActionPerformed(evt);

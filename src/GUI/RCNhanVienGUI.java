@@ -73,12 +73,7 @@ public class RCNhanVienGUI extends javax.swing.JDialog {
         }
     }
 
-    public void loadDataDSNV() {
-        System.out.println("MaCV o GUI" + MaCV);
-        nvBUS.docDanhSachTheoMaCV(MaCV);
-        ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
-        showAllDSNV(dsnv);
-    }
+  
     public void loadDataDSNVTheoMaCV() {
         nvBUS.docDanhSachTheoMaCV(MaCV);
         ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVienTheoMaCV(MaCV);
