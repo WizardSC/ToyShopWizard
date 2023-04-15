@@ -208,7 +208,7 @@ public class LoaiGUI extends javax.swing.JDialog {
         jPanel6.add(txtTimKiem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 200, 27));
 
         jComboBox2.setEditable(true);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã KH" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã loại" }));
         jComboBox2.setFocusable(false);
         jPanel6.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 68, 27));
 

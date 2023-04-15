@@ -8,6 +8,7 @@ package DAO;
 import DTO.NhanVienDTO;
 import DTO.TaiKhoanDTO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -69,7 +70,17 @@ public class TaiKhoanDAO {
         return null;
     }
     
-//    public insertTaiKhoan(TaiKhoanDTO tk){
-//        String sql = "INSERT INTO taikhoan VALUES(?,?,?,"
-//    }
+    public void insertTaiKhoan(TaiKhoanDTO tk){
+        try {
+            String sql = "INSERT INTO taikhoan VALUES(?,?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, tk.getMaNV());
+            ps.setString(2, tk.getTenDangNhap());
+            ps.setString(3, tk.getMatKhau());
+            ps.setString(4, String.valueOf(tk.isTinhTrang()));
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

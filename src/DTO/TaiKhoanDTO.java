@@ -13,16 +13,17 @@ public class TaiKhoanDTO {
     private String MaNV;
     private String TenDangNhap;
     private String MatKhau;
-    private String PhanQuyen;
+   
     private boolean TinhTrang;
 
-    public TaiKhoanDTO(String MaNV, String TenDangNhap, String MatKhau, String PhanQuyen, boolean TinhTrang) {
+    public TaiKhoanDTO(String MaNV, String TenDangNhap, String MatKhau, boolean TinhTrang) {
         this.MaNV = MaNV;
         this.TenDangNhap = TenDangNhap;
         this.MatKhau = MatKhau;
-        this.PhanQuyen = PhanQuyen;
         this.TinhTrang = TinhTrang;
     }
+
+    
 
     public TaiKhoanDTO(String MaNV) {
         this.MaNV = MaNV;
@@ -63,12 +64,6 @@ public class TaiKhoanDTO {
         this.MatKhau = MatKhau;
     }
 
-    public String getPhanQuyen() {
-        return PhanQuyen;
-    }
-
-    public void setPhanQuyen(String PhanQuyen) {
-        this.PhanQuyen = PhanQuyen;
-    }
+    
     
 }

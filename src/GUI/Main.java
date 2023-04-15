@@ -15,11 +15,11 @@ public class Main {
         //Đăng nhập
 //        new DangNhapGUI().setVisible(true);
         //Nhân viên quản lý
-        new MainForQuanLyGUI().setVisible(true);
+//        new MainForQuanLyGUI().setVisible(true);
         //Nhân viên kho
 //        new MainForNVKhoGUI().setVisible(true);
         //Nhân viên bán hàng
-//        new MainForNhanVienGUI().setVisible(true);
+        new MainForNhanVienGUI().setVisible(true);
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

@@ -66,7 +66,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
                 dstk.get(i).getMaNV(),
                 dstk.get(i).getTenDangNhap(),
                 dstk.get(i).getMatKhau(),
-                dstk.get(i).getPhanQuyen(),
+                
                 String.valueOf(dstk.get(i).isTinhTrang())
             });
         }
@@ -195,17 +195,17 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
 
         tblDSTK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã NV", "Tên Đăng Nhập", "Mật Khẩu", "Phân Quyền", "Tình trạng"
+                "Mã NV", "Tên Đăng Nhập", "Mật Khẩu", "Tình trạng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -221,8 +221,6 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
             tblDSTK.getColumnModel().getColumn(2).setResizable(false);
             tblDSTK.getColumnModel().getColumn(2).setPreferredWidth(100);
             tblDSTK.getColumnModel().getColumn(3).setResizable(false);
-            tblDSTK.getColumnModel().getColumn(3).setPreferredWidth(80);
-            tblDSTK.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 286, 1067, 401));
