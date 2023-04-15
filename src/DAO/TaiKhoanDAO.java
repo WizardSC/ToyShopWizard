@@ -35,7 +35,7 @@ public class TaiKhoanDAO {
                         rs.getString("MaNV"),
                         rs.getString("TenDangNhap"),
                         rs.getString("MatKhau"),
-                        rs.getString("PhanQuyen"),
+                        
                         rs.getBoolean("TinhTrang")
                 );
                 dstk.add(tk);
@@ -79,6 +79,27 @@ public class TaiKhoanDAO {
             ps.setString(3, tk.getMatKhau());
             ps.setString(4, String.valueOf(tk.isTinhTrang()));
             ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+    }
+    
+    public void updateTaiKhoan(TaiKhoanDTO tk){
+        try {
+            String sql = "UPDATE taikhoan SET MatKhau = '111111' WHERE TenDangNhap = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,tk.getTenDangNhap());
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void lockTaikhoan(TaiKhoanDTO tk){
+        try {
+            String sql = "UPDATE taikhoan set TinhTrang = 0 where TenDangNhap = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,tk.getTenDangNhap());
         } catch (SQLException ex) {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

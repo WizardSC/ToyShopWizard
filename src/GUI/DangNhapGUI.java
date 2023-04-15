@@ -250,9 +250,9 @@ public class DangNhapGUI extends javax.swing.JFrame {
             if (tk1.getTenDangNhap().equals(TenDangNhap)) {
 
                 System.out.println(tk1.isTinhTrang());
-                String tempUser = tk1.getPhanQuyen();
+//                String tempUser = tk1.getPhanQuyen();
                 TinhTrang = tk1.isTinhTrang();
-                temp = tempUser;
+//                temp = tempUser;
 
             } else {
 
