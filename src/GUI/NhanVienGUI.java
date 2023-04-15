@@ -244,8 +244,8 @@ public class NhanVienGUI extends javax.swing.JPanel {
         btnThem = new javax.swing.JLabel();
         btnXoa = new javax.swing.JLabel();
         btnChinhSua = new javax.swing.JLabel();
-        btnNhapLai = new javax.swing.JLabel();
         btnImportExcel = new javax.swing.JLabel();
+        btnImportExcel1 = new javax.swing.JLabel();
 
         jPanel5.setBackground(new java.awt.Color(250, 247, 240));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
@@ -615,7 +615,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtIMG, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -684,9 +684,9 @@ public class NhanVienGUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(cbxTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(txtTimKiem)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -699,8 +699,10 @@ public class NhanVienGUI extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(250, 247, 240));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CHỨC NĂNG", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Baloo 2 ExtraBold", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnThem.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnAdd.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThem.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -708,8 +710,10 @@ public class NhanVienGUI extends javax.swing.JPanel {
                 btnThemMouseClicked(evt);
             }
         });
+        jPanel4.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         btnXoa.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnDelete.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -717,26 +721,21 @@ public class NhanVienGUI extends javax.swing.JPanel {
                 btnXoaMouseClicked(evt);
             }
         });
+        jPanel4.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
 
         btnChinhSua.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
-        btnChinhSua.setText("Chỉnh sửa");
+        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnUpdate.png"))); // NOI18N
+        btnChinhSua.setText("Sửa");
         btnChinhSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnChinhSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnChinhSuaMouseClicked(evt);
             }
         });
-
-        btnNhapLai.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
-        btnNhapLai.setText("Nhập lại");
-        btnNhapLai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNhapLai.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnNhapLaiMouseClicked(evt);
-            }
-        });
+        jPanel4.add(btnChinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
 
         btnImportExcel.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnImportExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/import.png"))); // NOI18N
         btnImportExcel.setText("Nhập Excel");
         btnImportExcel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnImportExcel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -744,57 +743,34 @@ public class NhanVienGUI extends javax.swing.JPanel {
                 btnImportExcelMouseClicked(evt);
             }
         });
+        jPanel4.add(btnImportExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnImportExcel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnThem)
-                            .addComponent(btnChinhSua))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnXoa)
-                            .addComponent(btnNhapLai))
-                        .addGap(31, 31, 31))))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnXoa))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnChinhSua)
-                    .addComponent(btnNhapLai))
-                .addGap(96, 96, 96)
-                .addComponent(btnImportExcel))
-        );
+        btnImportExcel1.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnImportExcel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/xls.png"))); // NOI18N
+        btnImportExcel1.setText("Xuất Excel");
+        btnImportExcel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnImportExcel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnImportExcel1MouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnImportExcel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 776, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,7 +782,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addGap(6, 6, 6))
         );
 
@@ -814,7 +790,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1091, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -881,21 +857,6 @@ public class NhanVienGUI extends javax.swing.JPanel {
         saveIMG();
         loadData();
     }//GEN-LAST:event_btnChinhSuaMouseClicked
-
-    private void btnNhapLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapLaiMouseClicked
-        txtMaNV.setText("");
-        txtMaNV.setEnabled(true);
-        txtHo.setText("");
-        txtTen.setText("");
-        txtNgaySinh.setText("");
-        cbxGioiTinh.setSelectedIndex(0);
-        txtDiaChi.setText("");
-        txtMaCV.setText("");
-        txtIMG.setIcon(null);
-        txtIMG.setText("IMAGE");
-        imgName = null;
-        txtSoDT.setText("");
-    }//GEN-LAST:event_btnNhapLaiMouseClicked
 
     private void tblDSNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSNVMouseClicked
         int k = tblDSNV.getSelectedRow();
@@ -986,6 +947,10 @@ public class NhanVienGUI extends javax.swing.JPanel {
         RecentChucVuGUI.dispose();
     }//GEN-LAST:event_btnBoChonMouseClicked
 
+    private void btnImportExcel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImportExcel1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnImportExcel1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog RecentChucVuGUI;
@@ -995,8 +960,8 @@ public class NhanVienGUI extends javax.swing.JPanel {
     private javax.swing.JLabel btnChonLoai;
     private javax.swing.JLabel btnClose;
     private javax.swing.JLabel btnImportExcel;
+    private javax.swing.JLabel btnImportExcel1;
     private javax.swing.JButton btnMaCV;
-    private javax.swing.JLabel btnNhapLai;
     private javax.swing.JLabel btnThem;
     private javax.swing.JLabel btnXoa;
     private javax.swing.JComboBox<String> cbxGioiTinh;

@@ -112,7 +112,6 @@ public class KhachHangGUI extends javax.swing.JPanel {
         btnThem = new javax.swing.JLabel();
         btnXoa = new javax.swing.JLabel();
         btnChinhSua = new javax.swing.JLabel();
-        btnNhapLai = new javax.swing.JLabel();
         btnImportExcel = new javax.swing.JLabel();
         btnExportExcel = new javax.swing.JLabel();
 
@@ -216,7 +215,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cbxGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtSoDT, javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,6 +304,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CHỨC NĂNG", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Baloo 2 ExtraBold", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
 
         btnThem.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnAdd.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThem.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -314,6 +314,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
         });
 
         btnXoa.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnDelete.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -323,20 +324,12 @@ public class KhachHangGUI extends javax.swing.JPanel {
         });
 
         btnChinhSua.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
-        btnChinhSua.setText("Chỉnh sửa");
+        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnUpdate.png"))); // NOI18N
+        btnChinhSua.setText("Sửa");
         btnChinhSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnChinhSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnChinhSuaMouseClicked(evt);
-            }
-        });
-
-        btnNhapLai.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
-        btnNhapLai.setText("Nhập lại");
-        btnNhapLai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNhapLai.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnNhapLaiMouseClicked(evt);
             }
         });
 
@@ -366,20 +359,20 @@ public class KhachHangGUI extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThem)
-                    .addComponent(btnChinhSua))
+                .addComponent(btnThem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnXoa)
-                    .addComponent(btnNhapLai))
-                .addGap(31, 31, 31))
+                .addComponent(btnXoa)
+                .addGap(32, 32, 32))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnImportExcel)
                     .addComponent(btnExportExcel))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnChinhSua)
+                .addGap(103, 103, 103))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,15 +381,13 @@ public class KhachHangGUI extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnXoa))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnChinhSua)
-                    .addComponent(btnNhapLai))
-                .addGap(51, 51, 51)
+                .addGap(18, 18, 18)
+                .addComponent(btnChinhSua)
+                .addGap(30, 30, 30)
                 .addComponent(btnImportExcel)
-                .addGap(31, 31, 31)
+                .addGap(27, 27, 27)
                 .addComponent(btnExportExcel)
-                .addContainerGap())
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -427,8 +418,8 @@ public class KhachHangGUI extends javax.swing.JPanel {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -548,21 +539,6 @@ public class KhachHangGUI extends javax.swing.JPanel {
 //        loadData();
     }//GEN-LAST:event_btnChinhSuaMouseClicked
 
-    private void btnNhapLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapLaiMouseClicked
-//        txtMaNV.setText("");
-//        txtMaNV.setEnabled(true);
-//        txtHo.setText("");
-//        txtTen.setText("");
-//        txtNgaySinh.setText("");
-//        cbxGioiTinh.setSelectedIndex(0);
-//        txtDiaChi.setText("");
-//        txtMaCV.setText("");
-//        txtIMG.setIcon(null);
-//        txtIMG.setText("IMAGE");
-//        imgName = null;
-//        txtSoDT.setText("");
-    }//GEN-LAST:event_btnNhapLaiMouseClicked
-
     private void btnImportExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImportExcelMouseClicked
         ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
         JFileChooser fc = new JFileChooser("./reports");
@@ -593,7 +569,6 @@ public class KhachHangGUI extends javax.swing.JPanel {
     private javax.swing.JLabel btnChonAnh;
     private javax.swing.JLabel btnExportExcel;
     private javax.swing.JLabel btnImportExcel;
-    private javax.swing.JLabel btnNhapLai;
     private javax.swing.JLabel btnThem;
     private javax.swing.JLabel btnXoa;
     private javax.swing.JComboBox<String> cbxGioiTinh;
