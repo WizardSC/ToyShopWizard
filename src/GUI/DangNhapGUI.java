@@ -25,6 +25,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
 
     DefaultTableModel model;
     public String temp = "";
+    public boolean TinhTrang = true;
 
     public DangNhapGUI() {
         setUndecorated(true);
@@ -34,6 +35,14 @@ public class DangNhapGUI extends javax.swing.JFrame {
         ImageIcon logo = new ImageIcon("./src/image/lblIconHotel32x32.png");
         setIconImage(logo.getImage());
 
+    }
+
+    public void loadDatatemp() {
+        tkBUS.docDanhSach();
+        ArrayList<TaiKhoanDTO> dstk = tkBUS.getListTaiKhoan();
+        for (TaiKhoanDTO tk : dstk) {
+            System.out.println(tk.isTinhTrang());
+        }
     }
 
     /**
@@ -239,9 +248,16 @@ public class DangNhapGUI extends javax.swing.JFrame {
         ArrayList<TaiKhoanDTO> dstk = tkBUS.getListTaiKhoan();
         for (TaiKhoanDTO tk1 : dstk) {
             if (tk1.getTenDangNhap().equals(TenDangNhap)) {
+
+                System.out.println(tk1.isTinhTrang());
                 String tempUser = tk1.getPhanQuyen();
+                TinhTrang = tk1.isTinhTrang();
                 temp = tempUser;
-                
+
+            } else {
+
+            }
+        }
 
 //                if (tkBUS.getListTaiKhoan() == null) {
 //                    tkBUS.listTK();
@@ -262,9 +278,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
 //                    main.setVisible(true);
 //                    dispose();
 //                }
-            }
 //            break;
-        }
         System.out.println(temp);
         if (tkBUS.getListTaiKhoan() == null) {
             tkBUS.listTK();
@@ -276,28 +290,37 @@ public class DangNhapGUI extends javax.swing.JFrame {
             return;
         }
         if (temp.equals("CV01")) {
-            MainForQuanLyGUI main = new MainForQuanLyGUI();
-            main.setVisible(true);
-            dispose();
+            if (TinhTrang == true) {
+                MainForQuanLyGUI main = new MainForQuanLyGUI();
+                main.setVisible(true);
+                dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Tài khoản của bạn đang bị khóa, vui lòng liên hệ nhân viên quản lý");
+            return;
         }
+
         if (temp.equals("CV02")) {
-            MainForNhanVienGUI main = new MainForNhanVienGUI();
-            main.setVisible(true);
-            dispose();
+            if (TinhTrang == true) {
+                MainForNhanVienGUI main = new MainForNhanVienGUI();
+                main.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Tài khoản của bạn đang bị khóa, vui lòng liên hệ nhân viên quản lý");
+                return;
+            }
         }
-//        if (temp.equals("CV03")) {
-//            MainForNhanVienGUI main = new MainForNhanVienGUI();
-//            main.setVisible(true);
-//            dispose();
-//        }
-        if (temp.equals("CV04")) {
-            MainForNVKhoGUI main = new MainForNVKhoGUI();
-            main.setVisible(true);
-            dispose();
+        if (temp.equals("CV03")) {
+            if (TinhTrang == true) {
+                MainForNVKhoGUI main = new MainForNVKhoGUI();
+                main.setVisible(true);
+                dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Tài khoản của bạn đang bị khóa, vui lòng liên hệ nhân viên quản lý");
+            return;
         }
-    
-        
-        
+
     
 //        MainForQuanLyGUI main = new MainForQuanLyGUI();
 //        main.setVisible(true);
@@ -315,7 +338,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnClose;
     private javax.swing.JLabel btnClose1;

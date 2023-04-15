@@ -14,13 +14,30 @@ public class TaiKhoanDTO {
     private String TenDangNhap;
     private String MatKhau;
     private String PhanQuyen;
+    private boolean TinhTrang;
 
-    public TaiKhoanDTO(String MaTK, String TenDangNhap, String MatKhau, String PhanQuyen) {
-        this.MaNV = MaTK;
+    public TaiKhoanDTO(String MaNV, String TenDangNhap, String MatKhau, String PhanQuyen, boolean TinhTrang) {
+        this.MaNV = MaNV;
         this.TenDangNhap = TenDangNhap;
         this.MatKhau = MatKhau;
         this.PhanQuyen = PhanQuyen;
+        this.TinhTrang = TinhTrang;
     }
+
+    public TaiKhoanDTO(String MaNV) {
+        this.MaNV = MaNV;
+    }
+
+    public boolean isTinhTrang() {
+        return TinhTrang;
+    }
+
+    public void setTinhTrang(boolean TinhTrang) {
+        this.TinhTrang = TinhTrang;
+    }
+    
+
+    
 
     public String getMaNV() {
         return MaNV;

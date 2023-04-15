@@ -21,11 +21,16 @@ public class TaiKhoanBUS {
     public void docDanhSach(){
         this.listTaiKhoan = tkDAO.getListTaiKhoan();
     }
+    public void docDanhSach1(){
+         this.listTaiKhoan = tkDAO.getListMaNVChuaCoTK();
+    }
     
     public ArrayList<TaiKhoanDTO> getListTaiKhoan(){
         return listTaiKhoan;
     }
-    
+    public ArrayList<TaiKhoanDTO> getListMaNVChuaCoTK(){
+        return listTaiKhoan;
+    }
     public void listTK(){
         TaiKhoanDAO tkDAO = new TaiKhoanDAO();
         listTaiKhoan = new ArrayList<>();

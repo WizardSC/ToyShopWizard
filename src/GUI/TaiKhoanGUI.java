@@ -23,6 +23,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     private ArrayList<TaiKhoanDTO> dstk = new ArrayList<>();
     private TaiKhoanBUS tkBUS = new TaiKhoanBUS();
     private TaiKhoanDAO tkDAO = new TaiKhoanDAO();
+    
     DefaultTableModel model;
     public TaiKhoanGUI() {
         initComponents();
@@ -30,7 +31,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         
         model = (DefaultTableModel) tblDSTK.getModel();
         loadData();
-                
+        loadData1();
     }
 
     public void init() {
@@ -52,7 +53,13 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         
         
     }
-    
+    public void loadData1(){
+        tkBUS.docDanhSach1();
+        ArrayList<TaiKhoanDTO> dstk = tkBUS.getListMaNVChuaCoTK();
+        for(TaiKhoanDTO tk : dstk){
+            System.out.println(tk.getMaNV());
+        }
+    }
     public void showAll(ArrayList<TaiKhoanDTO> dstk){
         model.setRowCount(0);
         for(int i=0;i<dstk.size();i++){
@@ -70,6 +77,10 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         ArrayList<TaiKhoanDTO> dstk = tkBUS.getListTaiKhoan();
         showAll(dstk);
                 
+    }
+    
+    public void loadlenCBX(ArrayList<TaiKhoanDTO> dstk){
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -340,7 +351,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

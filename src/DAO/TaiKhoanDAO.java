@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import DTO.NhanVienDTO;
 import DTO.TaiKhoanDTO;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -26,14 +27,15 @@ public class TaiKhoanDAO {
     public ArrayList<TaiKhoanDTO> getListTaiKhoan() {
         try {
             ArrayList<TaiKhoanDTO> dstk = new ArrayList<>();
-            String sql = "SELECT * FROM taikhoan";
+            String sql = "SELECT * FROM taikhoan ";
             ResultSet rs = mySQL.executeQuery(sql);
             while (rs.next()) {
                 TaiKhoanDTO tk = new TaiKhoanDTO(
                         rs.getString("MaNV"),
                         rs.getString("TenDangNhap"),
                         rs.getString("MatKhau"),
-                        rs.getString("PhanQuyen")
+                        rs.getString("PhanQuyen"),
+                        rs.getBoolean("TinhTrang")
                 );
                 dstk.add(tk);
             }
@@ -46,5 +48,23 @@ public class TaiKhoanDAO {
         }
         return null;
 
+    }
+    
+    public ArrayList<TaiKhoanDTO> getListMaNVChuaCoTK(){
+        try {
+            ArrayList<TaiKhoanDTO> dstk = new ArrayList<>();
+            String sql = "SELECT MaNV from nhanvien where nhanvien.MaNV not in (select MaNV from taikhoan)";
+            ResultSet rs = mySQL.executeQuery(sql);
+            while(rs.next()){
+                TaiKhoanDTO tk = new TaiKhoanDTO(
+                        rs.getString("MaNV")
+                );
+                dstk.add(tk);
+                    }
+            return dstk;
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
