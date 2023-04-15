@@ -1031,7 +1031,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_chooseMaKHActionPerformed
 
     private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaNVActionPerformed
-        RCNhanVienGUI rnv = new RCNhanVienGUI();
+        RCNhanVienGUI rnv = new RCNhanVienGUI("CV02");
         rnv.setVisible(true);
         String MaNV = rnv.getMaNV();
         txtMaNV.setText(MaNV);

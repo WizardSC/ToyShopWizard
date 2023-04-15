@@ -23,17 +23,22 @@ public class RCNhanVienGUI extends javax.swing.JDialog {
     DefaultTableModel dtmNhanVien;
     private NhanVienBUS nvBUS = new NhanVienBUS();
     private ArrayList<NhanVienDTO> dsnv = new ArrayList<>();
-    public RCNhanVienGUI() {
+    String MaCV;
+    public RCNhanVienGUI(String MaCV) {
         setUndecorated(true);
         initComponents();
         this.setModal(true);
         this.setResizable(false);
-        setLocationRelativeTo(null);     
+        setLocationRelativeTo(null);
         dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
         init();
         loadDataDSNV();
         
+        this.MaCV = MaCV;
+        System.out.println(MaCV);
+
     }
+    
     public void init() {
         //set giao diện cho Table
         //DSNV
@@ -50,30 +55,35 @@ public class RCNhanVienGUI extends javax.swing.JDialog {
         tblDSNV.getTableHeader().setReorderingAllowed(false);
         tblDSNV.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
     }
-    
-    public void showAllDSNV(ArrayList<NhanVienDTO> dsnv){
+
+    public void showAllDSNV(ArrayList<NhanVienDTO> dsnv) {
+
         dtmNhanVien.setRowCount(0);
-        for(int i=0;i<dsnv.size();i++){
-            dtmNhanVien.addRow(new String[]{
-                dsnv.get(i).getMaNV(),
-                dsnv.get(i).getHo(),
-                dsnv.get(i).getTen(),
-                dsnv.get(i).getNgaySinh(),
-                dsnv.get(i).getGioiTinh()
-            });
+        for (int i = 0; i < dsnv.size(); i++) {
+            if (dsnv.get(i).getMaCV().equals("CV03")) {
+                dtmNhanVien.addRow(new String[]{
+                    dsnv.get(i).getMaNV(),
+                    dsnv.get(i).getHo(),
+                    dsnv.get(i).getTen(),
+                    dsnv.get(i).getNgaySinh(),
+                    dsnv.get(i).getGioiTinh()
+                });
+            }
+
         }
     }
-    
-    public void loadDataDSNV(){
+
+    public void loadDataDSNV() {
         nvBUS.docDanhSach();
         ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
         showAllDSNV(dsnv);
     }
+
     //Hàm lấy Mã NV
-    public String getMaNV(){
+    public String getMaNV() {
         return txtMaNV.getText();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -256,12 +266,12 @@ public class RCNhanVienGUI extends javax.swing.JDialog {
 
     private void tblDSNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSNVMouseClicked
         int k = tblDSNV.getSelectedRow();
-        txtMaNV.setText(tblDSNV.getValueAt(k,0).toString());
-        txtHo.setText(tblDSNV.getValueAt(k,1).toString());
-        txtTen.setText(tblDSNV.getValueAt(k,2).toString());
-        txtNgaySinh.setText(tblDSNV.getValueAt(k,3).toString());
-        txtGioiTinh.setText(tblDSNV.getValueAt(k,4).toString());
-        
+        txtMaNV.setText(tblDSNV.getValueAt(k, 0).toString());
+        txtHo.setText(tblDSNV.getValueAt(k, 1).toString());
+        txtTen.setText(tblDSNV.getValueAt(k, 2).toString());
+        txtNgaySinh.setText(tblDSNV.getValueAt(k, 3).toString());
+        txtGioiTinh.setText(tblDSNV.getValueAt(k, 4).toString());
+
         txtMaNV.setEnabled(false);
         txtHo.setEnabled(false);
         txtTen.setEnabled(false);

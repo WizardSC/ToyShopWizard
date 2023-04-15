@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 15, 2023 lúc 05:25 PM
+-- Thời gian đã tạo: Th4 15, 2023 lúc 06:18 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.0.25
 
@@ -63,7 +63,8 @@ CREATE TABLE `cthoadon` (
 INSERT INTO `cthoadon` (`MaHD`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhTien`) VALUES
 ('HD01', 'SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 2, 479000, 958000),
 ('HD01', 'SP12', 'Xe chở xăng MAN TGS', 3, 2200000, 6600000),
-('HD02', 'SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 2, 479000, 958000);
+('HD02', 'SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 2, 479000, 958000),
+('HD03', 'SP03', 'Xe Mô Tô Cổ Điển', 2, 469000, 938000);
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,11 @@ INSERT INTO `ctphieunhap` (`MaPN`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhT
 ('PN02', 'SP03', 'Xe Mô Tô Cổ Điển', 5, 492450, 2462250),
 ('PN02', 'SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 3, 502950, 1508850),
 ('PN03', 'SP10', 'Set bánh vui vẻ 28 chi tiết ', 5, 329700, 1648500),
-('PN03', 'SP19', 'Gấu Lizzie tinh nghịch ', 4, 519750, 2079000);
+('PN03', 'SP19', 'Gấu Lizzie tinh nghịch ', 4, 519750, 2079000),
+('PN05', 'SP03', 'Xe Mô Tô Cổ Điển', 1, 492450, 492450),
+('PN06', 'SP08', 'Bộ làm bếp 3 món mini Hồng', 4, 531050, 2124200),
+('PN06', 'SP11', 'Trung tâm thương mại hiện đại', 3, 1900000, 5700000),
+('PN06', 'SP13', 'Đồ chơi mô hình tỷ lệ 1:16 xe chở hàng DHL ', 4, 1710000, 6840000);
 
 -- --------------------------------------------------------
 
@@ -115,7 +120,11 @@ INSERT INTO `ctphieuxuat` (`MaPX`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhT
 ('PX01', 'SP11', 'Trung tâm thương mại hiện đại', 1, 2000000, 2000000),
 ('PX01', 'SP12', 'Xe chở xăng MAN TGS', 3, 2200000, 6600000),
 ('PX02', 'SP09', 'Bộ nồi lẩu điện mini Xanh dương', 2, 399000, 798000),
-('PX03', 'SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 1, 479000, 479000);
+('PX03', 'SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 1, 479000, 479000),
+('PX04', 'SP03', 'Xe Mô Tô Cổ Điển', 1, 469000, 469000),
+('PX04', 'SP08', 'Bộ làm bếp 3 món mini Hồng', 4, 559000, 2236000),
+('PX04', 'SP11', 'Trung tâm thương mại hiện đại', 3, 2000000, 6000000),
+('PX04', 'SP13', 'Đồ chơi mô hình tỷ lệ 1:16 xe chở hàng DHL ', 4, 1800000, 7200000);
 
 -- --------------------------------------------------------
 
@@ -137,7 +146,8 @@ CREATE TABLE `hoadon` (
 
 INSERT INTO `hoadon` (`MaHD`, `MaKH`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 ('HD01', 'KH06', 'NV10', '2023-04-14', 7558000),
-('HD02', 'KH04', 'NV10', '2023-04-15', 958000);
+('HD02', 'KH04', 'NV10', '2023-04-15', 958000),
+('HD03', 'KH09', 'NV10', '2023-04-15', 938000);
 
 -- --------------------------------------------------------
 
@@ -199,26 +209,26 @@ CREATE TABLE `kho` (
 --
 
 INSERT INTO `kho` (`MaSP`, `TenSP`, `SoLuong`, `GiaNhap`, `DonViTinh`, `MaLoai`, `IMG`) VALUES
-('SP01', 'Siêu Xe Porsche 963', 0, 838950, 'Chiếc', 'L01', 'SP01.jpg'),
-('SP02', 'Siêu Xe Pagani Utopia', 0, 838950, 'Chiếc', 'L01', 'SP02.jpg'),
-('SP03', 'Xe Mô Tô Cổ Điển', 0, 492450, 'Chiếc', 'L01', 'SP03.jpg'),
-('SP04', 'Bộ Gạch Sáng Tạo Neon Vui Nhộn', 0, 454650, 'Bộ', 'L01', 'SP04.jpg'),
-('SP05', 'Bộ Gạch Sáng Tạo Pastel Dễ Thương', 0, 649950, 'Bộ', 'L01', 'SP05.jpg'),
-('SP06', 'Siêu Xe Của Người Nhện', 0, 324450, 'Chiếc', 'L01', 'SP06.jpg'),
-('SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 0, 502950, 'Bộ', 'L01', 'SP07.jpg'),
-('SP08', 'Bộ làm bếp 3 món mini Hồng', 0, 586950, 'Bộ', 'L05', 'SP08.jpg'),
-('SP09', 'Bộ nồi lẩu điện mini Xanh dương', 0, 418950, 'Bộ', 'L05', 'SP09.jpg'),
-('SP10', 'Set bánh vui vẻ 28 chi tiết ', 0, 329700, 'Bộ', 'L05', 'SP10.jpg'),
-('SP11', 'Trung tâm thương mại hiện đại', 0, 2100000, 'Bộ', 'L05', 'SP11.jpg'),
-('SP12', 'Xe chở xăng MAN TGS', 0, 2310000, 'Chiếc', 'L02', 'SP12.jpg'),
-('SP13', 'Đồ chơi mô hình tỷ lệ 1:16 xe chở hàng DHL ', 0, 1890000, 'Bộ', 'L02', 'SP13.jpg'),
-('SP14', 'Đồ chơi búp bê thời trang tóc đỏ ', 0, 270900, 'Bộ', 'L04', 'SP14.jpg'),
-('SP15', 'Đồ chơi búp bê thời trang jumpsuit xanh dạo phố ', 0, 270900, 'Bộ', 'L04', 'SP15.jpg'),
-('SP16', 'Bộ đồ chơi búp bê đi picnic cùng thú cưng ', 0, 735000, 'Bộ', 'L04', 'SP16.jpg'),
-('SP17', 'Đồ chơi búp bê nam thời trang áo xám ', 0, 387450, 'Bộ', 'L04', 'SP17.jpg'),
-('SP18', 'Sư tử Leo lười ', 0, 595350, 'Con', 'L04', 'SP18.jpg'),
-('SP19', 'Gấu Lizzie tinh nghịch ', 0, 519750, 'Con', 'L06', 'SP19.jpg'),
-('SP20', 'Gấu Bobbie tinh nghịch ', 0, 519750, 'Con', 'L06', 'SP20.jpg');
+('SP01', 'Siêu Xe Porsche 963', 0, 759050, 'Chiếc', 'L01', 'SP01.jpg'),
+('SP02', 'Siêu Xe Pagani Utopia', 0, 759050, 'Chiếc', 'L01', 'SP02.jpg'),
+('SP03', 'Xe Mô Tô Cổ Điển', 0, 445550, 'Chiếc', 'L01', 'SP03.jpg'),
+('SP04', 'Bộ Gạch Sáng Tạo Neon Vui Nhộn', 0, 411350, 'Bộ', 'L01', 'SP04.jpg'),
+('SP05', 'Bộ Gạch Sáng Tạo Pastel Dễ Thương', 0, 588050, 'Bộ', 'L01', 'SP05.jpg'),
+('SP06', 'Siêu Xe Của Người Nhện', 0, 293550, 'Chiếc', 'L01', 'SP06.jpg'),
+('SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 0, 455050, 'Bộ', 'L01', 'SP07.jpg'),
+('SP08', 'Bộ làm bếp 3 món mini Hồng', 0, 531050, 'Bộ', 'L05', 'SP08.jpg'),
+('SP09', 'Bộ nồi lẩu điện mini Xanh dương', 0, 379050, 'Bộ', 'L05', 'SP09.jpg'),
+('SP10', 'Set bánh vui vẻ 28 chi tiết ', 0, 298300, 'Bộ', 'L05', 'SP10.jpg'),
+('SP11', 'Trung tâm thương mại hiện đại', 0, 1900000, 'Bộ', 'L05', 'SP11.jpg'),
+('SP12', 'Xe chở xăng MAN TGS', 0, 2090000, 'Chiếc', 'L02', 'SP12.jpg'),
+('SP13', 'Đồ chơi mô hình tỷ lệ 1:16 xe chở hàng DHL ', 0, 1710000, 'Bộ', 'L02', 'SP13.jpg'),
+('SP14', 'Đồ chơi búp bê thời trang tóc đỏ ', 0, 245100, 'Bộ', 'L04', 'SP14.jpg'),
+('SP15', 'Đồ chơi búp bê thời trang jumpsuit xanh dạo phố ', 0, 245100, 'Bộ', 'L04', 'SP15.jpg'),
+('SP16', 'Bộ đồ chơi búp bê đi picnic cùng thú cưng ', 0, 665000, 'Bộ', 'L04', 'SP16.jpg'),
+('SP17', 'Đồ chơi búp bê nam thời trang áo xám ', 0, 350550, 'Bộ', 'L04', 'SP17.jpg'),
+('SP18', 'Sư tử Leo lười ', 0, 538650, 'Con', 'L04', 'SP18.jpg'),
+('SP19', 'Gấu Lizzie tinh nghịch ', 0, 470250, 'Con', 'L06', 'SP19.jpg'),
+('SP20', 'Gấu Bobbie tinh nghịch ', 0, 470250, 'Con', 'L06', 'SP20.jpg');
 
 -- --------------------------------------------------------
 
@@ -312,24 +322,24 @@ CREATE TABLE `nhanvien` (
 
 INSERT INTO `nhanvien` (`MaNV`, `Ho`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `SoDT`, `MaCV`, `IMG`) VALUES
 ('NV01', 'Seo', 'Eunkwang', '22/11/1990', 'Nam', 'South Korea', '22111990', 'CV01', 'Eunkwang.jpg'),
-('NV02', 'Lee', 'Minhyuk', '29/11/1990', 'Nam', 'South Korea', '29111990', 'CV01', 'Minhyuk.jpg'),
-('NV03', 'Shin', 'Peniel', '10/03/1993', 'Nam', 'USA', '10031993', 'CV01', 'Peniel.jpg'),
+('NV02', 'Lee', 'Minhyuk', '29/11/1990', 'Nam', 'South Korea', '29111990', 'CV03', 'Minhyuk.jpg'),
+('NV03', 'Shin', 'Peniel', '10/03/1993', 'Nam', 'USA', '10031993', 'CV02', 'Peniel.jpg'),
 ('NV04', 'Jung', 'Ilhoon', '04/10/1994', 'Nam', 'South Korea', '04101994', 'CV01', 'Ilhoon.jpg'),
-('NV05', 'Lee', 'Changsub', '26/02/1991', 'Nam', 'South Korea', '26021991', 'CV01', 'Changsub.jpg'),
-('NV06', 'Yook', 'Sungjae', '02/05/1995', 'Nam', 'South Korea', '02051995', 'CV01', 'Sungjae.jpg'),
+('NV05', 'Lee', 'Changsub', '26/02/1991', 'Nam', 'South Korea', '26021991', 'CV02', 'Changsub.jpg'),
+('NV06', 'Yook', 'Sungjae', '02/05/1995', 'Nam', 'South Korea', '02051995', 'CV02', 'Sungjae.jpg'),
 ('NV07', 'Im', 'Hyunsik', '07/03/1992', 'Nam', 'South Korea', '07031992', 'CV01', 'Hyunsik.jpg'),
 ('NV08', 'Kim', 'Dami', '09/04/1995', 'Nữ', 'South Korea', '09041995', 'CV01', 'Dami.jpg'),
-('NV09', 'Choi', 'Woosik', '26/03/1990', 'Nam', 'South Korea', '26031990', 'CV01', 'Woosik.jpg'),
-('NV10', 'Roh', 'Jeongeui', '31/07/2001', 'Nữ', 'South Korea', '31072001', 'CV01', 'Jeongeui.jpg'),
-('NV11', 'Kim', 'Sungcheol', '31/12/1991', 'Nam', 'South Korea', '31121991', 'CV01', 'Sungcheol.jpg'),
-('NV12', 'Trần Thùy', 'Chi', '04/05/1990', 'Nữ', 'Vietnam', '04051990', 'CV01', 'Chi.jpg'),
-('NV13', 'Chi', 'Pu', '14/06/1993', 'Nữ', 'Vietnam', '14061993', 'CV01', 'Pu.jpg'),
-('NV14', 'Jeon', 'Soyeon', '26/08/1998', 'Nữ', 'South Korea', '26081998', 'CV01', 'Soyeon.jpg'),
-('NV15', 'Cho', 'Miyeon', '31/01/1997', 'Nữ', 'South Korea', '31011997', 'CV01', 'Miyeon.jpg'),
-('NV16', 'Yontararak', 'Minnie', '23/10/1997', 'Nữ', 'Thailand', '23101997', 'CV01', 'Minnie.jpg'),
-('NV17', 'Song', 'Yuqi', '23/09/1999', 'Nữ', 'China', '23091999', 'CV01', 'Yuqi.jpg'),
-('NV18', 'Yeh', 'Shuhua', '06/01/2000', 'Nữ', 'Taiwan', '06012000', 'CV01', 'Shuhua.jpg'),
-('NV20', 'Yook', 'Sungjae', '12/10/1995', 'Nam', 'North Korea', '12101995', 'CV01', 'null');
+('NV09', 'Choi', 'Woosik', '26/03/1990', 'Nam', 'South Korea', '26031990', 'CV02', 'Woosik.jpg'),
+('NV10', 'Roh', 'Jeongeui', '31/07/2001', 'Nữ', 'South Korea', '31072001', 'CV03', 'Jeongeui.jpg'),
+('NV11', 'Kim', 'Sungcheol', '31/12/1991', 'Nam', 'South Korea', '31121991', 'CV02', 'Sungcheol.jpg'),
+('NV12', 'Trần Thùy', 'Chi', '04/05/1990', 'Nữ', 'Vietnam', '04051990', 'CV03', 'Chi.jpg'),
+('NV13', 'Chi', 'Pu', '14/06/1993', 'Nữ', 'Vietnam', '14061993', 'CV02', 'Pu.jpg'),
+('NV14', 'Jeon', 'Soyeon', '26/08/1998', 'Nữ', 'South Korea', '26081998', 'CV02', 'Soyeon.jpg'),
+('NV15', 'Cho', 'Miyeon', '31/01/1997', 'Nữ', 'South Korea', '31011997', 'CV02', 'Miyeon.jpg'),
+('NV16', 'Yontararak', 'Minnie', '23/10/1997', 'Nữ', 'Thailand', '23101997', 'CV03', 'Minnie.jpg'),
+('NV17', 'Song', 'Yuqi', '23/09/1999', 'Nữ', 'China', '23091999', 'CV02', 'Yuqi.jpg'),
+('NV18', 'Yeh', 'Shuhua', '06/01/2000', 'Nữ', 'Taiwan', '06012000', 'CV03', 'Shuhua.jpg'),
+('NV20', 'Yook', 'Sungjae', '12/10/1995', 'Nam', 'North Korea', '12101995', 'CV03', 'null');
 
 -- --------------------------------------------------------
 
@@ -353,7 +363,9 @@ INSERT INTO `phieunhap` (`MaPN`, `MaNCC`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 ('PN01', 'NCC01', 'NV03', '2023-04-14', 837900),
 ('PN02', 'NCC02', 'NV02', '2023-04-15', 3971100),
 ('PN03', 'NCC02', 'NV05', '2023-04-15', 3727500),
-('PN04', 'NCC01', 'NV05', '2023-04-15', 502950);
+('PN04', 'NCC01', 'NV05', '2023-04-15', 502950),
+('PN05', 'NCC01', 'NV09', '2023-04-15', 492450),
+('PN06', 'NCC01', 'NV06', '2023-04-15', 14664200);
 
 -- --------------------------------------------------------
 
@@ -375,7 +387,8 @@ CREATE TABLE `phieuxuat` (
 INSERT INTO `phieuxuat` (`MaPX`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 ('PX01', 'NV07', '2023-04-14', 9079000),
 ('PX02', 'NV05', '2023-04-14', 798000),
-('PX03', 'NV05', '2023-04-15', 479000);
+('PX03', 'NV05', '2023-04-15', 479000),
+('PX04', 'NV06', '2023-04-15', 15905000);
 
 -- --------------------------------------------------------
 
@@ -405,12 +418,12 @@ INSERT INTO `sanpham` (`MaSP`, `TenSP`, `SoLuong`, `DonGia`, `DonViTinh`, `MaLoa
 ('SP05', 'Bộ Gạch Sáng Tạo Pastel Dễ Thương', 0, 619000, 'Bộ', 'L01', 'SP05.jpg'),
 ('SP06', 'Siêu Xe Của Người Nhện', 0, 309000, 'Chiếc', 'L01', 'SP06.jpg'),
 ('SP07', 'Combo 2 mô hình nhân vật MOBILITY JOINT GUNDAM VOL', 0, 479000, 'Bộ', 'L01', 'SP07.jpg'),
-('SP08', 'Bộ làm bếp 3 món mini Hồng', 0, 559000, 'Bộ', 'L05', 'SP08.jpg'),
+('SP08', 'Bộ làm bếp 3 món mini Hồng', 8, 559000, 'Bộ', 'L05', 'SP08.jpg'),
 ('SP09', 'Bộ nồi lẩu điện mini Xanh dương', 0, 399000, 'Bộ', 'L05', 'SP09.jpg'),
 ('SP10', 'Set bánh vui vẻ 28 chi tiết ', 0, 314000, 'Bộ', 'L05', 'SP10.jpg'),
-('SP11', 'Trung tâm thương mại hiện đại', 0, 2000000, 'Bộ', 'L05', 'SP11.jpg'),
+('SP11', 'Trung tâm thương mại hiện đại', 6, 2000000, 'Bộ', 'L05', 'SP11.jpg'),
 ('SP12', 'Xe chở xăng MAN TGS', 0, 2200000, 'Chiếc', 'L02', 'SP12.jpg'),
-('SP13', 'Đồ chơi mô hình tỷ lệ 1:16 xe chở hàng DHL ', 0, 1800000, 'Bộ', 'L02', 'SP13.jpg'),
+('SP13', 'Đồ chơi mô hình tỷ lệ 1:16 xe chở hàng DHL ', 8, 1800000, 'Bộ', 'L02', 'SP13.jpg'),
 ('SP14', 'Đồ chơi búp bê thời trang tóc đỏ ', 0, 258000, 'Bộ', 'L04', 'SP14.jpg'),
 ('SP15', 'Đồ chơi búp bê thời trang jumpsuit xanh dạo phố ', 0, 258000, 'Bộ', 'L04', 'SP15.jpg'),
 ('SP16', 'Bộ đồ chơi búp bê đi picnic cùng thú cưng ', 0, 700000, 'Bộ', 'L04', 'SP16.jpg'),
@@ -425,7 +438,7 @@ INSERT INTO `sanpham` (`MaSP`, `TenSP`, `SoLuong`, `DonGia`, `DonViTinh`, `MaLoa
 DELIMITER $$
 CREATE TRIGGER `CAP_NHAT_SANPHAM` AFTER UPDATE ON `sanpham` FOR EACH ROW BEGIN
    UPDATE KHO 
-   SET KHO.TenSP = NEW.TenSP, KHO.GiaNhap = NEW.DonGia*1.05, KHO.DonViTinh = NEW.DonViTinh, KHO.MaLoai = NEW.MaLoai, KHO.IMG = NEW.IMG 
+   SET KHO.TenSP = NEW.TenSP, KHO.GiaNhap = NEW.DonGia*0.95, KHO.DonViTinh = NEW.DonViTinh, KHO.MaLoai = NEW.MaLoai, KHO.IMG = NEW.IMG 
    WHERE KHO.MaSP = NEW.MaSP;
 END
 $$
@@ -439,7 +452,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `trg_add_product_to_kho` AFTER INSERT ON `sanpham` FOR EACH ROW BEGIN
     INSERT INTO Kho(MaSP, TenSP, SoLuong, GiaNhap, DonViTinh, MaLoai, IMG)
-    VALUES (NEW.MaSP, NEW.TenSP, NEW.SoLuong, NEW.DonGia * 1.05, NEW.DonViTinh, NEW.MaLoai, NEW.IMG);
+    VALUES (NEW.MaSP, NEW.TenSP, NEW.SoLuong, NEW.DonGia * 0.95, NEW.DonViTinh, NEW.MaLoai, NEW.IMG);
 END
 $$
 DELIMITER ;
