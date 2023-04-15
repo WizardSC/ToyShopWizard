@@ -32,8 +32,8 @@ public class ChucVuDAO {
             while (rs.next()) {
                 ChucVuDTO cv = new ChucVuDTO(
                         rs.getString("MaCV"),
-                        rs.getString("TenCV"),
-                        rs.getInt("Luong"));
+                        rs.getString("TenCV"));
+                       
                 dscv.add(cv);
             }
             return dscv;

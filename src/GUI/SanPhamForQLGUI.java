@@ -66,7 +66,7 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
 //        txtDonGia.setEnabled(false);
         txtSoLuong.setEnabled(false);
         txtMaSP.setEnabled(false);
-
+//        txtDonGia.setEnabled(false);
     }
 
 //    public void showAll(ArrayList<SanPham_ViTriDTO> dssp) {

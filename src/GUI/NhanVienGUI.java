@@ -121,7 +121,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
             dtmChucVu.addRow(new String[]{
                 dscv.get(i).getMaCV(),
                 dscv.get(i).getTenCV(),
-                String.valueOf(dscv.get(i).getLuong())
+              
             });
         }
     }
@@ -210,8 +210,6 @@ public class NhanVienGUI extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtTenCVinCV = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        txtLuonginCV = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jComboBox2 = new javax.swing.JComboBox<>();
         txtTimKiem1 = new javax.swing.JTextField();
@@ -254,14 +252,14 @@ public class NhanVienGUI extends javax.swing.JPanel {
 
         tblDSCV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"2", null, null}
+                {"2", null}
             },
             new String [] {
-                "Mã CV", "Tên CV", "Lương"
+                "Mã CV", "Tên CV"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -279,7 +277,6 @@ public class NhanVienGUI extends javax.swing.JPanel {
             tblDSCV.getColumnModel().getColumn(0).setPreferredWidth(50);
             tblDSCV.getColumnModel().getColumn(1).setResizable(false);
             tblDSCV.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tblDSCV.getColumnModel().getColumn(2).setResizable(false);
         }
 
         pnHeader1.setBackground(new java.awt.Color(152, 168, 248));
@@ -350,9 +347,6 @@ public class NhanVienGUI extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Tên CV");
 
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel12.setText("Lương");
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -360,21 +354,14 @@ public class NhanVienGUI extends javax.swing.JPanel {
             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMaCVinMaCV, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenCVinCV, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtLuonginCV, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
+                    .addComponent(txtMaCVinMaCV, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenCVinCV, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnChonLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBoChon, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -397,12 +384,8 @@ public class NhanVienGUI extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtTenCVinCV, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtLuonginCV, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                            .addComponent(txtTenCVinCV, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(250, 247, 240));
@@ -443,7 +426,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
+            .addComponent(pnHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -625,7 +608,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtMaCV, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMaCV, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
+                                .addComponent(btnMaCV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(txtSoDT, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDiaChi, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(36, 36, 36)))
@@ -986,11 +969,9 @@ public class NhanVienGUI extends javax.swing.JPanel {
         int k = tblDSCV.getSelectedRow();
         txtMaCVinMaCV.setText(tblDSCV.getModel().getValueAt(k, 0).toString());
         txtTenCVinCV.setText(tblDSCV.getModel().getValueAt(k, 1).toString());
-        txtLuonginCV.setText(tblDSCV.getModel().getValueAt(k, 2).toString());
 
         txtMaCVinMaCV.setEnabled(false);
         txtTenCVinCV.setEnabled(false);
-        txtLuonginCV.setEnabled(false);
     }//GEN-LAST:event_tblDSCVMouseClicked
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
@@ -1022,7 +1003,6 @@ public class NhanVienGUI extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbxTimKiem;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1051,7 +1031,6 @@ public class NhanVienGUI extends javax.swing.JPanel {
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtHo;
     private javax.swing.JLabel txtIMG;
-    private javax.swing.JTextField txtLuonginCV;
     private javax.swing.JTextField txtMaCV;
     private javax.swing.JTextField txtMaCVinMaCV;
     private javax.swing.JTextField txtMaNV;

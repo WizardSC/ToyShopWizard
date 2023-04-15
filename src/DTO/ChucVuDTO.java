@@ -12,12 +12,12 @@ package DTO;
 public class ChucVuDTO {
     private String MaCV;
     private String TenCV;
-    private int Luong;
+    
 
-    public ChucVuDTO(String MaCV, String TenCV, int Luong) {
+    public ChucVuDTO(String MaCV, String TenCV) {
         this.MaCV = MaCV;
         this.TenCV = TenCV;
-        this.Luong = Luong;
+        
     }
 
     public String getMaCV() {
@@ -36,12 +36,5 @@ public class ChucVuDTO {
         this.TenCV = TenCV;
     }
 
-    public int getLuong() {
-        return Luong;
-    }
-
-    public void setLuong(int Luong) {
-        this.Luong = Luong;
-    }
     
 }
