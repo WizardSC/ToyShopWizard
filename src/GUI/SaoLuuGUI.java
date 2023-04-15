@@ -27,6 +27,7 @@ public class SaoLuuGUI extends javax.swing.JPanel {
     private SanPhamBUS spBUS = new SanPhamBUS();
     private KhoBUS khoBUS = new KhoBUS();
     private KhachHangBUS khBUS = new KhachHangBUS();
+    private boolean isCountingDown;
     public SaoLuuGUI() {
         initComponents();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -37,13 +38,56 @@ public class SaoLuuGUI extends javax.swing.JPanel {
         // Khởi tạo giá trị ngày tháng B ban đầu
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateA);
-        calendar.add(Calendar.WEEK_OF_YEAR, 1); // Thêm 1 tuần vào giá trị của ngày tháng A
+        calendar.add(Calendar.DAY_OF_YEAR, 1); //THêm 1 ngày so với ngày A
         Date dateB = calendar.getTime();
         String formattedDateB = formatter.format(dateB);
         txtNgayThangB.setText(formattedDateB);
-
-
+        
+        
+        startCountdown();
     }
+
+    public void startCountdown() {
+    isCountingDown = true;
+    Thread t = new Thread(new Runnable() {
+        public void run() {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 59);
+            calendar.set(Calendar.SECOND, 59);
+            long endTime = calendar.getTimeInMillis();
+            while (isCountingDown) {
+                long currentTime = System.currentTimeMillis();
+                long remainingTime = endTime - currentTime;
+                if (remainingTime < 0) {
+                    // Countdown has finished, restart countdown from the beginning of the day
+                    calendar = Calendar.getInstance();
+                    calendar.set(Calendar.HOUR_OF_DAY, 23);
+                    calendar.set(Calendar.MINUTE, 59);
+                    calendar.set(Calendar.SECOND, 59);
+                    endTime = calendar.getTimeInMillis();
+                    remainingTime = endTime - currentTime;
+                }
+                // Convert remainingTime to hours, minutes and seconds
+                int hours = (int) (remainingTime / (60 * 60 * 1000));
+                remainingTime %= (60 * 60 * 1000);
+                int minutes = (int) (remainingTime / (60 * 1000));
+                remainingTime %= (60 * 1000);
+                int seconds = (int) (remainingTime / 1000);
+                // Update the countdown label with the current time
+                lblDemNguoc.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    });
+    t.start();
+}
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,9 +98,6 @@ public class SaoLuuGUI extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtNgayThangB = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNgayThangA = new javax.swing.JLabel();
@@ -70,35 +111,32 @@ public class SaoLuuGUI extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         btnNhapExcelKho = new javax.swing.JLabel();
         btnXuatExcelKho = new javax.swing.JLabel();
+        lblDemNguoc = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        btnXuatExcelKH1 = new javax.swing.JLabel();
+        btnNhapExcelKH1 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(250, 247, 240));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1062, 0, -1, -1));
-
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1062, 674, -1, -1));
-
-        jLabel3.setText("jLabel2");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 674, -1, -1));
-
         txtNgayThangB.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtNgayThangB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(txtNgayThangB, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, 39));
+        jPanel1.add(txtNgayThangB, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 130, 39));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel4.setText("Hôm nay là ngày:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 25, 164, 39));
+        jLabel4.setText("Thời gian còn lại để sao lưu:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 270, 39));
 
         txtNgayThangA.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtNgayThangA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(txtNgayThangA, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 130, 39));
+        jPanel1.add(txtNgayThangA, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 19, 130, 50));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel5.setText("Ngày sao lưu kế tiếp: ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 200, 39));
+        jLabel5.setText("Hệ thống sẽ sao lưu dữ liệu định kỳ trước: ");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 39));
 
+        jPanel2.setBackground(new java.awt.Color(255, 242, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SẢN PHẨM (Cửa hàng)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
 
         btnXuatExcelSP.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
@@ -144,6 +182,7 @@ public class SaoLuuGUI extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 410, 110));
 
+        jPanel3.setBackground(new java.awt.Color(255, 242, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "KHÁCH HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
 
         btnXuatExcelKH.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
@@ -189,6 +228,7 @@ public class SaoLuuGUI extends javax.swing.JPanel {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 410, 110));
 
+        jPanel4.setBackground(new java.awt.Color(255, 242, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SẢN PHẨM (Kho)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
 
         btnNhapExcelKho.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
@@ -232,17 +272,75 @@ public class SaoLuuGUI extends javax.swing.JPanel {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 410, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, 410, -1));
+
+        lblDemNguoc.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jPanel1.add(lblDemNguoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 50, 140, 40));
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel6.setText("Hôm nay là ngày:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 25, 164, 39));
+
+        jPanel5.setBackground(new java.awt.Color(255, 242, 204));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NHÂN VIÊN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
+
+        btnXuatExcelKH1.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnXuatExcelKH1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/xls.png"))); // NOI18N
+        btnXuatExcelKH1.setText("Xuất Excel");
+        btnXuatExcelKH1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXuatExcelKH1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXuatExcelKH1MouseClicked(evt);
+            }
+        });
+
+        btnNhapExcelKH1.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnNhapExcelKH1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/import.png"))); // NOI18N
+        btnNhapExcelKH1.setText("Nhập Excel");
+        btnNhapExcelKH1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNhapExcelKH1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNhapExcelKH1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(btnNhapExcelKH1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(btnXuatExcelKH1)
+                .addGap(48, 48, 48))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnXuatExcelKH1)
+                    .addComponent(btnNhapExcelKH1))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1092, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -256,7 +354,7 @@ public class SaoLuuGUI extends javax.swing.JPanel {
         ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
         JFileChooser fc = new JFileChooser("./reports");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Excel", "xlsx");
+                "Excel", "xlsx");
         fc.setFileFilter(filter);
         int result = fc.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -267,7 +365,7 @@ public class SaoLuuGUI extends javax.swing.JPanel {
 
         }
 
-        
+
     }//GEN-LAST:event_btnNhapExcelKhoMouseClicked
 
     private void btnXuatExcelKhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatExcelKhoMouseClicked
@@ -280,7 +378,7 @@ public class SaoLuuGUI extends javax.swing.JPanel {
         ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
         JFileChooser fc = new JFileChooser("./reports");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Excel", "xlsx");
+                "Excel", "xlsx");
         fc.setFileFilter(filter);
         int result = fc.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -291,7 +389,7 @@ public class SaoLuuGUI extends javax.swing.JPanel {
 
         }
 
-       
+
     }//GEN-LAST:event_btnNhapExcelKHMouseClicked
 
     private void btnXuatExcelKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatExcelKHMouseClicked
@@ -304,7 +402,7 @@ public class SaoLuuGUI extends javax.swing.JPanel {
         ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
         JFileChooser fc = new JFileChooser("./reports");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Excel", "xlsx");
+                "Excel", "xlsx");
         fc.setFileFilter(filter);
         int result = fc.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -315,26 +413,36 @@ public class SaoLuuGUI extends javax.swing.JPanel {
 
         }
 
-        
+
     }//GEN-LAST:event_btnNhapExcelSPMouseClicked
+
+    private void btnXuatExcelKH1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatExcelKH1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXuatExcelKH1MouseClicked
+
+    private void btnNhapExcelKH1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapExcelKH1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNhapExcelKH1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnNhapExcelKH;
+    private javax.swing.JLabel btnNhapExcelKH1;
     private javax.swing.JLabel btnNhapExcelKho;
     private javax.swing.JLabel btnNhapExcelSP;
     private javax.swing.JLabel btnXuatExcelKH;
+    private javax.swing.JLabel btnXuatExcelKH1;
     private javax.swing.JLabel btnXuatExcelKho;
     private javax.swing.JLabel btnXuatExcelSP;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel lblDemNguoc;
     private javax.swing.JLabel txtNgayThangA;
     private javax.swing.JLabel txtNgayThangB;
     // End of variables declaration//GEN-END:variables
