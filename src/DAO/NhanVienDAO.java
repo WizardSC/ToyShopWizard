@@ -63,19 +63,50 @@ public class NhanVienDAO {
         return null;
     }
 
+    public ArrayList<NhanVienDTO> getListNhanVienTheoMaCV(String MaCV) {
+        try {
+            ArrayList<NhanVienDTO> dsnv = new ArrayList<>();
+            String sql = "SELECT * FROM nhanvien Where nhanvien.MaCV = " + "'" + MaCV +"'";
+            System.out.println(sql);
+            ResultSet rs = mySQL.executeQuery(sql);
+            while (rs.next()) {
+                NhanVienDTO nv = new NhanVienDTO(
+                        rs.getString("MaNV"),
+                        rs.getString("Ho"),
+                        rs.getString("Ten"),
+                        rs.getString("NgaySinh"),
+                        rs.getString("GioiTinh"),
+                        rs.getString("DiaChi"),
+                        rs.getString("SoDT"),
+                        rs.getString("MaCV"),
+                        rs.getString("IMG"));
+
+                dsnv.add(nv);
+            }
+            
+            return dsnv;
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+
+        return null;
+    }
+
     public void insertNhanVien(NhanVienDTO nv) {
         try {
             String sql = "INSERT INTO nhanvien VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstatement = connection.prepareStatement(sql);
-            pstatement.setString(1,nv.getMaNV());
-            pstatement.setString(2,nv.getHo());
-            pstatement.setString(3,nv.getTen());
-            pstatement.setString(4,nv.getNgaySinh());
-            pstatement.setString(5,nv.getGioiTinh());
-            pstatement.setString(6,nv.getDiaChi());
-            pstatement.setString(7,nv.getSoDT());
-            pstatement.setString(8,nv.getMaCV());
-            pstatement.setString(9,nv.getIMG());
+            pstatement.setString(1, nv.getMaNV());
+            pstatement.setString(2, nv.getHo());
+            pstatement.setString(3, nv.getTen());
+            pstatement.setString(4, nv.getNgaySinh());
+            pstatement.setString(5, nv.getGioiTinh());
+            pstatement.setString(6, nv.getDiaChi());
+            pstatement.setString(7, nv.getSoDT());
+            pstatement.setString(8, nv.getMaCV());
+            pstatement.setString(9, nv.getIMG());
             pstatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,43 +114,45 @@ public class NhanVienDAO {
             mySQL.Disconnect();
         }
     }
-    
-    public void deleteNhanVien(String MaNV){
+
+    public void deleteNhanVien(String MaNV) {
         try {
             String sql = "DELETE FROM nhanvien WHERE MaNV = ?";
             PreparedStatement pstatement = connection.prepareStatement(sql);
-            
-            pstatement.setString(1,MaNV);
+
+            pstatement.setString(1, MaNV);
             pstatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             mySQL.Disconnect();
         }
-        
+
     }
-    public void updatesNhanVien(NhanVienDTO nv){
+
+    public void updatesNhanVien(NhanVienDTO nv) {
         try {
             String queryUpdatesNhanVien = " UPDATE nhanvien SET Ho = ? , Ten = ? , NgaySinh = ? , GioiTinh = ? , DiaChi = ? ,SoDT = ? , MaCV = ? , IMG= ? WHERE MaNV = ?";
             PreparedStatement pre = connection.prepareStatement(queryUpdatesNhanVien);
-           // pre.setString(1, MaNV);
+            // pre.setString(1, MaNV);
             pre.setString(1, nv.getHo());
             pre.setString(2, nv.getTen());
             pre.setString(3, nv.getNgaySinh());
             pre.setString(4, nv.getGioiTinh());
             pre.setString(5, nv.getDiaChi());
-            pre.setString(6,nv.getSoDT());
+            pre.setString(6, nv.getSoDT());
             pre.setString(7, nv.getMaCV());
             pre.setString(8, nv.getIMG());
-            pre.setString(9,nv.getMaNV());
+            pre.setString(9, nv.getMaNV());
             pre.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             mySQL.Disconnect();
         }
     }
+
     public void ExportExcel() {
 
         try {
@@ -207,6 +240,7 @@ public class NhanVienDAO {
         }
 
     }
+
     public void ImportExcel(File file) {
 
         try {

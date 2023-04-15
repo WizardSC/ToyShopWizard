@@ -32,10 +32,10 @@ public class RCNhanVienGUI extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
         init();
-        loadDataDSNV();
+        
         
         this.MaCV = MaCV;
-        System.out.println(MaCV);
+        loadDataDSNVTheoMaCV();
 
     }
     
@@ -60,7 +60,7 @@ public class RCNhanVienGUI extends javax.swing.JDialog {
 
         dtmNhanVien.setRowCount(0);
         for (int i = 0; i < dsnv.size(); i++) {
-            if (dsnv.get(i).getMaCV().equals("CV03")) {
+            
                 dtmNhanVien.addRow(new String[]{
                     dsnv.get(i).getMaNV(),
                     dsnv.get(i).getHo(),
@@ -68,17 +68,22 @@ public class RCNhanVienGUI extends javax.swing.JDialog {
                     dsnv.get(i).getNgaySinh(),
                     dsnv.get(i).getGioiTinh()
                 });
-            }
+            
 
         }
     }
 
     public void loadDataDSNV() {
-        nvBUS.docDanhSach();
+        System.out.println("MaCV o GUI" + MaCV);
+        nvBUS.docDanhSachTheoMaCV(MaCV);
         ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
         showAllDSNV(dsnv);
     }
-
+    public void loadDataDSNVTheoMaCV() {
+        nvBUS.docDanhSachTheoMaCV(MaCV);
+        ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVienTheoMaCV(MaCV);
+        showAllDSNV(dsnv);
+    }
     //Hàm lấy Mã NV
     public String getMaNV() {
         return txtMaNV.getText();

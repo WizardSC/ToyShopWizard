@@ -917,7 +917,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_chooseMaNCCActionPerformed
 
     private void chooseMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseMaNVActionPerformed
-        RCNhanVienGUI rcnv = new RCNhanVienGUI();
+        RCNhanVienGUI rcnv = new RCNhanVienGUI("CV03");
         rcnv.setVisible(true);
 
         String MaNV = rcnv.getMaNV();
