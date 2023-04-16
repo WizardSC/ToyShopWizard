@@ -10,10 +10,11 @@ package DTO;
  * @author Administrator
  */
 public class TaiKhoanDTO {
+
     private String MaNV;
     private String TenDangNhap;
     private String MatKhau;
-   
+
     private boolean TinhTrang;
 
     public TaiKhoanDTO(String MaNV, String TenDangNhap, String MatKhau, boolean TinhTrang) {
@@ -23,10 +24,13 @@ public class TaiKhoanDTO {
         this.TinhTrang = TinhTrang;
     }
 
-    
-
     public TaiKhoanDTO(String MaNV) {
         this.MaNV = MaNV;
+    }
+    
+    public TaiKhoanDTO(String TenDangNhap,String MatKhau) {
+        this.TenDangNhap= TenDangNhap;
+        this.MatKhau = MatKhau;
     }
 
     public boolean isTinhTrang() {
@@ -36,9 +40,6 @@ public class TaiKhoanDTO {
     public void setTinhTrang(boolean TinhTrang) {
         this.TinhTrang = TinhTrang;
     }
-    
-
-    
 
     public String getMaNV() {
         return MaNV;
@@ -64,6 +65,4 @@ public class TaiKhoanDTO {
         this.MatKhau = MatKhau;
     }
 
-    
-    
 }

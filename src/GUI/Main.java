@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         
-        //Đăng nhập
+            //Đăng nhập
 //        new DangNhapGUI().se^tVisible(true);
         //Nhân viên quản lý
         new MainForQuanLyGUI().setVisible(true);

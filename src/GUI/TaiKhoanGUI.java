@@ -21,74 +21,75 @@ import javax.swing.table.DefaultTableModel;
  * @author Administrator
  */
 public class TaiKhoanGUI extends javax.swing.JPanel {
+
     private ArrayList<TaiKhoanDTO> dstk = new ArrayList<>();
     private TaiKhoanBUS tkBUS = new TaiKhoanBUS();
     private TaiKhoanDAO tkDAO = new TaiKhoanDAO();
-    
+
     DefaultTableModel model;
     DefaultComboBoxModel dcbmNhanVien;
+
     public TaiKhoanGUI() {
         initComponents();
         init();
-        
+
         model = (DefaultTableModel) tblDSTK.getModel();
         dcbmNhanVien = (DefaultComboBoxModel) cbxNhanVien.getModel();
 //        dcbmNhanVien = cbx
-        loadData();
-        
+
         loadlenCBX();
+        loadData();
     }
 
     public void init() {
-        
+
         tblDSTK.setFocusable(false);
         tblDSTK.setIntercellSpacing(new Dimension(0, 0));
 
         tblDSTK.setRowHeight(30);
         tblDSTK.setFillsViewportHeight(true);
-        
-        tblDSTK.getTableHeader().setOpaque(false);    
-        tblDSTK.getTableHeader().setBackground(new Color(152,168,248));
+
+        tblDSTK.getTableHeader().setOpaque(false);
+        tblDSTK.getTableHeader().setBackground(new Color(152, 168, 248));
         tblDSTK.getTableHeader().setForeground(Color.WHITE);
-        tblDSTK.setSelectionBackground(new Color(188,206,248));
+        tblDSTK.setSelectionBackground(new Color(188, 206, 248));
         tblDSTK.setFont(new Font("Arial", Font.PLAIN, 13));
-        
+
         tblDSTK.getTableHeader().setReorderingAllowed(false);
-        tblDSTK.setBorder(BorderFactory.createLineBorder(new Color(152,168,248), 1));
-        
-        
+        tblDSTK.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
+
     }
-    
-    public void showAll(ArrayList<TaiKhoanDTO> dstk){
+
+    public void showAll(ArrayList<TaiKhoanDTO> dstk) {
         model.setRowCount(0);
-        for(int i=0;i<dstk.size();i++){
+        for (int i = 0; i < dstk.size(); i++) {
             model.addRow(new String[]{
                 dstk.get(i).getMaNV(),
                 dstk.get(i).getTenDangNhap(),
                 dstk.get(i).getMatKhau(),
-                
                 String.valueOf(dstk.get(i).isTinhTrang())
             });
         }
     }
-    
-    public void loadData(){
+
+    public void loadData() {
         tkBUS.docDanhSach();
         ArrayList<TaiKhoanDTO> dstk = tkBUS.getListTaiKhoan();
         showAll(dstk);
-                
+
     }
-    
-    public void loadlenCBX(){
+
+    public void loadlenCBX() {
         tkBUS.docDanhSach1();
         ArrayList<TaiKhoanDTO> dstk = tkBUS.getListMaNVChuaCoTK();
         dcbmNhanVien.removeAllElements();
-        for(int i=0;i<dstk.size();i++){
-            cbxNhanVien.addItem(dstk.get(i).getMaNV());  
-            
+        for (int i = 0; i < dstk.size(); i++) {
+            cbxNhanVien.addItem(dstk.get(i).getMaNV());
+
         }
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,7 +113,8 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         btnXoa = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtTen4 = new javax.swing.JTextField();
+        txtTenDangNhap3 = new javax.swing.JTextField();
+        txtTinhTrang2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSTK = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -120,10 +122,13 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtTen1 = new javax.swing.JTextField();
+        txtMatKhau2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtTen3 = new javax.swing.JTextField();
-        btnChinhSua = new javax.swing.JLabel();
+        txtTenDangNhap2 = new javax.swing.JTextField();
+        btnDatMatKhau = new javax.swing.JLabel();
+        btnDatMatKhau1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtMatKhauMoi = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(1089, 700));
 
@@ -176,7 +181,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnXoa.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnUpdate.png"))); // NOI18N
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/padlock.png"))); // NOI18N
         btnXoa.setText("Khóa");
         btnXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,12 +189,13 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
                 btnXoaMouseClicked(evt);
             }
         });
-        jPanel3.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
+        jPanel3.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel7.setText("Tên đăng nhập");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 110, -1));
-        jPanel3.add(txtTen4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 150, 26));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 110, -1));
+        jPanel3.add(txtTenDangNhap3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 150, 26));
+        jPanel3.add(txtTinhTrang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 150, 26));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(767, 3, 310, 170));
 
@@ -212,6 +218,11 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblDSTK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDSTKMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDSTK);
         if (tblDSTK.getColumnModel().getColumnCount() > 0) {
             tblDSTK.getColumnModel().getColumn(0).setResizable(false);
@@ -223,7 +234,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
             tblDSTK.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 286, 1067, 401));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 286, 1067, 390));
 
         jPanel4.setBackground(new java.awt.Color(250, 247, 240));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TÌM KIẾM", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Baloo 2 ExtraBold", 1, 18), new java.awt.Color(255, 51, 0))); // NOI18N
@@ -273,23 +284,39 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel4.setText("Tên đăng nhập");
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
-        jPanel5.add(txtTen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 168, 26));
+        jPanel5.add(txtMatKhau2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 168, 26));
 
         jLabel6.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
-        jLabel6.setText("Mật khẩu");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
-        jPanel5.add(txtTen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 168, 26));
+        jLabel6.setText("Mật khẩu cũ");
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel5.add(txtTenDangNhap2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 168, 26));
 
-        btnChinhSua.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
-        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnReset.png"))); // NOI18N
-        btnChinhSua.setText("Đặt lại mật khẩu");
-        btnChinhSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnChinhSua.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnDatMatKhau.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnDatMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnReset.png"))); // NOI18N
+        btnDatMatKhau.setText("Đặt lại mật khẩu");
+        btnDatMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDatMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnChinhSuaMouseClicked(evt);
+                btnDatMatKhauMouseClicked(evt);
             }
         });
-        jPanel5.add(btnChinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
+        jPanel5.add(btnDatMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
+
+        btnDatMatKhau1.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnDatMatKhau1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnUpdate.png"))); // NOI18N
+        btnDatMatKhau1.setText("Sửa mật khẩu");
+        btnDatMatKhau1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDatMatKhau1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDatMatKhau1MouseClicked(evt);
+            }
+        });
+        jPanel5.add(btnDatMatKhau1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
+        jLabel8.setText("Mật khẩu mới");
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        jPanel5.add(txtMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 168, 26));
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 350, 270));
 
@@ -306,7 +333,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -314,20 +341,56 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-        
+
     }//GEN-LAST:event_btnThemMouseClicked
 
-    private void btnChinhSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaMouseClicked
-        
-    }//GEN-LAST:event_btnChinhSuaMouseClicked
+    private void btnDatMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDatMatKhauMouseClicked
+        String TenDangNhap = txtTenDangNhap2.getText();
+
+        String MatKhau = txtMatKhau2.getText();
+        String MatKhauMoi = txtMatKhauMoi.getText();
+        tkBUS.update(MatKhau,MatKhauMoi, TenDangNhap);
+        loadData();
+    }//GEN-LAST:event_btnDatMatKhauMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
-        
+        String TenDangNhap = txtTenDangNhap2.getText();
+        String TinhTrang = txtTinhTrang2.getText();
+        tkBUS.lock(Boolean.parseBoolean(TinhTrang), TenDangNhap);
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/unlock.png")));
+        loadData();
     }//GEN-LAST:event_btnXoaMouseClicked
+
+    private void tblDSTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSTKMouseClicked
+        int k = tblDSTK.getSelectedRow();
+        txtTenDangNhap2.setText(tblDSTK.getModel().getValueAt(k, 1).toString());
+        txtTenDangNhap2.setEnabled(false);
+        txtMatKhau2.setText(tblDSTK.getModel().getValueAt(k, 2).toString());
+        txtTenDangNhap3.setText(tblDSTK.getModel().getValueAt(k, 1).toString());
+        txtTinhTrang2.setText(tblDSTK.getModel().getValueAt(k, 3).toString());
+        String TT = tblDSTK.getModel().getValueAt(k, 3).toString();
+        boolean TinhTrang = Boolean.parseBoolean(TT);
+        System.out.println(TinhTrang);
+        System.out.println(TT);
+        if (TinhTrang == false) {
+            btnXoa.setText("Mở khóa");
+        } else {
+            btnXoa.setText("Khóa");
+        }
+    }//GEN-LAST:event_tblDSTKMouseClicked
+
+    private void btnDatMatKhau1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDatMatKhau1MouseClicked
+        String TenDangNhap = txtTenDangNhap2.getText();
+        String MatKhau = txtMatKhau2.getText();
+        String MatKhauMoi = txtMatKhauMoi.getText();
+        tkBUS.update(MatKhau, MatKhauMoi, TenDangNhap);
+        loadData();
+    }//GEN-LAST:event_btnDatMatKhau1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnChinhSua;
+    private javax.swing.JLabel btnDatMatKhau;
+    private javax.swing.JLabel btnDatMatKhau1;
     private javax.swing.JLabel btnThem;
     private javax.swing.JLabel btnXoa;
     private javax.swing.JComboBox<String> cbxNhanVien;
@@ -338,6 +401,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -348,10 +412,12 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     private javax.swing.JLabel lblMaCV;
     private javax.swing.JLabel lblMaCV1;
     private javax.swing.JTable tblDSTK;
+    private javax.swing.JTextField txtMatKhau2;
+    private javax.swing.JTextField txtMatKhauMoi;
     private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtTen1;
     private javax.swing.JTextField txtTen2;
-    private javax.swing.JTextField txtTen3;
-    private javax.swing.JTextField txtTen4;
+    private javax.swing.JTextField txtTenDangNhap2;
+    private javax.swing.JTextField txtTenDangNhap3;
+    private javax.swing.JTextField txtTinhTrang2;
     // End of variables declaration//GEN-END:variables
 }

@@ -54,8 +54,8 @@ public class TaiKhoanDAO {
     public ArrayList<TaiKhoanDTO> getListMaNVChuaCoTK(){
         try {
             ArrayList<TaiKhoanDTO> dstk = new ArrayList<>();
-//            String sql = "SELECT MaNV from nhanvien where nhanvien.MaNV not in (select MaNV from taikhoan) ORDER BY nhanvien.manv asc";
-            String sql = "CALL sp_get_nhanvien_without_taikhoan();"; //Thực thi stored procedure
+            String sql = "SELECT MaNV from nhanvien where nhanvien.MaNV not in (select MaNV from taikhoan) ORDER BY nhanvien.manv asc";
+//            String sql = "CALL sp_get_nhanvien_without_taikhoan();"; //Thực thi stored procedure
             ResultSet rs = mySQL.executeQuery(sql);
             while(rs.next()){
                 TaiKhoanDTO tk = new TaiKhoanDTO(
@@ -86,20 +86,25 @@ public class TaiKhoanDAO {
         }
     }
     
-    public void updateTaiKhoan(TaiKhoanDTO tk){
+    public void updateTaiKhoan(String MatKhauMoi, String TenDangNhap){
         try {
-            String sql = "UPDATE taikhoan SET MatKhau = '111111' WHERE TenDangNhap = ?";
+            String sql = "UPDATE taikhoan SET MatKhau = ? WHERE TenDangNhap = ?";
+            System.out.println(sql);
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,tk.getTenDangNhap());
+            ps.setString(1, MatKhauMoi);
+            ps.setString(2,TenDangNhap);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void lockTaikhoan(TaiKhoanDTO tk){
+    public void lockTaikhoan(boolean TinhTrang, String TenDangNhap){
         try {
-            String sql = "UPDATE taikhoan set TinhTrang = 0 where TenDangNhap = ?";
+            String sql = "UPDATE taikhoan set TinhTrang = ? where TenDangNhap = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,tk.getTenDangNhap());
+            ps.setBoolean(1,TinhTrang);
+            ps.setString(2,TenDangNhap);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
