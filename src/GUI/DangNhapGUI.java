@@ -41,22 +41,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
 
     }
 
-    public void loadDatatemp() {
-        tkBUS.docDanhSach();
-        nvBUS.docDanhSach();
-        ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
-        ArrayList<TaiKhoanDTO> dstk = tkBUS.getListTaiKhoan();
-        for (TaiKhoanDTO tk : dstk) {
-            TinhTrang = tk.isTinhTrang();
-            System.out.println(tk.isTinhTrang());
-            for (NhanVienDTO nv : dsnv) {
-                if (tk.getMaNV().equals(nv.getMaNV())) {
-                    System.out.println(nv.getMaNV());
-                }
-            }
-
-        }
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

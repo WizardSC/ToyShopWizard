@@ -93,6 +93,8 @@ public class LoaiGUI extends javax.swing.JDialog {
         txtTenLoai = new javax.swing.JTextField();
         txtTimKiem1 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
+        btnThem = new javax.swing.JLabel();
+        btnChinhSua = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -210,7 +212,29 @@ public class LoaiGUI extends javax.swing.JDialog {
         jComboBox2.setEditable(true);
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã loại" }));
         jComboBox2.setFocusable(false);
-        jPanel6.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 68, 27));
+        jPanel6.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 150, 70, 27));
+
+        btnThem.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnAdd.png"))); // NOI18N
+        btnThem.setText("Thêm");
+        btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnThem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnThemMouseClicked(evt);
+            }
+        });
+        jPanel6.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        btnChinhSua.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
+        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnUpdate.png"))); // NOI18N
+        btnChinhSua.setText("Sửa");
+        btnChinhSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChinhSua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnChinhSuaMouseClicked(evt);
+            }
+        });
+        jPanel6.add(btnChinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -267,11 +291,45 @@ public class LoaiGUI extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnBoChonMouseClicked
 
+    private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
+//        String MaSP = txtMaSP.getText().toUpperCase();
+//        String TenSP = txtTenSP.getText();
+//        int SoLuong = 0;
+//        int DonGia = Integer.parseInt(txtDonGia.getText());
+//        //        int DonGia = 0;
+//        String DonViTinh = cbxDonViTinh.getSelectedItem().toString();
+//        String MaLoai = txtMaLoai.getText();
+//        String IMG = imgName;
+//        SanPhamDTO sp = new SanPhamDTO(MaSP, TenSP, SoLuong, DonGia, DonViTinh, MaLoai, IMG);
+//        spBUS.add(sp);
+//        loadData();
+        //        NhanVienDTO nv = new NhanVienDTO(MaNV, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, Integer.parseInt(Luong), IMG);
+        //        nvBUS.add(nv);
+        //        saveIMG();
+        //        loadData();
+    }//GEN-LAST:event_btnThemMouseClicked
+
+    private void btnChinhSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaMouseClicked
+//        String MaSP = txtMaSP.getText();
+//        String TenSP = txtTenSP.getText();
+//        String SoLuong = txtSoLuong.getText();
+//        String DonGia = txtDonGia.getText();
+//        String DonViTinh = cbxDonViTinh.getSelectedItem().toString();
+//        String MaLoai = txtMaLoai.getText();
+//        String IMG = imgName;
+//        SanPhamDTO sp = new SanPhamDTO(MaSP, TenSP, Integer.parseInt(SoLuong), Integer.parseInt(DonGia), DonViTinh, MaLoai, IMG);
+//        spBUS.update(sp);
+//        saveIMG();
+//        loadData();
+    }//GEN-LAST:event_btnChinhSuaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBoChon;
+    private javax.swing.JLabel btnChinhSua;
     private javax.swing.JLabel btnChonLoai;
     private javax.swing.JLabel btnClose;
+    private javax.swing.JLabel btnThem;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel6;
