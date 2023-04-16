@@ -367,8 +367,10 @@ public class ThongKeGUI extends javax.swing.JPanel {
                 .addContainerGap(324, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("   MUA HÀNG   ", PnTKMua);
+        jTabbedPane1.addTab("   BÁN HÀNG   ", PnTKMua);
         PnTKMua.getAccessibleContext().setAccessibleDescription("");
+
+        PnTKKho.setBackground(new java.awt.Color(250, 247, 240));
 
         txtThang.setDateFormatString("MM-yyyy");
         txtThang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -581,9 +583,7 @@ public class ThongKeGUI extends javax.swing.JPanel {
                 .addContainerGap(324, Short.MAX_VALUE))
         );
 
-        PnTienNhap.getAccessibleContext().setAccessibleName("Tổng Tiền Nhập");
-
-        jTabbedPane1.addTab("    KHO    ", PnTKKho);
+        jTabbedPane1.addTab("   NHẬP/XUẤT KHO   ", PnTKKho);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

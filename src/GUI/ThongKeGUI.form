@@ -58,8 +58,8 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="   MUA H&#xc0;NG   ">
-                <Property name="tabTitle" type="java.lang.String" value="   MUA H&#xc0;NG   "/>
+              <JTabbedPaneConstraints tabName="   B&#xc1;N H&#xc0;NG   ">
+                <Property name="tabTitle" type="java.lang.String" value="   B&#xc1;N H&#xc0;NG   "/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -440,10 +440,15 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PnTKKho">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f0" green="f7" red="fa" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="    KHO    ">
-                <Property name="tabTitle" type="java.lang.String" value="    KHO    "/>
+              <JTabbedPaneConstraints tabName="   NH&#x1eac;P/XU&#x1ea4;T KHO   ">
+                <Property name="tabTitle" type="java.lang.String" value="   NH&#x1eac;P/XU&#x1ea4;T KHO   "/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
