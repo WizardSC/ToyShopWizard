@@ -427,7 +427,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
                 .addGap(287, 287, 287)
                 .addComponent(btnInHoaDoninTTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(pnHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+            .addComponent(pnHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,7 +544,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
                 btnThemSPMouseClicked(evt);
             }
         });
-        pnDSSP.add(btnThemSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 640, 170, -1));
+        pnDSSP.add(btnThemSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 640, 190, -1));
         pnDSSP.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, 230, 24));
 
         pnGioHang.setBackground(new java.awt.Color(250, 247, 240));
