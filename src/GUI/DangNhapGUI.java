@@ -29,6 +29,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
     public String temp = "";
     public boolean TinhTrang = true;
     public String MaCV;
+    public String MaNV;
 
     public DangNhapGUI() {
         setUndecorated(true);
@@ -254,6 +255,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
                     if (tk.getMaNV().equals(nv.getMaNV())) {
                         System.out.println(nv.getMaNV());
                         MaCV = nv.getMaCV();
+                        MaNV = nv.getMaNV();
                     }
                 }
             }
@@ -272,7 +274,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
         }
         if (MaCV.equals("CV01")) {
             if (TinhTrang == true) {
-                MainForQuanLyGUI main = new MainForQuanLyGUI();
+                MainForQuanLyGUI main = new MainForQuanLyGUI(MaNV);
                 main.setVisible(true);
                 dispose();
                 return;

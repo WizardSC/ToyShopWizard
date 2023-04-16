@@ -42,7 +42,7 @@ public class ChangeScreenQuanLy {
 //        lblItem.setBackground(new Color(130,120,210));
         pnRoot.removeAll();
         pnRoot.setLayout(new BorderLayout());
-        pnRoot.add(new MainForQuanLyGUI());
+        pnRoot.add(new MainForQuanLyGUI(""));
         pnRoot.validate();
         pnRoot.repaint();
     }
