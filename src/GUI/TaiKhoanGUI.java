@@ -126,7 +126,6 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtTenDangNhap2 = new javax.swing.JTextField();
         btnDatMatKhau = new javax.swing.JLabel();
-        btnDatMatKhau1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtMatKhauMoi = new javax.swing.JTextField();
 
@@ -284,11 +283,11 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel4.setText("Tên đăng nhập");
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
-        jPanel5.add(txtMatKhau2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 168, 26));
+        jPanel5.add(txtMatKhau2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 168, 26));
 
         jLabel6.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel6.setText("Mật khẩu cũ");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
         jPanel5.add(txtTenDangNhap2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 168, 26));
 
         btnDatMatKhau.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
@@ -300,18 +299,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
                 btnDatMatKhauMouseClicked(evt);
             }
         });
-        jPanel5.add(btnDatMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
-
-        btnDatMatKhau1.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
-        btnDatMatKhau1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnUpdate.png"))); // NOI18N
-        btnDatMatKhau1.setText("Sửa mật khẩu");
-        btnDatMatKhau1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDatMatKhau1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDatMatKhau1MouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnDatMatKhau1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+        jPanel5.add(btnDatMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel8.setText("Mật khẩu mới");
@@ -357,7 +345,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         String TenDangNhap = txtTenDangNhap2.getText();
         String TinhTrang = txtTinhTrang2.getText();
         tkBUS.lock(Boolean.parseBoolean(TinhTrang), TenDangNhap);
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/unlock.png")));
+        
         loadData();
     }//GEN-LAST:event_btnXoaMouseClicked
 
@@ -366,31 +354,34 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         txtTenDangNhap2.setText(tblDSTK.getModel().getValueAt(k, 1).toString());
         txtTenDangNhap2.setEnabled(false);
         txtMatKhau2.setText(tblDSTK.getModel().getValueAt(k, 2).toString());
+        String MatKhau = tblDSTK.getModel().getValueAt(k, 2).toString();
+        txtMatKhau2.setEnabled(false);
         txtTenDangNhap3.setText(tblDSTK.getModel().getValueAt(k, 1).toString());
         txtTinhTrang2.setText(tblDSTK.getModel().getValueAt(k, 3).toString());
         String TT = tblDSTK.getModel().getValueAt(k, 3).toString();
         boolean TinhTrang = Boolean.parseBoolean(TT);
         System.out.println(TinhTrang);
         System.out.println(TT);
+        
+        if (MatKhau.equals("111111")){
+            btnDatMatKhau.setText("Đặt mật khẩu mới");
+            btnDatMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/password.png")));
+        } else {
+            btnDatMatKhau.setText("Reset mật khẩu");
+            btnDatMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnReset.png")));
+        }
         if (TinhTrang == false) {
             btnXoa.setText("Mở khóa");
+            btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/unlock.png")));
         } else {
             btnXoa.setText("Khóa");
+            btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/padlock.png")));
         }
     }//GEN-LAST:event_tblDSTKMouseClicked
-
-    private void btnDatMatKhau1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDatMatKhau1MouseClicked
-        String TenDangNhap = txtTenDangNhap2.getText();
-        String MatKhau = txtMatKhau2.getText();
-        String MatKhauMoi = txtMatKhauMoi.getText();
-        tkBUS.update(MatKhau, MatKhauMoi, TenDangNhap);
-        loadData();
-    }//GEN-LAST:event_btnDatMatKhau1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnDatMatKhau;
-    private javax.swing.JLabel btnDatMatKhau1;
     private javax.swing.JLabel btnThem;
     private javax.swing.JLabel btnXoa;
     private javax.swing.JComboBox<String> cbxNhanVien;

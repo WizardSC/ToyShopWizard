@@ -13,9 +13,9 @@ public class Main {
     public static void main(String[] args) {
         
             //Đăng nhập
-//        new DangNhapGUI().se^tVisible(true);
+        new DangNhapGUI().setVisible(true);
         //Nhân viên quản lý
-        new MainForQuanLyGUI().setVisible(true);
+//        new MainForQuanLyGUI().setVisible(true);
         //Nhân viên kho
 //        new MainForNVKhoGUI().setVisible(true);
         //Nhân viên bán hàng
