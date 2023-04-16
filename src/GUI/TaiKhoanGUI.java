@@ -102,13 +102,13 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtTen = new javax.swing.JTextField();
+        txtTenDangNhap1 = new javax.swing.JTextField();
         lblMaCV = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtTen2 = new javax.swing.JTextField();
+        txtMatKhau1 = new javax.swing.JTextField();
         lblMaCV1 = new javax.swing.JLabel();
         btnThem = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbxTinhTrang = new javax.swing.JComboBox<>();
         cbxNhanVien = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         btnXoa = new javax.swing.JLabel();
@@ -142,7 +142,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel3.setText("Tên đăng nhập");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
-        jPanel1.add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 168, 26));
+        jPanel1.add(txtTenDangNhap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 168, 26));
 
         lblMaCV.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblMaCV.setText("Mã NV");
@@ -151,7 +151,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         jLabel5.setText("Mật khẩu");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
-        jPanel1.add(txtTen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 169, 26));
+        jPanel1.add(txtMatKhau1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 169, 26));
 
         lblMaCV1.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblMaCV1.setText("Tình trạng");
@@ -168,7 +168,8 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         });
         jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
 
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 170, 30));
+        cbxTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true" }));
+        jPanel1.add(cbxTinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 170, 30));
 
         cbxNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(cbxNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 170, 30));
@@ -329,7 +330,13 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-
+        String TenDangNhap = txtTenDangNhap1.getText();
+        String MatKhau = txtMatKhau1.getText();
+        String MaNV = cbxNhanVien.getSelectedItem().toString();
+        boolean TinhTrang = Boolean.parseBoolean(cbxTinhTrang.getSelectedItem().toString());
+        TaiKhoanDTO tk = new TaiKhoanDTO(MaNV, TenDangNhap, MatKhau, TinhTrang);
+        tkBUS.add(tk);
+        loadData();
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnDatMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDatMatKhauMouseClicked
@@ -351,6 +358,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
 
     private void tblDSTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSTKMouseClicked
         int k = tblDSTK.getSelectedRow();
+        
         txtTenDangNhap2.setText(tblDSTK.getModel().getValueAt(k, 1).toString());
         txtTenDangNhap2.setEnabled(false);
         txtMatKhau2.setText(tblDSTK.getModel().getValueAt(k, 2).toString());
@@ -385,8 +393,8 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     private javax.swing.JLabel btnThem;
     private javax.swing.JLabel btnXoa;
     private javax.swing.JComboBox<String> cbxNhanVien;
+    private javax.swing.JComboBox<String> cbxTinhTrang;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -403,10 +411,10 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
     private javax.swing.JLabel lblMaCV;
     private javax.swing.JLabel lblMaCV1;
     private javax.swing.JTable tblDSTK;
+    private javax.swing.JTextField txtMatKhau1;
     private javax.swing.JTextField txtMatKhau2;
     private javax.swing.JTextField txtMatKhauMoi;
-    private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtTen2;
+    private javax.swing.JTextField txtTenDangNhap1;
     private javax.swing.JTextField txtTenDangNhap2;
     private javax.swing.JTextField txtTenDangNhap3;
     private javax.swing.JTextField txtTinhTrang2;
