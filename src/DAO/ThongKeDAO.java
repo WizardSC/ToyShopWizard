@@ -224,9 +224,66 @@ public class ThongKeDAO {
         return null;
     }
     
+    public ArrayList<Object> getTienXuat(String[] arrDate) {
+        try {
+            ArrayList<Object> dsDT = new ArrayList<>();
+            String sql_per = "(((SELECT SUM(TongTien) FROM phieuxuat WHERE Month(NgayLap)="+arrDate[0]+" AND Year(NgayLap)="+arrDate[1]+") "
+                    + "- (SELECT SUM(TongTien) FROM phieuxuat WHERE Month(NgayLap)="+arrDate[2]+" AND Year(NgayLap)="+arrDate[3]+"))" +
+"/ (SELECT SUM(TongTien) FROM phieuxuat WHERE Month(NgayLap)="+arrDate[2]+" AND Year(NgayLap)="+arrDate[3]+"))*100 AS Tang";
+            
+            String sql = "SELECT SUM(TongTien) as TienXuat, "
+                    + "(SELECT SUM(TongTien) FROM phieuxuat WHERE Month(NgayLap)="+arrDate[0]+" AND Year(NgayLap)="+arrDate[1]+")"
+                    + "/"
+                    + "(SELECT SUM(TongTien) FROM phieuxuat)*100 AS ChiemTongTX, "+sql_per+" "
+                    + "FROM phieuxuat WHERE Month(NgayLap)="+arrDate[0]+" AND Year(NgayLap)="+arrDate[1];
+
+            ResultSet rs = mySQL.executeQuery(sql);
+            while (rs.next()) {
+                if(rs.getBigDecimal("TienXuat")!=null){
+                    dsDT.add(rs.getBigDecimal("TienXuat").toBigInteger());
+                }
+                else{
+                    dsDT.add(0);
+                }
+                dsDT.add(rs.getDouble("ChiemTongTX"));
+                dsDT.add(rs.getDouble("Tang"));
+            }
+            return dsDT;
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+        return null;
+    }
+    
     public Integer getSLNhap(String thang, String nam) {
         try {
             String sql = "SELECT SUM(SoLuong) AS SoLuong FROM phieunhap pn,ctphieunhap ct WHERE pn.MaPN=ct.MaPN AND "
+                    + "Month(NgayLap)="+thang+" AND Year(NgayLap)="+nam;
+            System.out.println(sql);
+            Integer count = 0;
+            ResultSet rs = mySQL.executeQuery(sql);
+            while (rs.next()) {
+                if(rs.getBigDecimal("SoLuong")!=null){
+                    count = rs.getInt("SoLuong");
+                }
+                else{
+                    count = 0;
+                }
+            }
+            return count;
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+        return null;
+    }
+    
+    public Integer getSLXuat(String thang, String nam) {
+        try {
+            String sql = "SELECT SUM(SoLuong) AS SoLuong FROM phieuxuat px,ctphieuxuat ct WHERE px.MaPX=ct.MaPX AND "
                     + "Month(NgayLap)="+thang+" AND Year(NgayLap)="+nam;
             System.out.println(sql);
             Integer count = 0;
@@ -308,10 +365,68 @@ public class ThongKeDAO {
         return null;
     }
     
+    public ArrayList<Object> getTienXuatQuy(String[] arrDate) {
+        try {
+            ArrayList<Object> dsTN = new ArrayList<>();
+            String sql_per = "(((SELECT SUM(TongTien) FROM phieuxuat WHERE NgayLap BETWEEN '"+arrDate[0]+"' AND '"+arrDate[1]+"') "
+                    + "- (SELECT SUM(TongTien) FROM phieuxuat WHERE NgayLap BETWEEN '"+arrDate[2]+"' AND '"+arrDate[3]+"'))" +
+"/ (SELECT SUM(TongTien) FROM phieuxuat WHERE NgayLap BETWEEN '"+arrDate[2]+"' AND '"+arrDate[3]+"'))*100 AS Tang";
+            
+            String sql = "SELECT SUM(TongTien) as TienXuat, "
+                    + "(SELECT SUM(TongTien) FROM phieuxuat WHERE NgayLap BETWEEN '"+arrDate[0]+"' AND '"+arrDate[1]+"')"
+                    + "/"
+                    + "(SELECT SUM(TongTien) FROM phieuxuat)*100 AS ChiemTX, "+sql_per+" "
+                    + "FROM phieuxuat WHERE NgayLap BETWEEN '"+arrDate[0]+"' AND '"+arrDate[1]+"'";
+
+            System.out.println(sql);
+            ResultSet rs = mySQL.executeQuery(sql);
+            while (rs.next()) {
+                if(rs.getBigDecimal("TienXuat")!=null){
+                    dsTN.add(rs.getBigDecimal("TienXuat").toBigInteger());
+                }
+                else{
+                    dsTN.add(0);
+                }
+                dsTN.add(rs.getDouble("ChiemTX"));
+                dsTN.add(rs.getDouble("Tang"));
+            }
+            return dsTN;
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+        return null;
+    }
+    
     public Integer getSLNhapQuy(String dateStart, String dateEnd) {
         try {
             String sql = "SELECT SUM(SoLuong) AS SoLuong FROM phieunhap pn,ctphieunhap ct"
                     + " WHERE pn.MaPN=ct.MaPN AND NgayLap BETWEEN '"+dateStart+"' AND '"+dateEnd+"'";
+            System.out.println(sql);
+            Integer count = 0;
+            ResultSet rs = mySQL.executeQuery(sql);
+            while (rs.next()) {
+                if(rs.getBigDecimal("SoLuong")!=null){
+                    count = rs.getInt("SoLuong");
+                }
+                else{
+                    count = 0;
+                }
+            }
+            return count;
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+        return null;
+    }
+    
+    public Integer getSLXuatQuy(String dateStart, String dateEnd) {
+        try {
+            String sql = "SELECT SUM(SoLuong) AS SoLuong FROM phieuxuat px,ctphieuxuat ct"
+                    + " WHERE px.MaPX=ct.MaPX AND NgayLap BETWEEN '"+dateStart+"' AND '"+dateEnd+"'";
             System.out.println(sql);
             Integer count = 0;
             ResultSet rs = mySQL.executeQuery(sql);

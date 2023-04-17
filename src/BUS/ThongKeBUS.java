@@ -17,6 +17,7 @@ public class ThongKeBUS {
     public static ArrayList<Object> listTKDT;
     //Thong Ke Kho
     public static ArrayList<Object> listTKTN;
+    public static ArrayList<Object> listTKTX;
     public static ArrayList<KhoDTO> listTKTon;
     private ThongKeDAO tkDAO;
     
@@ -210,9 +211,33 @@ public class ThongKeBUS {
         listTKTN = tkDAO.getTienNhap(arrDate);
     }
     
+    public void ThongkeTX(String ngayTK){
+        listTKTX = new ArrayList<>();
+        String[] arrDate = new String[4]; // [0]: thang TK, [1]: nam TK, [2]: thang truoc TK, [3]: nam truoc TK
+        String[] arrSplit = ngayTK.split("-");
+        
+        arrDate[0]= arrSplit[0];
+        arrDate[1]= arrSplit[1];
+            
+        if(Integer.parseInt(arrSplit[0]) == 1){
+            arrDate[2]= "12";
+            arrDate[3]= String.valueOf(Integer.parseInt(arrSplit[1])-1);
+        }
+        else{
+            arrDate[2]= String.valueOf(Integer.parseInt(arrSplit[0])-1);
+            arrDate[3]= arrSplit[1];
+        }
+        listTKTX = tkDAO.getTienXuat(arrDate);
+    }
+    
     public String ThongkeSLN(String ngayTK){
         String[] arrDate = ngayTK.split("-"); // [0]: thang TK, [1]: nam TK   
         return String.valueOf(tkDAO.getSLNhap(arrDate[0], arrDate[1]));
+    }
+    
+    public String ThongkeSLX(String ngayTK){
+        String[] arrDate = ngayTK.split("-"); // [0]: thang TK, [1]: nam TK   
+        return String.valueOf(tkDAO.getSLXuat(arrDate[0], arrDate[1]));
     }
     
     public void ThongkeSPKho(String limit, String sort){
@@ -285,6 +310,59 @@ public class ThongKeBUS {
         }
     }
     
+    public void ThongkeTXQuy(String quy){
+        listTKTX = new ArrayList<>();
+        
+        String[] arrDate = new String[4]; // [0]: bắt đầu quý TK, [1]: kết thúc quý TK, [2]: bat dau quy truoc quy TK, [3]: ket thuc quy truoc quy TK
+        //Lấy năm hiện tại
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        dateFormat.applyPattern("yyyy");
+        String year = dateFormat.format(date);
+        
+        switch(quy) {
+            case "Quý 1":
+                arrDate[0] = year + "-01-01";
+                arrDate[1] = year + "-03-31";
+
+                String beforeYear = String.valueOf(Integer.parseInt(year)-1);
+
+                arrDate[2] = beforeYear + "-10-01";
+                arrDate[3] = beforeYear + "-12-31";
+
+                listTKTX = tkDAO.getTienXuatQuy(arrDate);
+            break;
+            case "Quý 2":
+                arrDate[0] = year+"-04-01";
+                arrDate[1] = year+"-06-30";
+            
+                arrDate[2] = year + "-01-01";
+                arrDate[3] = year + "-03-31";
+            
+                listTKTX = tkDAO.getTienXuatQuy(arrDate);
+            break;
+            case "Quý 3":
+                arrDate[0] = year+"-07-01";
+                arrDate[1] = year+"-09-30";
+            
+                arrDate[2] = year+"-04-01";
+                arrDate[3] = year+"-06-30";
+            
+                listTKTX = tkDAO.getTienXuatQuy(arrDate);
+            break;
+            case "Quý 4":
+                arrDate[0] = year+"-10-01";
+                arrDate[1] = year+"-12-31";
+
+                arrDate[2] = year+"-07-01";
+                arrDate[3] = year+"-09-30";
+
+                listTKTX = tkDAO.getTienXuatQuy(arrDate);
+            break;
+        
+        }
+    }
+    
     public String ThongkeSLNQuy(String quy){
         //Lấy năm hiện tại
         Date date = new Date();
@@ -313,6 +391,27 @@ public class ThongKeBUS {
                 }
             }
         }
+    }
+    
+    public String ThongkeSLXQuy(String quy){
+        //Lấy năm hiện tại
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        dateFormat.applyPattern("yyyy");
+        String year = dateFormat.format(date);
+        
+        
+        switch(quy) {
+            case "Quý 1":
+                return String.valueOf(tkDAO.getSLXuatQuy(year+"-01-01-", year+"-03-31"));
+            case "Quý 2":
+                return String.valueOf(tkDAO.getSLXuatQuy(year+"-04-01", year+"-06-30"));
+            case "Quý 3":
+                return String.valueOf(tkDAO.getSLXuatQuy(year+"-07-01", year+"-09-30"));
+            case "Quý 4":
+                return String.valueOf(tkDAO.getSLXuatQuy(year+"-10-01", year+"-12-31"));
+        }
+        return "0";
     }
     
 }

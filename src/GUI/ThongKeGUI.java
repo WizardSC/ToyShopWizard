@@ -129,6 +129,17 @@ public class ThongKeGUI extends javax.swing.JPanel {
         // So Luong Nhap
         setPanelSLNhap(dateFormat.format(txtThang.getDate()),
                 tkBUS.ThongkeSLN(dateFormat.format(txtThang.getDate())));
+        
+        // Tong Tien Xuat
+        tkBUS.ThongkeTX(dateFormat.format(txtThang.getDate()));
+        setPanelTX(dateFormat.format(txtThang.getDate()),
+                tkBUS.listTKTX.get(0),
+                (Double) tkBUS.listTKTX.get(1),
+                (Double) tkBUS.listTKTX.get(2));
+//            
+        // So Luong Xuat
+        setPanelSLXuat(dateFormat.format(txtThang.getDate()),
+                tkBUS.ThongkeSLX(dateFormat.format(txtThang.getDate())));
 //        
         // Thong ke san pham Ton Kho
         tkBUS.ThongkeSPKho("", "Giảm");
@@ -162,9 +173,6 @@ public class ThongKeGUI extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         PnTKKho = new javax.swing.JPanel();
         txtThang = new com.toedter.calendar.JDateChooser();
         btnTKKho = new javax.swing.JButton();
@@ -186,9 +194,14 @@ public class ThongKeGUI extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        PnSLXuat = new javax.swing.JPanel();
+        txtSLXuat = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        PnTienXuat = new javax.swing.JPanel();
+        txtTienXuat = new javax.swing.JLabel();
+        iconUpKho2 = new javax.swing.JLabel();
+        valueUpKho2 = new javax.swing.JLabel();
+        ChiemXuat = new javax.swing.JLabel();
 
         jTabbedPane1.setBackground(new java.awt.Color(204, 204, 204));
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -384,36 +397,6 @@ public class ThongKeGUI extends javax.swing.JPanel {
         jLabel8.setText("THỐNG KÊ SẢN PHẨM BÁN CHẠY");
         PnTKMua.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 640, -1));
 
-        jLabel15.setText("jLabel15");
-
-        jLabel16.setText("jLabel16");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(289, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(91, 91, 91))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addGap(42, 42, 42))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addComponent(jLabel16))
-        );
-
-        jScrollPane3.setViewportView(jPanel1);
-
-        PnTKMua.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 590, 110, 50));
-
         jTabbedPane1.addTab("   BÁN HÀNG   ", PnTKMua);
         PnTKMua.getAccessibleContext().setAccessibleDescription("");
 
@@ -532,7 +515,7 @@ public class ThongKeGUI extends javax.swing.JPanel {
                     .addComponent(txtTienNhap)
                     .addGroup(PnTienNhapLayout.createSequentialGroup()
                         .addComponent(ChiemNhap)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(iconUpKho)
                         .addGap(0, 0, 0)
                         .addComponent(valueUpKho)))
@@ -570,7 +553,7 @@ public class ThongKeGUI extends javax.swing.JPanel {
         PnSLNhapLayout.setHorizontalGroup(
             PnSLNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnSLNhapLayout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
+                .addContainerGap(174, Short.MAX_VALUE)
                 .addComponent(txtSLNhap)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
@@ -601,18 +584,96 @@ public class ThongKeGUI extends javax.swing.JPanel {
         PnTKKho.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 400, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/pie-chart (1).png"))); // NOI18N
-        PnTKKho.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 490, 130, 150));
+        PnTKKho.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 500, 130, 150));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/pie-chart.png"))); // NOI18N
-        PnTKKho.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 500, 130, 150));
+        PnSLXuat.setBackground(new java.awt.Color(255, 242, 204));
+        PnSLXuat.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3), "Số Lượng Xuất", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 20))); // NOI18N
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/pie-chart.png"))); // NOI18N
-        PnTKKho.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 500, 130, 150));
+        txtSLXuat.setBackground(new java.awt.Color(153, 102, 255));
+        txtSLXuat.setFont(new java.awt.Font("Tahoma", 1, 40)); // NOI18N
+        txtSLXuat.setText("0");
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/pie-chart (1).png"))); // NOI18N
-        PnTKKho.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 130, 150));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel15.setText("Sản phẩm");
 
-        jTabbedPane1.addTab("   NHẬP/XUẤT KHO   ", PnTKKho);
+        javax.swing.GroupLayout PnSLXuatLayout = new javax.swing.GroupLayout(PnSLXuat);
+        PnSLXuat.setLayout(PnSLXuatLayout);
+        PnSLXuatLayout.setHorizontalGroup(
+            PnSLXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnSLXuatLayout.createSequentialGroup()
+                .addContainerGap(174, Short.MAX_VALUE)
+                .addComponent(txtSLXuat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
+                .addGap(10, 10, 10))
+        );
+        PnSLXuatLayout.setVerticalGroup(
+            PnSLXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PnSLXuatLayout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addGroup(PnSLXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSLXuat)
+                    .addComponent(jLabel15))
+                .addGap(25, 25, 25))
+        );
+
+        PnTKKho.add(PnSLXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
+        PnSLXuat.getAccessibleContext().setAccessibleName("Số Lượng Xuất");
+
+        PnTienXuat.setBackground(new java.awt.Color(244, 177, 131));
+        PnTienXuat.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tổng Tiền Xuất", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 20), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        txtTienXuat.setBackground(new java.awt.Color(153, 102, 255));
+        txtTienXuat.setFont(new java.awt.Font("Tahoma", 1, 33)); // NOI18N
+        txtTienXuat.setForeground(new java.awt.Color(255, 255, 255));
+        txtTienXuat.setText("200000000vnd");
+
+        iconUpKho2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/arrow-up.png"))); // NOI18N
+
+        valueUpKho2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        valueUpKho2.setForeground(new java.awt.Color(51, 153, 0));
+        valueUpKho2.setText("50%");
+
+        ChiemXuat.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        ChiemXuat.setForeground(new java.awt.Color(255, 0, 51));
+        ChiemXuat.setText("Chiếm % Tổng Tiền Xuất");
+
+        javax.swing.GroupLayout PnTienXuatLayout = new javax.swing.GroupLayout(PnTienXuat);
+        PnTienXuat.setLayout(PnTienXuatLayout);
+        PnTienXuatLayout.setHorizontalGroup(
+            PnTienXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnTienXuatLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PnTienXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtTienXuat)
+                    .addGroup(PnTienXuatLayout.createSequentialGroup()
+                        .addComponent(ChiemXuat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(iconUpKho2)
+                        .addGap(0, 0, 0)
+                        .addComponent(valueUpKho2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PnTienXuatLayout.setVerticalGroup(
+            PnTienXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnTienXuatLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(PnTienXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ChiemXuat)
+                    .addGroup(PnTienXuatLayout.createSequentialGroup()
+                        .addGroup(PnTienXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(iconUpKho2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(valueUpKho2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addComponent(txtTienXuat)))
+                .addContainerGap())
+        );
+
+        PnTKKho.add(PnTienXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, -1, 150));
+
+        jScrollPane3.setViewportView(PnTKKho);
+
+        jTabbedPane1.addTab("NHẬP/XUẤT KHO", jScrollPane3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -692,33 +753,46 @@ public class ThongKeGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void cboxQuyDTItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxQuyDTItemStateChanged
-        tkBUS.ThongkeDTQuy(String.valueOf(cboxQuyDT.getSelectedItem()));
+        if(!String.valueOf(cboxQuyDT.getSelectedItem()).equals("Chọn Quý Thống Kê")){
+            tkBUS.ThongkeDTQuy(String.valueOf(cboxQuyDT.getSelectedItem()));
 
-        // Doanh thu
-        setPanelDT(String.valueOf(cboxQuyDT.getSelectedItem()),
-            tkBUS.listTKDT.get(0),
-            (Double) tkBUS.listTKDT.get(1),
-            (Double) tkBUS.listTKDT.get(2));
+            // Doanh thu
+            setPanelDT(String.valueOf(cboxQuyDT.getSelectedItem()),
+                tkBUS.listTKDT.get(0),
+                (Double) tkBUS.listTKDT.get(1),
+                (Double) tkBUS.listTKDT.get(2));
 
-        // So luong Hoa don
-        setPanelHD(String.valueOf(cboxQuyDT.getSelectedItem()),
-            tkBUS.ThongkeHDQuy(String.valueOf(cboxQuyDT.getSelectedItem())));
+            // So luong Hoa don
+            setPanelHD(String.valueOf(cboxQuyDT.getSelectedItem()),
+                tkBUS.ThongkeHDQuy(String.valueOf(cboxQuyDT.getSelectedItem())));
 
-        // Thong ke San Pham
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-yyyy");
-        if ((int) txtSoLuong.getValue() == -1 || (int) txtSoLuong.getValue() == 0) {
-            txtSoLuong.setValue(1);
-            tkBUS.ThongkeSPQuy(String.valueOf(cboxQuyDT.getSelectedItem()), "1", String.valueOf(cboxSort.getSelectedItem()));
-        } else {
+            // Thong ke San Pham
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-yyyy");
+            if ((int) txtSoLuong.getValue() == -1 || (int) txtSoLuong.getValue() == 0) {
+                txtSoLuong.setValue(1);
+                tkBUS.ThongkeSPQuy(String.valueOf(cboxQuyDT.getSelectedItem()), "1", String.valueOf(cboxSort.getSelectedItem()));
+            } else {
 
-            tkBUS.ThongkeSPQuy(String.valueOf(cboxQuyDT.getSelectedItem()), String.valueOf(txtSoLuong.getValue()), String.valueOf(cboxSort.getSelectedItem()));
+                tkBUS.ThongkeSPQuy(String.valueOf(cboxQuyDT.getSelectedItem()), String.valueOf(txtSoLuong.getValue()), String.valueOf(cboxSort.getSelectedItem()));
+            }
+            showAll(tkBUS.listTKSP);
         }
-        showAll(tkBUS.listTKSP);
     }//GEN-LAST:event_cboxQuyDTItemStateChanged
 
     private void tblTKSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTKSPMouseClicked
 
     }//GEN-LAST:event_tblTKSPMouseClicked
+
+    private void txtSLKhoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtSLKhoStateChanged
+        // TODO add your handling code here:
+        if ((int) txtSLKho.getValue() == -1 || (int) txtSLKho.getValue() == 0) {
+            txtSLKho.setValue(1);
+            tkBUS.ThongkeSPKho("1", String.valueOf(cboxSortKho.getSelectedItem()));
+        } else {
+            tkBUS.ThongkeSPKho(String.valueOf(txtSLKho.getValue()), String.valueOf(cboxSortKho.getSelectedItem()));
+        }
+        showAllKho(tkBUS.listTKTon);
+    }//GEN-LAST:event_txtSLKhoStateChanged
 
     private void tblTKSPKhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTKSPKhoMouseClicked
         // TODO add your handling code here:
@@ -735,30 +809,34 @@ public class ThongKeGUI extends javax.swing.JPanel {
         showAllKho(tkBUS.listTKTon);
     }//GEN-LAST:event_cboxSortKhoItemStateChanged
 
-    private void txtSLKhoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtSLKhoStateChanged
-        // TODO add your handling code here:
-        if ((int) txtSLKho.getValue() == -1 || (int) txtSLKho.getValue() == 0) {
-            txtSLKho.setValue(1);
-            tkBUS.ThongkeSPKho("1", String.valueOf(cboxSortKho.getSelectedItem()));
-        } else {
-            tkBUS.ThongkeSPKho(String.valueOf(txtSLKho.getValue()), String.valueOf(cboxSortKho.getSelectedItem()));
-        }
-        showAllKho(tkBUS.listTKTon);
-    }//GEN-LAST:event_txtSLKhoStateChanged
-
     private void cboxQuyKhoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxQuyKhoItemStateChanged
         // TODO add your handling code here:
-        tkBUS.ThongkeTNQuy(String.valueOf(cboxQuyKho.getSelectedItem()));
+        if(!String.valueOf(cboxQuyKho.getSelectedItem()).equals("Chọn Quý Thống Kê")){
+            tkBUS.ThongkeTNQuy(String.valueOf(cboxQuyKho.getSelectedItem()));
 
-        // Tong Tien Nhap
-        setPanelTN(String.valueOf(cboxQuyKho.getSelectedItem()),
-            tkBUS.listTKTN.get(0),
-            (Double) tkBUS.listTKTN.get(1),
-            (Double) tkBUS.listTKTN.get(2));
+            // Tong Tien Nhap
+            setPanelTN(String.valueOf(cboxQuyKho.getSelectedItem()),
+                tkBUS.listTKTN.get(0),
+                (Double) tkBUS.listTKTN.get(1),
+                (Double) tkBUS.listTKTN.get(2));
 
-        // So luong Nhap
-        setPanelSLNhap(String.valueOf(cboxQuyKho.getSelectedItem()),
-            tkBUS.ThongkeSLNQuy(String.valueOf(cboxQuyKho.getSelectedItem())));
+            // So luong Nhap
+            setPanelSLNhap(String.valueOf(cboxQuyKho.getSelectedItem()),
+                tkBUS.ThongkeSLNQuy(String.valueOf(cboxQuyKho.getSelectedItem())));
+
+
+            tkBUS.ThongkeTXQuy(String.valueOf(cboxQuyKho.getSelectedItem()));
+
+            // Tong Tien Xuat
+            setPanelTX(String.valueOf(cboxQuyKho.getSelectedItem()),
+                tkBUS.listTKTX.get(0),
+                (Double) tkBUS.listTKTX.get(1),
+                (Double) tkBUS.listTKTX.get(2));
+
+            // So luong Xuat
+            setPanelSLXuat(String.valueOf(cboxQuyKho.getSelectedItem()),
+                tkBUS.ThongkeSLXQuy(String.valueOf(cboxQuyKho.getSelectedItem())));
+        }
     }//GEN-LAST:event_cboxQuyKhoItemStateChanged
 
     private void btnTKKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKKhoActionPerformed
@@ -776,6 +854,18 @@ public class ThongKeGUI extends javax.swing.JPanel {
             // So Luong Nhap
             setPanelSLNhap(dateFormat.format(txtThang.getDate()),
                 tkBUS.ThongkeSLN(dateFormat.format(txtThang.getDate())));
+            
+            // Tong Tien Xuat
+            tkBUS.ThongkeTX(dateFormat.format(txtThang.getDate()));
+            
+            setPanelTX(dateFormat.format(txtThang.getDate()),
+                tkBUS.listTKTX.get(0),
+                (Double) tkBUS.listTKTX.get(1),
+                (Double) tkBUS.listTKTX.get(2));
+//            
+            // So Luong Xuat
+            setPanelSLXuat(dateFormat.format(txtThang.getDate()),
+                tkBUS.ThongkeSLX(dateFormat.format(txtThang.getDate())));
         } else {
             JOptionPane.showMessageDialog(null, "Chưa nhập thời gian thống kế kho hoac sai dinh dang (MM-yyyy)!!");
         }
@@ -813,15 +903,15 @@ public class ThongKeGUI extends javax.swing.JPanel {
         txtSLHD.setText(Soluong);
     }
 
-    private void setPanelTN(String titlePanel, Object DoanhThu, Double percentDT, Double valueDel) {
+    private void setPanelTN(String titlePanel, Object TienNhap, Double percentTN, Double valueDel) {
         PnTienNhap.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 4, true), "Tổng Tiền Nhập " + titlePanel,
                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
                 javax.swing.border.TitledBorder.DEFAULT_POSITION,
                 new java.awt.Font("Tahoma", 1, 20),
                 new java.awt.Color(0, 0, 0)));
 
-        txtTienNhap.setText(DoanhThu + "vnd");
-        ChiemNhap.setText("Chiếm " + String.valueOf(Math.round(percentDT * 100) / 100) + "% Tổng Tiền Nhập");
+        txtTienNhap.setText(TienNhap + "vnd");
+        ChiemNhap.setText("Chiếm " + String.valueOf(Math.round(percentTN * 100) / 100) + "% Tổng Tiền Nhập");
         valueUpKho.setText(String.valueOf(Math.round(valueDel * 100) / 100) + "%");
 
         if (valueDel >= 0) {
@@ -843,16 +933,50 @@ public class ThongKeGUI extends javax.swing.JPanel {
 
         txtSLNhap.setText(Soluong);
     }
+    
+    private void setPanelTX(String titlePanel, Object TienXuat, Double percentTX, Double valueDel) {
+        PnTienXuat.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 4, true), "Tổng Tiền Xuất " + titlePanel,
+                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Tahoma", 1, 20),
+                new java.awt.Color(0, 0, 0)));
+
+        txtTienXuat.setText(TienXuat + "vnd");
+        ChiemXuat.setText("Chiếm " + String.valueOf(Math.round(percentTX * 100) / 100) + "% Tổng Tiền Xuất");
+        valueUpKho2.setText(String.valueOf(Math.round(valueDel * 100) / 100) + "%");
+
+        if (valueDel >= 0) {
+            valueUpKho2.setForeground(new Color(51, 153, 0));
+            iconUpKho2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/arrow-up.png")));
+        } else {
+            valueUpKho2.setForeground(new Color(204, 0, 0));
+            iconUpKho2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/arrow-down.png")));
+        }
+    }
+
+    private void setPanelSLXuat(String titlePanel, String Soluong) {
+
+        PnSLXuat.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 4, true), "Số Lượng Xuất " + titlePanel,
+                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Tahoma", 1, 20),
+                new java.awt.Color(0, 0, 0)));
+
+        txtSLXuat.setText(Soluong);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ChiemDT;
     private javax.swing.JLabel ChiemNhap;
+    private javax.swing.JLabel ChiemXuat;
     private javax.swing.JPanel PnDTMua;
     private javax.swing.JPanel PnHD;
     private javax.swing.JPanel PnSLNhap;
+    private javax.swing.JPanel PnSLXuat;
     private javax.swing.JPanel PnTKKho;
     private javax.swing.JPanel PnTKMua;
     private javax.swing.JPanel PnTienNhap;
+    private javax.swing.JPanel PnTienXuat;
     private javax.swing.JButton btnTK;
     private javax.swing.JButton btnTKKho;
     private javax.swing.JComboBox<String> cboxQuyDT;
@@ -861,14 +985,11 @@ public class ThongKeGUI extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboxSortKho;
     private javax.swing.JLabel iconUp;
     private javax.swing.JLabel iconUpKho;
+    private javax.swing.JLabel iconUpKho2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -877,7 +998,6 @@ public class ThongKeGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -889,10 +1009,13 @@ public class ThongKeGUI extends javax.swing.JPanel {
     private javax.swing.JLabel txtSLHD;
     private javax.swing.JSpinner txtSLKho;
     private javax.swing.JLabel txtSLNhap;
+    private javax.swing.JLabel txtSLXuat;
     private javax.swing.JSpinner txtSoLuong;
     private com.toedter.calendar.JDateChooser txtThang;
     private javax.swing.JLabel txtTienNhap;
+    private javax.swing.JLabel txtTienXuat;
     private javax.swing.JLabel valueUp;
     private javax.swing.JLabel valueUpKho;
+    private javax.swing.JLabel valueUpKho2;
     // End of variables declaration//GEN-END:variables
 }
