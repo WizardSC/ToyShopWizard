@@ -82,70 +82,70 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         lblTenNV.setText(TenNV);
         lblMaNV.setText(MaNV);
         setTime();
-        ChayChuoi();
+//        ChayChuoi();
     }
 
-    public void fadeIn(JComponent comp) {
-        Timer timer = new Timer(2, null);
-        timer.setRepeats(true);
-        timer.addActionListener(new ActionListener() {
-            private float alpha = 0;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                alpha += 0.05f;
-                if (alpha >= 1f) {
-                    alpha = 1f;
-                    timer.stop();
-                }
-                comp.setOpaque(true);
-                comp.setBackground(new Color(152,168,248, (int) (255 * alpha)));
-            }
-        });
-        timer.start();
-    }
-
-    public void fadeOut(JComponent comp) {
-        Timer timer = new Timer(2, null);
-        timer.setRepeats(true);
-        timer.addActionListener(new ActionListener() {
-            private float alpha = 1;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                alpha -= 0.05f;
-                if (alpha <= 0f) {
-                    alpha = 0f;
-                    timer.stop();
-                }
-                comp.setOpaque(true);
-                comp.setBackground(new Color(152,168,248, (int) (255 * alpha)));
-            }
-
-            
-        });
-        timer.start();
-    }
-
-    public void ChayChuoi() {
-    Timer timer = new Timer(1000, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            fadeOut(lblThongTin);
-            Timer timer2 = new Timer(300, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    lblThongTin.setLocation(-lblThongTin.getWidth(), lblThongTin.getY());
-                    fadeIn(lblThongTin);
-                }
-            });
-            timer2.setRepeats(false);
-            timer2.start();
-        }
-    });
-    timer.setRepeats(true);
-    timer.start();
-}
+//    public void fadeIn(JComponent comp) {
+//        Timer timer = new Timer(2, null);
+//        timer.setRepeats(true);
+//        timer.addActionListener(new ActionListener() {
+//            private float alpha = 0;
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                alpha += 0.05f;
+//                if (alpha >= 1f) {
+//                    alpha = 1f;
+//                    timer.stop();
+//                }
+//                comp.setOpaque(true);
+//                comp.setBackground(new Color(152,168,248, (int) (255 * alpha)));
+//            }
+//        });
+//        timer.start();
+//    }
+//
+//    public void fadeOut(JComponent comp) {
+//        Timer timer = new Timer(2, null);
+//        timer.setRepeats(true);
+//        timer.addActionListener(new ActionListener() {
+//            private float alpha = 1;
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                alpha -= 0.05f;
+//                if (alpha <= 0f) {
+//                    alpha = 0f;
+//                    timer.stop();
+//                }
+//                comp.setOpaque(true);
+//                comp.setBackground(new Color(152,168,248, (int) (255 * alpha)));
+//            }
+//
+//            
+//        });
+//        timer.start();
+//    }
+//
+//    public void ChayChuoi() {
+//    Timer timer = new Timer(1000, new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            fadeOut(lblThongTin);
+//            Timer timer2 = new Timer(300, new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    lblThongTin.setLocation(-lblThongTin.getWidth(), lblThongTin.getY());
+//                    fadeIn(lblThongTin);
+//                }
+//            });
+//            timer2.setRepeats(false);
+//            timer2.start();
+//        }
+//    });
+//    timer.setRepeats(true);
+//    timer.start();
+//}
 
     /* Hàm set thời gian ở thanh Header */
     public void setTime() {
