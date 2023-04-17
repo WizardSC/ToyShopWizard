@@ -36,8 +36,8 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
 
     TaiKhoanBUS tkBUS = new TaiKhoanBUS();
     NhanVienBUS nvBUS = new NhanVienBUS();
-    private String MaNV;
-    private String TenNV;
+    private String tempMaNV;
+    
 
     public MainForQuanLyGUI(String MaNV) {
         setUndecorated(true);
@@ -64,25 +64,26 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         list.add(new DanhMuc("ThongKe", pnThongKe, lblThongKe));
         list.add(new DanhMuc("SaoLuu", pnSaoLuu, lblSaoLuu));
         controller.setEvent(list);
-
+        tempMaNV = MaNV;
+        
+        
+        setTime();
+        loadThongTinNV();
+//        ChayChuoi();
+    }
+    public void loadThongTinNV(){
         nvBUS.docDanhSach();
         ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
         for (NhanVienDTO nv : dsnv) {
-            if (nv.getMaNV().equals(MaNV)) {
+            if (nv.getMaNV().equals(tempMaNV)) {
                 String Ho = nv.getHo();
                 String Ten = nv.getTen();
-                System.out.println(Ho);
-                System.out.println(Ten);
-                TenNV = Ho + " " + Ten;
+                
+                lblTenNV.setText(Ho + " " + Ten);
+                lblMaNV.setText(tempMaNV);
             }
 
         }
-        System.out.println(TenNV);
-
-        lblTenNV.setText(TenNV);
-        lblMaNV.setText(MaNV);
-        setTime();
-//        ChayChuoi();
     }
 
 //    public void fadeIn(JComponent comp) {

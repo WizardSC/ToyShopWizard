@@ -42,7 +42,7 @@ public class ChangeScreenNhanVien {
 //        lblItem.setBackground(new Color(130,120,210));
         pnRoot.removeAll();
         pnRoot.setLayout(new BorderLayout());
-        pnRoot.add(new MainForNhanVienGUI());
+        pnRoot.add(new MainForNhanVienGUI(""));
         pnRoot.validate();
         pnRoot.repaint();
     }

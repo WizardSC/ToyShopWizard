@@ -42,8 +42,6 @@ public class DangNhapGUI extends javax.swing.JFrame {
 
     }
 
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -278,15 +276,15 @@ public class DangNhapGUI extends javax.swing.JFrame {
                 main.setVisible(true);
                 dispose();
                 return;
+            } else {
+                JOptionPane.showMessageDialog(null, "Tài khoản của bạn đang bị khóa, vui lòng liên hệ nhân viên quản lý");
+                return;
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Tài khoản của bạn đang bị khóa, vui lòng liên hệ nhân viên quản lý");
-            return;
         }
 
         if (MaCV.equals("CV02")) {
             if (TinhTrang == true) {
-                MainForNhanVienGUI main = new MainForNhanVienGUI();
+                MainForNhanVienGUI main = new MainForNhanVienGUI(MaNV);
                 main.setVisible(true);
                 dispose();
                 return;
@@ -295,16 +293,18 @@ public class DangNhapGUI extends javax.swing.JFrame {
                 return;
             }
         }
+
         if (MaCV.equals("CV03")) {
             if (TinhTrang == true) {
-                MainForNVKhoGUI main = new MainForNVKhoGUI();
+                MainForNVKhoGUI main = new MainForNVKhoGUI(MaNV);
                 main.setVisible(true);
                 dispose();
                 return;
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Tài khoản của bạn đang bị khóa, vui lòng liên hệ nhân viên quản lý");
+                return;
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Tài khoản của bạn đang bị khóa, vui lòng liên hệ nhân viên quản lý");
-            return;
         }
 
 //        MainForQuanLyGUI main = new MainForQuanLyGUI();

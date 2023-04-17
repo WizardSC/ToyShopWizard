@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import BUS.NhanVienBUS;
+import DTO.NhanVienDTO;
 import GUI.model.ChangeScreenNVKho;
 
 import GUI.model.DanhMuc;
@@ -18,9 +20,9 @@ import javax.swing.JFrame;
  * @author wizardsc
  */
 public class MainForNVKhoGUI extends javax.swing.JFrame {
-
-    
-    public MainForNVKhoGUI() {
+    private NhanVienBUS nvBUS = new NhanVienBUS();
+    private String tempMaNV;
+    public MainForNVKhoGUI(String MaNV) {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
@@ -35,6 +37,20 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
         list.add(new DanhMuc("XuatHang", pnXuatHang, lblXuatHang));
         list.add(new DanhMuc("CTPhieuXuat",pnPhieuXuat,lblPhieuXuat));
         controller.setEvent(list);
+        tempMaNV = MaNV;
+        loadThongTinNV();
+    }
+    public void loadThongTinNV(){
+        nvBUS.docDanhSach();
+        ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
+        for(NhanVienDTO nv : dsnv){
+            if(nv.getMaNV().equals(tempMaNV)){
+                String Ho = nv.getHo();
+                String Ten = nv.getTen();
+                lblTenNV.setText(Ho + " " + Ten);
+                lblMaNV.setText(tempMaNV);
+            }
+        }
     }
     
     
@@ -72,6 +88,9 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
         lblXuatHang = new javax.swing.JLabel();
         pnPhieuXuat = new javax.swing.JPanel();
         lblPhieuXuat = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblTenNV = new javax.swing.JLabel();
+        lblMaNV = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -186,9 +205,11 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
         pnMenu.setBackground(new java.awt.Color(188, 206, 248));
         pnMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 4, 4, 0, new java.awt.Color(0, 0, 0)));
         pnMenu.setPreferredSize(new java.awt.Dimension(211, 650));
+        pnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblIconHotel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconHotel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/storage-box.png"))); // NOI18N
+        pnMenu.add(lblIconHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 61, 191, 150));
 
         pnNhapHang.setBackground(new java.awt.Color(188, 206, 248));
         pnNhapHang.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,6 +232,8 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
             .addComponent(lblNhapHang, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
 
+        pnMenu.add(pnNhapHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 218, 191, -1));
+
         pnPhieuNhap.setBackground(new java.awt.Color(188, 206, 248));
         pnPhieuNhap.setForeground(new java.awt.Color(255, 255, 255));
         pnPhieuNhap.setPreferredSize(new java.awt.Dimension(300, 43));
@@ -231,6 +254,8 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
             pnPhieuNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblPhieuNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
+
+        pnMenu.add(pnPhieuNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 279, 191, -1));
 
         pnKho.setBackground(new java.awt.Color(188, 206, 248));
         pnKho.setForeground(new java.awt.Color(255, 255, 255));
@@ -254,6 +279,8 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
                 .addComponent(lblKho, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        pnMenu.add(pnKho, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 340, 191, -1));
+
         pnXuatHang.setBackground(new java.awt.Color(188, 206, 248));
         pnXuatHang.setForeground(new java.awt.Color(255, 255, 255));
         pnXuatHang.setPreferredSize(new java.awt.Dimension(300, 43));
@@ -276,6 +303,8 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
             .addComponent(lblXuatHang, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
 
+        pnMenu.add(pnXuatHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 401, 191, -1));
+
         pnPhieuXuat.setBackground(new java.awt.Color(188, 206, 248));
         pnPhieuXuat.setForeground(new java.awt.Color(255, 255, 255));
         pnPhieuXuat.setPreferredSize(new java.awt.Dimension(300, 43));
@@ -297,40 +326,18 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
             .addComponent(lblPhieuXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout pnMenuLayout = new javax.swing.GroupLayout(pnMenu);
-        pnMenu.setLayout(pnMenuLayout);
-        pnMenuLayout.setHorizontalGroup(
-            pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnMenuLayout.createSequentialGroup()
-                .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnNhapHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                    .addComponent(pnKho, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(pnXuatHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMenuLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIconHotel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnPhieuNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnPhieuXuat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-        );
-        pnMenuLayout.setVerticalGroup(
-            pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(pnNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pnPhieuNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pnKho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pnXuatHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pnPhieuXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(181, Short.MAX_VALUE))
-        );
+        pnMenu.add(pnPhieuXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 462, 191, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/manager.png"))); // NOI18N
+        pnMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+
+        lblTenNV.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTenNV.setText("Tên nhân viên");
+        pnMenu.add(lblTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, 20));
+
+        lblMaNV.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        lblMaNV.setText("Mã NV");
+        pnMenu.add(lblMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
 
         javax.swing.GroupLayout pnRootLayout = new javax.swing.GroupLayout(pnRoot);
         pnRoot.setLayout(pnRootLayout);
@@ -385,15 +392,18 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
     private javax.swing.JLabel btnClose;
     private javax.swing.JLabel btnMinimize;
     private javax.swing.JComboBox<String> cbxPhanQuyen;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblHome;
     private javax.swing.JLabel lblIconHotel;
     private javax.swing.JLabel lblKho;
+    private javax.swing.JLabel lblMaNV;
     private javax.swing.JLabel lblNhapHang;
     private javax.swing.JLabel lblPhieuNhap;
     private javax.swing.JLabel lblPhieuXuat;
+    private javax.swing.JLabel lblTenNV;
     private javax.swing.JLabel lblThongTin;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblXuatHang;
