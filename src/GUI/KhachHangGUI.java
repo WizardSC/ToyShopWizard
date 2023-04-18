@@ -26,17 +26,20 @@ import javax.swing.table.DefaultTableModel;
  * @author wizardsc
  */
 public class KhachHangGUI extends javax.swing.JPanel {
+
     KhachHangBUS khBUS = new KhachHangBUS();
     DefaultTableModel dtmKhachHang;
     private BufferedImage i = null;
     String imgName = "null";
+
     public KhachHangGUI() {
         initComponents();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
         init();
         loadDataDSKH();
     }
-    public void init(){
+
+    public void init() {
         tblDSKH.setFocusable(false);
         tblDSKH.setIntercellSpacing(new Dimension(0, 0));
 
@@ -51,13 +54,13 @@ public class KhachHangGUI extends javax.swing.JPanel {
         tblDSKH.setFont(new Font("Arial", Font.PLAIN, 13));
         tblDSKH.getTableHeader().setReorderingAllowed(false);
         tblDSKH.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
-        
+
     }
-    
+
     //Hàm load dữ liệu lên bảng DSKH
-    public void showAllDSKH(ArrayList<KhachHangDTO> dskh){
+    public void showAllDSKH(ArrayList<KhachHangDTO> dskh) {
         dtmKhachHang.setRowCount(0);
-        for(int i=0;i<dskh.size();i++){
+        for (int i = 0; i < dskh.size(); i++) {
             dtmKhachHang.addRow(new String[]{
                 dskh.get(i).getMaKH(),
                 dskh.get(i).getHo(),
@@ -70,12 +73,14 @@ public class KhachHangGUI extends javax.swing.JPanel {
             });
         }
     }
+
     //Hàm lấy dữ liệu để đổ vào table
-    public void loadDataDSKH(){
+    public void loadDataDSKH() {
         khBUS.docDanhSach();
         ArrayList<KhachHangDTO> dskh = khBUS.getListKhachHang();
         showAllDSKH(dskh);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -444,16 +449,15 @@ public class KhachHangGUI extends javax.swing.JPanel {
         txtDiaChi.setText(tblDSKH.getModel().getValueAt(k, 5).toString());
         txtSoDT.setText(tblDSKH.getModel().getValueAt(k, 6).toString());
         txtMaKH.setEnabled(false);
-        
-        imgName = tblDSKH.getModel().getValueAt(k,7).toString();
-        
+
+        imgName = tblDSKH.getModel().getValueAt(k, 7).toString();
+
         Image newImage;
 
         newImage = new ImageIcon("./src/image/KhachHang/" + imgName).getImage().getScaledInstance(200, 230, Image.SCALE_DEFAULT);
-        
-        
+
         txtIMG.setIcon(new ImageIcon(newImage));
-        
+
     }//GEN-LAST:event_tblDSKHMouseClicked
 
     private void btnChonAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChonAnhMouseClicked
@@ -494,13 +498,14 @@ public class KhachHangGUI extends javax.swing.JPanel {
         String DiaChi = txtDiaChi.getText();
         String SoDT = txtSoDT.getText();
         String IMG = imgName;
-        KhachHangDTO kh = new KhachHangDTO(MaKH, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, IMG);
-        khBUS.add(kh);
-        loadDataDSKH();
-//        NhanVienDTO nv = new NhanVienDTO(MaNV, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, MaCV, IMG);
-//        nvBUS.add(nv);
-//        saveIMG();
-//        loadData();
+        if (MaKH.trim().equals("") || Ho.trim().equals("") || Ten.trim().equals("") || NgaySinh.trim().equals("") || GioiTinh.trim().equals("") || DiaChi.trim().equals("") || SoDT.trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin khách hàng.");
+        } else {
+            KhachHangDTO kh = new KhachHangDTO(MaKH, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, IMG);
+            khBUS.add(kh);
+            loadDataDSKH();
+        }
+//       
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
@@ -543,7 +548,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
         ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
         JFileChooser fc = new JFileChooser("./reports");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Excel", "xlsx");
+                "Excel", "xlsx");
         fc.setFileFilter(filter);
         int result = fc.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -553,7 +558,7 @@ public class KhachHangGUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Đã nhập file excel thành công", "THÔNG BÁO", JOptionPane.INFORMATION_MESSAGE, icon);
 
         }
-        
+
         loadDataDSKH();
     }//GEN-LAST:event_btnImportExcelMouseClicked
 

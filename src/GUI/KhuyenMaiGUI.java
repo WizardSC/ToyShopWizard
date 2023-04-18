@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,16 +26,19 @@ import javax.swing.table.DefaultTableModel;
  * @author wizardsc
  */
 public class KhuyenMaiGUI extends javax.swing.JPanel {
+
     private ArrayList<KhuyenMaiDTO> dskm = new ArrayList<>();
     private KhuyenMaiBUS kmBUS = new KhuyenMaiBUS();
     DefaultTableModel dtmKhuyenMai;
+
     public KhuyenMaiGUI() {
         initComponents();
         init();
         dtmKhuyenMai = (DefaultTableModel) tblDSKM.getModel();
         loadData();
     }
-    public void init(){
+
+    public void init() {
         //set giao diện cho Table
         //DSKM
         tblDSKM.setFocusable(false);
@@ -50,16 +54,16 @@ public class KhuyenMaiGUI extends javax.swing.JPanel {
         tblDSKM.getTableHeader().setReorderingAllowed(false);
         tblDSKM.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
     }
-    
-    public void showAll(ArrayList<KhuyenMaiDTO> dskm){
+
+    public void showAll(ArrayList<KhuyenMaiDTO> dskm) {
         dtmKhuyenMai.setRowCount(0);
         DecimalFormat dcf = new DecimalFormat(">#######");
 //        DecimalFormat dcf1 = new DecimalFormat("%");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date now = new Date();
-       
-        for(int i=0;i<dskm.size();i++){
-            if(dskm.get(i).getNgayBatDau().before(now) && dskm.get(i).getNgayKetThuc().after(now)){
+
+        for (int i = 0; i < dskm.size(); i++) {
+            if (dskm.get(i).getNgayBatDau().before(now) && dskm.get(i).getNgayKetThuc().after(now)) {
                 dtmKhuyenMai.addRow(new String[]{
                     dskm.get(i).getMaKM(),
                     dskm.get(i).getTenKM(),
@@ -82,12 +86,13 @@ public class KhuyenMaiGUI extends javax.swing.JPanel {
             }
         }
     }
-    
-    public void loadData(){
+
+    public void loadData() {
         kmBUS.docDanhSach();
         ArrayList<KhuyenMaiDTO> dskm = kmBUS.getListKhuyenMai();
         showAll(dskm);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -402,7 +407,7 @@ public class KhuyenMaiGUI extends javax.swing.JPanel {
         String dk = tblDSKM.getModel().getValueAt(k, 3).toString();
         dk = dk.replace(">", "");
         txtDieuKien.setText(dk);
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date NgayBD = new Date();
         Date NgayKT = new Date();
@@ -423,14 +428,27 @@ public class KhuyenMaiGUI extends javax.swing.JPanel {
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         String MaKM = txtMaKM.getText();
         String TenKM = txtTenKM.getText();
-        int PhanTramKM = Integer.parseInt(txtPhanTramKM.getText());
-        int DieuKien = Integer.parseInt(txtDieuKien.getText());
+
         Date NgayBD = txtNgayBD.getDate();
         Date NgayKT = txtNgayKT.getDate();
-        
-        KhuyenMaiDTO km = new KhuyenMaiDTO(MaKM, TenKM, PhanTramKM, DieuKien, NgayBD, NgayKT);
-        kmBUS.add(km);
-        loadData();
+        if(NgayBD == null){
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày bắt đầu");
+            return;
+        }
+        if(NgayKT == null){
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày kết thúc");
+            return;
+        }
+        if (MaKM.trim().equals("") || TenKM.trim().equals("") || txtPhanTramKM.getText().equals("") || txtDieuKien.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin khuyến mãi");
+        } else {
+            int PhanTramKM = Integer.parseInt(txtPhanTramKM.getText());
+            int DieuKien = Integer.parseInt(txtDieuKien.getText());
+            KhuyenMaiDTO km = new KhuyenMaiDTO(MaKM, TenKM, PhanTramKM, DieuKien, NgayBD, NgayKT);
+            kmBUS.add(km);
+            loadData();
+        }
+
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
@@ -461,7 +479,7 @@ public class KhuyenMaiGUI extends javax.swing.JPanel {
         int DieuKien = Integer.parseInt(txtDieuKien.getText());
         Date NgayBD = txtNgayBD.getDate();
         Date NgayKT = txtNgayKT.getDate();
-        
+
         KhuyenMaiDTO km = new KhuyenMaiDTO(MaKM, TenKM, PhanTramKM, DieuKien, NgayBD, NgayKT);
         kmBUS.update(km);
         loadData();

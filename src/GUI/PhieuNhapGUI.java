@@ -873,10 +873,15 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         String NgayLap = dateFormat.format(txtNgayLap.getDate());
         int TongTien = Integer.parseInt(txtTongTien.getText());
 
-        PhieuNhapDTO pn = new PhieuNhapDTO(MaPN, MaNCC, MaNV, NgayLap, TongTien);
-        pnBUS.add(pn);
-//        loadDataTTHD(); //load thông tin hóa đơn
+        if (MaPN.trim().equals("") || MaNCC.trim().equals("") || MaNV.trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin phiếu nhập");
+            return;
+        } else {
+            PhieuNhapDTO pn = new PhieuNhapDTO(MaPN, MaNCC, MaNV, NgayLap, TongTien);
+            pnBUS.add(pn);
+        }
 
+//        loadDataTTHD(); //load thông tin hóa đơn
         txtMaPN.setText("");
         txtMaNCC.setText("");
         txtMaNV.setText("");
@@ -988,7 +993,6 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         String MaNCC = txtMaNCCinTTPN.getText();
         String MaNV = txtMaNVinTTPN.getText();
 
-       
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // định dạng ngày
         String NgayLap = sdf.format(txtNgayLapinTTPN.getDate());
         System.out.println(NgayLap);

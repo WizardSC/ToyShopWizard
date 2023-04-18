@@ -917,10 +917,15 @@ public class HoaDonGUI extends javax.swing.JPanel {
 
         String NgayLap = dateFormat.format(txtNgayLap.getDate());
         String ThanhToan = txtThanhToan.getText();
-
-        HoaDonDTO hd = new HoaDonDTO(MaHD, MaKH, MaNV, NgayLap, ThanhToan);
-        hdBUS.add(hd);
-        loadDataTTHD(); //load thông tin hóa đơn
+        if (MaKH.trim().equals("") || MaNV.trim().equals("")) {
+            JOptionPane.showConfirmDialog(this, "Vui lòng nhập đầy đủ thông tin hóa đơn");
+            return;
+        } else {
+            HoaDonDTO hd = new HoaDonDTO(MaHD, MaKH, MaNV, NgayLap, ThanhToan);
+            hdBUS.add(hd);
+            loadDataTTHD();
+        }
+        //load thông tin hóa đơn
 
         txtMaHD.setText("");
         txtMaKH.setText("");
@@ -996,7 +1001,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblTTHDMouseClicked
 
     private void btnInHoaDoninTTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDoninTTHDMouseClicked
-        String MaHD= txtMaHDinTTHD.getText();
+        String MaHD = txtMaHDinTTHD.getText();
         String MaKH = txtMaKHinTTHD.getText();
         String MaNV = txtMaNVinTTHD.getText();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // định dạng ngày

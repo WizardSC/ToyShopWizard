@@ -815,6 +815,10 @@ public class NhanVienGUI extends javax.swing.JPanel {
         String SoDT = txtSoDT.getText();
         String MaCV = txtMaCV.getText();
         String IMG = imgName;
+        
+        if(MaNV.trim().equals("") || Ho.trim().equals("") || Ten.trim().equals("") || NgaySinh.trim().equals("") || GioiTinh.trim().equals("") || DiaChi.trim().equals("") || SoDT.trim().equals("") || MaCV.trim().equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin nhân viên");
+        }
         NhanVienDTO nv = new NhanVienDTO(MaNV, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, MaCV, IMG);
         nvBUS.add(nv);
         saveIMG();

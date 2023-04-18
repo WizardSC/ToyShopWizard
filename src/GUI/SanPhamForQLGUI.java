@@ -122,25 +122,22 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
             Logger.getLogger(SanPhamForQLGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     //--    Hiển thị mã NV tiếp theo
     //--    Lấy mã NV mới nhất + 1 để ra mã NV cần được tạo
-
-    public void showMaSP(ArrayList<SanPhamDTO> dssp){
-        if(dssp.isEmpty()){
+    public void showMaSP(ArrayList<SanPhamDTO> dssp) {
+        if (dssp.isEmpty()) {
             txtMaSP.setText(String.valueOf("SP01"));
         }
-        for(int i=0;i<dssp.size();i++){
-            int sum = Integer.parseInt(dssp.get(i).getMaSP().substring(2)) +1;
-            if( sum < 10){
-                txtMaSP.setText(String.valueOf("SP0")+sum);
-            } else{
-                txtMaSP.setText(String.valueOf("SP")+sum);
+        for (int i = 0; i < dssp.size(); i++) {
+            int sum = Integer.parseInt(dssp.get(i).getMaSP().substring(2)) + 1;
+            if (sum < 10) {
+                txtMaSP.setText(String.valueOf("SP0") + sum);
+            } else {
+                txtMaSP.setText(String.valueOf("SP") + sum);
             }
         }
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -518,14 +515,20 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
         String MaSP = txtMaSP.getText().toUpperCase();
         String TenSP = txtTenSP.getText();
         int SoLuong = 0;
-        int DonGia = Integer.parseInt(txtDonGia.getText());
-//        int DonGia = 0;
+        
+
         String DonViTinh = cbxDonViTinh.getSelectedItem().toString();
         String MaLoai = txtMaLoai.getText();
         String IMG = imgName;
-        SanPhamDTO sp = new SanPhamDTO(MaSP, TenSP, SoLuong, DonGia, DonViTinh, MaLoai, IMG);
-        spBUS.add(sp);
-        loadData();
+        if (MaSP.trim().equals("") || TenSP.trim().equals("") || DonViTinh.trim().equals("") || MaLoai.trim().equals("") || txtDonGia.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin sản phẩm");
+        } else {
+            int DonGia = Integer.parseInt(txtDonGia.getText());
+            SanPhamDTO sp = new SanPhamDTO(MaSP, TenSP, SoLuong, DonGia, DonViTinh, MaLoai, IMG);
+            spBUS.add(sp);
+            loadData();
+        }
+
         //        NhanVienDTO nv = new NhanVienDTO(MaNV, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, Integer.parseInt(Luong), IMG);
         //        nvBUS.add(nv);
         //        saveIMG();
@@ -616,7 +619,7 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
         ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
         JFileChooser fc = new JFileChooser("./reports");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Excel", "xlsx");
+                "Excel", "xlsx");
         fc.setFileFilter(filter);
         int result = fc.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {

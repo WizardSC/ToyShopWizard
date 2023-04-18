@@ -832,8 +832,13 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         String NgayLap = dateFormat.format(txtNgayLap.getDate());
 
         int TongTien = Integer.parseInt(txtTongTien.getText());
-        PhieuXuatDTO px = new PhieuXuatDTO(MaPX, MaNV, NgayLap, TongTien);
-        pxBUS.add(px);
+        if (MaPX.trim().equals("") || MaNV.trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin phiếu xuất");
+            return;
+        } else {
+            PhieuXuatDTO px = new PhieuXuatDTO(MaPX, MaNV, NgayLap, TongTien);
+            pxBUS.add(px);
+        }
 
         txtMaPX.setText("");
         txtMaNV.setText("");
@@ -851,9 +856,9 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
             ArrayList<PhieuXuatDTO> dsctpx = pxBUS.getListPhieuXuat();
         } else {
             JOptionPane.showMessageDialog(pnRoot, "Nếu có nhu cầu, bạn hãy nhấn vào In phiếu xuất");
-        
+
         }
-        
+
     }//GEN-LAST:event_btnTaoPhieuXuatMouseClicked
 
     private void btnInHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDonMouseClicked
@@ -928,16 +933,15 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
             ctpxBUS.add(ctpx);
         }
         String MaPX = txtMaPXinTTPX.getText();
-       
+
         String MaNV = txtMaNVinTTPX.getText();
 
-       
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // định dạng ngày
         String NgayLap = sdf.format(txtNgayLapinTTPX.getDate());
         System.out.println(NgayLap);
         int TongTien = Integer.parseInt(txtTongTieninTTPX.getText());
         PhieuXuatDTO px = new PhieuXuatDTO(MaPX, MaNV, NgayLap, TongTien);
-        
+
         XuatPhieuXuatBUS xuatpx = new XuatPhieuXuatBUS(px, dsctpx);
         xuatpx.print();
         txtMaPXinTTPX.setText("");
