@@ -43,7 +43,14 @@ public class NhanVienBUS {
         nvDAO.insertNhanVien(nv);
     }
 
-    public void delete(String MaNV) {
+    public class DeleteNhanVienException extends Exception {
+
+        public DeleteNhanVienException(String message) {
+            super(message);
+        }
+    }
+
+    public void delete(String MaNV) throws DeleteNhanVienException {
         for (NhanVienDTO nv : listNhanVien) {
             if (nv.getMaNV().equals(MaNV)) {
                 listNhanVien.remove(nv);
@@ -51,15 +58,32 @@ public class NhanVienBUS {
                 try {
                     nvDAO.deleteNhanVien(MaNV);
                 } catch (SQLIntegrityConstraintViolationException e) {
-                    JOptionPane.showMessageDialog(null, "Không thể xóa nhân viên vì đã có dữ liệu liên quan đến nhân viên này trong cơ sở dữ liệu.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    throw new DeleteNhanVienException("Không thể xóa nhân viên vì đã có dữ liệu liên quan đến nhân viên này trong cơ sở dữ liệu.");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return;
             }
         }
+        throw new DeleteNhanVienException("Không tìm thấy nhân viên với mã " + MaNV);
     }
 
+//    public void delete(String MaNV) {
+//        for (NhanVienDTO nv : listNhanVien) {
+//            if (nv.getMaNV().equals(MaNV)) {
+//                listNhanVien.remove(nv);
+//                NhanVienDAO nvDAO = new NhanVienDAO();
+//                try {
+//                    nvDAO.deleteNhanVien(MaNV);
+//                } catch (SQLIntegrityConstraintViolationException e) {
+//                    JOptionPane.showMessageDialog(null, "Không thể xóa nhân viên vì đã có dữ liệu liên quan đến nhân viên này trong cơ sở dữ liệu.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                return;
+//            }
+//        }
+//    }
     public void updates(NhanVienDTO nv) {
         for (int i = 0; i < listNhanVien.size(); i++) {
             System.out.println(listNhanVien.get(i).getMaNV());

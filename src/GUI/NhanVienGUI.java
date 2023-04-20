@@ -7,6 +7,7 @@ package GUI;
 
 import BUS.ChucVuBUS;
 import BUS.NhanVienBUS;
+import BUS.NhanVienBUS.DeleteNhanVienException;
 import DTO.ChucVuDTO;
 import DTO.NhanVienDTO;
 import java.awt.Color;
@@ -827,15 +828,27 @@ public class NhanVienGUI extends javax.swing.JPanel {
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
 
+//        String MaNV = txtMaNV.getText();
+//        int result = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa nhân viên không");
+//        if (result == JOptionPane.YES_OPTION) {
+//
+//            nvBUS.delete(MaNV);
+//            loadData();
+//
+//        }
         String MaNV = txtMaNV.getText();
         int result = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa nhân viên không");
         if (result == JOptionPane.YES_OPTION) {
-
-            nvBUS.delete(MaNV);
-            loadData();
-
+            try {
+                nvBUS.delete(MaNV);
+                loadData();
+            } catch (DeleteNhanVienException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi xóa nhân viên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
 //       
 
     }//GEN-LAST:event_btnXoaMouseClicked
