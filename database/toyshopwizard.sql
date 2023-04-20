@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 20, 2023 lúc 04:53 PM
+-- Thời gian đã tạo: Th4 20, 2023 lúc 05:30 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.0.25
 
@@ -471,9 +471,9 @@ INSERT INTO `sanpham` (`MaSP`, `TenSP`, `SoLuong`, `DonGia`, `DonViTinh`, `MaLoa
 --
 -- Bẫy `sanpham`
 --
-DROP TRIGGER IF EXISTS `CAP_NHAT_SANPHAM1`;
+DROP TRIGGER IF EXISTS `CAP_NHAT_SANPHAM`;
 DELIMITER $$
-CREATE TRIGGER `CAP_NHAT_SANPHAM1` AFTER UPDATE ON `sanpham` FOR EACH ROW BEGIN
+CREATE TRIGGER `CAP_NHAT_SANPHAM` AFTER UPDATE ON `sanpham` FOR EACH ROW BEGIN
    UPDATE KHO 
    SET KHO.TenSP = NEW.TenSP, KHO.GiaNhap = NEW.DonGia*1.05, KHO.DonViTinh = NEW.DonViTinh, KHO.MaLoai = NEW.MaLoai, KHO.IMG = NEW.IMG 
    WHERE KHO.MaSP = NEW.MaSP;
@@ -487,9 +487,9 @@ CREATE TRIGGER `XOA_SANPHAM` AFTER DELETE ON `sanpham` FOR EACH ROW BEGIN
 END
 $$
 DELIMITER ;
-DROP TRIGGER IF EXISTS `trg_add_product_to_kho1`;
+DROP TRIGGER IF EXISTS `trg_add_product_to_kho`;
 DELIMITER $$
-CREATE TRIGGER `trg_add_product_to_kho1` AFTER INSERT ON `sanpham` FOR EACH ROW BEGIN
+CREATE TRIGGER `trg_add_product_to_kho` AFTER INSERT ON `sanpham` FOR EACH ROW BEGIN
     INSERT INTO Kho(MaSP, TenSP, SoLuong, GiaNhap, DonViTinh, MaLoai, IMG)
     VALUES (NEW.MaSP, NEW.TenSP, NEW.SoLuong, NEW.DonGia * 1.05, NEW.DonViTinh, NEW.MaLoai, NEW.IMG);
 END
@@ -602,7 +602,16 @@ ALTER TABLE `nhanvien`
 -- Chỉ mục cho bảng `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  ADD PRIMARY KEY (`MaPN`);
+  ADD PRIMARY KEY (`MaPN`),
+  ADD KEY `FK_PHIEUNHAP_NHACUNGCAP` (`MaNCC`),
+  ADD KEY `FK_PHIEUNHAP_NHANVIEN` (`MaNV`);
+
+--
+-- Chỉ mục cho bảng `phieuxuat`
+--
+ALTER TABLE `phieuxuat`
+  ADD PRIMARY KEY (`MaPX`),
+  ADD KEY `FK_PHIEUXUAT_NHANVIEN` (`MaNV`);
 
 --
 -- Chỉ mục cho bảng `sanpham`
@@ -634,6 +643,38 @@ ALTER TABLE `cthoadon`
 ALTER TABLE `ctphieunhap`
   ADD CONSTRAINT `FK_CTPHIEUNHAP_PHIEUNHAP` FOREIGN KEY (`MaPN`) REFERENCES `phieunhap` (`MaPN`),
   ADD CONSTRAINT `FK_CTPHIEUNHAP_SANPHAM` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
+
+--
+-- Các ràng buộc cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `FK_HOADON_KHACHHANG` FOREIGN KEY (`MaKH`) REFERENCES `khachhang` (`MaKH`),
+  ADD CONSTRAINT `FK_HOADON_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
+
+--
+-- Các ràng buộc cho bảng `kho`
+--
+ALTER TABLE `kho`
+  ADD CONSTRAINT `FK_KHO_SANPHAM` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
+
+--
+-- Các ràng buộc cho bảng `nhanvien`
+--
+ALTER TABLE `nhanvien`
+  ADD CONSTRAINT `FK_NHANVIEN_CHUCVU` FOREIGN KEY (`MaCV`) REFERENCES `chucvu` (`MaCV`);
+
+--
+-- Các ràng buộc cho bảng `phieunhap`
+--
+ALTER TABLE `phieunhap`
+  ADD CONSTRAINT `FK_PHIEUNHAP_NHACUNGCAP` FOREIGN KEY (`MaNCC`) REFERENCES `nhacungcap` (`MaNCC`),
+  ADD CONSTRAINT `FK_PHIEUNHAP_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
+
+--
+-- Các ràng buộc cho bảng `phieuxuat`
+--
+ALTER TABLE `phieuxuat`
+  ADD CONSTRAINT `FK_PHIEUXUAT_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
 
 --
 -- Các ràng buộc cho bảng `taikhoan`
