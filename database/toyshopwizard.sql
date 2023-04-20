@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 15, 2023 lúc 06:18 PM
+-- Thời gian đã tạo: Th4 20, 2023 lúc 04:53 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.0.25
 
@@ -21,12 +21,31 @@ SET time_zone = "+00:00";
 -- Cơ sở dữ liệu: `toyshopwizard`
 --
 
+DELIMITER $$
+--
+-- Thủ tục
+--
+DROP PROCEDURE IF EXISTS `sp_getSoLuongHoaDon`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getSoLuongHoaDon` (IN `thang` INT, IN `nam` INT, OUT `soLuong` INT)   BEGIN
+    SELECT COUNT(MaHD) INTO soLuong
+    FROM hoadon
+    WHERE MONTH(NgayLap) = thang AND YEAR(NgayLap) = nam;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_get_nhanvien_without_taikhoan`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_nhanvien_without_taikhoan` ()   BEGIN
+  SELECT MaNV FROM nhanvien WHERE MaNV NOT IN (SELECT MaNV FROM taikhoan) ORDER BY MaNV ASC;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Cấu trúc bảng cho bảng `chucvu`
 --
 
+DROP TABLE IF EXISTS `chucvu`;
 CREATE TABLE `chucvu` (
   `MaCV` varchar(20) NOT NULL,
   `TenCV` varchar(30) NOT NULL
@@ -47,6 +66,7 @@ INSERT INTO `chucvu` (`MaCV`, `TenCV`) VALUES
 -- Cấu trúc bảng cho bảng `cthoadon`
 --
 
+DROP TABLE IF EXISTS `cthoadon`;
 CREATE TABLE `cthoadon` (
   `MaHD` varchar(10) NOT NULL,
   `MaSP` varchar(10) NOT NULL,
@@ -72,6 +92,7 @@ INSERT INTO `cthoadon` (`MaHD`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhTien
 -- Cấu trúc bảng cho bảng `ctphieunhap`
 --
 
+DROP TABLE IF EXISTS `ctphieunhap`;
 CREATE TABLE `ctphieunhap` (
   `MaPN` varchar(15) NOT NULL,
   `MaSP` varchar(15) NOT NULL,
@@ -102,6 +123,7 @@ INSERT INTO `ctphieunhap` (`MaPN`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhT
 -- Cấu trúc bảng cho bảng `ctphieuxuat`
 --
 
+DROP TABLE IF EXISTS `ctphieuxuat`;
 CREATE TABLE `ctphieuxuat` (
   `MaPX` varchar(15) NOT NULL,
   `MaSP` varchar(20) NOT NULL,
@@ -132,6 +154,7 @@ INSERT INTO `ctphieuxuat` (`MaPX`, `MaSP`, `TenSP`, `SoLuong`, `DonGia`, `ThanhT
 -- Cấu trúc bảng cho bảng `hoadon`
 --
 
+DROP TABLE IF EXISTS `hoadon`;
 CREATE TABLE `hoadon` (
   `MaHD` varchar(15) NOT NULL,
   `MaKH` varchar(15) DEFAULT NULL,
@@ -155,6 +178,7 @@ INSERT INTO `hoadon` (`MaHD`, `MaKH`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 -- Cấu trúc bảng cho bảng `khachhang`
 --
 
+DROP TABLE IF EXISTS `khachhang`;
 CREATE TABLE `khachhang` (
   `MaKH` varchar(20) NOT NULL,
   `Ho` varchar(50) NOT NULL,
@@ -194,6 +218,7 @@ INSERT INTO `khachhang` (`MaKH`, `Ho`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, 
 -- Cấu trúc bảng cho bảng `kho`
 --
 
+DROP TABLE IF EXISTS `kho`;
 CREATE TABLE `kho` (
   `MaSP` varchar(20) NOT NULL,
   `TenSP` varchar(50) NOT NULL,
@@ -228,7 +253,8 @@ INSERT INTO `kho` (`MaSP`, `TenSP`, `SoLuong`, `GiaNhap`, `DonViTinh`, `MaLoai`,
 ('SP17', 'Đồ chơi búp bê nam thời trang áo xám ', 0, 350550, 'Bộ', 'L04', 'SP17.jpg'),
 ('SP18', 'Sư tử Leo lười ', 0, 538650, 'Con', 'L04', 'SP18.jpg'),
 ('SP19', 'Gấu Lizzie tinh nghịch ', 0, 470250, 'Con', 'L06', 'SP19.jpg'),
-('SP20', 'Gấu Bobbie tinh nghịch ', 0, 470250, 'Con', 'L06', 'SP20.jpg');
+('SP20', 'Gấu Bobbie tinh nghịch ', 0, 470250, 'Con', 'L06', 'SP20.jpg'),
+('SP22', '1', 2, 2, 'GS', 'SF', 'S');
 
 -- --------------------------------------------------------
 
@@ -236,6 +262,7 @@ INSERT INTO `kho` (`MaSP`, `TenSP`, `SoLuong`, `GiaNhap`, `DonViTinh`, `MaLoai`,
 -- Cấu trúc bảng cho bảng `khuyenmai`
 --
 
+DROP TABLE IF EXISTS `khuyenmai`;
 CREATE TABLE `khuyenmai` (
   `MaKM` varchar(10) NOT NULL,
   `TenKM` varchar(40) NOT NULL,
@@ -260,6 +287,7 @@ INSERT INTO `khuyenmai` (`MaKM`, `TenKM`, `PhanTramKM`, `DieuKien`, `NgayBatDau`
 -- Cấu trúc bảng cho bảng `loai`
 --
 
+DROP TABLE IF EXISTS `loai`;
 CREATE TABLE `loai` (
   `MaLoai` varchar(20) NOT NULL,
   `TenLoai` varchar(20) NOT NULL
@@ -283,6 +311,7 @@ INSERT INTO `loai` (`MaLoai`, `TenLoai`) VALUES
 -- Cấu trúc bảng cho bảng `nhacungcap`
 --
 
+DROP TABLE IF EXISTS `nhacungcap`;
 CREATE TABLE `nhacungcap` (
   `MaNCC` varchar(20) NOT NULL,
   `TenNCC` varchar(30) NOT NULL,
@@ -304,6 +333,7 @@ INSERT INTO `nhacungcap` (`MaNCC`, `TenNCC`, `DiaChi`, `SoDT`) VALUES
 -- Cấu trúc bảng cho bảng `nhanvien`
 --
 
+DROP TABLE IF EXISTS `nhanvien`;
 CREATE TABLE `nhanvien` (
   `MaNV` varchar(10) NOT NULL,
   `Ho` varchar(20) NOT NULL,
@@ -339,7 +369,8 @@ INSERT INTO `nhanvien` (`MaNV`, `Ho`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `
 ('NV16', 'Yontararak', 'Minnie', '23/10/1997', 'Nữ', 'Thailand', '23101997', 'CV03', 'Minnie.jpg'),
 ('NV17', 'Song', 'Yuqi', '23/09/1999', 'Nữ', 'China', '23091999', 'CV02', 'Yuqi.jpg'),
 ('NV18', 'Yeh', 'Shuhua', '06/01/2000', 'Nữ', 'Taiwan', '06012000', 'CV03', 'Shuhua.jpg'),
-('NV20', 'Yook', 'Sungjae', '12/10/1995', 'Nam', 'North Korea', '12101995', 'CV03', 'null');
+('NV20', 'Yook', 'Sungjae', '12/10/1995', 'Nam', 'North Korea', '12101995', 'CV03', 'null'),
+('NV21', '343', '4234', '324', 'Nam', '34', '234', 'CV03', 'null');
 
 -- --------------------------------------------------------
 
@@ -347,6 +378,7 @@ INSERT INTO `nhanvien` (`MaNV`, `Ho`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `
 -- Cấu trúc bảng cho bảng `phieunhap`
 --
 
+DROP TABLE IF EXISTS `phieunhap`;
 CREATE TABLE `phieunhap` (
   `MaPN` varchar(15) NOT NULL,
   `MaNCC` varchar(15) NOT NULL,
@@ -373,6 +405,7 @@ INSERT INTO `phieunhap` (`MaPN`, `MaNCC`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 -- Cấu trúc bảng cho bảng `phieuxuat`
 --
 
+DROP TABLE IF EXISTS `phieuxuat`;
 CREATE TABLE `phieuxuat` (
   `MaPX` varchar(15) NOT NULL,
   `MaNV` varchar(15) NOT NULL,
@@ -396,6 +429,7 @@ INSERT INTO `phieuxuat` (`MaPX`, `MaNV`, `NgayLap`, `TongTien`) VALUES
 -- Cấu trúc bảng cho bảng `sanpham`
 --
 
+DROP TABLE IF EXISTS `sanpham`;
 CREATE TABLE `sanpham` (
   `MaSP` varchar(20) NOT NULL,
   `TenSP` varchar(100) NOT NULL,
@@ -430,29 +464,34 @@ INSERT INTO `sanpham` (`MaSP`, `TenSP`, `SoLuong`, `DonGia`, `DonViTinh`, `MaLoa
 ('SP17', 'Đồ chơi búp bê nam thời trang áo xám ', 0, 369000, 'Bộ', 'L04', 'SP17.jpg'),
 ('SP18', 'Sư tử Leo lười ', 0, 567000, 'Con', 'L04', 'SP18.jpg'),
 ('SP19', 'Gấu Lizzie tinh nghịch ', 0, 495000, 'Con', 'L06', 'SP19.jpg'),
-('SP20', 'Gấu Bobbie tinh nghịch ', 0, 495000, 'Con', 'L06', 'SP20.jpg');
+('SP20', 'Gấu Bobbie tinh nghịch ', 0, 495000, 'Con', 'L06', 'SP20.jpg'),
+('SP21', '1', 1, 1, 'N', 'N', 'N'),
+('SP22', '1', 2, 2, 'GS', 'SF', 'S');
 
 --
 -- Bẫy `sanpham`
 --
+DROP TRIGGER IF EXISTS `CAP_NHAT_SANPHAM1`;
 DELIMITER $$
-CREATE TRIGGER `CAP_NHAT_SANPHAM` AFTER UPDATE ON `sanpham` FOR EACH ROW BEGIN
+CREATE TRIGGER `CAP_NHAT_SANPHAM1` AFTER UPDATE ON `sanpham` FOR EACH ROW BEGIN
    UPDATE KHO 
-   SET KHO.TenSP = NEW.TenSP, KHO.GiaNhap = NEW.DonGia*0.95, KHO.DonViTinh = NEW.DonViTinh, KHO.MaLoai = NEW.MaLoai, KHO.IMG = NEW.IMG 
+   SET KHO.TenSP = NEW.TenSP, KHO.GiaNhap = NEW.DonGia*1.05, KHO.DonViTinh = NEW.DonViTinh, KHO.MaLoai = NEW.MaLoai, KHO.IMG = NEW.IMG 
    WHERE KHO.MaSP = NEW.MaSP;
 END
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `XOA_SANPHAM`;
 DELIMITER $$
 CREATE TRIGGER `XOA_SANPHAM` AFTER DELETE ON `sanpham` FOR EACH ROW BEGIN
    DELETE FROM KHO WHERE KHO.MaSP = OLD.MaSP;
 END
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_add_product_to_kho1`;
 DELIMITER $$
-CREATE TRIGGER `trg_add_product_to_kho` AFTER INSERT ON `sanpham` FOR EACH ROW BEGIN
+CREATE TRIGGER `trg_add_product_to_kho1` AFTER INSERT ON `sanpham` FOR EACH ROW BEGIN
     INSERT INTO Kho(MaSP, TenSP, SoLuong, GiaNhap, DonViTinh, MaLoai, IMG)
-    VALUES (NEW.MaSP, NEW.TenSP, NEW.SoLuong, NEW.DonGia * 0.95, NEW.DonViTinh, NEW.MaLoai, NEW.IMG);
+    VALUES (NEW.MaSP, NEW.TenSP, NEW.SoLuong, NEW.DonGia * 1.05, NEW.DonViTinh, NEW.MaLoai, NEW.IMG);
 END
 $$
 DELIMITER ;
@@ -463,11 +502,11 @@ DELIMITER ;
 -- Cấu trúc bảng cho bảng `taikhoan`
 --
 
+DROP TABLE IF EXISTS `taikhoan`;
 CREATE TABLE `taikhoan` (
   `MaNV` char(20) NOT NULL,
   `TenDangNhap` char(30) NOT NULL,
   `MatKhau` char(20) NOT NULL,
-  `PhanQuyen` char(25) NOT NULL,
   `TinhTrang` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -475,11 +514,12 @@ CREATE TABLE `taikhoan` (
 -- Đang đổ dữ liệu cho bảng `taikhoan`
 --
 
-INSERT INTO `taikhoan` (`MaNV`, `TenDangNhap`, `MatKhau`, `PhanQuyen`, `TinhTrang`) VALUES
-('NV01', 'admin', '123456', 'CV01', 0),
-('NV02', 'admin1', '123456', 'CV02', 0),
-('NV04', 'admin2', '123456', 'CV03', 1),
-('NV03', 'admin3', '123456', 'CV01', 1);
+INSERT INTO `taikhoan` (`MaNV`, `TenDangNhap`, `MatKhau`, `TinhTrang`) VALUES
+('NV01', 'admin', '123456', 0),
+('NV02', 'admin1', '123456', 0),
+('NV04', 'admin2', '123456', 1),
+('NV03', 'admin3', '123456', 1),
+('NV21', 'toanhuynh', 'toan123', 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -562,29 +602,20 @@ ALTER TABLE `nhanvien`
 -- Chỉ mục cho bảng `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  ADD PRIMARY KEY (`MaPN`),
-  ADD KEY `FK_PHIEUNHAP_NHACUNGCAP` (`MaNCC`),
-  ADD KEY `FK_PHIEUNHAP_NHANVIEN` (`MaNV`);
-
---
--- Chỉ mục cho bảng `phieuxuat`
---
-ALTER TABLE `phieuxuat`
-  ADD PRIMARY KEY (`MaPX`),
-  ADD KEY `FK_PHIEUXUAT_NHANVIEN` (`MaNV`);
+  ADD PRIMARY KEY (`MaPN`);
 
 --
 -- Chỉ mục cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  ADD PRIMARY KEY (`MaSP`),
-  ADD KEY `FK_SANPHAM_LOAI` (`MaLoai`);
+  ADD PRIMARY KEY (`MaSP`);
 
 --
 -- Chỉ mục cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  ADD PRIMARY KEY (`TenDangNhap`);
+  ADD PRIMARY KEY (`TenDangNhap`),
+  ADD KEY `FK_TAIKHOAN_NHANVIEN` (`MaNV`);
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -603,51 +634,6 @@ ALTER TABLE `cthoadon`
 ALTER TABLE `ctphieunhap`
   ADD CONSTRAINT `FK_CTPHIEUNHAP_PHIEUNHAP` FOREIGN KEY (`MaPN`) REFERENCES `phieunhap` (`MaPN`),
   ADD CONSTRAINT `FK_CTPHIEUNHAP_SANPHAM` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
-
---
--- Các ràng buộc cho bảng `ctphieuxuat`
---
-ALTER TABLE `ctphieuxuat`
-  ADD CONSTRAINT `FK_CTPHIEUXUAT_PHIEUXUAT` FOREIGN KEY (`MaPX`) REFERENCES `phieuxuat` (`MaPX`),
-  ADD CONSTRAINT `FK_CTPHIEUXUAT_SANPHAM` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
-
---
--- Các ràng buộc cho bảng `hoadon`
---
-ALTER TABLE `hoadon`
-  ADD CONSTRAINT `FK_HOADON_KHACHHANG` FOREIGN KEY (`MaKH`) REFERENCES `khachhang` (`MaKH`),
-  ADD CONSTRAINT `FK_HOADON_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
-
---
--- Các ràng buộc cho bảng `kho`
---
-ALTER TABLE `kho`
-  ADD CONSTRAINT `FK_KHO_LOAI` FOREIGN KEY (`MaLoai`) REFERENCES `loai` (`MaLoai`);
-
---
--- Các ràng buộc cho bảng `nhanvien`
---
-ALTER TABLE `nhanvien`
-  ADD CONSTRAINT `FK_NHANVIEN_CHUCVU` FOREIGN KEY (`MaCV`) REFERENCES `chucvu` (`MaCV`);
-
---
--- Các ràng buộc cho bảng `phieunhap`
---
-ALTER TABLE `phieunhap`
-  ADD CONSTRAINT `FK_PHIEUNHAP_NHACUNGCAP` FOREIGN KEY (`MaNCC`) REFERENCES `nhacungcap` (`MaNCC`),
-  ADD CONSTRAINT `FK_PHIEUNHAP_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
-
---
--- Các ràng buộc cho bảng `phieuxuat`
---
-ALTER TABLE `phieuxuat`
-  ADD CONSTRAINT `FK_PHIEUXUAT_NHANVIEN` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`);
-
---
--- Các ràng buộc cho bảng `sanpham`
---
-ALTER TABLE `sanpham`
-  ADD CONSTRAINT `FK_SANPHAM_LOAI` FOREIGN KEY (`MaLoai`) REFERENCES `loai` (`MaLoai`);
 
 --
 -- Các ràng buộc cho bảng `taikhoan`

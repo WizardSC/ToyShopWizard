@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +67,7 @@ public class NhanVienDAO {
     public ArrayList<NhanVienDTO> getListNhanVienTheoMaCV(String MaCV) {
         try {
             ArrayList<NhanVienDTO> dsnv = new ArrayList<>();
-            String sql = "SELECT * FROM nhanvien Where nhanvien.MaCV = " + "'" + MaCV +"'";
+            String sql = "SELECT * FROM nhanvien Where nhanvien.MaCV = " + "'" + MaCV + "'";
             System.out.println(sql);
             ResultSet rs = mySQL.executeQuery(sql);
             while (rs.next()) {
@@ -83,7 +84,7 @@ public class NhanVienDAO {
 
                 dsnv.add(nv);
             }
-            
+
             return dsnv;
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,19 +116,18 @@ public class NhanVienDAO {
         }
     }
 
-    public void deleteNhanVien(String MaNV) {
+    public void deleteNhanVien(String MaNV) throws SQLException, SQLIntegrityConstraintViolationException {
         try {
             String sql = "DELETE FROM nhanvien WHERE MaNV = ?";
             PreparedStatement pstatement = connection.prepareStatement(sql);
 
             pstatement.setString(1, MaNV);
             pstatement.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            throw ex;
         } finally {
             mySQL.Disconnect();
         }
-
     }
 
     public void updatesNhanVien(NhanVienDTO nv) {

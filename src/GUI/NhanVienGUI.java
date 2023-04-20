@@ -16,6 +16,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -120,9 +122,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
         for (int i = 0; i < dscv.size(); i++) {
             dtmChucVu.addRow(new String[]{
                 dscv.get(i).getMaCV(),
-                dscv.get(i).getTenCV(),
-              
-            });
+                dscv.get(i).getTenCV(),});
         }
     }
 
@@ -161,11 +161,11 @@ public class NhanVienGUI extends javax.swing.JPanel {
             ArrayList<NhanVienDTO> dsnv = nvBUS.searchMaNV(txtTimKiem.getText().toString());
             showAll(dsnv);
         }
-        if (tk.equals("Họ")){
+        if (tk.equals("Họ")) {
             ArrayList<NhanVienDTO> dsnv = nvBUS.searchHo(txtTimKiem.getText().toString());
             showAll(dsnv);
         }
-        if(tk.equals("Tên")){
+        if (tk.equals("Tên")) {
             ArrayList<NhanVienDTO> dsnv = nvBUS.searchTen(txtTimKiem.getText().toString());
             showAll(dsnv);
         }
@@ -815,8 +815,8 @@ public class NhanVienGUI extends javax.swing.JPanel {
         String SoDT = txtSoDT.getText();
         String MaCV = txtMaCV.getText();
         String IMG = imgName;
-        
-        if(MaNV.trim().equals("") || Ho.trim().equals("") || Ten.trim().equals("") || NgaySinh.trim().equals("") || GioiTinh.trim().equals("") || DiaChi.trim().equals("") || SoDT.trim().equals("") || MaCV.trim().equals("")){
+
+        if (MaNV.trim().equals("") || Ho.trim().equals("") || Ten.trim().equals("") || NgaySinh.trim().equals("") || GioiTinh.trim().equals("") || DiaChi.trim().equals("") || SoDT.trim().equals("") || MaCV.trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin nhân viên");
         }
         NhanVienDTO nv = new NhanVienDTO(MaNV, Ho, Ten, NgaySinh, GioiTinh, DiaChi, SoDT, MaCV, IMG);
@@ -826,22 +826,17 @@ public class NhanVienGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
-        // nvBUS.delete(txtMaNV.getText());
-        //saveIMG();
-        //loadData();      
 
-        if (tblDSNV.getSelectedRowCount() == 1) {
-            int result = JOptionPane.showConfirmDialog(null, "Bạn muốn xóa sản phẩm này?");
-            if (result == 0) {
-                nvBUS.delete(txtMaNV.getText());
-                saveIMG();
-                loadData();
-                JOptionPane.showMessageDialog(null, "Xóa thành công!");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Bạn chưa chọn sản phẩm muốn xóa!");
+        String MaNV = txtMaNV.getText();
+        int result = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa nhân viên không");
+        if (result == JOptionPane.YES_OPTION) {
+
+            nvBUS.delete(MaNV);
+            loadData();
+
         }
 
+//       
 
     }//GEN-LAST:event_btnXoaMouseClicked
 
@@ -900,7 +895,8 @@ public class NhanVienGUI extends javax.swing.JPanel {
                 revalidate();
                 repaint();
             } catch (IOException ex) {
-                Logger.getLogger(NhanVienGUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NhanVienGUI.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnChonAnhMouseClicked

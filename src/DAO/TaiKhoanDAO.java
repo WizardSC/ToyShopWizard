@@ -77,7 +77,7 @@ public class TaiKhoanDAO {
             ps.setString(1, tk.getMaNV());
             ps.setString(2, tk.getTenDangNhap());
             ps.setString(3, tk.getMatKhau());
-            ps.setString(4, String.valueOf(tk.isTinhTrang()));
+            ps.setBoolean(4, tk.isTinhTrang());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);

@@ -8,7 +8,9 @@ package BUS;
 import DAO.NhanVienDAO;
 import DTO.NhanVienDTO;
 import java.io.File;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,7 +48,13 @@ public class NhanVienBUS {
             if (nv.getMaNV().equals(MaNV)) {
                 listNhanVien.remove(nv);
                 NhanVienDAO nvDAO = new NhanVienDAO();
-                nvDAO.deleteNhanVien(MaNV);
+                try {
+                    nvDAO.deleteNhanVien(MaNV);
+                } catch (SQLIntegrityConstraintViolationException e) {
+                    JOptionPane.showMessageDialog(null, "Không thể xóa nhân viên vì đã có dữ liệu liên quan đến nhân viên này trong cơ sở dữ liệu.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return;
             }
         }
@@ -54,6 +62,7 @@ public class NhanVienBUS {
 
     public void updates(NhanVienDTO nv) {
         for (int i = 0; i < listNhanVien.size(); i++) {
+            System.out.println(listNhanVien.get(i).getMaNV());
             if (listNhanVien.get(i).getMaNV().equals(nv.getMaNV())) {
                 listNhanVien.set(i, nv);
                 // NhanVienDAO nvDao = new NhanVienDAO();

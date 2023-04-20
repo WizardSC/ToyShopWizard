@@ -334,6 +334,7 @@ public class TaiKhoanGUI extends javax.swing.JPanel {
         String MatKhau = txtMatKhau1.getText();
         String MaNV = cbxNhanVien.getSelectedItem().toString();
         boolean TinhTrang = Boolean.parseBoolean(cbxTinhTrang.getSelectedItem().toString());
+        
         TaiKhoanDTO tk = new TaiKhoanDTO(MaNV, TenDangNhap, MatKhau, TinhTrang);
         tkBUS.add(tk);
         loadData();

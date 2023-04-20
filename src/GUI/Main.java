@@ -15,9 +15,9 @@ public class Main {
             //Đăng nhập
 //        new DangNhapGUI().setVisible(true);
         //Nhân viên quản lý
-//        new MainForQuanLyGUI("NV03").setVisible(true);
+        new MainForQuanLyGUI("NV03").setVisible(true);
         //Nhân viên kho
-        new MainForNVKhoGUI("").setVisible(true);
+//        new MainForNVKhoGUI("").setVisible(true);
         //Nhân viên bán hàng
 //        new MainForNhanVienGUI("NV02").setVisible(true);
 
