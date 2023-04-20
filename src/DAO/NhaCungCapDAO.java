@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,14 +47,15 @@ public class NhaCungCapDAO {
         }
         return null;
     }
-    public void insertNhaCungCap(NhaCungCapDTO ncc){
+
+    public void insertNhaCungCap(NhaCungCapDTO ncc) {
         try {
             String sql = "INSERT INTO nhacungcap VALUES(?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1,ncc.getMaNCC());
-            ps.setString(2,ncc.getTenNCC());
-            ps.setString(3,ncc.getDiaChi());
-            ps.setString(4,ncc.getSoDT());
+            ps.setString(1, ncc.getMaNCC());
+            ps.setString(2, ncc.getTenNCC());
+            ps.setString(3, ncc.getDiaChi());
+            ps.setString(4, ncc.getSoDT());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(NhaCungCapDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,16 +81,14 @@ public class NhaCungCapDAO {
 
     }
 
-    public void deleteNhaCungCap(String MaNCC) {
+    public void deleteNhaCungCap(String MaNCC) throws SQLException, SQLIntegrityConstraintViolationException {
         try {
             String sql = "DELETE FROM nhacungcap WHERE MaNCC = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, MaNCC);
             ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(NhaCungCapDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mySQL.Disconnect();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw e;
         }
     }
 }

@@ -7,11 +7,13 @@ package GUI;
 
 import BUS.NhaCungCapBUS;
 import DTO.NhaCungCapDTO;
+import MyCustom.XuLyException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -66,17 +68,17 @@ public class NhaCungCapGUI extends javax.swing.JPanel {
         if (dsncc.isEmpty()) {
             txtMaNCC.setText(String.valueOf("NCC01"));
         } else {
-            
+
             int i = dsncc.size() - 1;
             System.out.println(String.valueOf(dsncc.get(i).getMaNCC().substring(3)));
             int sum = Integer.parseInt((dsncc.get(i).getMaNCC().substring(3)) + 1);
-            if(sum < 10){
-                txtMaNCC.setText(String.valueOf("NCC0")+sum);
+            if (sum < 10) {
+                txtMaNCC.setText(String.valueOf("NCC0") + sum);
             } else {
-                txtMaNCC.setText(String.valueOf("NCC")+sum);
+                txtMaNCC.setText(String.valueOf("NCC") + sum);
             }
         }
-     
+
     }
 
     public void loadNewMaNCC() {
@@ -257,7 +259,7 @@ public class NhaCungCapGUI extends javax.swing.JPanel {
 
         btnChinhSua.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
         btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnUpdate.png"))); // NOI18N
-        btnChinhSua.setText("Chỉnh sửa");
+        btnChinhSua.setText("Sửa");
         btnChinhSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnChinhSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -299,9 +301,8 @@ public class NhaCungCapGUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1060, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -321,8 +322,8 @@ public class NhaCungCapGUI extends javax.swing.JPanel {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-                .addGap(6, 6, 6))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -336,7 +337,9 @@ public class NhaCungCapGUI extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -393,10 +396,22 @@ public class NhaCungCapGUI extends javax.swing.JPanel {
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
         String MaNCC = txtMaNCC.getText();
-        nccBUS.delete(MaNCC);
-        loadDataDSNCC();
-        resetInput();
-        txtMaNCC.setEnabled(true);
+        int result = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa nhà cung cấp không?");
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                nccBUS.delete(MaNCC);
+                loadDataDSNCC();
+                resetInput();
+                txtMaNCC.setEnabled(true);
+
+            } catch (XuLyException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi xóa chức vụ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }//GEN-LAST:event_btnXoaMouseClicked
 
     private void btnNhapLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapLaiMouseClicked

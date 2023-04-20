@@ -7,11 +7,13 @@ package GUI;
 
 import BUS.ChucVuBUS;
 import DTO.ChucVuDTO;
+import MyCustom.XuLyException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -170,7 +172,7 @@ public class ChucVuGUI extends javax.swing.JPanel {
 
         btnChinhSua.setFont(new java.awt.Font("Baloo 2", 1, 18)); // NOI18N
         btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btnUpdate.png"))); // NOI18N
-        btnChinhSua.setText("Chỉnh sửa");
+        btnChinhSua.setText("Sửa");
         btnChinhSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnChinhSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -341,11 +343,27 @@ public class ChucVuGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tblDSCVMouseClicked
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-        
+        String MaCV = txtMaCV.getText();
+        String TenCV = txtTenCV.getText();
+        ChucVuDTO cv = new ChucVuDTO(MaCV, TenCV);
+        cvBUS.add(cv);
+        loadData();
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
-        
+        String MaCV = txtMaCV.getText();
+        int result = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa chức vụ không");
+        if(result == JOptionPane.YES_OPTION){
+            try{
+                cvBUS.delete(MaCV);
+                loadData();
+            } catch (XuLyException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi xóa chức vụ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
     }//GEN-LAST:event_btnXoaMouseClicked
 
@@ -365,7 +383,11 @@ public class ChucVuGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNhapLaiMouseClicked
 
     private void btnChinhSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaMouseClicked
-        
+        String MaCV = txtMaCV.getText();
+        String TenCV = txtTenCV.getText();
+        ChucVuDTO cv = new ChucVuDTO(MaCV, TenCV);
+        cvBUS.update(cv);
+        loadData();
     }//GEN-LAST:event_btnChinhSuaMouseClicked
 
 

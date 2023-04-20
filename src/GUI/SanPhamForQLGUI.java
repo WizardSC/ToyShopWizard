@@ -8,6 +8,7 @@ package GUI;
 import BUS.SanPhamBUS;
 import DTO.SanPhamDTO;
 import DTO.SanPham_ViTriDTO;
+import MyCustom.XuLyException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,6 +16,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -515,7 +517,6 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
         String MaSP = txtMaSP.getText().toUpperCase();
         String TenSP = txtTenSP.getText();
         int SoLuong = 0;
-        
 
         String DonViTinh = cbxDonViTinh.getSelectedItem().toString();
         String MaLoai = txtMaLoai.getText();
@@ -541,16 +542,18 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
 //                saveIMG();
 //                loadData();
 
-        if (tblDSSP.getSelectedRowCount() == 1) {
-            int k = JOptionPane.showConfirmDialog(null, "Bạn muốn xóa sản phẩm này?");
-            if (k == 0) {
-                spBUS.delete(txtMaSP.getText());
-                saveIMG();
+        String MaSP = txtMaSP.getText();
+        int result = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa sản phẩm không?");
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                spBUS.delete(MaSP);
                 loadData();
-                JOptionPane.showMessageDialog(null, "Xóa thành công!");
+            } catch (XuLyException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi xóa sản phẩm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Bạn chưa chọn sản phẩm muốn xóa!");
         }
 
     }//GEN-LAST:event_btnXoaMouseClicked

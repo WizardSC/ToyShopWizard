@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -88,31 +89,31 @@ public class SanPhamDAO {
         }
         return null;
     }
-    public ArrayList<SanPham_ViTriDTO> getListSanPhamCuaHang() {
-        try {
-            ArrayList<SanPham_ViTriDTO> dssp = new ArrayList<>();
-             String sql = "select sp.MaSP, sp.TenSP, spvt.SoLuong, spvt.DonGia, sp.DonViTinh, sp.MaLoai, sp.IMG from sanpham as sp join sanpham_vitri as spvt on spvt.MaSP = sp.MaSP";
-            ResultSet rs = mySQL.executeQuery(sql);
-            while (rs.next()) {
-                SanPham_ViTriDTO sp = new SanPham_ViTriDTO(
-                        rs.getString("MaSP"),
-                        rs.getString("TenSP"),
-                        rs.getInt("SoLuong"),
-                        rs.getInt("DonGia"),
-                        rs.getString("DonViTinh"),
-                        rs.getString("MaLoai"),
-                        rs.getString("IMG")
-                );
-                dssp.add(sp);
-            }
-            return dssp;
-        } catch (SQLException ex) {
-            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mySQL.Disconnect();
-        }
-        return null;
-    }
+//    public ArrayList<SanPham_ViTriDTO> getListSanPhamCuaHang() {
+//        try {
+//            ArrayList<SanPham_ViTriDTO> dssp = new ArrayList<>();
+//             String sql = "select sp.MaSP, sp.TenSP, spvt.SoLuong, spvt.DonGia, sp.DonViTinh, sp.MaLoai, sp.IMG from sanpham as sp join sanpham_vitri as spvt on spvt.MaSP = sp.MaSP";
+//            ResultSet rs = mySQL.executeQuery(sql);
+//            while (rs.next()) {
+//                SanPham_ViTriDTO sp = new SanPham_ViTriDTO(
+//                        rs.getString("MaSP"),
+//                        rs.getString("TenSP"),
+//                        rs.getInt("SoLuong"),
+//                        rs.getInt("DonGia"),
+//                        rs.getString("DonViTinh"),
+//                        rs.getString("MaLoai"),
+//                        rs.getString("IMG")
+//                );
+//                dssp.add(sp);
+//            }
+//            return dssp;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            mySQL.Disconnect();
+//        }
+//        return null;
+//    }
 
    
 
@@ -156,16 +157,16 @@ public class SanPhamDAO {
 
     }
 
-    public void deleteSanPham(String MaSP) {
+    public void deleteSanPham(String MaSP) throws SQLException, SQLIntegrityConstraintViolationException{
         String queryDeleteSanPham = "DELETE FROM sanpham WHERE MaSP = ?";
         try {
             PreparedStatement pre = connection.prepareStatement(queryDeleteSanPham);
 
             pre.setString(1, MaSP);
             pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (SQLIntegrityConstraintViolationException e){
+            throw e;
+        } 
 
     }
 

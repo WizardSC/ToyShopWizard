@@ -7,6 +7,8 @@ package BUS;
 
 import DAO.NhaCungCapDAO;
 import DTO.NhaCungCapDTO;
+import MyCustom.XuLyException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 /**
@@ -25,10 +27,12 @@ public class NhaCungCapBUS {
     public ArrayList<NhaCungCapDTO> getListNhaCungCap() {
         return listNhaCungCap;
     }
-    public void insert(NhaCungCapDTO ncc){
+
+    public void insert(NhaCungCapDTO ncc) {
         listNhaCungCap.add(ncc);
         nccDAO.insertNhaCungCap(ncc);
     }
+
     public void update(NhaCungCapDTO ncc) {
         for (int i = 0; i < listNhaCungCap.size(); i++) {
             if (listNhaCungCap.get(i).getMaNCC().equals(ncc.getMaNCC())) {
@@ -39,11 +43,17 @@ public class NhaCungCapBUS {
         }
     }
 
-    public void delete(String MaNCC){
-        for(NhaCungCapDTO ncc : listNhaCungCap){
-            if(ncc.getMaNCC().equals(MaNCC)){
-                listNhaCungCap.remove(ncc);
-                nccDAO.deleteNhaCungCap(MaNCC);
+    public void delete(String MaNCC) throws XuLyException {
+        for (NhaCungCapDTO ncc : listNhaCungCap) {
+            if (ncc.getMaNCC().equals(MaNCC)) {
+                try {
+                    listNhaCungCap.remove(ncc);
+                    nccDAO.deleteNhaCungCap(MaNCC);
+                } catch (SQLIntegrityConstraintViolationException e){
+                    throw new XuLyException("Không thể xóa nhà cung cấp vì đã có dữ liệu liên quan đến nhà cung cấp này trong cơ sở dữ liệu.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return;
             }
         }
