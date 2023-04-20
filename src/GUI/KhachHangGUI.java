@@ -7,6 +7,7 @@ package GUI;
 
 import BUS.KhachHangBUS;
 import DTO.KhachHangDTO;
+import MyCustom.XuLyException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -509,21 +510,21 @@ public class KhachHangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
-//        // nvBUS.delete(txtMaNV.getText());
-//        //saveIMG();
-//        //loadData();
-//
-//        if (tblDSKH.getSelectedRowCount() == 1) {
-//            int result = JOptionPane.showConfirmDialog(null, "Bạn muốn xóa sản phẩm này?");
-//            if (result == 0) {
-//                nvBUS.delete(txtMaNV.getText());
-//                saveIMG();
-//                loadData();
-//                JOptionPane.showMessageDialog(null, "Xóa thành công!");
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Bạn chưa chọn sản phẩm muốn xóa!");
-//        }
+        String MaKH = txtMaKH.getText();
+        int result = JOptionPane.showConfirmDialog(null, "Bạn muốn xóa khách hàng này?");
+        if (result == 0) {
+            try {
+                khBUS.delete(MaKH);
+                loadDataDSKH();
+            } catch (XuLyException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi xóa khách hàng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+
 
     }//GEN-LAST:event_btnXoaMouseClicked
 

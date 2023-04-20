@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,6 +103,17 @@ public class KhachHangDAO {
         } finally {
             mySQL.Disconnect();
         }
+    }
+    
+    public void deleteKhachHang(String MaKH) throws SQLException, SQLIntegrityConstraintViolationException{
+        try {
+            String sql = "DELETE FROM khachhang WHERE MaKH = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, MaKH);
+            ps.executeUpdate();
+        } catch(SQLIntegrityConstraintViolationException e){
+            throw e;
+        } 
     }
     
     public void ImportExcel(File file) {

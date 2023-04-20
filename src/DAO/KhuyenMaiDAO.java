@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -67,7 +68,7 @@ public class KhuyenMaiDAO {
         }
     }
     
-    public void deleteKhuyenMai(String MaKM){
+    public void deleteKhuyenMai(String MaKM) throws SQLException, SQLIntegrityConstraintViolationException{
         try {
             String sql = "DELETE FROM khuyenmai WHERE MaKM = ?";
             PreparedStatement ps = connection.prepareStatement(sql);

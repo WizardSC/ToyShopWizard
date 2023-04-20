@@ -7,6 +7,7 @@ package GUI;
 
 import BUS.KhuyenMaiBUS;
 import DTO.KhuyenMaiDTO;
+import MyCustom.XuLyException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -431,11 +432,11 @@ public class KhuyenMaiGUI extends javax.swing.JPanel {
 
         Date NgayBD = txtNgayBD.getDate();
         Date NgayKT = txtNgayKT.getDate();
-        if(NgayBD == null){
+        if (NgayBD == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày bắt đầu");
             return;
         }
-        if(NgayKT == null){
+        if (NgayKT == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn ngày kết thúc");
             return;
         }
@@ -453,8 +454,19 @@ public class KhuyenMaiGUI extends javax.swing.JPanel {
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
         String MaKM = txtMaKM.getText();
-        kmBUS.delete(MaKM);
-        loadData();
+        int result = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa khuyến mãi không");
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                kmBUS.delete(MaKM);
+                loadData();
+            } catch (XuLyException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi xóa khuyến mãi.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }//GEN-LAST:event_btnXoaMouseClicked
 
     private void btnNhapLaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapLaiMouseClicked
