@@ -181,8 +181,6 @@ public class ThongKeGUI extends javax.swing.JPanel {
         txtSLKho = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
         cboxSortKho = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblTKSPKho = new javax.swing.JTable();
         PnTienNhap = new javax.swing.JPanel();
         txtTienNhap = new javax.swing.JLabel();
         iconUpKho = new javax.swing.JLabel();
@@ -202,6 +200,8 @@ public class ThongKeGUI extends javax.swing.JPanel {
         iconUpKho2 = new javax.swing.JLabel();
         valueUpKho2 = new javax.swing.JLabel();
         ChiemXuat = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblTKSPKho = new javax.swing.JTable();
 
         jTabbedPane1.setBackground(new java.awt.Color(204, 204, 204));
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -427,7 +427,7 @@ public class ThongKeGUI extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Số Sản Phẩm");
-        PnTKKho.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 50, -1, -1));
+        PnTKKho.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, -1, -1));
 
         txtSLKho.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtSLKho.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -435,11 +435,11 @@ public class ThongKeGUI extends javax.swing.JPanel {
                 txtSLKhoStateChanged(evt);
             }
         });
-        PnTKKho.add(txtSLKho, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 40, 62, -1));
+        PnTKKho.add(txtSLKho, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 40, 62, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/filter-filled-tool-symbol.png"))); // NOI18N
-        PnTKKho.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
+        PnTKKho.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, -1));
 
         cboxSortKho.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cboxSortKho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Giảm", "Tăng" }));
@@ -448,44 +448,7 @@ public class ThongKeGUI extends javax.swing.JPanel {
                 cboxSortKhoItemStateChanged(evt);
             }
         });
-        PnTKKho.add(cboxSortKho, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 97, 28));
-
-        tblTKSPKho.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        tblTKSPKho.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Mã SP", "Tên SP", "Tổng Số Lượng Tồn"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblTKSPKho.setPreferredSize(new java.awt.Dimension(515, 100));
-        tblTKSPKho.setRowHeight(25);
-        tblTKSPKho.setRowSelectionAllowed(false);
-        tblTKSPKho.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblTKSPKhoMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblTKSPKho);
-        if (tblTKSPKho.getColumnModel().getColumnCount() > 0) {
-            tblTKSPKho.getColumnModel().getColumn(0).setMaxWidth(80);
-            tblTKSPKho.getColumnModel().getColumn(2).setMinWidth(130);
-            tblTKSPKho.getColumnModel().getColumn(2).setMaxWidth(150);
-        }
-
-        PnTKKho.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 650, 380));
+        PnTKKho.add(cboxSortKho, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 97, 28));
 
         PnTienNhap.setBackground(new java.awt.Color(244, 177, 131));
         PnTienNhap.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tổng Tiền Nhập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 20), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -618,7 +581,6 @@ public class ThongKeGUI extends javax.swing.JPanel {
         );
 
         PnTKKho.add(PnSLXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
-        PnSLXuat.getAccessibleContext().setAccessibleName("Số Lượng Xuất");
 
         PnTienXuat.setBackground(new java.awt.Color(244, 177, 131));
         PnTienXuat.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tổng Tiền Xuất", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 20), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -670,6 +632,37 @@ public class ThongKeGUI extends javax.swing.JPanel {
         );
 
         PnTKKho.add(PnTienXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, -1, 150));
+
+        tblTKSPKho.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Mã SP", "Tên SP", "SL Tồn"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblTKSPKho);
+        if (tblTKSPKho.getColumnModel().getColumnCount() > 0) {
+            tblTKSPKho.getColumnModel().getColumn(0).setResizable(false);
+            tblTKSPKho.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblTKSPKho.getColumnModel().getColumn(1).setResizable(false);
+            tblTKSPKho.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblTKSPKho.getColumnModel().getColumn(2).setResizable(false);
+            tblTKSPKho.getColumnModel().getColumn(2).setPreferredWidth(20);
+        }
+
+        PnTKKho.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 630, 380));
 
         jScrollPane3.setViewportView(PnTKKho);
 
@@ -793,10 +786,6 @@ public class ThongKeGUI extends javax.swing.JPanel {
         }
         showAllKho(tkBUS.listTKTon);
     }//GEN-LAST:event_txtSLKhoStateChanged
-
-    private void tblTKSPKhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTKSPKhoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblTKSPKhoMouseClicked
 
     private void cboxSortKhoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxSortKhoItemStateChanged
         // TODO add your handling code here:
@@ -999,8 +988,8 @@ public class ThongKeGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private com.toedter.calendar.JDateChooser ngayTKThang;
     private javax.swing.JTable tblTKSP;

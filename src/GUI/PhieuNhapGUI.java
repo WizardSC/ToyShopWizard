@@ -142,18 +142,18 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtSpinner.setBackground(Color.white);
 
         //Set hover cho tblDSSP
-        tblDSSP.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                int row = tblDSSP.rowAtPoint(evt.getPoint());
-                int col = tblDSSP.columnAtPoint(evt.getPoint());
-                if (row >= 0 && col >= 0) {
-
-                    tblDSSP.setRowSelectionInterval(row, row);
-                    tblDSSP.setColumnSelectionInterval(0, tblDSSP.getColumnCount() - 1);
-                    tblDSSP.setSelectionBackground(new Color(152, 168, 248)); // đổi màu nền của ô khi hover
-                }
-            }
-        });
+//        tblDSSP.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+//            public void mouseMoved(java.awt.event.MouseEvent evt) {
+//                int row = tblDSSP.rowAtPoint(evt.getPoint());
+//                int col = tblDSSP.columnAtPoint(evt.getPoint());
+//                if (row >= 0 && col >= 0) {
+//
+//                    tblDSSP.setRowSelectionInterval(row, row);
+//                    tblDSSP.setColumnSelectionInterval(0, tblDSSP.getColumnCount() - 1);
+//                    tblDSSP.setSelectionBackground(new Color(152, 168, 248)); // đổi màu nền của ô khi hover
+//                }
+//            }
+//        });
 
 //
 //    
@@ -630,7 +630,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         });
 
         lblMaSP1.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
-        lblMaSP1.setText("Mã HD");
+        lblMaSP1.setText("Mã PN");
 
         lblMaSP2.setFont(new java.awt.Font("Baloo 2 SemiBold", 1, 14)); // NOI18N
         lblMaSP2.setText("Mã NCC");
@@ -1006,9 +1006,11 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtMaNVinTTPN.setText("");
         txtNgayLapinTTPN.setCalendar(null);
         txtTongTieninTTPN.setText("");
-
+        dsctpn.clear();
 //        JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In phiếu nhập thành công");
         loadDataDSSP();
+
+        loadDataMaPN();
     }//GEN-LAST:event_btnInPhieuNhapinTTPNMouseClicked
     public static void setMaNCC(String ma) {
         txtMaNCC.setText(ma);

@@ -941,7 +941,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         System.out.println(NgayLap);
         int TongTien = Integer.parseInt(txtTongTieninTTPX.getText());
         PhieuXuatDTO px = new PhieuXuatDTO(MaPX, MaNV, NgayLap, TongTien);
-
+        
         XuatPhieuXuatBUS xuatpx = new XuatPhieuXuatBUS(px, dsctpx);
         xuatpx.print();
         txtMaPXinTTPX.setText("");
@@ -949,7 +949,8 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         txtMaNVinTTPX.setText("");
         txtNgayLapinTTPX.setCalendar(null);
         txtTongTieninTTPX.setText("");
-
+        dsctpx.clear();
+        loadDataMaPX();
         JOptionPane.showMessageDialog(jPanel5, "In phiếu xuất thành công");
     }//GEN-LAST:event_btnInHoaDoninTTHDMouseClicked
 

@@ -1008,7 +1008,7 @@ public class HoaDonGUI extends javax.swing.JPanel {
         String NgayLap = sdf.format(txtNgayLapinTTHD.getDate());
         System.out.println(NgayLap);
         int TongTien = Integer.parseInt(txtTongTieninTTHD.getText());
-        HoaDonDTO hd = new HoaDonDTO(MaHD, MaKH, MaNV, NgayLap, NgayLap);
+        HoaDonDTO hd = new HoaDonDTO(MaHD, MaKH, MaNV, NgayLap, String.valueOf(TongTien));
         XuatHoaDonBUS xuathd = new XuatHoaDonBUS(hd, dscthd);
         xuathd.print();
         for (CTHoaDonDTO cthd : dscthd) {
@@ -1019,7 +1019,8 @@ public class HoaDonGUI extends javax.swing.JPanel {
         txtMaNVinTTHD.setText("");
         txtNgayLapinTTHD.setCalendar(null);
         txtTongTieninTTHD.setText("");
-
+        dscthd.clear();
+        loadDataMaHD();
         JOptionPane.showMessageDialog(pnRoot, "In hóa đơn thành công");
     }//GEN-LAST:event_btnInHoaDoninTTHDMouseClicked
 

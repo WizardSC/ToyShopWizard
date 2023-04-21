@@ -848,7 +848,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Baloo 2 SemiBold" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="M&#xe3; HD"/>
+                <Property name="text" type="java.lang.String" value="M&#xe3; PN"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtMaPN">
