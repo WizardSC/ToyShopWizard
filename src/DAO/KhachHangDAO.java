@@ -62,6 +62,33 @@ public class KhachHangDAO {
         }
         return null;
     }
+    
+    public ArrayList<KhachHangDTO> getListThongTinKhachHang(String MaKH) {
+        try {
+            ArrayList<KhachHangDTO> dskh = new ArrayList<>();
+            String sql = "SELECT * FROM khachhang where MaKH = '" +MaKH + "'" ;
+            ResultSet rs = mySQL.executeQuery(sql);
+            while (rs.next()) {
+                KhachHangDTO kh = new KhachHangDTO(
+                        rs.getString("MaKH"),
+                        rs.getString("Ho"),
+                        rs.getString("Ten"),
+                        rs.getString("NgaySinh"),
+                        rs.getString("GioiTinh"),
+                        rs.getString("DiaChi"),
+                        rs.getString("SoDT"),
+                        rs.getString("IMG")
+                );
+                dskh.add(kh);
+            }
+            return dskh;
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+        return null;
+    }
 
     public void insertKhachHang(KhachHangDTO kh) {
         try {

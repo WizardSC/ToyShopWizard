@@ -37,7 +37,6 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
     TaiKhoanBUS tkBUS = new TaiKhoanBUS();
     NhanVienBUS nvBUS = new NhanVienBUS();
     private String tempMaNV;
-    
 
     public MainForQuanLyGUI(String MaNV) {
         setUndecorated(true);
@@ -65,20 +64,20 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
         list.add(new DanhMuc("SaoLuu", pnSaoLuu, lblSaoLuu));
         controller.setEvent(list);
         tempMaNV = MaNV;
-        
-        
+
         setTime();
         loadThongTinNV();
 //        ChayChuoi();
     }
-    public void loadThongTinNV(){
+
+    public void loadThongTinNV() {
         nvBUS.docDanhSach();
         ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
         for (NhanVienDTO nv : dsnv) {
             if (nv.getMaNV().equals(tempMaNV)) {
                 String Ho = nv.getHo();
                 String Ten = nv.getTen();
-                
+
                 lblTenNV.setText(Ho + " " + Ten);
                 lblMaNV.setText(tempMaNV);
             }
@@ -555,12 +554,13 @@ public class MainForQuanLyGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-        // System.exit(0);
-//       setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-//        int result=JOptionPane.showConfirmDialog(null,"Do yout want to exit?","Congfig",JOptionPane.YES_NO_OPTION);
-//        if(result==0){
-        System.exit(0);
-//        }
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?", "Congfig", JOptionPane.YES_NO_OPTION);
+        if (result == 0) {
+            dispose();
+            DangNhapGUI loginForm = new DangNhapGUI(); // Tạo instance mới của DangNhapGUI
+            loginForm.setVisible(true);
+        }
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked

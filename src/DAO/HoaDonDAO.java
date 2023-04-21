@@ -66,4 +66,28 @@ public class HoaDonDAO {
         }
 
     }
+    
+    public ArrayList<HoaDonDTO> selectThongTinKH(String MaKH){
+        try {
+            ArrayList<HoaDonDTO> dshd = new ArrayList<>();
+            String sql = "SELECT * FROM hoadon where MaKH = '" + MaKH +"'";
+            ResultSet rs = mySQL.executeQuery(sql);
+            while (rs.next()) {
+                HoaDonDTO hd = new HoaDonDTO(
+                        rs.getString("MaHD"),
+                        rs.getString("MaKH"),
+                        rs.getString("MaNV"),
+                        rs.getString("NgayLap"),
+                        rs.getString("TongTien")
+                );
+                dshd.add(hd);
+            }
+            return dshd;
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+        return null;
+    }
 }

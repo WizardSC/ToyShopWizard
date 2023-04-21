@@ -30,6 +30,7 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
     DefaultTableModel dtmDSHoaDon;
     DefaultTableModel dtmDSCTHoaDon;
     String tuKhoaTimKiem;
+    boolean clickedOnce = false;
 
     public DSHoaDonGUI() {
         initComponents();
@@ -38,7 +39,6 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
         init();
         loadDataDSHD();
         ArrayList<HoaDonDTO> dshd = hdBUS.getListHoaDon();
-        
 
     }
 
@@ -93,6 +93,14 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
     public void search(String tk) {
         if (tk.equals("Mã HD")) {
             ArrayList<HoaDonDTO> dshd = hdBUS.searchMaHD(txtTimKiem.getText().toString());
+            showAllDSHD(dshd);
+        }
+        if (tk.equals("Mã NV")) {
+            ArrayList<HoaDonDTO> dshd = hdBUS.searchMaNV(txtTimKiem.getText().toString());
+            showAllDSHD(dshd);
+        }
+        if (tk.equals("Mã KH")) {
+            ArrayList<HoaDonDTO> dshd = hdBUS.searchMaKH(txtTimKiem.getText().toString());
             showAllDSHD(dshd);
         }
     }
@@ -182,7 +190,8 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
         btnTimKiemNC = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxChonThang = new javax.swing.JComboBox<>();
+        cbxThongTinKH = new javax.swing.JButton();
         pnGioHang = new javax.swing.JPanel();
         lblGioHang = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -339,8 +348,21 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         pnDSSP.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
-        pnDSSP.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 610, 310, 30));
+        cbxChonThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
+        cbxChonThang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxChonThangItemStateChanged(evt);
+            }
+        });
+        pnDSSP.add(cbxChonThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 610, 310, 30));
+
+        cbxThongTinKH.setText("...");
+        cbxThongTinKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxThongTinKHActionPerformed(evt);
+            }
+        });
+        pnDSSP.add(cbxThongTinKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 530, 40, -1));
 
         pnGioHang.setBackground(new java.awt.Color(250, 247, 240));
 
@@ -587,25 +609,43 @@ public class DSHoaDonGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxTimKiemActionPerformed
 
     private void btnTimKiemNCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemNCMouseClicked
-//        if(!clickedOnce){
-//            ArrayList<PhieuXuatDTO> dspx = pxBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
-//            showAllDSPX(dspx);
-//            clickedOnce = true;
-//        } else {
-//            txtFrom.setText("");
-//            txtTo.setText("");
-//            loadDataDSPX();
-//            clickedOnce = false;
-//        }
+        if (!clickedOnce) {
+            ArrayList<HoaDonDTO> dshd = hdBUS.searchTongTien(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
+            showAllDSHD(dshd);
+            clickedOnce = true;
+        } else {
+            txtFrom.setText("");
+            txtTo.setText("");
+            loadDataDSHD();
+            clickedOnce = false;
+        }
 
     }//GEN-LAST:event_btnTimKiemNCMouseClicked
+
+    private void cbxChonThangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxChonThangItemStateChanged
+        tuKhoaTimKiem = cbxChonThang.getSelectedItem().toString();
+        String temp = tuKhoaTimKiem.substring(tuKhoaTimKiem.indexOf(" ") + 1);
+        int thang = Integer.parseInt(temp);
+        hdBUS.docDanhSach();
+        ArrayList<HoaDonDTO> dshd = hdBUS.searchThang(thang);
+        showAllDSHD(dshd);
+    }//GEN-LAST:event_cbxChonThangItemStateChanged
+
+    private void cbxThongTinKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxThongTinKHActionPerformed
+        String MaKH = txtMaKH.getText();
+        RCThongTinKHGUI rkh = new RCThongTinKHGUI(MaKH);
+        rkh.setVisible(true);
+        
+        
+    }//GEN-LAST:event_cbxThongTinKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnTimKiemNC;
+    private javax.swing.JComboBox<String> cbxChonThang;
+    private javax.swing.JButton cbxThongTinKH;
     private javax.swing.JComboBox<String> cbxTimKiem;
     private javax.swing.JComboBox<String> cbxTimKiemNC;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

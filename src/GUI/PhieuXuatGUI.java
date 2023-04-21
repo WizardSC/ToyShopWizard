@@ -55,7 +55,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     String imgName = "null";
     private BufferedImage i = null;
     int SoLuongTrongKho;
-
+    int SoLuongTrongCH;
     public PhieuXuatGUI() {
         initComponents();
         init();
@@ -781,16 +781,23 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         String MaPX = txtMaPX.getText();
         String MaSP = txtMaSP.getText();
         String TenSP = txtTenSP.getText();
-        int SoLuong = Integer.parseInt(txtSoLuong.getValue().toString());
+        int SoLuong = Integer.parseInt(txtSoLuong.getValue().toString()); //số lượng muốn xuất kho
         int DonGia = Integer.parseInt(txtDonGia.getText());
         int ThanhTien = SoLuong * DonGia;
 
         int k = tblDSSP.getSelectedRow();
-        int SoLuongConLai = Integer.parseInt(tblDSSP.getModel().getValueAt(k, 2).toString());
-
+        spBUS.docDanhSach1(MaSP);
+        ArrayList<SanPhamDTO> dssp = spBUS.getSLSanPhamCH();
+        for (SanPhamDTO sp : dssp) {
+            SoLuongTrongCH = sp.getSoLuong(); //số lượng hiện tại trong cửa hàng
+        }
+        
+        int SoLuongConLai = Integer.parseInt(tblDSSP.getModel().getValueAt(k, 2).toString()); //số lượng trong kho
+        System.out.println(SoLuongConLai);
+        System.out.println(SoLuong);
         khoBUS.capNhatSoLuongSP(MaSP, -SoLuong, SoLuongConLai);
         khoBUS.docDanhSach();
-        spBUS.capNhatSoLuongHD(MaSP, SoLuong, SoLuongConLai);
+        spBUS.capNhatSoLuongHD(MaSP, SoLuong, SoLuongTrongCH);
         spBUS.docDanhSach();
         boolean flag = true;
         for (CTPhieuXuatDTO ctpx : dsctpx) {
@@ -931,6 +938,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
 
         for (CTPhieuXuatDTO ctpx : dsctpx) {
             ctpxBUS.add(ctpx);
+            System.out.println(ctpx.getSoLuong());
         }
         String MaPX = txtMaPXinTTPX.getText();
 
@@ -941,7 +949,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         System.out.println(NgayLap);
         int TongTien = Integer.parseInt(txtTongTieninTTPX.getText());
         PhieuXuatDTO px = new PhieuXuatDTO(MaPX, MaNV, NgayLap, TongTien);
-        
+
         XuatPhieuXuatBUS xuatpx = new XuatPhieuXuatBUS(px, dsctpx);
         xuatpx.print();
         txtMaPXinTTPX.setText("");
@@ -949,8 +957,7 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         txtMaNVinTTPX.setText("");
         txtNgayLapinTTPX.setCalendar(null);
         txtTongTieninTTPX.setText("");
-        dsctpx.clear();
-        loadDataMaPX();
+
         JOptionPane.showMessageDialog(jPanel5, "In phiếu xuất thành công");
     }//GEN-LAST:event_btnInHoaDoninTTHDMouseClicked
 

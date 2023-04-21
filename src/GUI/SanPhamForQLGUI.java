@@ -7,6 +7,7 @@ package GUI;
 
 import BUS.SanPhamBUS;
 import DTO.SanPhamDTO;
+import DTO.SanPhamDTO;
 import DTO.SanPham_ViTriDTO;
 import MyCustom.XuLyException;
 import java.awt.Color;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -25,6 +27,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,6 +42,8 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
     DefaultTableModel dtmSanPham = new DefaultTableModel();
     String imgName = "null";
     private BufferedImage i = null;
+    String tuKhoaTimKiem;
+    boolean clickedOnce = false;
 
     public SanPhamForQLGUI() {
         initComponents();
@@ -68,23 +74,65 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
 //        txtDonGia.setEnabled(false);
         txtSoLuong.setEnabled(false);
         txtMaSP.setEnabled(false);
-//        txtDonGia.setEnabled(false);
+//        txtDonGia.setEnabled(false)
+        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search(tuKhoaTimKiem);
+            }
+        });;
+        loaddataCBX();
     }
 
-//    public void showAll(ArrayList<SanPham_ViTriDTO> dssp) {
-//        dtmSanPham.setRowCount(0);
-//        for (int i = 0; i < dssp.size(); i++) {
-//            dtmSanPham.addRow(new String[]{
-//                dssp.get(i).getMaSP(),
-//                dssp.get(i).getTenSP(),
-//                String.valueOf(dssp.get(i).getSoLuong()),
-//                String.valueOf(dssp.get(i).getDonGia()),
-//                dssp.get(i).getDonViTinh(),
-//                dssp.get(i).getMaLoai(),
-//                dssp.get(i).getIMG()
-//            });
-//        }
-//    }
+    public void loaddataCBX() {
+
+        spBUS.docDanhSach();
+        ArrayList<SanPhamDTO> dssp = spBUS.getListSanPham();
+        HashSet<String> unique = new HashSet<>();
+        for (SanPhamDTO sp : dssp) {
+            unique.add(sp.getMaLoai());
+        }
+        for (String MaLoai : unique) {
+            cbxDuLieu.addItem(MaLoai);
+        }
+    }
+
+    public void search(String tk) {
+        if (tk.equals("Mã SP")) {
+            ArrayList<SanPhamDTO> dssp = spBUS.searchMaSP(txtTimKiem.getText().toString());
+            showAll(dssp);
+        }
+        if (tk.equals("Tên SP")) {
+            ArrayList<SanPhamDTO> dssp = spBUS.searchTenSP(txtTimKiem.getText().toString());
+            showAll(dssp);
+        }
+    }
+    //    public void showAll(ArrayList<SanPham_ViTriDTO> dssp) {
+    //        dtmSanPham.setRowCount(0);
+    //        for (int i = 0; i < dssp.size(); i++) {
+    //            dtmSanPham.addRow(new String[]{
+    //                dssp.get(i).getMaSP(),
+    //                dssp.get(i).getTenSP(),
+    //                String.valueOf(dssp.get(i).getSoLuong()),
+    //                String.valueOf(dssp.get(i).getDonGia()),
+    //                dssp.get(i).getDonViTinh(),
+    //                dssp.get(i).getMaLoai(),
+    //                dssp.get(i).getIMG()
+    //            });
+    //        }
+    //    }
+
     public void showAll(ArrayList<SanPhamDTO> dssp) {
         dtmSanPham.setRowCount(0);
         for (int i = 0; i < dssp.size(); i++) {
@@ -445,7 +493,7 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
-        cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã SP", "Tên SP", "Đơn vị tính" }));
+        cbxTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã SP", "Tên SP" }));
         cbxTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxTimKiemActionPerformed(evt);
@@ -509,7 +557,7 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -643,9 +691,9 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExportExcelMouseClicked
 
     private void cbxTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemActionPerformed
-//        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
-//
-//        System.out.println(tuKhoaTimKiem);
+        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
+        System.out.println(tuKhoaTimKiem);
+        txtTimKiem.setText("");
     }//GEN-LAST:event_cbxTimKiemActionPerformed
 
     private void txtTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimKiemMouseClicked
@@ -657,35 +705,35 @@ public class SanPhamForQLGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemMouseClicked
 
     private void btnTimKiemNCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemNCMouseClicked
-//        if(!clickedOnce){
-//            ArrayList<KhoDTO> dskho = khoBUS.searchDonGia(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
-//            showAllDSKho(dskho);
-//            clickedOnce = true;
-//        } else {
-//            txtFrom.setText("");
-//            txtTo.setText("");
-//            loadDataKho();
-//            clickedOnce = false;
-//        }
+        if (!clickedOnce) {
+            ArrayList<SanPhamDTO> dssp = spBUS.searchDonGia(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
+            showAll(dssp);
+            clickedOnce = true;
+        } else {
+            txtFrom.setText("");
+            txtTo.setText("");
+            loadData();
+            clickedOnce = false;
+        }
     }//GEN-LAST:event_btnTimKiemNCMouseClicked
 
     private void cbxTimKiemNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemNCActionPerformed
-        //        tuKhoaTimKiem = cbxTimKiemNC.getSelectedItem().toString();
-        //        System.out.println(tuKhoaTimKiem);
+        tuKhoaTimKiem = cbxTimKiemNC.getSelectedItem().toString();
+        System.out.println(tuKhoaTimKiem);
     }//GEN-LAST:event_cbxTimKiemNCActionPerformed
 
     private void cbxDuLieuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxDuLieuItemStateChanged
-//        tuKhoaTimKiem = cbxDuLieu.getSelectedItem().toString();
-//        if(tuKhoaTimKiem.equals("Danh sach")){
-//            khoBUS.docDanhSach();
-//            ArrayList<KhoDTO> dskho = khoBUS.getListKho();
-//            showAllDSKho(dskho);
-//            loadDataKho();
-//        } else {
-//            khoBUS.docDanhSach();
-//            ArrayList<KhoDTO> dskho = khoBUS.searchMaLoai(tuKhoaTimKiem);
-//            showAllDSKho(dskho);
-//        }
+        tuKhoaTimKiem = cbxDuLieu.getSelectedItem().toString();
+        if(tuKhoaTimKiem.equals("Danh sach")){
+            spBUS.docDanhSach();
+            ArrayList<SanPhamDTO> dssp = spBUS.getListSanPham();
+            showAll(dssp);
+            loadData();
+        } else {
+            spBUS.docDanhSach();
+            ArrayList<SanPhamDTO> dssp = spBUS.searchMaLoai(tuKhoaTimKiem);
+            showAll(dssp);
+        }
 
     }//GEN-LAST:event_cbxDuLieuItemStateChanged
 

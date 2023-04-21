@@ -89,6 +89,32 @@ public class SanPhamDAO {
         }
         return null;
     }
+    
+    public ArrayList<SanPhamDTO> getSLSanPhamCH(String MaSP) {
+        try {
+            ArrayList<SanPhamDTO> dssp = new ArrayList<>();
+            String sql = "SELECT * FROM sanpham WHERE MaSP = '" +MaSP +"'" ;
+            ResultSet rs = mySQL.executeQuery(sql);
+            while (rs.next()) {
+                SanPhamDTO sp = new SanPhamDTO(
+                        rs.getString("MaSP"),
+                        rs.getString("TenSP"),
+                        rs.getInt("SoLuong"),
+                        rs.getInt("DonGia"),
+                        rs.getString("DonViTinh"),
+                        rs.getString("MaLoai"),
+                        rs.getString("IMG")
+                );
+                dssp.add(sp);
+            }
+            return dssp;
+        } catch (SQLException ex) {
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mySQL.Disconnect();
+        }
+        return null;
+    }
 //    public ArrayList<SanPham_ViTriDTO> getListSanPhamCuaHang() {
 //        try {
 //            ArrayList<SanPham_ViTriDTO> dssp = new ArrayList<>();

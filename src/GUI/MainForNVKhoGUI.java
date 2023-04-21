@@ -14,37 +14,41 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author wizardsc
  */
 public class MainForNVKhoGUI extends javax.swing.JFrame {
+
     private NhanVienBUS nvBUS = new NhanVienBUS();
     private String tempMaNV;
+
     public MainForNVKhoGUI(String MaNV) {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         ImageIcon logo = new ImageIcon("./src/image/iconshop.png");
         setIconImage(logo.getImage());
-        
+
         ChangeScreenNVKho controller = new ChangeScreenNVKho(pnView);
         ArrayList<DanhMuc> list = new ArrayList<>();
         list.add(new DanhMuc("NhapHang", pnNhapHang, lblNhapHang));
-        list.add(new DanhMuc("CTPhieuNhap",pnPhieuNhap,lblPhieuNhap));
+        list.add(new DanhMuc("CTPhieuNhap", pnPhieuNhap, lblPhieuNhap));
         list.add(new DanhMuc("Kho", pnKho, lblKho));
         list.add(new DanhMuc("XuatHang", pnXuatHang, lblXuatHang));
-        list.add(new DanhMuc("CTPhieuXuat",pnPhieuXuat,lblPhieuXuat));
+        list.add(new DanhMuc("CTPhieuXuat", pnPhieuXuat, lblPhieuXuat));
         controller.setEvent(list);
         tempMaNV = MaNV;
         loadThongTinNV();
     }
-    public void loadThongTinNV(){
+
+    public void loadThongTinNV() {
         nvBUS.docDanhSach();
         ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
-        for(NhanVienDTO nv : dsnv){
-            if(nv.getMaNV().equals(tempMaNV)){
+        for (NhanVienDTO nv : dsnv) {
+            if (nv.getMaNV().equals(tempMaNV)) {
                 String Ho = nv.getHo();
                 String Ten = nv.getTen();
                 lblTenNV.setText(Ho + " " + Ten);
@@ -52,8 +56,6 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
             }
         }
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -374,20 +376,26 @@ public class MainForNVKhoGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-        // System.exit(0);
-        //       setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        //        int result=JOptionPane.showConfirmDialog(null,"Do yout want to exit?","Congfig",JOptionPane.YES_NO_OPTION);
-        //        if(result==0){
-            System.exit(0);
-            //        }
+//        System.exit(0);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?", "Congfig", JOptionPane.YES_NO_OPTION);
+        if (result == 0) {
+            dispose();
+            DangNhapGUI loginForm = new DangNhapGUI(); // Tạo instance mới của DangNhapGUI
+            loginForm.setVisible(true);
+            
+        }
+
+//            
+        //        }
+
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
         setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizeMouseClicked
 
-    
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnClose;
     private javax.swing.JLabel btnMinimize;

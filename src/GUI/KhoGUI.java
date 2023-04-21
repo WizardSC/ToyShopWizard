@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
  * @author wizardsc
  */
 public class KhoGUI extends javax.swing.JPanel {
+
     KhoBUS khoBUS = new KhoBUS();
     DefaultTableModel dtmKho;
     DefaultComboBoxModel dcbmDuLieu;
@@ -38,18 +39,19 @@ public class KhoGUI extends javax.swing.JPanel {
     String imgName = "null";
     String tuKhoaTimKiem;
     boolean clickedOnce = false;
+
     public KhoGUI() {
         initComponents();
         dtmKho = (DefaultTableModel) tblDSSP.getModel();
         dcbmDuLieu = (DefaultComboBoxModel) cbxDuLieu.getModel();
-        
+
         init();
         loadDataKho();
         loaddataCBX();
-        
+
     }
-    
-    public void init(){
+
+    public void init() {
         //set giao diện cho Table
         //DSSP
         tblDSSP.setFocusable(false);
@@ -64,7 +66,7 @@ public class KhoGUI extends javax.swing.JPanel {
         tblDSSP.setFont(new Font("Arial", Font.PLAIN, 13));
         tblDSSP.getTableHeader().setReorderingAllowed(false);
         tblDSSP.setBorder(BorderFactory.createLineBorder(new Color(152, 168, 248), 1));
-        
+        tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -78,31 +80,33 @@ public class KhoGUI extends javax.swing.JPanel {
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-               search(tuKhoaTimKiem);
+                search(tuKhoaTimKiem);
             }
         });
     }
-    public void search(String tk){
-        if (tk.equals("Mã SP")){
+
+    public void search(String tk) {
+        if (tk.equals("Mã SP")) {
             khoBUS.docDanhSach();
             ArrayList<KhoDTO> dskho = khoBUS.searchMaSP(txtTimKiem.getText());
             showAllDSKho(dskho);
         }
-        if (tk.equals("Tên SP")){
+        if (tk.equals("Tên SP")) {
             khoBUS.docDanhSach();
             ArrayList<KhoDTO> dskho = khoBUS.searchTenSP(txtTimKiem.getText());
             showAllDSKho(dskho);
         }
-        if (tk.equals("Đơn vị tính")){
+        if (tk.equals("Đơn vị tính")) {
             khoBUS.docDanhSach();
             ArrayList<KhoDTO> dskho = khoBUS.searchDonViTinh(txtTimKiem.getText());
             showAllDSKho(dskho);
         }
-       
+
     }
-    public void showAllDSKho(ArrayList<KhoDTO> dskho){
+
+    public void showAllDSKho(ArrayList<KhoDTO> dskho) {
         dtmKho.setRowCount(0);
-        for(int i=0;i<dskho.size();i++){
+        for (int i = 0; i < dskho.size(); i++) {
             dtmKho.addRow(new String[]{
                 dskho.get(i).getMaSP(),
                 dskho.get(i).getTenSP(),
@@ -110,31 +114,31 @@ public class KhoGUI extends javax.swing.JPanel {
                 String.valueOf(dskho.get(i).getGiaNhap()),
                 dskho.get(i).getDonViTinh(),
                 dskho.get(i).getMaLoai(),
-                dskho.get(i).getIMG(),
-            });
-            
-            
+                dskho.get(i).getIMG(),});
+
         }
     }
-    
+
 //    Đổ dữ liệu vào combobox
-    public void loaddataCBX(){
-        
+    public void loaddataCBX() {
+
         khoBUS.docDanhSach();
         ArrayList<KhoDTO> dskho = khoBUS.getListKho();
         HashSet<String> unique = new HashSet<>();
         for (KhoDTO kho : dskho) {
             unique.add(kho.getMaLoai());
         }
-        for(String MaLoai : unique ){
-            cbxDuLieu.addItem(MaLoai);        
+        for (String MaLoai : unique) {
+            cbxDuLieu.addItem(MaLoai);
         }
     }
-    public void loadDataKho(){
+
+    public void loadDataKho() {
         khoBUS.docDanhSach();
         ArrayList<KhoDTO> dskho = khoBUS.getListKho();
         showAllDSKho(dskho);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -415,7 +419,7 @@ public class KhoGUI extends javax.swing.JPanel {
         txtMaLoai.setText(tblDSSP.getModel().getValueAt(k, 5).toString());
         imgName = tblDSSP.getModel().getValueAt(k, 6).toString();
         Image newImage;
-        newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(200,250, Image.SCALE_DEFAULT);
+        newImage = new ImageIcon("./src/image/SanPham/" + imgName).getImage().getScaledInstance(200, 250, Image.SCALE_DEFAULT);
         txtIMG.setIcon(new ImageIcon(newImage));
 
         txtMaSP.setEnabled(false);
@@ -467,7 +471,7 @@ public class KhoGUI extends javax.swing.JPanel {
 
     private void cbxTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTimKiemActionPerformed
         tuKhoaTimKiem = cbxTimKiem.getSelectedItem().toString();
-        
+
         System.out.println(tuKhoaTimKiem);
     }//GEN-LAST:event_cbxTimKiemActionPerformed
 
@@ -480,7 +484,7 @@ public class KhoGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemMouseClicked
 
     private void btnTimKiemNCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemNCMouseClicked
-        if(!clickedOnce){
+        if (!clickedOnce) {
             ArrayList<KhoDTO> dskho = khoBUS.searchDonGia(Integer.parseInt(txtFrom.getText()), Integer.parseInt(txtTo.getText()));
             showAllDSKho(dskho);
             clickedOnce = true;
@@ -499,24 +503,24 @@ public class KhoGUI extends javax.swing.JPanel {
 
     private void cbxDuLieuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxDuLieuItemStateChanged
         tuKhoaTimKiem = cbxDuLieu.getSelectedItem().toString();
-        if(tuKhoaTimKiem.equals("Danh sach")){
+        if (tuKhoaTimKiem.equals("Chọn mã loại")) {
             khoBUS.docDanhSach();
             ArrayList<KhoDTO> dskho = khoBUS.getListKho();
             showAllDSKho(dskho);
             loadDataKho();
         } else {
-             khoBUS.docDanhSach();
-        ArrayList<KhoDTO> dskho = khoBUS.searchMaLoai(tuKhoaTimKiem);
-        showAllDSKho(dskho);
+            khoBUS.docDanhSach();
+            ArrayList<KhoDTO> dskho = khoBUS.searchMaLoai(tuKhoaTimKiem);
+            showAllDSKho(dskho);
         }
-       
+
     }//GEN-LAST:event_cbxDuLieuItemStateChanged
 
     private void btnImportExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImportExcelMouseClicked
         ImageIcon icon = new ImageIcon(getClass().getResource("/image/checkOption.png"));
         JFileChooser fc = new JFileChooser("./reports");
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Excel", "xlsx");
+                "Excel", "xlsx");
         fc.setFileFilter(filter);
         int result = fc.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {

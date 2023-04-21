@@ -7,6 +7,7 @@ package BUS;
 
 import DAO.SanPhamDAO;
 import DTO.SanPhamDTO;
+import DTO.SanPhamDTO;
 import DTO.SanPham_ViTriDTO;
 import MyCustom.XuLyException;
 import java.io.File;
@@ -30,7 +31,13 @@ public class SanPhamBUS {
         this.listSanPham = spDAO.getListSanPham();
 
     }
+    public void docDanhSach1(String MaSP) {
+        this.listSanPham = spDAO.getSLSanPhamCH(MaSP);
 
+    }
+    public ArrayList<SanPhamDTO> getSLSanPhamCH() {
+        return listSanPham;
+    }
     public void listSP() {
         SanPhamDAO spDAO = new SanPhamDAO();
 
@@ -45,9 +52,9 @@ public class SanPhamBUS {
         return listSanPham;
     }
 
-    public ArrayList<SanPham_ViTriDTO> getListSPCuahang() {
-        return listSPCuaHang;
-    }
+//    public ArrayList<SanPham_ViTriDTO> getListSPCuahang() {
+//        return listSPCuaHang;
+//    }
 
     public void add(SanPhamDTO sp) {
         listSanPham.add(sp);
@@ -93,5 +100,48 @@ public class SanPhamBUS {
 
     public void ExportExcel() {
         spDAO.ExportExcel();
+    }
+    public ArrayList<SanPhamDTO> searchMaSP(String tk) {  // tk có nghĩa là từ khóa
+        tk = tk.toLowerCase();
+        ArrayList<SanPhamDTO> dssp = new ArrayList<>();
+        for (SanPhamDTO nv : listSanPham) {
+            String MaNV = nv.getMaSP().toLowerCase();
+            if (MaNV.contains(tk)) {
+                dssp.add(nv);
+            }
+        }
+        return dssp;
+    }
+    public ArrayList<SanPhamDTO> searchTenSP(String tk) {  // tk có nghĩa là từ khóa
+        tk = tk.toLowerCase();
+        ArrayList<SanPhamDTO> dssp = new ArrayList<>();
+        for (SanPhamDTO nv : listSanPham) {
+            String MaNV = nv.getTenSP().toLowerCase();
+            if (MaNV.contains(tk)) {
+                dssp.add(nv);
+            }
+        }
+        return dssp;
+    }
+    public ArrayList<SanPhamDTO> searchMaLoai(String tk) {  // tk có nghĩa là từ khóa
+        tk = tk.toLowerCase();
+        ArrayList<SanPhamDTO> dssp = new ArrayList<>();
+        for (SanPhamDTO sp : listSanPham) {
+            String MaLoai = sp.getMaLoai().toLowerCase();
+            if (MaLoai.contains(tk)) {
+                dssp.add(sp);
+            }
+        }
+        return dssp;
+    }
+    public ArrayList<SanPhamDTO> searchDonGia(int tienmin, int tienmax){
+        ArrayList<SanPhamDTO> dssp = new ArrayList<>();
+        for(SanPhamDTO sp : listSanPham){
+            int DonGia = sp.getDonGia();
+            if ( tienmin <= DonGia && DonGia <= tienmax){
+                dssp.add(sp);
+            }
+        }
+        return dssp;
     }
 }

@@ -24,7 +24,7 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
     DefaultTableModel dtmKhachHang;
     private KhachHangBUS khBUS = new KhachHangBUS();
     private ArrayList<KhachHangDTO> dskh = new ArrayList<>();
-
+    String MaKH;
     public RCKhachHangGUI() {
         setUndecorated(true);
         initComponents();
@@ -35,6 +35,20 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
         
         init();
         loadData();
+        
+        
+    }
+    public RCKhachHangGUI(String temp) {
+        this.MaKH = temp;
+        setUndecorated(true);
+        initComponents();
+        this.setModal(true);
+        this.setResizable(false);
+        setLocationRelativeTo(null);
+        dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
+        
+        init();
+        loadData1();
         
         
     }
@@ -84,6 +98,25 @@ public class RCKhachHangGUI extends javax.swing.JDialog {
         khBUS.docDanhSach();
         ArrayList<KhachHangDTO> dskh = khBUS.getListKhachHang();
         showAllDSKH(dskh);
+    }
+    
+    public void showAllDSKH1(ArrayList<KhachHangDTO> dskh){
+        dtmKhachHang.setRowCount(0);
+        for(int i=0;i<dskh.size();i++){
+            dtmKhachHang.addRow(new Object[]{
+                dskh.get(i).getMaKH(),
+                dskh.get(i).getHo(),
+                dskh.get(i).getTen(),
+                dskh.get(i).getNgaySinh(),
+                dskh.get(i).getGioiTinh(),
+            });
+        }
+    }
+    
+    public void loadData1(){
+        khBUS.docDanhSach1(MaKH);
+        ArrayList<KhachHangDTO> dskh = khBUS.getListThongTinKhachHang();
+        showAllDSKH1(dskh);
     }
     
     //Hàm lấy mã KH để dùng cho việc khác

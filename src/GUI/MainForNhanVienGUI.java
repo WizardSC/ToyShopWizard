@@ -12,6 +12,7 @@ import GUI.model.DanhMuc;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,30 +22,32 @@ public class MainForNhanVienGUI extends javax.swing.JFrame {
 
     private NhanVienBUS nvBUS = new NhanVienBUS();
     private String tempMaNV;
+
     public MainForNhanVienGUI(String MaNV) {
         setUndecorated(true);
 
         initComponents();
         setLocationRelativeTo(null);
-        
+
         ImageIcon logo = new ImageIcon("./src/image/iconshop.png");
         setIconImage(logo.getImage());
-        
+
         ChangeScreenNhanVien controller = new ChangeScreenNhanVien(pnView);
         ArrayList<DanhMuc> list = new ArrayList<>();
         list.add(new DanhMuc("HoaDon", pnHoaDon, lblHoaDon));
-        list.add(new DanhMuc("DSHoaDon",pnDSHoaDon,lblDSHoaDon));
+        list.add(new DanhMuc("DSHoaDon", pnDSHoaDon, lblDSHoaDon));
         list.add(new DanhMuc("SanPham", pnSanPham, lblSanPham));
-        list.add(new DanhMuc("KhachHang",pnKhachHang,lblKhachHang));
+        list.add(new DanhMuc("KhachHang", pnKhachHang, lblKhachHang));
         controller.setEvent(list);
         tempMaNV = MaNV;
         loadThongTinNV();
     }
-    public void loadThongTinNV(){
+
+    public void loadThongTinNV() {
         nvBUS.docDanhSach();
         ArrayList<NhanVienDTO> dsnv = nvBUS.getListNhanVien();
-        for(NhanVienDTO nv : dsnv){
-            if(nv.getMaNV().equals(tempMaNV)){
+        for (NhanVienDTO nv : dsnv) {
+            if (nv.getMaNV().equals(tempMaNV)) {
                 String Ho = nv.getHo();
                 String Ten = nv.getTen();
                 lblTenNV.setText(Ho + " " + Ten);
@@ -349,12 +352,13 @@ public class MainForNhanVienGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-        // System.exit(0);
-        //       setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        //        int result=JOptionPane.showConfirmDialog(null,"Do yout want to exit?","Congfig",JOptionPane.YES_NO_OPTION);
-        //        if(result==0){
-            System.exit(0);
-            //        }
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?", "Congfig", JOptionPane.YES_NO_OPTION);
+        if (result == 0) {
+            dispose();
+            DangNhapGUI loginForm = new DangNhapGUI(); // Tạo instance mới của DangNhapGUI
+            loginForm.setVisible(true);
+        }
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked

@@ -28,6 +28,13 @@ public class KhachHangBUS {
     public ArrayList<KhachHangDTO> getListKhachHang() {
         return listKhachHang;
     }
+    public void docDanhSach1(String MaKH) {
+        this.listKhachHang = khDAO.getListThongTinKhachHang(MaKH);
+    }
+
+    public ArrayList<KhachHangDTO> getListThongTinKhachHang() {
+        return listKhachHang;
+    }
 
     public void listKH() {
         KhachHangDAO khDAO = new KhachHangDAO();
