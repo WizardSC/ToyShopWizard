@@ -935,11 +935,12 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void btnInHoaDoninTTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHoaDoninTTHDMouseClicked
-
+        
         for (CTPhieuXuatDTO ctpx : dsctpx) {
             ctpxBUS.add(ctpx);
             System.out.println(ctpx.getSoLuong());
         }
+        
         String MaPX = txtMaPXinTTPX.getText();
 
         String MaNV = txtMaNVinTTPX.getText();
@@ -957,7 +958,9 @@ public class PhieuXuatGUI extends javax.swing.JPanel {
         txtMaNVinTTPX.setText("");
         txtNgayLapinTTPX.setCalendar(null);
         txtTongTieninTTPX.setText("");
-
+        dsctpx.clear();
+        loadDataDSSP();
+        loadDataMaPX();
         JOptionPane.showMessageDialog(jPanel5, "In phiếu xuất thành công");
     }//GEN-LAST:event_btnInHoaDoninTTHDMouseClicked
 

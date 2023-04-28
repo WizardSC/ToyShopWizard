@@ -1007,6 +1007,7 @@ public class PhieuNhapGUI extends javax.swing.JPanel {
         txtNgayLapinTTPN.setCalendar(null);
         txtTongTieninTTPN.setText("");
         dsctpn.clear();
+        
 //        JOptionPane.showMessageDialog(pnRootInPhieuNhapGUI, "In phiếu nhập thành công");
         loadDataDSSP();
 

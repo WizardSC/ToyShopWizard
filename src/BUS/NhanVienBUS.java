@@ -65,6 +65,7 @@ public class NhanVienBUS {
                 return;
             }
         }
+        
         throw new DeleteNhanVienException("Không tìm thấy nhân viên với mã " + MaNV);
     }
 
